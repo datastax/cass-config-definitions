@@ -1,0 +1,56 @@
+{:display-name "spark-defaults.conf"
+ :package-path "/etc/dse/spark/spark-defaults.conf"
+ :tarball-path "resources/spark/conf/spark-defaults.conf"
+ :workload-file-group "spark"
+ :ui-visibility :editable
+ :valid-dse-versions [:all]
+ :renderer
+ {:renderer-type :template
+  :template "spark-defaults-conf-dse-5.1.0.template"}
+ :workload :spark
+ :properties
+ {:spark-cassandra-connection-factory
+  {:type "string" :required true :default_value "com.datastax.bdp.spark.DseCassandraConnectionFactory"}
+  :spark-cassandra-auth-conf-factory
+  {:type "string" :required true :default_value "com.datastax.bdp.spark.DseAuthConfFactory"}
+  :spark-extra-listeners
+  {:type "string" :required true :default_value "com.datastax.bdp.spark.reporting.DseSparkListener"}
+  :spark-hadoop-util
+  {:type "string" :required true :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"}
+  :spark-sql-catalog-implementation
+  {:type "string" :required true :default_value "hive"}
+
+  :spark-cassandra-input-split-size-in-mb
+  {:type "int" :required true :default_value "512"}
+
+  :spark-authenticate
+  {:type "boolean" :required true :default_value false}
+  :spark-authenticate-enable-sasl-encryption
+  {:type "boolean" :required true :default_value false}
+
+  :spark-ui-confidential-keys
+  {:type "string" :required true :default_value "token,password"}
+
+  :spark-hadoop-com-datastax-bdp-fs-client-authentication-factory
+  {:type "string" :required true :default_value "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"}
+
+  :spark-dse-configuration-fetch-retries
+  {:type "int" :required true :default_value "5"}}
+ :groupings
+ [{:name "DSE Related Settings"
+   :list
+   ["spark-cassandra-connection-factory"
+    "spark-cassandra-auth-conf-factory"
+    "spark-extra-listeners"
+    "spark-hadoop-util"
+    "spark-sql-catalog-implementation"
+    "spark-cassandra-input-split-size-in-mb"
+    "spark-dse-configuration-fetch-retries"]}
+  {:name "Authentication And Encryption"
+   :list
+   ["spark-authenticate"
+    "spark-authenticate-enable-sasl-encryption"
+    "spark-hadoop-com-datastax-bdp-fs-client-authentication-factory"]}
+  {:name "General Settings"
+   :list
+   ["spark-ui-confidential-keys"]}]}

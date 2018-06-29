@@ -1,0 +1,52 @@
+{:display-name "logback.xml"
+ :package-path "/etc/dse/cassandra/logback.xml"
+ :tarball-path "resources/cassandra/conf/logback.xml"
+ :workload-file-group "cassandra"
+ :ui-visibility :editable
+ :valid-dse-versions [:all]
+ :renderer {:renderer-type :template
+            :template "logback-xml-dse-6.0.0.template"}
+ :properties {:systemlog-appender-level {:type "string"
+                                         :required true
+                                         :default_value "INFO"}
+              :systemlog-appender-min-index {:type "int"
+                                             :required true
+                                             :default_value 1}
+              :systemlog-appender-max-index {:type "int"
+                                             :required true
+                                             :default_value 20}
+              :systemlog-appender-max-file-size {:type "int"
+                                                 :required true
+                                                 :default_value 20
+                                                 :unit "MB"}
+              :debuglog-appender-min-index {:type "int"
+                                            :required true
+                                            :default_value 1}
+              :debuglog-appender-max-index {:type "int"
+                                            :required true
+                                            :default_value 20}
+              :debuglog-appender-max-file-size {:type "int"
+                                                :required true
+                                                :default_value 20
+                                                :unit "MB"}
+              :root-log-level {:type "string"
+                               :required true
+                               :default_value "INFO"}
+              :loggers {:type "list"
+                        :required false
+                        :default_value []
+                        :value_type "dict"
+                        :fields {:name {:type "string"
+                                        :required false}
+                                 :level {:type "string"
+                                         :required false}}}}
+ :groupings [{:name "General"
+              :list ["systemlog-appender-level"
+                     "systemlog-appender-min-index"
+                     "systemlog-appender-max-index"
+                     "systemlog-appender-max-file-size"
+                     "debuglog-appender-min-index"
+                     "debuglog-appender-max-index"
+                     "debuglog-appender-max-file-size"
+                     "root-log-level"
+                     "loggers"]}]}

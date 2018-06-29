@@ -1,0 +1,53 @@
+{:display-name "Java Setup"
+ :package-path ""
+ :tarball-path ""
+ :workload-file-group "lifecycle manager"
+ :ui-visibility :editable
+ :valid-dse-versions [:all]
+ :renderer {:renderer-type :template
+            :template "java-setup-dse-4.7.0.template"}
+ :properties {:manage-java {:type "boolean"
+                            :required true
+                            :default_value true
+                            :description "Uncheck if a Java Virtual Machine is pre-installed on your targets and you do not want LCM to install or upgrade Java."}
+              :major-version {:type "string"
+                              :required false
+                              :default_value "1.8.0"
+                              :depends :manage-java
+                              :description "The version of Java to install. Example: 1.8.0."}
+              :update-version {:type "string"
+                               :required false
+                               :default_value "172"
+                               :depends :manage-java
+                               :description "Each Java release is identified by an update-version in its filename. For example, the update-version for server-jre-8u121-linux-x64.tar.gz is 121."}
+              :build-version {:type "string"
+                              :required false
+                              :default_value "11"
+                              :depends :manage-java
+                              :description "Each Java release is additionally identified by a build number in its download url. For example, the build number for '.../java/jdk/8u121-b13/...', is '13'."}
+              :build-hash {:type "string"
+                           :required false
+                           :default_value "a58eab1ec242421181065cdc37240b08"
+                           :depends :manage-java
+                           :description "Java releases from 8u121-b13 onward are additionally identified by a build hash in their download url. For example, build hash in '.../java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/...',  is e9e7ea248e2c4826b92b3f075a80e441. When downloading older Java releases, this can be left blank."}
+              :download-url {:type "string"
+                             :required false
+                             :default_value "auto"
+                             :depends :manage-java
+                             :description "When download-url is set to auto, target nodes download Oracle Java from the official source. To download the tarball from a local mirror, enter the complete URL to the tarball here. In any case, complete the major-version, update-version, and build-version fields so that target nodes can verify that the expected version of Java is available."}
+              :manage-jce-policy {:type "boolean"
+                                  :required true
+                                  :default_value true
+                                  :description "Enable manage-java and manage-jce-policy to configure Lifecycle Manager to deploy Java Cryptography Extension (JCE) Unlimited Strength Policy Files."}
+              :jce-download-url {:type "string"
+                                 :required false
+                                 :default_value "auto"
+                                 :depends :manage-jce-policy
+                                 :description "When jce-download-url is set to auto, target nodes download Java Cryptography Extension (JCE) Unlimited Strength Policy Files from their official source. To download the tarball from a local mirror, enter the complete URL to the tarball here."}}
+ :groupings [{:name "Java",
+              :description "Lifecycle Manager can automatically manage your Java installation. For more details, please refer to the <a href=\"http://docs.datastax.com/en/opscenter/help/lcmManageJava.html\" target=\"_blank\">Lifecycle Manager documentation</a>.",
+              :list ["manage-java" "major-version" "update-version"
+                     "build-version" "build-hash" "download-url"]}
+             {:name "JCE Policy"
+              :description "If Lifecycle Manager is managing your Java installation, it can also install the Java Cryptography Extension (JCE) Unlimited Strength Policy files. These files enable the use of strong encryption suites. You must ensure that usage of these files is legal in your jurisdiction."
+              :list ["manage-jce-policy" "jce-download-url"]}]}

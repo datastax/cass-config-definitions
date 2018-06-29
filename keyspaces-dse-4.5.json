@@ -1,0 +1,6 @@
+{
+    "cassandra": ["dse_system"],
+    "solr": [],
+    "hadoop": ["dse_security", "dse_system", "cfs", "cfs_archive", "HiveMetaStore"],
+    "spark": []
+}

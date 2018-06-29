@@ -1,0 +1,451 @@
+{:display-name "dse.yaml",
+ :package-path "/etc/dse/dse.yaml"
+ :tarball-path "resources/dse/conf/dse.yaml"
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :valid-dse-versions [:all],
+ :renderer {:renderer-type :yaml},
+ :properties
+ {:kerberos_options
+  {:type "dict",
+   :fields
+   {:keytab
+    {:type "string", :default_value "/etc/dse/conf/dse.keytab"},
+    :service_principal
+    {:type "string", :default_value "dse/_HOST@REALM"},
+    :http_principal
+    {:type "string", :default_value "HTTP/_HOST@REALM"},
+    :qop
+    {:type "string",
+     :options
+     [{:label "auth", :value "auth"}
+      {:label "auth-int", :value "auth-int"}
+      {:label "auth-conf", :value "auth-conf"}],
+     :default_value "auth"}}},
+  :resource_level_latency_tracking_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 10000}}},
+  :cql_slow_log_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value true},
+    :threshold_ms {:type "int", :required false, :default_value 2000},
+    :ttl_seconds {:type "int", :required false, :default_value 259200},
+    :async_writers {:type "int", :required false, :default_value 1}}},
+  :histogram_data_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 10000},
+    :retention_count
+    {:type "int", :required false, :default_value 3}}},
+  :back_pressure_threshold_per_core
+  {:type "int", :required false, :default_value 1000},
+  :enable_back_pressure_adaptive_nrt_commit
+  {:type "boolean", :required true, :default_value true},
+  :load_max_time_per_core
+  {:type "int", :required false, :default_value 5},
+  :max_memory_to_lock_fraction
+  {:type "float", :required false, :default_value 0.2},
+  :spark_encryption_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :keystore
+    {:type "string", :required true, :default_value ".keystore"},
+    :keystore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :required true,
+     :default_value "cassandra"},
+    :key_password
+    {:type "string",
+     :password true,
+     :required true,
+     :default_value "cassandra"},
+    :truststore
+    {:type "string", :required true, :default_value ".truststore"},
+    :truststore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :required true,
+     :default_value "cassandra"},
+    :protocol {:type "string"},
+    :cipher_suites {:type "list", :required false, :value_type "string"}}},
+  :system_key_directory
+  {:type "string",
+   :required true,
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :is_directory true
+   :default_value "/etc/dse/conf"},
+  :solr_slow_sub_query_log_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds {:type "int", :required false, :default_value 604800},
+    :async_writers {:type "int", :required false, :default_value 1},
+    :threshold_ms {:type "int", :required false, :default_value 100}}},
+  :solr_index_stats_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds {:type "int", :required false, :default_value 604800},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 60000}}},
+  :hive_options
+  {:type "dict",
+   :fields
+   {:insert_max_retries
+    {:type "int", :required false, :default_value 6},
+    :insert_retry_sleep_period
+    {:type "int", :required false, :default_value 50}}},
+  :max_solr_concurrency_per_core
+  {:type "int", :required false, :default_value 2},
+  :user_level_latency_tracking_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 10000},
+    :top_stats_limit
+    {:type "int", :required false, :default_value 100},
+    :quantiles
+    {:type "boolean", :required true, :default_value false}}},
+  :ldap_options
+  {:type "dict",
+   :fields
+   {:connection_pool
+    {:type "dict",
+     :fields
+     {:max_active {:type "int", :required false, :default_value 8},
+      :max_idle {:type "int", :required false, :default_value 8}}},
+    :search_validity_in_seconds
+    {:type "int", :required false, :default_value 0},
+    :user_search_base
+    {:type "string",
+     :required false,
+     :default_value "ou=users,dc=example,dc=com"},
+    :search_dn
+    {:type "string", :required false, :default_value "cn=Admin"},
+    :credentials_validity_in_ms
+    {:type "int", :required false, :default_value 0},
+    :user_search_filter
+    {:type "string", :required false, :default_value "(uid={0})"},
+    :truststore_type
+    {:type "string", :required false, :default_value "jks"},
+    :truststore_path
+    {:type "string", :required false, :default_value ""},
+    :use_tls {:type "boolean", :required true, :default_value false},
+    :truststore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :required false},
+    :use_ssl {:type "boolean", :required true, :default_value false},
+    :server_host
+    {:type "string", :required false, :default_value "localhost"},
+    :server_port {:type "int", :required false, :default_value 389},
+    :search_password
+    {:type "string",
+     :password true,
+     :required false,
+     :default_value "secret"}}},
+  :solr_update_handler_metrics_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds {:type "int", :required false, :default_value 604800},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 60000}}},
+  :shard_transport_options
+  {:type "dict",
+   :fields
+   {:netty_client_request_timeout
+    {:type "int", :required false, :default_value 60000},
+    :netty_client_worker_threads {:type "int", :required false},
+    :netty_client_max_connections
+    {:type "int", :required false, :default_value 100},
+    :netty_server_worker_threads {:type "int", :required false},
+    :http_shard_client_conn_timeout
+    {:type "int", :required false, :default_value 0},
+    :type
+    {:type "string",
+     :required false,
+     :default_value "netty",
+     :options
+     [{:label "netty", :value "netty"}
+      {:label "http", :value "http"}]},
+    :http_shard_client_socket_timeout
+    {:type "int", :required false, :default_value 0},
+    :netty_server_port
+    {:type "int", :required false, :default_value 8984},
+    :netty_server_acceptor_threads {:type "int", :required false}}},
+  :cql_solr_query_paging
+  {:type "string", :required false, :default_value "off"},
+  :enable_index_disk_failure_policy
+  {:type "boolean", :required true, :default_value false},
+  :solr_request_handler_metrics_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds {:type "int", :required false, :default_value 604800},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 60000}}},
+  :spark_cluster_info_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 10000}}},
+  :ttl_index_rebuild_options
+  {:type "dict",
+   :fields
+   {:fixed_rate_period
+    {:type "int", :required false, :default_value 300},
+    :initial_delay {:type "int", :required false, :default_value 20},
+    :max_docs_per_batch
+    {:type "int", :required false, :default_value 200}}},
+  :node_health_options
+  {:type "dict",
+   :fields
+   {:refresh_rate_ms
+    {:type "int", :required true, :default_value 60000}}},
+  :max_memory_to_lock_mb
+  {:type "int", :required false, :default_value 10240},
+  :solr_latency_snapshot_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds {:type "int", :required false, :default_value 604800},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 60000}}},
+  :solr_data_dir {:type "string", :required false},
+  :config_encryption_active
+  {:type "boolean", :required true, :default_value false},
+  :kmip_hosts
+  {:type "user_defined",
+   :key_name "kmip_groupname",
+   :value_type "dict",
+   :summary_fields [:hosts],
+   :fields
+   {:keystore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :required false},
+    :hosts {:type "string", :required false},
+    :truststore_type {:type "string", :required false},
+    :truststore_path {:type "string", :required false},
+    :key_cache_millis
+    {:type "int", :required false, :default_value 300000},
+    :truststore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :required false},
+    :keystore_type
+    {:type "string", :required false, :default_value "jks"},
+    :keystore_path {:type "string", :required false},
+    :timeout {:type "int", :required false, :default_value 1000}}},
+  :cql_system_info_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 10000}}},
+  :system_info_encryption
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :cipher_algorithm
+    {:type "string", :required false, :default_value "AES"},
+    :secret_key_strength
+    {:type "int", :required false, :default_value 128},
+    :chunk_length_kb {:type "int", :required false, :default_value 64},
+    :key_name
+    {:type "string",
+     :required false,
+     :default_value "system_table_keytab"},
+    :key_provider {:type "string", :required false},
+    :kmip_host {:type "string", :required false}}},
+  :initial_spark_worker_resources
+  {:type "float", :required true, :default_value 0.7},
+  :config_encryption_key_name
+  {:type "string",
+   :required false,
+   :default_value "system_key",
+   :depends :config_encryption_active,
+   :conditional [{:eq true}]},
+  :cluster_summary_stats_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 10000}}},
+  :db_summary_stats_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 10000}}},
+  :spark_application_info_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 10000},
+    :driver
+    {:type "dict",
+     :fields
+     {:sink {:type "boolean", :required true, :default_value false},
+      :connectorSource
+      {:type "boolean", :required true, :default_value false},
+      :jvmSource
+      {:type "boolean", :required true, :default_value false},
+      :stateSource
+      {:type "boolean", :required true, :default_value false}}},
+    :executor
+    {:type "dict",
+     :fields
+     {:sink {:type "boolean", :required true, :default_value false},
+      :connectorSource
+      {:type "boolean", :required true, :default_value false},
+      :jvmSource
+      {:type "boolean", :required true, :default_value false}}}}},
+  :audit_logging_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :logger
+    {:type "string",
+     :required false,
+     :default_value "SLF4JAuditWriter",
+     :depends :enabled,
+     :options
+     [{:label "SLF4JAuditWriter", :value "SLF4JAuditWriter"}
+      {:label "CassandraAuditWriter", :value "CassandraAuditWriter"}],
+     :conditional [{:eq true}]},
+    :included_categories
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :excluded_categories
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :included_keyspaces
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :excluded_keyspaces
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :retention_time
+    {:type "int",
+     :required false,
+     :default_value 0,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :cassandra_audit_writer_options
+    {:type "dict",
+     :depends :logger,
+     :conditional [{:eq "CassandraAuditWriter"}],
+     :fields
+     {:mode {:type "string", :required false, :default_value "sync"},
+      :batch_size {:type "int", :required false},
+      :flush_time {:type "int", :required false},
+      :num_writers {:type "int", :required false},
+      :queue_size {:type "int", :required false},
+      :write_consistency
+      {:type "string", :required false, :default_value "QUORUM"}}}}},
+  :cql_solr_query_row_timeout
+  {:type "int", :required false, :default_value 10000},
+  :flush_max_time_per_core
+  {:type "int", :required false, :default_value 5},
+  :solr_indexing_error_log_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds {:type "int", :required false, :default_value 604800},
+    :async_writers {:type "int", :required false, :default_value 1}}},
+  :solr_cache_stats_options
+  {:type "dict",
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds {:type "int", :required false, :default_value 604800},
+    :refresh_rate_ms
+    {:type "int", :required false, :default_value 60000}}},
+  :hive_meta_store_enabled
+  {:type "boolean", :required true, :default_value true},
+  :cql_solr_query_executor_threads {:type "int", :required false}},
+ :groupings
+ [{:name "Security",
+   :description
+   "When config_encryption_active is enabled, DSE expects encrypted strings for several configuration values in dse.yaml and cassandra.yaml. LCM does not automatically encrypt these values; they must be manually encrypted and entered into the configuration profile. LCM passes through the encrypted values to DSE without any modification. For more details, refer to the <a href=\"http://docs.datastax.com/en/opscenter/help/DseYamlConfigEncrypt.html\" target=\"blank\">documentation</a>.",
+   :list ["config_encryption_active" "config_encryption_key_name"]}
+  {:name "DSE In-Memory Options",
+   :list ["max_memory_to_lock_fraction" "max_memory_to_lock_mb"]}
+  {:name "Hive Meta Store", :list ["hive_meta_store_enabled"]}
+  {:name "Kerberos Support", :list ["kerberos_options"]}
+  {:name "LDAP Options", :list ["ldap_options"]}
+  {:name "Solr Index Scheduler Settings",
+   :list ["ttl_index_rebuild_options"]}
+  {:name "Solr Shard Transport Options",
+   :list ["shard_transport_options"]}
+  {:name "Solr Indexing",
+   :list
+   ["max_solr_concurrency_per_core"
+    "back_pressure_threshold_per_core"
+    "flush_max_time_per_core"
+    "load_max_time_per_core"
+    "enable_back_pressure_adaptive_nrt_commit"]}
+  {:name "Cassandra Disk Failure Policy",
+   :list ["enable_index_disk_failure_policy"]}
+  {:name "Solr CQL Query Options",
+   :list
+   ["solr_data_dir"
+    "cql_solr_query_executor_threads"
+    "cql_solr_query_row_timeout"
+    "cql_solr_query_paging"]}
+  {:name "CQL Performance Service Options",
+   :list
+   ["cql_slow_log_options"
+    "cql_system_info_options"
+    "resource_level_latency_tracking_options"
+    "db_summary_stats_options"
+    "cluster_summary_stats_options"
+    "histogram_data_options"
+    "user_level_latency_tracking_options"]}
+  {:name "Spark Performance Service Options",
+   :list
+   ["spark_cluster_info_options" "spark_application_info_options"]}
+  {:name "Solr Performance Service Options",
+   :list
+   ["solr_indexing_error_log_options"
+    "solr_slow_sub_query_log_options"
+    "solr_update_handler_metrics_options"
+    "solr_request_handler_metrics_options"
+    "solr_index_stats_options"
+    "solr_cache_stats_options"
+    "solr_latency_snapshot_options"]}
+  {:name "Encryption Settings",
+   :list ["system_key_directory" "system_info_encryption"]}
+  {:name "Spark Encryption Settings",
+   :list ["spark_encryption_options"]}
+  {:name "Hive Options", :list ["hive_options"]}
+  {:name "Audit Logging Settings", :list ["audit_logging_options"]}
+  {:name "KMIP Encryption Options", :list ["kmip_hosts"]}
+  {:name "Miscellaneous",
+   :list ["initial_spark_worker_resources" "node_health_options"]}]}

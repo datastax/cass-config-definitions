@@ -1,0 +1,50 @@
+{:display-name "hive-site.xml",
+ :package-path "/etc/dse/spark/hive-site.xml"
+ :tarball-path "resources/spark/conf/hive-site.xml"
+ :workload-file-group "hadoop",
+ ;; hive-site.xml is valid in DSE 4.7.x (as a Hadoop config),
+ ;; and in 5.1.x (as a Spark config). It's not supported in
+ ;; LCM for 4.8.x or 5.0.x since we ended support for Hadoop.
+ ;; - This valid-dse-versions constraint, evaluated in the context of
+ ;;   this basefile, tells OpsCenter 6.1.x that to ignore this config for
+ ;;   DSE 4.8.x. It has no effect on definitions that are not derived from
+ ;;   this basefile (and so does not prevent hive-site.xml from being
+ ;;   configurable in DSE 4.7.x, for example).
+ ;; - OpsCenter 6.0.x does not respect valid-dse-versions, and has no
+ ;;   mechanism for preventing display/config of a file on a per-dse-version
+ ;;   basis. Until OpsCenter 6.0.x ages out of support, we must continue to
+ ;;   maintain DSE 4.8.x and 5.0.x definitions for this file even though they
+ ;;   are ignored by OpsCenter 6.1 so that OpsCenter 6.0.x will display
+ ;;   something sensible.
+ :valid-dse-versions [:gte "5.1.0"],
+ :ui-visibility :editable,
+ :renderer
+ {:renderer-type :template,
+  :template "hive-site-xml-dse-4.8.0.template"},
+ :workload :spark,
+ :properties
+ {:hive-exec-mode-local-auto
+  {:type "boolean", :required true, :default_value false},
+  :hive-metastore-warehouse-dir
+  {:type "string",
+   :required true,
+   :default_value "cfs:///user/hive/warehouse",
+   :render-without-quotes true},
+  :hive-metastore-rawstore-impl
+  {:type "string",
+   :required true,
+   :default_value
+   "com.datastax.bdp.hadoop.hive.metastore.CassandraHiveMetaStore",
+   :render-without-quotes true},
+  :cassandra-auto-create-hive-schema
+  {:type "boolean", :required true, :default_value true},
+  :hive-server2-enable-do-as
+  {:type "boolean", :required true, :default_value false}},
+ :groupings
+ [{:name "General",
+   :list
+   ["hive-exec-mode-local-auto"
+    "hive-metastore-warehouse-dir"
+    "hive-metastore-rawstore-impl"
+    "cassandra-auto-create-hive-schema"
+    "hive-server2-enable-do-as"]}]}

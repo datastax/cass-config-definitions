@@ -1,0 +1,24 @@
+{:display-name "cassandra-env.sh"
+ :package-path "/etc/dse/cassandra/cassandra-env.sh"
+ :tarball-path "resources/cassandra/conf/cassandra-env.sh"
+ :workload-file-group "cassandra"
+ :ui-visibility :editable
+ :valid-dse-versions [:all]
+ :renderer
+ {:renderer-type :template
+  :template "cassandra-env-sh-dse-5.1.0.template"}
+
+ :properties
+ {:malloc-arena-max
+  {:type "int"
+   :constant "MALLOC_ARENA_MAX"
+   :label "Malloc Arena Max"
+   :required false
+   :default_value 4
+   :disabled true
+   :add-export true}}
+
+ :groupings
+ [{:name "General",
+   :list
+   ["malloc-arena-max"]}]}

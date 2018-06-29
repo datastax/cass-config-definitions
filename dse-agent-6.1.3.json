@@ -1,0 +1,15 @@
+{
+    "older-than-current": {
+        "description": ["Sync snapshot is supported by 6.1.3 and newer agents"],
+        "routes": ["POST:/{cluster_id}/backups/sync"],
+        "schedule_jobs": [],
+        "stomp": []
+    },
+
+    "newer-than-current": {
+        "description": [],
+        "routes": [],
+        "schedule_jobs": [],
+        "stomp": []
+    }
+}

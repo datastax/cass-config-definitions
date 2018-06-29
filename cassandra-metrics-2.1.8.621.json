@@ -1,0 +1,25 @@
+{
+    "meta": {
+        "dse_version": "4.7.1",
+        "aggregates": {
+            "max": "<b>Max</b> - The maximum value recorded during a time interval. A higher maximum value could have occurred without it being recorded.",
+            "average": "<b>Avg</b> - The average of values recorded during a time interval.",
+            "total": "<b>Total</b> - Sum of the values recorded for each node during a time interval.",
+            "min": "<b>Min</b> - The minimal value recorded during a time interval. A lower minimal value could have occurred without it being recorded."
+        },
+        "include": ["cassandra-metrics-2.1.5.469.json"]
+    },
+    "cf-row-size": {
+        "aggregation_type": "average",
+        "api_key": "cf-row-size",
+        "is_table_metric": true,
+        "description": "Approximate number of partitions. This may be off given duplicates in memtables and sstables are both counted and there is a very small error percentage inherited from the HyperLogLog data structure.",
+        "group": "cf",
+        "label": "TBL: Partition Count",
+        "mbean": "org.apache.cassandra.metrics:type=ColumnFamily,keyspace={keyspace},scope={table},name=EstimatedRowCount",
+        "metric_type": "gauge",
+        "path": ["Value"],
+        "scope": "cf",
+        "type": "jmx"
+    }
+}

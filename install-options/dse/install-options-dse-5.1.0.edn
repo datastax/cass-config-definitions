@@ -1,0 +1,51 @@
+{:display-name "Install Options"
+ :package-path ""
+ :tarball-path ""
+ :workload-file-group "lifecycle manager"
+ :ui-visibility :editable
+ :renderer {:renderer-type :yaml} ;; arbitrary - we won't actually use the yaml
+ :properties
+ {:install-type
+  {:type "string"
+   :label "Installation Type"
+   :required true
+   :default_value "package"
+   :options [{:label "package" :value "package"}
+             {:label "tarball" :value "tarball"}]}
+  :install-directory
+  {:type "string"
+   :label "Installation Directory"
+   :required true
+   :default_value "/opt/datastax"
+   :depends :install-type
+   :conditional [{:eq "tarball"}]}
+  :tarball-hash
+  {:type "string"
+   :label "Tarball SHA-256 Hash"
+   :required false
+   :depends :install-type
+   :conditional [{:eq "tarball"}]}
+  :install-privileges
+  {:type "string"
+   :label "Install privileges"
+   :required true
+   :depends :install-type
+   :conditional [{:eq "tarball"}]
+   :default_value "non-root"
+   :options
+   [{:label "non-root" :value "non-root"}
+    {:label "root" :value "root"}]}
+  :run-dse-as
+  {:type "string"
+   :label "Run DSE as"
+   :depends :install-type
+   :conditional [{:eq "tarball"}]
+   :default_value "cassandra"}}
+ :groupings
+ [{:name ""
+   :list ["install-type"
+          "install-directory"
+          "tarball-hash"
+          "install-privileges"
+          "run-dse-as"]}]
+ }

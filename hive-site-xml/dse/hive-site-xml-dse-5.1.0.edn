@@ -1,0 +1,67 @@
+{:display-name "hive-site.xml"
+ :package-path "/etc/dse/spark/hive-site.xml"
+ :tarball-path "resources/spark/conf/hive-site.xml"
+ :workload-file-group "spark"
+ :valid-dse-versions [:all]
+ :ui-visibility :editable
+ :renderer
+ {:renderer-type :template
+  :template "hive-site-xml-dse-5.1.0.template"}
+ :workload :spark
+ :properties
+ {
+  :hive-exec-mode-local-auto
+  {:type "boolean" :required true :default_value false}
+  :hive-metastore-rawstore-impl
+  {:type "string" :required true :default_value "com.datastax.bdp.hadoop.hive.metastore.CassandraHiveMetaStore"
+   :render-without-quotes true}
+  :com-datastax-bdp-fs-client-authentication-factory
+  {:type "string" :required true
+   :default_value "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"
+   :render-without-quotes true}
+
+  :cassandra-auto-create-hive-schema
+  {:type "boolean" :required true :default_value true}
+  :hive-server2-enable-do-as
+  {:type "boolean" :required true :default_value false}
+  :hive-metastore-warehouse-dir
+  {:type "string" :required true
+   :default_value "dsefs:///user/spark/warehouse"
+   :render-without-quotes true}
+  :spark-enable
+  {:type "boolean" :required true :default_value true}
+  :cassandra-connection-meta-store-column-family-name
+  {:type "string" :required true
+   :default_value "sparkmetastore"
+   :render-without-quotes true}
+  :hive-server2-logging-operation-enabled {:type "boolean"
+                                           :required true
+                                           :default_value false}
+  :hive-server2-logging-operation-level
+  {:type "string" :required true
+   :default_value "NONE" :render-without-quotes true}
+  :hive-server2-transport-mode
+  {:type "string" :required true
+   :default_value "binary"
+   :render-without-quotes true}
+  :spark-hadoop-com-datastax-bdp-fs-client-authentication-factory
+  {:type "string" :required true
+   :default_value "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"
+   :render-without-quotes true}
+}
+ :groupings
+ [{:name "General",
+   :list
+   ["hive-exec-mode-local-auto"
+    "hive-metastore-warehouse-dir"
+    "hive-metastore-rawstore-impl"
+    "com-datastax-bdp-fs-client-authentication-factory"
+    "cassandra-auto-create-hive-schema"
+    "hive-server2-enable-do-as"
+    "spark-enable"
+    "cassandra-connection-meta-store-column-family-name"
+    "hive-server2-logging-operation-enabled"
+    "hive-server2-logging-operation-level"
+    "hive-server2-transport-mode"
+    "spark-hadoop-com-datastax-bdp-fs-client-authentication-factory"
+]}]}

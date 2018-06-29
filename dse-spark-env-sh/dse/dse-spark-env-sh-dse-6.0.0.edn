@@ -1,0 +1,56 @@
+{:display-name "dse-spark-env.sh"
+ :package-path "/etc/dse/spark/dse-spark-env.sh"
+ :tarball-path "resources/spark/conf/dse-spark-env.sh"
+ :workload-file-group "spark"
+ :ui-visibility :editable
+ :valid-dse-versions [:all]
+ :renderer
+ {:renderer-type :template
+  :template "dse-spark-env-sh-dse-6.0.0.template"}
+ :workload :spark
+
+ :properties
+ {:max-heap-free-ratio
+  {:type "int"
+   :required true
+   :default_value 50}
+
+  :min-heap-free-ratio
+  {:type "int"
+   :required true
+   :default_value 20}
+
+  :spark-worker-dir
+  {:type "string"
+   :required true
+   :default_value "/var/lib/spark/worker"}
+
+  :spark-executor-dirs
+  {:type "string"
+   :required true
+   :default_value "/var/lib/spark/rdd"}
+
+  :spark-worker-log-dir
+  {:type "string"
+   :required true
+   :default_value "/var/log/spark/worker"}
+
+  :spark-master-log-dir
+  {:type "string"
+   :required true
+   :default_value "/var/log/spark/master"}
+
+  :alwayson-sql-log-dir
+  {:type "string"
+   :required true
+   :default_value "/var/log/spark/alwayson_sql"}}
+
+ :groupings
+ [{:name "General"
+   :list ["max-heap-free-ratio"
+          "min-heap-free-ratio"
+          "spark-worker-dir"
+          "spark-executor-dirs"
+          "spark-worker-log-dir"
+          "spark-master-log-dir"
+          "alwayson-sql-log-dir"]}]}

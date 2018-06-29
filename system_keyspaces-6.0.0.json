@@ -1,0 +1,5 @@
+{
+    "system": ["system", "system_traces", "system_distributed", "dse_system", "dse_security", "system_schema"],
+    "system_with_auth": ["system", "system_traces", "system_distributed", "dse_system", "system_auth", "dse_auth", "dse_security", "system_schema"],
+    "all": ["system", "system_traces", "system_distributed", "dse_system", "system_auth", "dse_auth", "OpsCenter", "cfs", "system_schema"]
+}

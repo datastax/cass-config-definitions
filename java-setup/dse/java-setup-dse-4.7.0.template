@@ -1,0 +1,17 @@
+{% if manage-java %}{% ifequal download-url "auto" %}http://download.oracle.com/otn-pub/java/jdk/{{major-version|get-java-minor-version}}u{{update-version}}-b{{build-version}}/{% if build-hash|not-empty %}{{build-hash}}/{% endif %}server-jre-{{major-version|get-java-minor-version}}u{{update-version}}-linux-x64.tar.gz{% else %}{{download-url}}{% endifequal %}{% endif %}
+{% if manage-java %}{% if manage-jce-policy %}{% ifequal jce-download-url "auto" %}{% if major-version|get-java-minor-version = 7 %}http://download.oracle.com/otn-pub/java/jce/7/UnlimitedJCEPolicyJDK7.zip{% endif %}{% if major-version|get-java-minor-version = 8 %}http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip{% endif %}{% else %}{{jce-download-url}}{% endifequal %}{% endif %}{% endif %}
+{% comment %}
+   We're rendering two different things in this template
+   (the java-download-url and the jce-download-url) which we usually avoid.
+   But they both reference the same variables, and UI-wise want to be in the
+   same config-profile page, and we don't have a good mechanism for outputting
+   multiple rendered artifacts in that case. Here we just use line-breaks to
+   separate. The consumer of this template requires that the java download-url
+   be on line 0 and the jce download url be on line 1.
+{% endcomment %}
+{% comment %}
+   Note that the jce-line is only rendered if manage-jce-policy AND manage-java
+   are enabled. The UI up to (at least) OpsCenter 6.1.0 can't hide transitive
+   dependencies, so the template checks both parents before rendering in case
+   customers accidentally check manage-jce-policy without manage-java.
+{% endcomment %}

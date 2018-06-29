@@ -1,0 +1,29 @@
+{:display-name "dse.default"
+ :package-path "/etc/default/dse"
+ :tarball-path "resources/dse/conf/dse.default"
+ :workload-file-group "cassandra"
+ :ui-visibility :hidden
+ :valid-dse-versions [:all]
+ :renderer {:renderer-type :template
+            :template "dse-default-dse-5.0.1.template"}
+ :properties {:hadoop-enabled {:type "boolean"
+                               :required true
+                               :default_value false
+                               :render_as "int"}
+              :solr-enabled {:type "boolean"
+                             :required true
+                             :default_value false
+                             :render_as "int"},
+              :spark-enabled {:type "boolean"
+                              :required true
+                              :default_value false
+                              :render_as "int"}
+              :graph-enabled {:type "boolean"
+                              :required true
+                              :default_value false
+                              :render_as "int"}}
+ :groupings [{:name "General"
+              :list ["hadoop-enabled"
+                     "solr-enabled"
+                     "spark-enabled"
+                     "graph-enabled"]}]}

@@ -1,0 +1,65 @@
+{
+    "_comments-permissions": "Human readable name : mapping value",
+    "permissions": {
+        "Cluster Configuration" : "1",
+        "Node Cleanup" : "2",
+        "Node Compact" : "4",
+        "Node Flush" : "8",
+        "Node Repair" : "16",
+        "Node Decommission" : "32",
+        "Node Drain" : "64",
+        "Node Move" : "128",
+        "Node Garbage Collect" : "256",
+        "Node Start and Stop" : "512",
+        "Alerting" : "1024",
+        "Backup and Restore" : "2048",
+        "Add Nodes to Cluster" : "4096",
+        "View Cluster" : "8192",
+        "Rebalance Cluster" : "16384",
+        "Install Agent on Cluster" : "32768",
+        "Remove Token" : "65536",
+        "Assassinate Controller" : "131072",
+        "Best Practice Rules" : "262144",
+        "Repair Service" : "524288",
+        "Modify Schema" : "2097152",
+        "Truncate Data" : "4194304",
+        "View Schema" : "8388608",
+        "Cluster Connection": "16777216"
+    },
+    "_comments-groupings": "Group name: {permissions_key: label for use in UI}",
+    "groupings": {
+        "Core": {
+            "View Cluster": "View Cluster",
+            "Install Agent on Cluster": "Install Agents",
+            "Cluster Connection": "Edit Connection Settings",
+            "Alerting": "Manage Alerts",
+            "Cluster Configuration": "Cluster Configuration"
+        },
+        "Node Operations": {
+            "Node Start and Stop": "Start and Stop",
+            "Node Cleanup": "Cleanup",
+            "Node Compact": "Compact",
+            "Node Drain": "Drain",
+            "Node Flush": "Flush",
+            "Node Garbage Collect": "Garbage Collection",
+            "Node Repair": "Repair"
+        },
+        "Data": {
+            "View Schema": "View Schema",
+            "Modify Schema": "Modify Schema",
+            "Truncate Data": "Truncate Data"
+        },
+        "Cluster Topology": {
+            "Add Nodes to Cluster": "Add Nodes",
+            "Rebalance Cluster": "Rebalance Cluster",
+            "Node Move": "Move",
+            "Node Decommission": "Decommission",
+            "Remove Token": "Remove Tokens"
+        },
+        "Services": {
+            "Backup and Restore": "Backup Service",
+            "Best Practice Rules": "Best Practice Service",
+            "Repair Service": "Repair Service"
+        }
+    }
+}

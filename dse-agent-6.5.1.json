@@ -1,0 +1,15 @@
+{
+  "older-than-current": {
+    "description": ["Runtime log level adjustments are allowed by 6.5.1 and newer agents."],
+    "routes": ["PUT:/{cluster_id}/log/level/{level}"],
+    "schedule_jobs": [],
+    "stomp": []
+  },
+
+  "newer-than-current": {
+    "description": [],
+    "routes": [],
+    "schedule_jobs": [],
+    "stomp": []
+  }
+}

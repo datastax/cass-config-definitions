@@ -1,0 +1,301 @@
+{:display-name "spark-env.sh",
+ :package-path "/etc/dse/spark/spark-env.sh"
+ :tarball-path "resources/spark/conf/spark-env.sh"
+ :workload-file-group "spark",
+ :ui-visibility :editable,
+ :valid-dse-versions [:all],
+ :renderer
+ {:renderer-type :template,
+  :template "spark-env-sh-dse-6.0.0.template"},
+ :workload :spark,
+ :properties
+ {:spark-master-opts
+  {:type "string",
+   :constant "SPARK_MASTER_OPTS",
+   :label "Spark Master Options",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :hadoop-conf-dir
+  {:type "string",
+   :constant "HADOOP_CONF_DIR",
+   :label "Hadoop Configuration Directory",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-local-dirs
+  {:type "string",
+   :constant "SPARK_LOCAL_DIRS",
+   :label "Spark Local Directories",
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :required false,
+   :default_value "/tmp",
+   :disabled false,
+   :is_directory true,
+   :add-export true},
+  :spark-worker-port
+  {:type "int",
+   :constant "SPARK_WORKER_PORT",
+   :label "Spark Worker Port",
+   :required false,
+   :disabled true,
+   :add-export true},
+  :spark-worker-dir
+  {:type "string",
+   :constant "SPARK_WORKER_DIR",
+   :label "Spark Worker Directory",
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :required false,
+   :default_value "/var/lib/spark/worker",
+   :disabled false,
+   :is_directory true,
+   :add-export true},
+  :spark-executor-dirs
+  {:type "string",
+   :constant "SPARK_EXECUTOR_DIRS",
+   :label "Spark Executor Directories",
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :required false,
+   :default_value "/var/lib/spark/rdd",
+   :disabled false,
+   :is_directory true,
+   :add-export true}
+  :alwayson-sql-log-dir
+  {:type "string",
+   :constant "ALWAYSON_SQL_LOG_DIR",
+   :label "AlwaysOn SQL Log Directory",
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :required false,
+   :default_value "/var/log/spark/alwayson_sql",
+   :disabled false,
+   :is_directory true,
+   :add-export true}
+  :spark-master-port
+  {:type "int",
+   :constant "SPARK_MASTER_PORT",
+   :label "Spark Master Port",
+   :required true,
+   :default_value 7077,
+   :disabled false,
+   :add-export true},
+  :spark-master-host
+  {:type "string",
+   :constant "SPARK_MASTER_HOST",
+   :label "Spark Master IP/Hostname",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-master-log-dir
+  {:type "string",
+   :constant "SPARK_MASTER_LOG_DIR",
+   :label "Spark Master Log Directory",
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :required true,
+   :default_value "/var/log/spark/master",
+   :disabled false,
+   :is_directory true,
+   :add-export true},
+  :spark-conf-dir
+  {:type "string",
+   :constant "SPARK_CONF_DIR",
+   :label "Spark Configuration Directory",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-worker-webui-port
+  {:type "int",
+   :constant "SPARK_WORKER_WEBUI_PORT",
+   :label "Spark Worker Web UI Port",
+   :required false,
+   :default_value 7081,
+   :disabled false,
+   :add-export true},
+  :spark-public-dns
+  {:type "string",
+   :constant "SPARK_PUBLIC_DNS",
+   :label "Spark Public DNS",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-master-webui-port
+  {:type "int",
+   :constant "SPARK_MASTER_WEBUI_PORT",
+   :label "Spark Master Web UI Port",
+   :required true,
+   :default_value 7080,
+   :disabled false,
+   :add-export true},
+  :spark-history-opts
+  {:type "string",
+   :constant "SPARK_HISTORY_OPTS",
+   :label "Spark History Options",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :hive-server2-thrift-bind-host
+  {:type "string",
+   :constant "HIVE_SERVER2_THRIFT_BIND_HOST",
+   :label "Hive Server 2 Thrift Bind Host",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-worker-opts
+  {:type "string",
+   :constant "SPARK_WORKER_OPTS",
+   :label "Spark Worker Options",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-daemon-java-opts
+  {:type "string",
+   :constant "SPARK_DAEMON_JAVA_OPTS",
+   :label "Spark Daemon Java Options",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-log-dir
+  {:type "string",
+   :constant "SPARK_LOG_DIR",
+   :label "Spark Log Directory",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-worker-log-dir
+  {:type "string",
+   :constant "SPARK_WORKER_LOG_DIR",
+   :label "Spark Worker Log Directory",
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :required false,
+   :default_value "/var/log/spark/worker",
+   :disabled false,
+   :is_directory true,
+   :add-export true},
+  :spark-driver-host
+  {:type "string",
+   :constant "SPARK_DRIVER_HOST",
+   :label "Spark Driver Host",
+   :required false,
+   :default_value "127.0.0.1",
+   :disabled true,
+   :add-export true},
+  :spark-driver-memory
+  {:type "string",
+   :constant "SPARK_DRIVER_MEMORY",
+   :label "Spark Driver Memory",
+   :required false,
+   :default_value "1024M",
+   :disabled false,
+   :add-export true},
+  :spark-local-ip
+  {:type "string",
+   :constant "SPARK_LOCAL_IP",
+   :label "Spark Local IP",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-cassandra-connection-host
+  {:type "string",
+   :constant "SPARK_CASSANDRA_CONNECTION_HOST",
+   :label "Spark Cassandra Connection Host",
+   :required false,
+   :default_value "127.0.0.1",
+   :disabled true,
+   :add-export true},
+  :hive-server2-thrift-port
+  {:type "int",
+   :constant "HIVE_SERVER2_THRIFT_PORT",
+   :label "Hive Server 2 Thrift Port",
+   :required false,
+   :default_value 10000,
+   :disabled true,
+   :add-export true},
+  :spark-shuffle-opts
+  {:type "string",
+   :constant "SPARK_SHUFFLE_OPTS",
+   :label "Spark Shuffle Options",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-worker-host
+  {:type "string",
+   :constant "SPARK_WORKER_HOST",
+   :label "Spark Worker IP/Hostname",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-ident-string
+  {:type "string",
+   :constant "SPARK_IDENT_STRING",
+   :label "Spark Ident String",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-pid-dir
+  {:type "string",
+   :constant "SPARK_PID_DIR",
+   :label "Spark PID Directory",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true},
+  :spark-niceness
+  {:type "string",
+   :constant "SPARK_NICENESS",
+   :label "Spark Niceness",
+   :required false,
+   :default_value "",
+   :disabled true,
+   :add-export true}},
+ :groupings
+ [{:name "General",
+   :list
+   ["spark-master-opts"
+    "spark-local-dirs"
+    "spark-worker-port"
+    "spark-worker-dir"
+    "spark-master-port"
+    "spark-conf-dir"
+    "spark-worker-webui-port"
+    "spark-public-dns"
+    "spark-master-webui-port"
+    "spark-history-opts"
+    "spark-worker-opts"
+    "spark-daemon-java-opts"
+    "spark-log-dir"
+    "spark-worker-log-dir"
+    "spark-driver-host"
+    "spark-driver-memory"
+    "spark-local-ip"
+    "spark-cassandra-connection-host"
+    "spark-ident-string"
+    "spark-pid-dir"
+    "spark-niceness"
+    "spark-shuffle-opts"
+    "spark-master-log-dir"
+    "spark-master-host"
+    "spark-worker-host"
+    "spark-executor-dirs"
+    "alwayson-sql-log-dir"]}
+  {:name "Hadoop", :list ["hadoop-conf-dir"]}
+  {:name "Hive",
+   :list ["hive-server2-thrift-port" "hive-server2-thrift-bind-host"]}]}

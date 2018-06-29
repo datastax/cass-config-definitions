@@ -1,0 +1,15 @@
+{
+    "older-than-current": {
+        "description": ["Graphs are not automatically restored together by the Backup Service."],
+        "routes": [],
+        "schedule_jobs": [],
+        "stomp": []
+    },
+
+    "newer-than-current": {
+        "description": [],
+        "routes": [],
+        "schedule_jobs": [],
+        "stomp": []
+    }
+}

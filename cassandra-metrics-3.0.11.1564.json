@@ -1,0 +1,51 @@
+{
+    "meta": {
+        "dse_version": "5.0.6",
+        "aggregates": {
+            "max": "<b>Max</b> - The maximum value recorded during a time interval. A higher maximum value could have occurred without it being recorded.",
+            "average": "<b>Avg</b> - The average of values recorded during a time interval.",
+            "total": "<b>Total</b> - Sum of the values recorded for each node during a time interval.",
+            "min": "<b>Min</b> - The minimal value recorded during a time interval. A lower minimal value could have occurred without it being recorded."
+        },
+        "include": ["cassandra-metrics-3.0.0.json"]
+    },
+    "percentage-repaired": {
+        "aggregation_type": "average",
+        "allow_alerts": true,
+        "api_key": "percentage-repaired",
+        "is_table_metric": false,
+        "description": "Percentage of data (uncompressed) marked as repaired across all non-system tables on a node.  Tables with a replication factor of 1 are excluded.",
+        "group": "cassandra",
+        "histogram": false,
+        "label": "Percent Data Repaired",
+        "mbean": "org.apache.cassandra.metrics:type=Table,name=PercentRepaired",
+        "metric_type": "gauge",
+        "path": ["Value"],
+        "scope": "general",
+        "type": "jmx",
+
+        "#": "Leverage hardmax+unit instead of render_type:percentage, for more granular visibility at higher ranges",
+        "unit": "%",
+        "hardmax": 100
+    },
+    "cf-percentage-repaired": {
+        "aggregation_type": "average",
+        "allow_alerts": true,
+        "api_key": "cf-percentage-repaired",
+        "is_table_metric": true,
+        "description": "Percentage of data (uncompressed) marked as repired for a given table on a node.  This metric is only meaningful for replication factor > 1.",
+        "group": "cf",
+        "histogram": false,
+        "label": "TBL: Percent Data Repaired",
+        "alerts_label": "Percent Data Repaired",
+        "mbean": "org.apache.cassandra.metrics:type=Table,keyspace={keyspace},scope={table},name=PercentRepaired",
+        "metric_type": "gauge",
+        "path": ["Value"],
+        "scope": "cf",
+        "type": "jmx",
+
+        "#": "Leverage hardmax+unit instead of render_type:percentage, for more granular visibility at higher ranges",
+        "unit": "%",
+        "hardmax": 100
+    }
+}

@@ -1,0 +1,5 @@
+{
+    "system": ["system", "system_traces", "system_auth", "dse_auth", "dse_system", "dse_security"],
+    "for_stats": ["OpsCenter", "cfs"]
+}
+

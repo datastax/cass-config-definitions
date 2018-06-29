@@ -1,0 +1,64 @@
+{
+    "meta": {
+        "dse_version": "4.6.1",
+        "aggregates": {
+            "max": "<b>Max</b> - The maximum value recorded during a time interval. A higher maximum value could have occurred without it being recorded.",
+            "average": "<b>Avg</b> - The average of values recorded during a time interval.",
+            "total": "<b>Total</b> - Sum of the values recorded for each node during a time interval.",
+            "min": "<b>Min</b> - The minimal value recorded during a time interval. A lower minimal value could have occurred without it being recorded."
+        },
+        "include": ["cassandra-metrics-2.0.11.83.json"],
+        "exclude": []
+    },
+    "cf-bf-offheap": {
+        "aggregation_type": "average",
+        "alerts_label": "Bloom Filter Off Heap",
+        "api_key": "cf-bf-offheap",
+        "is_table_metric": true,
+        "description": "Total off heap memory used by bloom filters from all live SSTables in a table.",
+        "from_unit": "gbToBytes",
+        "group": "cf",
+        "label": "TBL: Bloom Filter Off Heap",
+        "mbean": "org.apache.cassandra.metrics:type=ColumnFamily,keyspace={keyspace},scope={table},name=BloomFilterOffHeapMemoryUsed",
+        "metric_type": "gauge",
+        "path": ["Value"],
+        "scope": "cf",
+        "to_unit": "bytesToGb",
+        "type": "jmx",
+        "render_type": "filesize"
+    },
+    "cf-index-summary-offheap": {
+        "aggregation_type": "average",
+        "alerts_label": "Index Summary Off Heap",
+        "api_key": "cf-index-summary-offheap",
+        "is_table_metric": true,
+        "description": "Total off heap memory used by the index summary of all live SSTables in a table.",
+        "from_unit": "gbToBytes",
+        "group": "cf",
+        "label": "TBL: Index Summary Off Heap",
+        "mbean": "org.apache.cassandra.metrics:type=ColumnFamily,keyspace={keyspace},scope={table},name=IndexSummaryOffHeapMemoryUsed",
+        "metric_type": "gauge",
+        "path": ["Value"],
+        "scope": "cf",
+        "to_unit": "bytesToGb",
+        "type": "jmx",
+        "render_type": "filesize"
+    },
+    "cf-compression-data-offheap": {
+        "aggregation_type": "average",
+        "alerts_label": "Compression Metadata Off Heap",
+        "api_key": "cf-compression-data-offheap",
+        "is_table_metric": true,
+        "description": "Total off heap memory used by the compression metadata of all live SSTables in a table.",
+        "from_unit": "gbToBytes",
+        "group": "cf",
+        "label": "TBL: Compression Metadata Off Heap",
+        "mbean": "org.apache.cassandra.metrics:type=ColumnFamily,keyspace={keyspace},scope={table},name=CompressionMetadataOffHeapMemoryUsed",
+        "metric_type": "gauge",
+        "path": ["Value"],
+        "scope": "cf",
+        "to_unit": "bytesToGb",
+        "type": "jmx",
+        "render_type": "filesize"
+    }
+}

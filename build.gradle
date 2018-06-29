@@ -1,0 +1,52 @@
+/*
+ * Copyright DataStax, Inc.
+ *
+ * Please see the included license file for details.
+ */
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'commons-codec:commons-codec:1.11'
+        classpath 'us.bpsm:edn-java:0.5.0'
+        classpath 'com.cloudbees:diff4j:1.2'
+    }
+}
+
+import org.apache.commons.codec.digest.DigestUtils
+import org.apache.commons.codec.binary.Hex
+
+description = "OpsCenter definitions"
+
+task tar(type:Tar) {
+    archiveName = "definition_files.tgz"
+    compression = Compression.GZIP
+    destinationDir buildDir
+    into ('/'){
+        from '.'
+        exclude 'build'
+    }
+}
+
+task md5hash(dependsOn: tar) {
+    ext {
+        md5File = file("${buildDir}/version.md5")
+    }
+
+    inputs.files "${buildDir}/definition_files.tgz"
+    outputs.file md5File
+    doLast {
+        def digest = DigestUtils.md5Digest
+        inputs.files.sort().each {
+            it.withInputStream { is ->
+                DigestUtils.updateDigest(digest, is)
+            }
+        }
+        md5File.withWriter { it << Hex.encodeHexString(digest.digest()) }
+    }
+}
+
+task dist(dependsOn: md5hash) {
+}

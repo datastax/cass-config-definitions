@@ -1,0 +1,22 @@
+{
+    "older-than-current": {
+        "description": ["A keyspace must be specified for flush, cleanup, and compact node operations.",
+                        "Restore actions may not be taken."],
+        "routes": ["POST:/{cluster_id}/ops/cleanup/{node_ip}",
+                   "POST:/{cluster_id}/ops/compact/{node_ip}",
+                   "POST:/{cluster_id}/ops/flush/{node_ip}",
+                   "POST:/{cluster_id}/pit/run",
+                   "POST:/{cluster_id}/backups/restore/{tag}",
+                   "POST:/{cluster_id}/backups/restore/{tag}/{ksname}",
+                   "POST:/{cluster_id}/backups/restore/{tag}/{ksname}/{cfname}"],
+        "schedule_jobs": [],
+        "stomp": []
+    },
+
+    "newer-than-current": {
+        "description": [],
+        "routes": [],
+        "schedule_jobs": [],
+        "stomp": []
+    }
+}

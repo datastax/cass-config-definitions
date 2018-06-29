@@ -1,0 +1,882 @@
+{
+    "meta" : {
+        "types": {
+            "latency-histogram": {
+                "p99th": "<b>99th</b> - The 99th percentile represents a value where 99 percent of values during a time interval are at or below, and 1 percent of values are above, the 99th percentile value.",
+                "p90th": "<b>90th</b> - The 90th percentile represents a value where 90 percent of values during a time interval are at or below, and 10 percent of values are above, the 90th percentile value.",
+                "median": "<b>Median</b> - The median, also known as the 50th percentile, represents a value where 50 percent of values during a time interval are either at or below the median value.",
+                "max": "<b>Max</b> - The maximum latency during a time interval.",
+                "min": "<b>Min</b> - The minimum latency during a time interval."
+            }
+        },
+        "aggregates": {
+            "max": "<b>Max</b> - The maximum value recorded during a time interval. A higher maximum value could have occurred without it being recorded.",
+            "average": "<b>Avg</b> - The average of values recorded during a time interval.",
+            "min": "<b>Min</b> - The minimal value recorded during a time interval. A lower minimal value could have occurred without it being recorded.",
+            "total": "<b>Total</b> - Sum of the values recorded for each node during a time interval."
+        }
+    },
+    "write-ops": {
+        "label": "Write Requests",
+        "description": "The number of write requests per second on the coordinator nodes, analogous to client writes. Monitoring the number of requests over a given time period reveals system write workload and usage patterns."
+    },
+    "write-latency-op": {
+        "label": "Write Request Latency",
+        "description": "The <i>average</i> response times (in milliseconds) of a client write. The time period starts when a node receives a client write request, and ends when the node responds back to the client. Depending on consistency level and replication factor, this may include the network latency from writing to the replicas."
+    },
+    "write-histogram": {
+        "label": "Write Latency (Stacked)",
+        "description": "The min, median, max, 90th, and 99th percentiles of a client writes. The time period starts when a node receives a client write request, and ends when the node responds back to the client. Depending on consistency level and replication factor, this may include the network latency from writing to the replicas.",
+        "types": ["latency-histogram"]
+    },
+    "read-ops": {
+        "label": "Read Requests",
+        "description": "The number of read requests per second on the coordinator nodes, analogous to client reads. Monitoring the number of requests over a given time period reveals system read workload and usage patterns."
+    },
+    "read-latency-op": {
+        "label": "Read Request Latency",
+        "description": "The <i>average</i> response times (in milliseconds) of a client read. The time period starts when a node receives a client read request, and ends when the node responds back to the client. Depending on consistency level and replication factor, this may include the network latency from requesting the data’s replicas."
+    },
+    "read-histogram": {
+        "label": "Read Latency (Stacked)",
+        "description": "The min, median, max, 90th, and 99th percentiles of a client reads. The time period starts when a node receives a client read request, and ends when the node responds back to the client. Depending on consistency level and replication factor, this may include the network latency from requesting the data’s replicas.",
+        "types": ["latency-histogram"]
+    },
+    "nonheap-committed": {
+        "label": "Non Heap Committed",
+        "description": "Allocated memory, guaranteed for Java nonheap."
+    },
+    "nonheap-max": {
+        "label": "Non Heap Max",
+        "description": "Maximum amount that the Java nonheap can grow."
+    },
+    "nonheap-used": {
+        "label": "Non Heap Used",
+        "description": "Average amount of Java nonheap memory used."
+    },
+    "heap-committed": {
+        "label": "Heap Committed",
+        "description": "Allocated memory guaranteed for the Java heap."
+    },
+    "heap-max": {
+        "label": "Heap Max",
+        "description": "Maximum amount that the Java heap can grow."
+    },
+    "heap-used": {
+        "label": "Heap Used",
+        "description": "Average amount of Java heap memory used."
+    },
+    "cms-collection-count": {
+        "label": "JVM CMS Collection Count",
+        "description": "Number of concurrent mark sweep garbage collections performed per second."
+    },
+    "par-new-collection-count": {
+        "label": "JVM ParNew Collection Count",
+        "description": "Number of ParNew garbage collections performed per second. ParNew collections pause all work in the JVM but should finish quickly."
+    },
+    "cms-collection-time": {
+        "label": "JVM CMS Collection Time",
+        "description": "Average number of milliseconds spent performing CMS garbage collections per second."
+    },
+    "par-new-collection-time": {
+        "label": "JVM ParNew Collection Time",
+        "description": "Average number of milliseconds spent performing ParNew garbage collections per second. ParNew collections pause all work in the JVM but should finish quickly."
+    },
+    "data-load": {
+        "label": "Data Size",
+        "description": "The live disk space used by all tables on a node."
+    },
+    "total-bytes-compacted": {
+        "label": "Total Bytes Compacted",
+        "description": "Number of bytes compacted per second."
+    },
+    "total-compactions-completed": {
+        "label": "Total Compactions",
+        "description": "Number of compaction tasks completed per second."
+    },
+    "pending-compaction-tasks": {
+        "label": "Compactions Pending",
+        "description": "Estimated number of compactions required to achieve the desired state. This includes the pending queue to the compaction executor and additional tasks that may be created from their completion."
+    },
+
+    "pending-flushes": {
+        "label": "Flushes Pending",
+        "description": "Number of memtables queued for the flush process. A flush sorts and writes the memtables to disk, which could block writes."
+    },
+    "pending-gossip-stage": {
+        "label": "Gossip Tasks Pending",
+        "description": "Number of gossip messages and acknowledgments queued and waiting to be sent or received."
+    },
+    "pending-hinted-handoff": {
+        "label": "Hinted Handoff Pending",
+        "description": "Number of hints in the queue waiting to be delivered after a failed node comes up."
+    },
+    "pending-internal-response-stage": {
+        "label": "Internal Responses Pending",
+        "description": "Number of pending tasks from internal tasks, such as nodes joining and leaving the cluster."
+    },
+    "pending-anti-entropy-stage": {
+        "label": "Manual Repair Tasks Pending",
+        "description": "Repair tasks pending, such as handling the merkle tree transfer after the validation compaction."
+    },
+    "pending-memtable-post-flush": {
+        "label": "Memtable Post Flushers Pending",
+        "description": "Number of pending tasks related to the last step in flushing memtables to disk as SSTables. Includes removing unnecessary commitlog files and committing Solr-based secondary indexes."
+    },
+    "pending-migration-stage": {
+        "label": "Migrations Pending",
+        "description": "Number of pending tasks from system methods that modified the schema."
+    },
+    "pending-misc-stage": {
+        "label": "Misc. Tasks Pending",
+        "description": "Number of pending tasks from infrequently run operations, such as taking a snapshot or processing the notification of a completed replication."
+    },
+    "pending-read-stage": {
+        "label": "Read Requests Pending",
+        "description": "Number of pending read requests. Read requests read data off of disk and deserialize cached data."
+    },
+    "pending-read-repair-stage": {
+        "label": "Read Repair Tasks Pending",
+        "description": "Number of read repair operations in the queue waiting to run."
+    },
+    "pending-repl-on-write-tasks": {
+        "label": "Repl. on Write Tasks Pending",
+        "description": "Number of pending counter increment tasks that will read then write on the replicas after a coordinator's local write. Depending on consistency level used on writes, tasks may back up outside of the normal write path."
+    },
+    "pending-request-response-stage": {
+        "label": "Request Responses Pending",
+        "description": "Number of pending callbacks to execute after a task on a remote node completes."
+    },
+    "pending-mutation-stage": {
+        "label": "Write Requests Pending",
+        "description": "Number of write requests received by the cluster and waiting to be handled."
+    },
+    "pending-counter-mutation-stage": {
+        "label": "Counter Mutations Pending",
+        "description": "Number of counter mutation requests received by the cluster and waiting to be handled."
+    },
+    "pending-memory-meter": {
+        "label": "Memory Meter Pending",
+        "description": "Pending tasks that will calculate the live ratio which is used to estimate memtable size. The live ratio is the actual memory usage of a memtable including JVM overhead as it compares it to the raw data size. There will be at most one pending task per table."
+    },
+    "pending-validation-executor": {
+        "label": "Validation Executor Pending",
+        "description": "Pending task to read data from sstables and generate a merkle tree for a repair."
+    },
+    "pending-commitlog-archiver": {
+        "label": "Commitlog Archiver Pending",
+        "description": "Commitlog Archiver Pending"
+    },
+    "pending-compaction-executor": {
+        "label": "Compaction Executor Pending",
+        "description": "Pending compactions that are known. This may deviate from \"pending compactions\" which includes an estimate of tasks that these pending tasks may create after completion."
+    },
+    "pending-pending-range-calculator": {
+        "label": "Pending Range Calculator Pending",
+        "description": "Pending tasks to calculate the ranges according to bootsrapping and leaving nodes."
+    },
+    "pending-native-transport-requests": {
+        "label": "Native Transport Requests Requests Pending",
+        "description": "Native Transport Requests Requests Pending"
+    },
+
+    "active-flushes": {
+        "label": "Flushes Active",
+        "description": "Number of memtables being flushed flush process. A flush sorts and writes the memtables to disk, which could block writes."
+    },
+    "active-gossip-stage": {
+        "label": "Gossip Tasks Active",
+        "description": "Number of gossip messages and acknowledgments actively being sent or received."
+    },
+    "active-hinted-handoff": {
+        "label": "Hinted Handoff Active",
+        "description": "Number of hints actively being delivered after a failed node comes up."
+    },
+    "active-internal-response-stage": {
+        "label": "Internal Responses Active",
+        "description": "Number of active tasks from internal tasks, such as nodes joining and leaving the cluster."
+    },
+    "active-anti-entropy-stage": {
+        "label": "Manual Repair Tasks Active",
+        "description": "Repair tasks active, such as handling the merkle tree transfer after the validation compaction."
+    },
+    "active-memtable-post-flush": {
+        "label": "Memtable Post Flushers Active",
+        "description": "Number of active tasks related to the last step in flushing memtables to disk as SSTables. Includes removing unnecessary commitlog files and committing Solr-based secondary indexes."
+    },
+    "active-migration-stage": {
+        "label": "Migrations Active",
+        "description": "Number of active tasks from system methods that modified the schema."
+    },
+    "active-misc-stage": {
+        "label": "Misc. Tasks Active",
+        "description": "Number of active tasks from infrequently run operations, such as taking a snapshot or processing the notification of a completed replication."
+    },
+    "active-read-stage": {
+        "label": "Read Requests Active",
+        "description": "Number of active read requests. Read requests read data off of disk and deserialize cached data."
+    },
+    "active-read-repair-stage": {
+        "label": "Read Repair Tasks Active",
+        "description": "Number of read repair operations actively being run."
+    },
+    "active-repl-on-write-tasks": {
+        "label": "Repl. on Write Tasks Active",
+        "description": "Number of active counter increment tasks that will read then write on the replicas after a coordinator's local write. Depending on consistency level used on writes, tasks may back up outside of the normal write path."
+    },
+    "active-request-response-stage": {
+        "label": "Request Responses Active",
+        "description": "Number of callbacks to being executed after a task on a remote node is completed."
+    },
+    "active-mutation-stage": {
+        "label": "Write Requests Active",
+        "description": "Number of write requests received by the cluster and being handled."
+    },
+    "active-counter-mutation-stage": {
+        "label": "Counter Mutations Active",
+        "description": "Number of counter mutation requests received by the cluster and being handled."
+    },
+    "active-memory-meter": {
+        "label": "Memory Meter Active",
+        "description": "Active tasks that calculate the live ratio which is used to estimate memtable size. The live ratio is the actual memory usage of a memtable including JVM overhead as it compares it to the raw data size. There will be at most one pending task per table."
+    },
+    "active-validation-executor": {
+        "label": "Validation Executor Active",
+        "description": "Active task to read data from sstables and generate a merkle tree for a repair."
+    },
+    "active-commitlog-archiver": {
+        "label": "Commitlog Archiver Active",
+        "description": "Commitlog Archiver Active"
+    },
+    "active-compaction-executor": {
+        "label": "Compaction Executor Active",
+        "description": "Active compactions that are known."
+    },
+    "active-pending-range-calculator": {
+        "label": "Pending Range Calculator Active",
+        "description": "Active tasks to calculate the ranges according to bootsrapping and leaving nodes."
+    },
+    "active-native-transport-requests": {
+        "label": "Native Transport Requests Requests Active",
+        "description": "Native Transport Requests Requests Active"
+    },
+
+    "completed-flushes": {
+        "label": "Flushes Completed",
+        "description": "Number of memtables recently flushed. A flush sorts and writes the memtables to disk, which could block writes."
+    },
+    "completed-gossip-stage": {
+        "label": "Gossip Tasks Completed",
+        "description": "Number of gossip messages and acknowledgments recently sent or received."
+    },
+    "completed-hinted-handoff": {
+        "label": "Hinted Handoff Completed",
+        "description": "Number of hints recently delivered after a failed node comes up."
+    },
+    "completed-internal-response-stage": {
+        "label": "Internal Responses Completed",
+        "description": "Number of recently completed tasks from internal tasks, such as nodes joining and leaving the cluster."
+    },
+    "completed-anti-entropy-stage": {
+        "label": "Manual Repair Tasks Completed",
+        "description": "Repair tasks recently completed, such as handling the merkle tree transfer after the validation compaction."
+    },
+    "completed-memtable-post-flush": {
+        "label": "Memtable Post Flushers Completed",
+        "description": "Number of completed tasks related to the last step in flushing memtables to disk as SSTables. Includes removing unnecessary commitlog files and committing Solr-based secondary indexes."
+    },
+    "completed-migration-stage": {
+        "label": "Migrations Completed",
+        "description": "Number of completed tasks from system methods that modified the schema."
+    },
+    "completed-misc-stage": {
+        "label": "Misc. Tasks Completed",
+        "description": "Number of completed tasks from infrequently run operations, such as taking a snapshot or processing the notification of a completed replication."
+    },
+    "completed-read-stage": {
+        "label": "Read Requests Completed",
+        "description": "Number of completed read requests. Read requests read data off of disk and deserialize cached data."
+    },
+    "completed-read-repair-stage": {
+        "label": "Read Repair Tasks Completed",
+        "description": "Number of read repair operations recently completed."
+    },
+    "completed-repl-on-write-tasks": {
+        "label": "Repl. on Write Tasks Completed",
+        "description": "Number of completed counter increment tasks that read then write on the replicas after a coordinator's local write. Depending on consistency level used on writes, tasks may back up outside of the normal write path."
+    },
+    "completed-request-response-stage": {
+        "label": "Request Responses Completed",
+        "description": "Number of completed callbacks executed after a task on a remote node is completed."
+    },
+    "completed-mutation-stage": {
+        "label": "Write Requests Completed",
+        "description": "Number of write requests received by the cluster that have been handled."
+    },
+    "completed-counter-mutation-stage": {
+        "label": "Counter Mutation Requests Completed",
+        "description": "Number of counter mutation requests received by the cluster that have been handled."
+    },
+    "completed-memory-meter": {
+        "label": "Memory Meter Completed",
+        "description": "Completed tasks that calculate the live ratio which is used to estimate memtable size. The live ratio is the actual memory usage of a memtable including JVM overhead as it compares it to the raw data size. There will be at most one pending task per table."
+    },
+    "completed-validation-executor": {
+        "label": "Validation Executor Completed",
+        "description": "Completed tasks to read data from sstables and generate a merkle tree for a repair."
+    },
+    "completed-commitlog-archiver": {
+        "label": "Commitlog Archiver Completed",
+        "description": "Commitlog Archiver Completed"
+    },
+    "completed-compaction-executor": {
+        "label": "Compaction Executor Completed",
+        "description": "Completed compactions."
+    },
+    "completed-pending-range-calculator": {
+        "label": "Pending Range Calculator Completed",
+        "description": "Completed tasks to calculate the ranges according to bootsrapping and leaving nodes."
+    },
+    "completed-native-transport-requests": {
+        "label": "Native Transport Requests Requests Completed",
+        "description": "Native Transport Requests Requests Completed"
+    },
+
+    "blocked-flushes": {
+        "label": "Flushes Blocked",
+        "description": "Number of memtables flush process blocked. A flush sorts and writes the memtables to disk, which could block writes."
+    },
+    "blocked-gossip-stage": {
+        "label": "Gossip Tasks Blocked",
+        "description": "Number of gossip messages and acknowledgments blocked waiting to be sent or received."
+    },
+    "blocked-hinted-handoff": {
+        "label": "Hinted Handoff Blocked",
+        "description": "Number of hints blocked waiting to be delivered after a failed node comes up."
+    },
+    "blocked-internal-response-stage": {
+        "label": "Internal Responses Blocked",
+        "description": "Number of blocked tasks from internal tasks, such as nodes joining and leaving the cluster."
+    },
+    "blocked-anti-entropy-stage": {
+        "label": "Manual Repair Tasks Blocked",
+        "description": "Repair tasks blocked, such as handling the merkle tree transfer after the validation compaction."
+    },
+    "blocked-memtable-post-flush": {
+        "label": "Memtable Post Flushers Blocked",
+        "description": "Number of blocked tasks related to the last step in flushing memtables to disk as SSTables. Includes removing unnecessary commitlog files and committing Solr-based secondary indexes."
+    },
+    "blocked-migration-stage": {
+        "label": "Migrations Blocked",
+        "description": "Number of blocked tasks from system methods that modified the schema."
+    },
+    "blocked-misc-stage": {
+        "label": "Misc. Tasks Blocked",
+        "description": "Number of blocked tasks from infrequently run operations, such as taking a snapshot or processing the notification of a completed replication."
+    },
+    "blocked-read-stage": {
+        "label": "Read Requests Blocked",
+        "description": "Number of blocked read requests. Read requests read data off of disk and deserialize cached data."
+    },
+    "blocked-read-repair-stage": {
+        "label": "Read Repair Tasks Blocked",
+        "description": "Number of read repair operations blocked waiting to run."
+    },
+    "blocked-repl-on-write-tasks": {
+        "label": "Repl. on Write Tasks Blocked",
+        "description": "Number of blocked counter increment tasks that will read then write on the replicas after a coordinator's local write. Depending on consistency level used on writes, tasks may back up outside of the normal write path."
+    },
+    "blocked-request-response-stage": {
+        "label": "Request Responses Blocked",
+        "description": "Number of blocked callbacks to be executed after a task on a remote node is completed."
+    },
+    "blocked-mutation-stage": {
+        "label": "Write Requests Blocked",
+        "description": "Number of write requests received by the cluster and blocked waiting to be handled."
+    },
+    "blocked-counter-mutation-stage": {
+        "label": "Counter Mutation Requests Blocked",
+        "description": "Number of counter mutation requests received by the cluster that are blocked and waiting to be handled."
+    },
+    "blocked-memory-meter": {
+        "label": "Memory Meter Blocked",
+        "description": "Memory Meter Blocked"
+    },
+    "blocked-validation-executor": {
+        "label": "Validation Executor Blocked",
+        "description": "Validation Executor Blocked"
+    },
+    "blocked-commitlog-archiver": {
+        "label": "Commitlog Archiver Blocked",
+        "description": "Commitlog Archiver Blocked"
+    },
+    "blocked-compaction-executor": {
+        "label": "Compaction Executor Blocked",
+        "description": "Compaction Executor Blocked"
+    },
+    "blocked-pending-range-calculator": {
+        "label": "Pending Range Calculator Blocked",
+        "description": "Pending Range Calculator Blocked"
+    },
+    "blocked-native-transport-requests": {
+        "label": "Native Transport Requests Requests Blocked",
+        "description": "Native Transport Requests Requests Blocked"
+    },
+
+    "total-blocked-flushes": {
+        "label": "Total Flushes Blocked",
+        "description": "Total number of memtables flush process blocked. A flush sorts and writes the memtables to disk, which could block writes."
+    },
+    "total-blocked-gossip-stage": {
+        "label": "Total Gossip Tasks Blocked",
+        "description": "Total number of gossip messages and acknowledgments blocked waiting to be sent or received."
+    },
+    "total-blocked-hinted-handoff": {
+        "label": "Total Hinted Handoff Blocked",
+        "description": "Total number of hints blocked waiting to be delivered after a failed node comes up."
+    },
+    "total-blocked-internal-response-stage": {
+        "label": "Total Internal Responses Blocked",
+        "description": "Total number of blocked tasks from internal tasks, such as nodes joining and leaving the cluster."
+    },
+    "total-blocked-anti-entropy-stage": {
+        "label": "Total Manual Repair Tasks Blocked",
+        "description": "Total repair tasks blocked, such as handling the merkle tree transfer after the validation compaction."
+    },
+    "total-blocked-memtable-post-flush": {
+        "label": "Total Memtable Post Flushers Blocked",
+        "description": "Total number of blocked tasks related to the last step in flushing memtables to disk as SSTables. Includes removing unnecessary commitlog files and committing Solr-based secondary indexes."
+    },
+    "total-blocked-migration-stage": {
+        "label": "Total Migrations Blocked",
+        "description": "Total number of blocked tasks from system methods that modified the schema."
+    },
+    "total-blocked-misc-stage": {
+        "label": "Total Misc. Tasks Blocked",
+        "description": "Total number of blocked tasks from infrequently run operations, such as taking a snapshot or processing the notification of a completed replication."
+    },
+    "total-blocked-read-stage": {
+        "label": "Total Read Requests Blocked",
+        "description": "Total number of blocked read requests. Read requests read data off of disk and deserialize cached data."
+    },
+    "total-blocked-read-repair-stage": {
+        "label": "Total Read Repair Tasks Blocked",
+        "description": "Total number of read repair operations blocked waiting to run."
+    },
+    "total-blocked-repl-on-write-tasks": {
+        "label": "Total Repl. on Write Tasks Blocked",
+        "description": "Total number of blocked counter increment tasks that will read then write on the replicas after a coordinator's local write. Depending on consistency level used on writes, tasks may back up outside of the normal write path."
+    },
+    "total-blocked-request-response-stage": {
+        "label": "Total Request Responses Blocked",
+        "description": "Total number of blocked callbacks to be executed after a task on a remote node is completed."
+    },
+    "total-blocked-mutation-stage": {
+        "label": "Total Write Requests Blocked",
+        "description": "Total number of write requests received by the cluster and blocked waiting to be handled."
+    },
+    "total-blocked-counter-mutation-stage": {
+        "label": "Counter Mutation Requests Total Blocked",
+        "description": "Total number of counter mutation requests received by the cluster that are blocked and waiting to be handled."
+    },
+    "total-blocked-memory-meter": {
+        "label": "Total Memory Meter Blocked",
+        "description": "Total Memory Meter Blocked"
+    },
+    "total-blocked-validation-executor": {
+        "label": "Total Validation Executor Blocked",
+        "description": "Total Validation Executor Blocked"
+    },
+    "total-blocked-commitlog-archiver": {
+        "label": "Total Commitlog Archiver Blocked",
+        "description": "Total Commitlog Archiver Blocked"
+    },
+    "total-blocked-compaction-executor": {
+        "label": "Total Compaction Executor Blocked",
+        "description": "Total Compaction Executor Blocked"
+    },
+    "total-blocked-pending-range-calculator": {
+        "label": "Total Pending Range Calculator Blocked",
+        "description": "Total Pending Range Calculator Blocked"
+    },
+    "total-blocked-native-transport-requests": {
+        "label": "Total Native Transport Requests Requests Blocked",
+        "description": "Total Native Transport Requests Requests Blocked"
+    },
+
+    "all-pending": {
+        "label": "Task Queues",
+        "description": "Aggregate of thread pools pending queues that can be used to identify where things are backing up internally. This doesn't include pending compactions because it includes an estimate outside of the task queue or the hinted hand off queue, which can be in constant state of being on."
+    },
+    "all-dropped": {
+        "label": "Dropped Tasks",
+        "description": "Aggregate of different messages that might be thrown away."
+    },
+    "dropped-counter-mutations": {
+        "label": "Dropped Counter Mutations",
+        "description": "Mutation was seen after the timeout (write_request_timeout_in_ms) so was thrown away. This client might have timed out before it met the required consistency level, but might have succeeded as well. Hinted handoffs and read repairs should resolve inconsistencies but a repair can ensure it."
+    },
+    "dropped-mutations": {
+        "label": "Dropped Mutations",
+        "description": "Mutation was seen after the timeout (write_request_timeout_in_ms) so was thrown away. This client might have timed out before it met the required consistency level, but might have succeeded as well. Hinted handoffs and read repairs should resolve inconsistencies but a repair can ensure it."
+    },
+    "dropped-reads": {
+        "label": "Dropped Reads",
+        "description": "A local read request was received after the timeout (read_request_timeout_in_ms) so it was thrown away because it would have already either been completed and sent to client or sent back as a timeout error."
+    },
+    "dropped-ranged-slice-reads": {
+        "label": "Dropped Ranged Slice Reads",
+        "description": "A local ranged read request was received after the timeout (range_request_timeout_in_ms) so it was thrown away because it would have already either been completed and sent to client or sent back as a timeout error."
+    },
+    "dropped-paged-range-reads": {
+        "label": "Dropped Paged Range Reads",
+        "description": "A local paged read request was received after the timeout (request_timeout_in_ms) so it was thrown away because it would have already either been completed and sent to client or sent back as a timeout error."
+    },
+    "dropped-request-responses": {
+        "label": "Dropped Request Responses",
+        "description": "A response to a request was received after the timeout (request_timeout_in_ms) so it was thrown away because it would have already either been completed and sent to client or sent back as a timeout error."
+    },
+    "dropped-read-repairs": {
+        "label": "Dropped Read Repairs",
+        "description": "The Mutation was seen after the timeout (write_request_timeout_in_ms) so was thrown away. With the read repair timeout, the node still exists in an inconsistent state."
+    },
+
+    "key-cache-hits": {
+        "label": "KeyCache Hits",
+        "description": "The number of key cache hits per second. This will avoid possible disk seeks when finding a partition in an SSTable."
+    },
+    "key-cache-requests": {
+        "label": "KeyCache Requests",
+        "description": "The number of key cache requests per second."
+    },
+    "key-cache-hit-rate": {
+        "label": "KeyCache Hit Rate",
+        "description": "The percentage of key cache lookups that resulted in a hit."
+    },
+    "row-cache-hits": {
+        "label": "RowCache Hits",
+        "description": "The number of row cache hits per second."
+    },
+    "row-cache-requests": {
+        "label": "RowCache Requests",
+        "description": "The number of row cache requests per second."
+    },
+    "row-cache-hit-rate": {
+        "label": "RowCache Hit Rate",
+        "description": "The percentage of row cache lookups that resulted in a hit."
+    },
+    "native-connections": {
+        "label": "Native Clients",
+        "description": "The number of clients connected using the native protocol."
+    },
+    "thrift-connections": {
+        "label": "Thrift Clients",
+        "description": "The number of clients connected via thrift."
+    },
+    "read-repair-attempted": {
+        "label": "Read Repairs Attempted",
+        "description": "Number of read requests where the number of nodes queried possibly exceeds the consistency level requested in order to check for a possible digest mismatch."
+    },
+    "read-repaired-background": {
+        "label": "Asynchronous Read Repairs",
+        "description": "Corresponds to a digest mismatch that occurred <em>after</em> a completed read, outside of the client read loop."
+    },
+    "read-repaired-blocking": {
+        "label": "Synchronous Read Repairs",
+        "description": "Corresponds to the number of times there was a digest mismatch <em>within</em> the requested consistency level and a full data read was started."
+    },
+    "cf-write-ops": {
+        "label": "TBL: Local Writes",
+        "description": "Local write requests per second. Local writes update the table's memtable and appends to a commitlog."
+    },
+    "cf-write-latency-op": {
+        "label": "TBL: Local Write Latency",
+        "description": "Average response time to write data to a table's memtable and append to the commitlog. The elapsed time from when the replica receives the request from a coordinator and returns a response."
+    },
+    "cf-local-write-latency": {
+        "label": "TBL: Write Latency (Stacked)",
+        "description": "The min, median, max, 90th, and 99th percentile of the response times to write data to a table's memtable and append to the commitlog. The elapsed time from when the replica receives the request from a coordinator and returns a response.",
+        "types": ["latency-histogram"]
+    },
+    "cf-read-ops": {
+        "label": "TBL: Local Reads",
+        "description": "Local read requests per second. Local reads retrieve data from a table's memtable and any necessary SSTables on disk."
+    },
+    "cf-read-latency-op": {
+        "label": "TBL: Local Read Latency",
+        "description": "Average response time to read data from the memtable and SSTables for a specific table. The elapsed time from when the replica receives the request from a coordinator and returns a response."
+    },
+    "cf-local-read-latency": {
+        "label": "TBL: Read Latency (Stacked)",
+        "description": "The min, median, max, 90th, and 99th percentile of the response time to read data from the memtable and sstables for a specific table. The elapsed time from when the replica receives the request from a coordinator and returns a response.",
+        "types": ["latency-histogram"]
+    },
+    "cf-live-disk-used": {
+        "label": "TBL: Live Disk Used",
+        "description": "Disk space used by live SSTables. There might be obsolete SSTables not included."
+    },
+    "cf-total-disk-used": {
+        "label": "TBL: Total Disk Used",
+        "description": "Disk space used by a table by SSTables, including obsolete ones waiting to be garbage collected."
+    },
+    "cf-live-sstables": {
+        "label": "TBL: SSTable Count",
+        "description": "Total number of SSTables for a table."
+    },
+    "cf-sstables-per-read": {
+        "label": "TBL: SSTables per Read (Stacked)",
+        "description": "The min, median, max, 90th, and 99th percentile of how many SSTables are accessed during a read. Includes sstables that undergo bloom-filter checks, even if no data is read from the sstable.",
+        "p99th": "<b>99th</b> - 99 percent of reads checked or read no more than this many SSTables during the period.",
+        "p90th": "<b>90th</b> - 90 percent of reads checked or read no more than this many SSTables during the period.",
+        "median": "<b>Median</b> - 50 percent of reads checked or read no more than this many SSTables during the period.",
+        "max" : "<b>Max</b> - Maximum number of SSTables checked or read during this period for a single read on this table.",
+        "min" : "<b>Min</b> - Minimum number of SSTables checked or read during this period for a single read on this table."
+    },
+    "cf-column-count": {
+        "label": "CF: Cell Count",
+        "description": "The min, median, max, 90th, and 99th percentile of how many cells exist in partitions for this table.",
+        "p99th": "<b>99th</b> - 99 percent of partitions have no more than this many cells.",
+        "p90th": "<b>90th</b> - 90 percent of partitions have no more than this many cells.",
+        "median": "<b>Median</b> - 50 percent of partitions have no more than this many cells.",
+        "max" : "<b>Max</b> - Maximum number of cells in a partition.",
+        "min" : "<b>Min</b> - Minimum number of cells in a partition."
+    },
+    "cf-partition-size": {
+        "label": "CF: Partition Size",
+        "description": "The min, median, max, 90th, and 99th percentile of the size (in bytes) of partitions of this table.",
+        "p99th": "<b>99th</b> - 99 percent of partitions are no larger than this.",
+        "p90th": "<b>90th</b> - 90 percent of partitions are no larger than this.",
+        "median": "<b>Median</b> - 50 percent of partitions are no larger than this.",
+        "max" : "<b>Max</b> - Maximum size of a partition in bytes.",
+        "min" : "<b>Min</b> - Minimum size of a partition in bytes"
+    },
+    "cf-pending-tasks": {
+        "label": "TBL: Pending Reads/Writes",
+        "description": "Estimate of the number of mutation threads blocked on a memtable flush or truncate."
+    },
+    "cf-bf-space-used": {
+        "label": "TBL: Bloom Filter Space Used",
+        "description": "The total size of all the SSTables' bloom filters for this table."
+    },
+    "cf-bf-false-positives": {
+        "label": "TBL: Bloom Filter False Positives",
+        "description": "Number of bloom filter false positives per second."
+    },
+    "cf-bf-false-ratio": {
+        "label": "TBL: Bloom Filter False Positive Ratio",
+        "description": "Percentage of bloom filter lookups that resulted in a false positive."
+    },
+    "cf-bf-offheap": {
+        "label": "TBL: Bloom Filter Off Heap",
+        "description": "Total off heap memory used by bloom filters from all live SSTables in a table."
+    },
+    "cf-index-summary-offheap": {
+        "label": "TBL: Index Summary Off Heap",
+        "description": "Total off heap memory used by the index summary of all live SSTables in a table."
+    },
+    "cf-compression-data-offheap": {
+        "label": "TBL: Compression Metadata Off Heap",
+        "description": "Total off heap memory used by the compression metadata of all live SSTables in a table."
+    },
+    "cf-memtable-offheap": {
+        "label": "TBL: Memtable Off Heap",
+        "description": "Off heap memory used by a table's current memtable."
+    },
+    "cf-all-memtables-datasize": {
+        "label": "TBL: Total Memtable Size",
+        "description": "An estimate of the space used in memory (including JVM overhead) for all memtables. This includes ones that are currently being flushed and related secondary indexes."
+    },
+    "cf-all-memtables-heapsize": {
+        "label": "TBL: Total Memtable Heap Size",
+        "description": "An estimate of the space used in JVM heap memory for all memtables. This includes ones that are currently being flushed and related secondary indexes."
+    },
+    "cf-all-memtables-livedatasize": {
+        "label": "TBL: Total Memtable Live Data Size",
+        "description": "An estimate of the space used for 'live data' (off-heap, excluding overhead) for all memtables. This includes ones that are currently being flushed and related secondary indexes."
+    },
+    "cf-all-memtables-offheapsize": {
+        "label": "TBL: Total Memtable Off-Heap Size",
+        "description": "An estimate of the space used in off-heap memory for all memtables. This includes ones that are currently being flushed and related secondary indexes."
+    },
+    "solr-requests": {
+        "label": "Search: Requests",
+        "description": "Requests per second made to a specific Solr core/index."
+    },
+    "solr-avg-time-per-req": {
+        "label": "Search: Request Latency",
+        "description": "Average time a search query takes in a DSE cluster using DSE Search."
+    },
+    "solr-errors": {
+        "label": "Search: Errors",
+        "description": "Errors per second that occur for a specific Solr core/index."
+    },
+    "solr-timeouts": {
+        "label": "Search: Timeouts",
+        "description": "Timeouts per second on a specific Solr core/index."
+    },
+    "solr-index-size": {
+        "label": "Search: Core Size",
+        "description": "Size of the Solr core on disk."
+    },
+    "in-memory-percent-used": {
+        "label": "In-Memory Percent Used",
+        "description": "The percentage of memory allocated for in-memory tables currently in use."
+    },
+    "os-memory": {
+        "label": "OS: Memory (stacked)",
+        "description": "Stacked graph of used, cached, and free memory."
+    },
+    "os-memory-osx": {
+        "label": "OS: Memory (stacked)",
+        "description": "Stacked graph of used and free memory."
+    },
+    "os-memory-win": {
+        "label": "OS: Memory (stacked)",
+        "description": "Stacked graph of committed, cached, paged, non-paged, and free memory."
+    },
+    "os-memory-free": {
+        "label": "OS: Memory Free",
+        "description": "Total system memory currently free."
+    },
+    "os-memory-used": {
+        "label": "OS: Memory Used",
+        "description": "Total system memory currently used."
+    },
+    "os-memory-shared": {
+        "label": "OS: Memory Shared",
+        "description": "Total amount of memory in shared memory space."
+    },
+    "os-memory-buffers": {
+        "label": "OS: Memory Buffered",
+        "description": "Total system memory currently buffered."
+    },
+    "os-memory-cached": {
+        "label": "OS: Memory Cached",
+        "description": "Total system memory currently cached."
+    },
+    "os-memory-avail": {
+        "label": "OS: Memory Available",
+        "description": "Available physical memory."
+    },
+    "os-memory-committed": {
+        "label": "OS: Memory Committed",
+        "description": "Memory in use by the operating system."
+    },
+    "os-memory-pool-paged": {
+        "label": "OS: Pool Paged Resident Memory",
+        "description": "Allocated pool-paged-resident memory."
+    },
+    "os-memory-pool-nonpaged": {
+        "label": "OS: Pool Nonpaged Memory",
+        "description": "Allocated pool-nonpaged memory."
+    },
+    "os-memory-sys-cache-resident": {
+        "label": "OS: System Cache Resident Memory",
+        "description": "Memory used by the file cache."
+    },
+    "cpu": {
+        "label": "OS: CPU (stacked)",
+        "description": "Stacked graph of iowait, steal, nice, system, user, and idle CPU usage."
+    },
+    "cpu-osx": {
+        "label": "OS: CPU (stacked)",
+        "description": "Stacked graph of idle, user, and system CPU usage."
+    },
+    "cpu-win": {
+        "label": "OS: CPU (stacked)",
+        "description": "Stacked graph of user, privileged, and idle CPU usage."
+    },
+    "os-cpu-user": {
+        "label": "OS: CPU User",
+        "description": "Time the CPU devotes to user processes."
+    },
+    "os-cpu-system": {
+        "label": "OS: CPU System",
+        "description": "Time the CPU devotes to system processes."
+    },
+    "os-cpu-idle": {
+        "label": "OS: CPU Idle",
+        "description": "Time the CPU is idle."
+    },
+    "os-cpu-iowait": {
+        "label": "OS: CPU Iowait",
+        "description": "Time the CPU devotes to waiting for I/O to complete."
+    },
+    "os-cpu-steal": {
+        "label": "OS: CPU Steal",
+        "description": "Time the CPU devotes to tasks stolen by virtual operating systems."
+    },
+    "os-cpu-nice": {
+        "label": "OS: CPU Nice",
+        "description": "Time the CPU devotes to processing nice tasks."
+    },
+    "os-cpu-privileged": {
+        "label": "OS: CPU Privileged",
+        "description": "Time the CPU devotes to processing privileged instructions."
+    },
+    "os-load": {
+        "label": "OS: Load",
+        "description": "Operating system load average."
+    },
+    "os-disk-usage": {
+        "label": "OS: Disk Usage (%)",
+        "description": "Disk space used by Cassandra at a given time.",
+        "total": "<b>Total</b> - The sum of all the nodes disk used values divided by the sum of all the nodes total disk space."
+    },
+    "os-disk-free": {
+        "label": "OS: Disk Free",
+        "description": "Free space on a specific disk partition."
+    },
+    "os-disk-used": {
+        "label": "OS: Disk Used",
+        "description": "Disk space used by Cassandra at a given time."
+    },
+    "os-disk-read-throughput": {
+        "label": "OS: Disk Read Throughput",
+        "description": "Average disk throughput for read operations."
+    },
+    "os-disk-write-throughput": {
+        "label": "OS: Disk Write Throughput",
+        "description": "Average disk throughput for write operations."
+    },
+    "os-disk-throughput": {
+        "label": "OS: Disk Throughput",
+        "description": "Average disk throughput for read and write operations."
+    },
+    "os-disk-read-rate": {
+        "label": "OS: Disk Read Rate",
+        "description": "Rate of reads per second to the disk."
+    },
+    "os-disk-write-rate": {
+        "label": "OS: Disk Writes Rate",
+        "description": "Rate of writes per second to the disk."
+    },
+    "os-disk-await": {
+        "label": "OS: Disk Latency",
+        "description": "Average completion time of each request to the disk."
+    },
+    "os-disk-request-size": {
+        "label": "OS: Disk Request Size",
+        "description": "Average size of read requests issued to the disk."
+    },
+    "os-disk-request-size-kb": {
+        "label": "OS: Disk Request Size",
+        "description": "Average size of read requests issued to the disk."
+    },
+    "os-disk-queue-size": {
+        "label": "OS: Disk Queue Size",
+        "description": "Average number of requests queued due to disk latency issues."
+    },
+    "os-disk-utilization": {
+        "label": "OS: Disk Utilization",
+        "description": "CPU time consumed by disk I/O."
+    },
+    "os-net-received": {
+        "label": "OS: Net Received",
+        "description": "Speed of data received from the network."
+    },
+    "os-net-sent": {
+        "label": "OS: Net Sent",
+        "description": "Speed of data sent across the network."
+    }
+}

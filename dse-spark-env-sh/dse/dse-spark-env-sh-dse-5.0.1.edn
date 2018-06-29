@@ -1,0 +1,18 @@
+{:display-name "dse-spark-env.sh",
+ :package-path "/etc/dse/spark/dse-spark-env.sh"
+ :tarball-path "resources/spark/conf/dse-spark-env.sh"
+ :workload-file-group "spark",
+ :ui-visibility :editable,
+ :valid-dse-versions [:all],
+ :renderer
+ {:renderer-type :template,
+  :template "dse-spark-env-sh-dse-5.0.1.template"},
+ :workload :spark,
+ :properties
+ {:max-heap-free-ratio
+  {:type "int", :required true, :default_value 50},
+  :min-heap-free-ratio
+  {:type "int", :required true, :default_value 20}},
+ :groupings
+ [{:name "General",
+   :list ["max-heap-free-ratio" "min-heap-free-ratio"]}]}

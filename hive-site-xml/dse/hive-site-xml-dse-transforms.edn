@@ -1,0 +1,76 @@
+(
+ ;; Begin DSE 4.7.x transforms.
+ "4.7.0" "hive-site-xml-dse-4.7.0.edn"
+ "4.7.1" :no-change
+ "4.7.2" :no-change
+ "4.7.3" :no-change
+ "4.7.4" (transforms
+          (update-template "hive-site-xml-dse-4.7.4.template"))
+ "4.7.5" :no-change
+ "4.7.6" :no-change
+ "4.7.7" :no-change
+ "4.7.8" :no-change
+ "4.7.9" :no-change
+ ;; End DSE 4.7.x transforms.
+
+
+ ;; hive-site.xml is not valid for 4.8.x or 5.0.x
+ ;; Begin DSE 4.8.x transforms.
+ "4.8.0"  ()
+ "4.8.1"  ()
+ "4.8.2"  ()
+ "4.8.3"  ()
+ "4.8.4"  ()
+ "4.8.5"  ()
+ "4.8.6"  ()
+ "4.8.7"  ()
+ "4.8.8"  ()
+ "4.8.9"  ()
+ "4.8.10" ()
+ "4.8.11" ()
+ "4.8.12" ()
+ "4.8.13" ()
+ "4.8.14" ()
+ "4.8.15" ()
+ "4.8.16" ()
+ ;; End DSE 4.8.x transforms.
+
+
+ ;; Begin DSE 5.0.x transforms.
+ "5.0.1"  ()
+ "5.0.2"  ()
+ "5.0.3"  ()
+ "5.0.4"  ()
+ "5.0.5"  ()
+ "5.0.6"  ()
+ "5.0.7"  ()
+ "5.0.8"  ()
+ "5.0.9"  ()
+ "5.0.10" ()
+ "5.0.11" ()
+ "5.0.12" ()
+ "5.0.13" ()
+ "5.0.14" ()
+ ;; End DSE 5.0.x transforms.
+
+
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "hive-site-xml-dse-5.1.0.edn"
+ "5.1.1" :no-change
+ "5.1.2" :no-change
+ "5.1.3" :no-change
+ "5.1.4" :no-change
+ "5.1.5" :no-change
+ "5.1.6" :no-change
+ "5.1.7" :no-change
+ "5.1.8" :no-change
+ "5.1.9" :no-change
+ "5.1.10" :no-change
+ ;; End DSE 5.1.x transforms.
+
+
+ ;; Begin DSE 6.0.x transforms.
+ "6.0.0" "hive-site-xml-dse-6.0.0.edn"
+ "6.0.1" :no-change
+ ;; End DSE 6.0.x transforms.
+ )

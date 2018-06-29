@@ -1,0 +1,40 @@
+{:display-name "dse.default"
+ :package-path "/etc/default/dse"
+ :tarball-path "resources/dse/conf/dse.default"
+ :workload-file-group "cassandra"
+ :ui-visibility :hidden
+ :valid-dse-versions [:all]
+ :renderer
+ {:renderer-type :template
+  :template "dse-default-dse-6.0.0.template"}
+ :properties
+ {:solr-enabled
+  {:type "boolean", :required true, :default_value false, :render_as "int"},
+  :spark-enabled
+  {:type "boolean", :required true, :default_value false, :render_as "int"}
+  :graph-enabled
+  {:type "boolean", :required true, :default_value false, :render_as "int"}
+  :wait-for-start
+  {:type "int"
+   :required false
+   :label "Wait for start"
+   :constant "WAIT_FOR_START"
+   :disabled true
+   :default_value 3
+   :unit "seconds"}
+  :wait-for-start-sleep
+  {:type "int"
+   :required false
+   :label "Wait for start sleep"
+   :constant "WAIT_FOR_START_SLEEP"
+   :disabled true
+   :default_value 5
+   :unit "seconds"}}
+ :groupings
+ [{:name "General",
+   :list
+   ["solr-enabled"
+    "spark-enabled"
+    "graph-enabled"
+    "wait-for-start"
+    "wait-for-start-sleep"]}]}

@@ -1,0 +1,35 @@
+{:display-name "logback.xml"
+ :package-path "/etc/dse/cassandra/logback.xml"
+ :tarball-path "resources/cassandra/conf/logback.xml"
+ :workload-file-group "cassandra"
+ :ui-visibility :editable
+ :valid-dse-versions [:all]
+ :renderer {:renderer-type :template
+            :template "logback-xml-dse-4.7.0.template"}
+ :properties {:file-appender-min-index {:type "int",
+                                        :required true
+                                        :default_value 1}
+              :file-appender-max-index {:type "int"
+                                        :required true
+                                        :default_value 20}
+              :file-appender-max-file-size {:type "int"
+                                            :required true
+                                            :default_value 20
+                                            :unit "MB"}
+              :root-log-level {:type "string"
+                               :required false
+                               :default_value "INFO"}
+              :loggers {:type "list"
+                        :required false
+                        :default_value []
+                        :value_type "dict"
+                        :fields {:name {:type "string"
+                                        :required false}
+                                 :level {:type "string"
+                                         :required false}}}}
+ :groupings [{:name "General"
+              :list ["file-appender-min-index"
+                     "file-appender-max-index"
+                     "file-appender-max-file-size"
+                     "root-log-level"
+                     "loggers"]}]}

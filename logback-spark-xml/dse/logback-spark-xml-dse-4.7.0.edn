@@ -1,0 +1,20 @@
+{:display-name "logback-spark.xml"
+ :package-path "/etc/dse/spark/logback-spark.xml"
+ :tarball-path "resources/spark/conf/logback-spark.xml"
+ :workload-file-group "spark"
+ :ui-visibility :editable
+ :valid-dse-versions [:all]
+ :renderer
+ {:renderer-type :template
+  :template "logback-spark-xml-dse-4.7.0.template"}
+ :workload :spark
+ :properties
+ {:root-level
+  {:type "string" :required true :default_value "WARN"}
+  :logger-jetty-level
+  {:type "string" :required true :default_value "ERROR"}}
+ :groupings
+ [{:name "General",
+   :list
+   ["root-level"
+    "logger-jetty-level"]}]}

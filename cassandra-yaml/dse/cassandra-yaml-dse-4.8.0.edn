@@ -1,0 +1,613 @@
+{:display-name "cassandra.yaml",
+ :package-path "/etc/dse/cassandra/cassandra.yaml"
+ :tarball-path "resources/cassandra/conf/cassandra.yaml"
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :valid-dse-versions [:all],
+ :renderer {:renderer-type :yaml},
+ :properties
+ {:concurrent_writes {:type "int", :required true, :default_value 32},
+  :hinted_handoff_enabled
+  {:type "string", :required true, :default_value "true"},
+  :rpc_min_threads {:type "int", :required false, :unit "threads"},
+  :dynamic_snitch_update_interval_in_ms
+  {:type "int", :required true, :default_value 100, :unit "ms"},
+  :max_hint_window_in_ms
+  {:type "int", :required true, :default_value 10800000, :unit "ms"},
+  :commitlog_sync_batch_window_in_ms
+  {:type "int",
+   :default_value 2,
+   :depends :commitlog_sync,
+   :conditional [{:eq "batch"}]},
+  :cross_node_timeout
+  {:type "boolean", :required true, :default_value false},
+  :compaction_throughput_mb_per_sec
+  {:type "int", :required true, :default_value 16, :unit "MB/sec"},
+  :storage_port
+  {:type "int", :required true, :default_value 7000, :format false},
+  :start_native_transport
+  {:type "boolean",
+   :required true,
+   :readonly true,
+   :default_value true},
+  :snapshot_before_compaction
+  {:type "boolean", :required true, :default_value false},
+  :permissions_validity_in_ms
+  {:type "int", :required true, :default_value 2000},
+  :compaction_large_partition_warning_threshold_mb
+  {:type "int", :required true, :default_value 100},
+  :max_hints_delivery_threads
+  {:type "int", :required true, :default_value 2},
+  :native_transport_max_concurrent_connections
+  {:type "int", :required false, :default_value -1},
+  :gc_warn_threshold_in_ms {:type "int", :default_value 1000},
+  :native_transport_max_frame_size_in_mb
+  {:type "int", :required false, :default_value 256},
+  :data_file_directories
+  {:type "list",
+   :required true,
+   :description
+   "If this list includes a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :is_directory true
+   :default_value ["/var/lib/cassandra/data"],
+   :value_type "string"},
+  :commit_failure_policy
+  {:type "string",
+   :required true,
+   :options
+   [{:label "die", :value "die"}
+    {:label "stop", :value "stop"}
+    {:label "stop commit", :value "stop_commit"}
+    {:label "ignore", :value "ignore"}],
+   :default_value "stop"},
+  :truncate_request_timeout_in_ms
+  {:type "int", :required true, :default_value 60000, :unit "ms"},
+  :request_timeout_in_ms
+  {:type "int", :required true, :default_value 10000, :unit "ms"},
+  :concurrent_counter_writes
+  {:type "int", :required true, :default_value 32},
+  :range_request_timeout_in_ms
+  {:type "int", :required true, :default_value 10000, :unit "ms"},
+  :trickle_fsync_interval_in_kb
+  {:type "int", :required true, :default_value 10240, :unit "KB"},
+  :endpoint_snitch
+  {:type "string",
+   :required true,
+   :options
+   [{:label "GossipingPropertyFileSnitch",
+     :value
+     "org.apache.cassandra.locator.GossipingPropertyFileSnitch"}],
+   :default_value "GossipingPropertyFileSnitch",
+   :description "Gossiping Property File Snitch (GPFS) is automatically configured according to the rack setting on each node in the cluster topology. GPFS is the only endpoint_snitch supported by LCM because it is the only snitch that supports all possible topologies and can be configured independently on each node."},
+  :ssl_storage_port
+  {:type "int", :required true, :default_value 7001, :format false},
+  :commitlog_directory
+  {:type "string",
+   :required true,
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :is_directory true
+   :default_value "/var/lib/cassandra/commitlog"},
+  :commitlog_total_space_in_mb
+  {:type "int", :required false, :default_value 8192, :unit "MB"},
+  :counter_cache_save_period
+  {:type "int", :required true, :default_value 7200},
+  :native_transport_max_threads
+  {:type "int", :required false, :default_value 128},
+  :memtable_flush_writers {:type "int", :required false},
+  :row_cache_size_in_mb
+  {:type "int", :required true, :default_value 0, :unit "MB"},
+  :tombstone_warn_threshold
+  {:type "int", :required true, :default_value 1000},
+  :rpc_port
+  {:type "int", :required true, :default_value 9160, :format false},
+  :incremental_backups
+  {:type "boolean", :required true, :default_value false},
+  :native_transport_max_concurrent_connections_per_ip
+  {:type "int", :required false, :default_value -1},
+  :commitlog_segment_size_in_mb
+  {:type "int", :required true, :default_value 32, :unit "MB"},
+  :key_cache_save_period
+  {:type "int", :required true, :default_value 14400, :unit "seconds"},
+  :read_request_timeout_in_ms
+  {:type "int", :required true, :default_value 5000, :unit "ms"},
+  :rpc_send_buff_size_in_bytes
+  {:type "int", :required false, :unit "bytes"},
+  :rpc_recv_buff_size_in_bytes
+  {:type "int", :required false, :unit "bytes"},
+  :internode_recv_buff_size_in_bytes {:type "int", :required false},
+  :saved_caches_directory
+  {:type "string",
+   :required true,
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :is_directory true
+   :default_value "/var/lib/cassandra/saved_caches"},
+  :rpc_server_type
+  {:type "string",
+   :required true,
+   :options
+   [{:label "sync", :value "sync"}
+    {:label "half sync, half async", :value "hsha"}],
+   :default_value "sync"},
+  :memory_allocator
+  {:type "string",
+   :required false,
+   :options
+   [{:label "NativeAllocator", :value "NativeAllocator"}
+    {:label "JEMallocAllocator", :value "JEMallocAllocator"}]},
+  :dynamic_snitch_reset_interval_in_ms
+  {:type "int", :required true, :default_value 600000, :unit "ms"},
+  :inter_dc_stream_throughput_outbound_megabits_per_sec
+  {:type "int", :required false, :unit "mbps", :default_value 200},
+  :file_cache_size_in_mb {:type "int", :required false},
+  :row_cache_keys_to_save {:type "int", :required false, :unit "rows"},
+  :counter_cache_size_in_mb {:type "int", :required false},
+  :disk_failure_policy
+  {:type "string",
+   :required true,
+   :options
+   [{:label "die", :value "die"}
+    {:label "stop_paranoid", :value "stop_paranoid"}
+    {:label "stop", :value "stop"}
+    {:label "best effort", :value "best_effort"}
+    {:label "ignore", :value "ignore"}],
+   :default_value "stop"},
+  :memtable_allocation_type
+  {:type "string",
+   :required true,
+   :options
+   [{:label "heap_buffers", :value "heap_buffers"}
+    {:label "offheap_buffers", :value "offheap_buffers"}
+    {:label "offheap_objects", :value "offheap_objects"}],
+   :default_value "heap_buffers"},
+  :stream_throughput_outbound_megabits_per_sec
+  {:type "int", :required false, :default_value 200, :unit "mbps"},
+  :counter_cache_keys_to_save {:type "int", :required false},
+  :tombstone_failure_threshold
+  {:type "int", :required true, :default_value 100000},
+  :native_transport_port
+  {:type "int", :required true, :default_value 9042, :format false},
+  :request_scheduler_options
+  {:type "dict",
+   :required false,
+   :depends :request_scheduler,
+   :conditional
+   [{:eq "org.apache.cassandra.scheduler.RoundRobinScheduler"}],
+   :fields
+   {:throttle_limit
+    {:type "int", :required true, :default_value 80, :unit "requests"},
+    :default_weight {:type "int", :required true, :default_value 5},
+    :weights
+    {:type "user_defined",
+     :value_type "int",
+     :key_name "keyspace",
+     :required false}}},
+  :index_summary_capacity_in_mb
+  {:type "int", :required false, :unit "MB"},
+  :commitlog_sync
+  {:type "string",
+   :required true,
+   :options
+   [{:label "periodic", :value "periodic"}
+    {:label "batch", :value "batch"}],
+   :default_value "periodic"},
+  :rpc_keepalive
+  {:type "boolean", :required true, :default_value true},
+  :trickle_fsync
+  {:type "boolean", :required true, :default_value false},
+  :rpc_max_threads {:type "int", :required false, :unit "threads"},
+  :client_encryption_options
+  {:type "dict",
+   :order
+   [:enabled
+    :keystore
+    :keystore_password
+    :require_client_auth
+    :truststore
+    :truststore_password
+    :protocol
+    :algorithm
+    :store_type
+    :cipher_suites],
+   :fields
+   {:keystore
+    {:type "string",
+     :default_value "/etc/dse/keystores/client.keystore",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :cipher_suites
+    {:type "list",
+     :required false,
+     :value_type "string",
+     :default_value
+     ["TLS_RSA_WITH_AES_128_CBC_SHA"
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"],
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :keystore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :default_value "cassandra",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :store_type
+    {:type "string",
+     :required false,
+     :default_value "JKS",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :algorithm
+    {:type "string",
+     :required false,
+     :default_value "SunX509",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :protocol
+    {:type "string",
+     :required false,
+     :default_value "TLS",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :truststore_password
+    {:type "string",
+     :depends :enabled,
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :default_value "cassandra",
+     :conditional [{:eq true}]},
+    :require_client_auth
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :enabled,
+     :description
+     "Enabling require_client_auth for client_encryption_options requires external configuration steps. Until these steps are completed, any install jobs run on a cluster using this setting will fail. For more information, refer to the <a target=\"_blank\" href=\"https://support.datastax.com/hc/en-us/articles/209650806-Lifecycle-Manager-Setting-require-cient-auth-true\">documentation</a>.",
+     :conditional [{:eq true}]},
+    :truststore
+    {:type "string",
+     :depends :enabled,
+     :default_value "/etc/dse/keystores/client.truststore",
+     :conditional [{:eq true}]},
+    :enabled
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :description
+     "Lifecycle Manager can configure DataStax Enterprise clusters to use client-to-node encryption. When enabled,  Lifecycle Manager automates the process of preparing server certificates, but you must manually configure your clients to trust the resulting server certificates by importing the certificate authority into your client's truststore. <a target=\"_blank\" href=\"https://docs.datastax.com/en/opscenter/help/downloadCAcert.html\">View Documentation</a>."}},
+   :required true},
+  :key_cache_size_in_mb {:type "int", :required false, :unit "MB"},
+  :commitlog_sync_period_in_ms
+  {:type "int",
+   :default_value 10000,
+   :depends :commitlog_sync,
+   :conditional [{:eq "periodic"}]},
+  :batch_size_warn_threshold_in_kb
+  {:type "int", :required true, :default_value 64},
+  :row_cache_save_period
+  {:type "int", :required true, :default_value 0, :unit "seconds"},
+  :start_rpc {:type "boolean", :required true, :default_value true},
+  :inter_dc_tcp_nodelay
+  {:type "boolean", :required true, :default_value false},
+  :num_tokens {:type "int", :required false},
+  :thrift_framed_transport_size_in_mb
+  {:type "int", :required true, :default_value 15, :unit "MB"},
+  :partitioner
+  {:type "string",
+   :required true,
+   :options
+   [{:label "Murmur3Partitioner",
+     :value "org.apache.cassandra.dht.Murmur3Partitioner"}
+    {:label "RandomPartitioner",
+     :value "org.apache.cassandra.dht.RandomPartitioner"}],
+   :default_value "org.apache.cassandra.dht.Murmur3Partitioner"},
+  :column_index_size_in_kb
+  {:type "int", :required true, :default_value 64, :unit "KB"},
+  :internode_compression
+  {:type "string",
+   :required true,
+   :options
+   [{:label "all", :value "all"}
+    {:label "dc", :value "dc"}
+    {:label "none", :value "none"}],
+   :default_value "dc"},
+  :dynamic_snitch_badness_threshold
+  {:type "float", :required true, :default_value 0.1},
+  :phi_convict_threshold
+  {:type "int", :default_value 8, :required false},
+  :authorizer
+  {:type "string",
+   :required true,
+   :options
+   [{:label "AllowAllAuthorizer", :value "AllowAllAuthorizer"}
+    {:label "CassandraAuthorizer", :value "CassandraAuthorizer"}],
+   :default_value "AllowAllAuthorizer"},
+  :internode_authenticator
+  {:type "string",
+   :required false,
+   :default_value
+   "org.apache.cassandra.auth.AllowAllInternodeAuthenticator"},
+  :batchlog_replay_throttle_in_kb
+  {:type "int", :required true, :default_value 1024},
+  :hinted_handoff_throttle_in_kb
+  {:type "int", :required true, :default_value 1024, :unit "KB"},
+  :cas_contention_timeout_in_ms
+  {:type "int", :required true, :default_value 1000, :unit "ms"},
+  :counter_write_request_timeout_in_ms
+  {:type "int", :required true, :default_value 5000},
+  :memtable_offheap_space_in_mb
+  {:type "int",
+   :required false,
+   :default_value 2048,
+   :unit "MB",
+   :depends :memtable_allocation_type,
+   :conditional [{:eq "offheap_objects"} {:eq "offheap_buffers"}]},
+  :memtable_heap_space_in_mb
+  {:type "int", :required false, :default_value 2048, :unit "MB"},
+  :auto_snapshot
+  {:type "boolean", :required true, :default_value true},
+  :memtable_cleanup_threshold {:type "float", :required false},
+  :commitlog_segment_recycling
+  {:type "boolean", :required true, :default_value false},
+  :streaming_socket_timeout_in_ms
+  {:type "int", :default_value 3600000, :required false, :unit "ms"},
+  :write_request_timeout_in_ms
+  {:type "int", :required true, :default_value 2000, :unit "ms"},
+  :request_scheduler_id
+  {:type "string",
+   :required false,
+   :depends :request_scheduler,
+   :conditional
+   [{:eq "org.apache.cassandra.scheduler.RoundRobinScheduler"}],
+   :options [{:label "keyspace", :value "keyspace"}],
+   :default_value "keyspace"},
+  :request_scheduler
+  {:type "string",
+   :required true,
+   :options
+   [{:label "NoScheduler",
+     :value "org.apache.cassandra.scheduler.NoScheduler"}
+    {:label "RoundRobinScheduler",
+     :value "org.apache.cassandra.scheduler.RoundRobinScheduler"}],
+   :default_value "org.apache.cassandra.scheduler.NoScheduler"},
+  :concurrent_reads {:type "int", :required true, :default_value 32},
+  :authenticator
+  {:type "string",
+   :required true,
+   :options
+   [{:label "AllowAllAuthenticator", :value "AllowAllAuthenticator"}
+    {:label "PasswordAuthenticator", :value "PasswordAuthenticator"}
+    {:label "KerberosAuthenticator",
+     :value "com.datastax.bdp.cassandra.auth.KerberosAuthenticator"}
+    {:label "LdapAuthenticator",
+     :value "com.datastax.bdp.cassandra.auth.LdapAuthenticator"}],
+   :default_value "PasswordAuthenticator"},
+  :internode_send_buff_size_in_bytes {:type "int", :required false},
+  :key_cache_keys_to_save {:type "int", :required false, :unit "keys"},
+  :concurrent_compactors {:type "int", :required false},
+  :sstable_preemptive_open_interval_in_mb
+  {:type "int", :required true, :default_value 50, :unit "MB"},
+  :index_summary_resize_interval_in_minutes
+  {:type "int", :required true, :default_value 60},
+  :server_encryption_options
+  {:type "dict",
+   :order
+   [:internode_encryption
+    :keystore
+    :keystore_password
+    :truststore
+    :truststore_password
+    :protocol
+    :algorithm
+    :store_type
+    :cipher_suites
+    :require_client_auth],
+   :fields
+   {:keystore
+    {:type "string",
+     :default_value "/etc/dse/keystores/server.keystore",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :cipher_suites
+    {:type "list",
+     :value_type "string",
+     :required false,
+     :default_value
+     ["TLS_RSA_WITH_AES_128_CBC_SHA"
+      "TLS_RSA_WITH_AES_256_CBC_SHA"
+      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"],
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :keystore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :default_value "cassandra",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :store_type
+    {:type "string",
+     :required false,
+     :default_value "JKS",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :algorithm
+    {:type "string",
+     :required false,
+     :default_value "SunX509",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :protocol
+    {:type "string",
+     :required false,
+     :default_value "TLS",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :internode_encryption
+    {:type "string",
+     :options
+     [{:label "none", :value "none"}
+      {:label "all", :value "all"}
+      {:label "dc", :value "dc"}
+      {:label "rack", :value "rack"}],
+     :default_value "none"},
+    :truststore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length :params {:min 6}}],
+     :default_value "cassandra",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :require_client_auth
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :truststore
+    {:type "string",
+     :default_value "/etc/dse/keystores/server.truststore",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]}},
+   :required true}},
+ :groupings
+ [{:name "Security",
+   :list
+   ["authenticator"
+    "authorizer"
+    "permissions_validity_in_ms"
+    "server_encryption_options"
+    "client_encryption_options"]}
+  {:name "General", :list ["partitioner" "num_tokens"]}
+  {:name "Directories",
+   :list
+   ["data_file_directories"
+    "commitlog_directory"
+    "saved_caches_directory"]}
+  {:name "Ports",
+   :list
+   ["storage_port"
+    "ssl_storage_port"
+    "rpc_port"
+    "native_transport_port"]}
+  {:name "Caches",
+   :list
+   ["key_cache_size_in_mb"
+    "key_cache_save_period"
+    "key_cache_keys_to_save"
+    "row_cache_size_in_mb"
+    "row_cache_keys_to_save"
+    "row_cache_save_period"]}
+  {:name "Commit Log",
+   :list
+   ["commitlog_sync"
+    "commitlog_total_space_in_mb"
+    "commitlog_segment_size_in_mb"
+    "commitlog_sync_period_in_ms"
+    "commitlog_sync_batch_window_in_ms"
+    "commitlog_segment_recycling"]}
+  {:name "Memory Management",
+   :list ["memory_allocator" "gc_warn_threshold_in_ms"]}
+  {:name "Concurrency Control",
+   :list
+   ["concurrent_reads"
+    "concurrent_writes"
+    "concurrent_counter_writes"]}
+  {:name "Memtable Settings",
+   :list
+   ["memtable_allocation_type"
+    "memtable_heap_space_in_mb"
+    "memtable_offheap_space_in_mb"
+    "memtable_cleanup_threshold"
+    "file_cache_size_in_mb"
+    "memtable_flush_writers"]}
+  {:name "RPC",
+   :list
+   ["start_rpc"
+    "rpc_server_type"
+    "thrift_framed_transport_size_in_mb"
+    "rpc_keepalive"
+    "rpc_min_threads"
+    "rpc_max_threads"
+    "rpc_send_buff_size_in_bytes"
+    "rpc_recv_buff_size_in_bytes"
+    "request_scheduler"
+    "request_scheduler_options"
+    "request_scheduler_id"]}
+  {:name "Native Transport",
+   :list
+   ["start_native_transport"
+    "native_transport_max_threads"
+    "native_transport_max_frame_size_in_mb"
+    "native_transport_max_concurrent_connections"
+    "native_transport_max_concurrent_connections_per_ip"]}
+  {:name "Timeouts",
+   :list
+   ["read_request_timeout_in_ms"
+    "range_request_timeout_in_ms"
+    "write_request_timeout_in_ms"
+    "cas_contention_timeout_in_ms"
+    "truncate_request_timeout_in_ms"
+    "request_timeout_in_ms"
+    "streaming_socket_timeout_in_ms"
+    "cross_node_timeout"
+    "counter_write_request_timeout_in_ms"]}
+  {:name "Counter Caches",
+   :list
+   ["counter_cache_size_in_mb"
+    "counter_cache_save_period"
+    "counter_cache_keys_to_save"]}
+  {:name "Tombstones",
+   :list ["tombstone_warn_threshold" "tombstone_failure_threshold"]}
+  {:name "Snapshots",
+   :list
+   ["incremental_backups"
+    "auto_snapshot"
+    "snapshot_before_compaction"]}
+  {:name "Compactions",
+   :list
+   ["compaction_throughput_mb_per_sec"
+    "concurrent_compactors"
+    "sstable_preemptive_open_interval_in_mb"
+    "compaction_large_partition_warning_threshold_mb"]}
+  {:name "Cluster Communication",
+   :list
+   ["endpoint_snitch"
+    "stream_throughput_outbound_megabits_per_sec"
+    "inter_dc_stream_throughput_outbound_megabits_per_sec"
+    "phi_convict_threshold"
+    "dynamic_snitch_update_interval_in_ms"
+    "dynamic_snitch_reset_interval_in_ms"
+    "dynamic_snitch_badness_threshold"
+    "internode_authenticator"
+    "internode_compression"
+    "inter_dc_tcp_nodelay"
+    "internode_send_buff_size_in_bytes"
+    "internode_recv_buff_size_in_bytes"]}
+  {:name "Hinted Handoff",
+   :list
+   ["hinted_handoff_enabled"
+    "max_hint_window_in_ms"
+    "hinted_handoff_throttle_in_kb"
+    "max_hints_delivery_threads"]}
+  {:name "Indexes",
+   :list
+   ["column_index_size_in_kb"
+    "index_summary_capacity_in_mb"
+    "index_summary_resize_interval_in_minutes"]}
+  {:name "Miscellaneous",
+   :list
+   ["disk_failure_policy"
+    "commit_failure_policy"
+    "trickle_fsync"
+    "trickle_fsync_interval_in_kb"
+    "batchlog_replay_throttle_in_kb"
+    "batch_size_warn_threshold_in_kb"]}]}
