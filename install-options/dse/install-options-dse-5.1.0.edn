@@ -35,11 +35,17 @@
    :options
    [{:label "non-root" :value "non-root"}
     {:label "root" :value "root"}]}
-  :run-dse-as
+  :run-dse-as-user
   {:type "string"
-   :label "Run DSE as"
-   :depends :install-type
-   :conditional [{:eq "tarball"}]
+   :label "Run DSE as User"
+   :depends :install-privileges
+   :conditional [{:eq "root"}]
+   :default_value "cassandra"}
+  :run-dse-as-group
+  {:type "string"
+   :label "Run DSE as Group"
+   :depends :install-privileges
+   :conditional [{:eq "root"}]
    :default_value "cassandra"}}
  :groupings
  [{:name ""
@@ -47,5 +53,6 @@
           "install-directory"
           "tarball-hash"
           "install-privileges"
-          "run-dse-as"]}]
+          "run-dse-as-user"
+          "run-dse-as-group"]}]
  }

@@ -38,10 +38,10 @@ fi
 #DSE_HOME=your_install_location
 
 # Location of log output
-OUTPUT_FILE="/var/log/cassandra/output.log"
+OUTPUT_FILE={{output-file}}
 
 # Configuration directory
-CASSANDRA_CONF=/etc/dse/cassandra
+CASSANDRA_CONF={{cassandra-conf}}
 
 # Set the PID file location here
 PIDFILE=/var/run/$NODEID/$NODEID.pid
@@ -53,20 +53,20 @@ PIDFILE=/var/run/$NODEID/$NODEID.pid
 #TOMCAT_LOGS=
 
 # Ths user to use for the service
-CASSANDRA_USER=cassandra
+CASSANDRA_USER={{cassandra-user}}
 
 # Ths group to use for the service
-CASSANDRA_GROUP=cassandra
+CASSANDRA_GROUP={{cassandra-group}}
 
 # Set this if you've installed DSE into a different location from the default
 # (Note: this refers to DSE Spark, not open-source Spark)
 #SPARK_HOME=your_spark_install_location
 
 # Spark configuration files location
-SPARK_CONF_DIR=/etc/dse/spark
+SPARK_CONF_DIR={{spark-conf-dir}}
 
 # Uncomment and increase/decrease if you want longer/shorter waits checking if the service is up
 {{wait-for-start}}
 
-# Uncomment and decrease/increase if you want finer/coarser grained waits while checking if the servic
+# Uncomment and decrease/increase if you want finer/coarser grained waits while checking if the service is up
 {{wait-for-start-sleep}}

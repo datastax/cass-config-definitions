@@ -8,12 +8,24 @@
  {:renderer-type :template
   :template "dse-default-dse-5.1.0.template"}
  :properties
- {:solr-enabled
-  {:type "boolean", :required true, :default_value false, :render_as "int"},
-  :spark-enabled
-  {:type "boolean", :required true, :default_value false, :render_as "int"}
-  :graph-enabled
-  {:type "boolean", :required true, :default_value false, :render_as "int"}
+ {:output-file
+  {:type "string"
+   :label "Cassandra Log File"
+   :is_file true
+   :default_value "/var/log/cassandra/output.log"
+   :tarball_default "var/log/cassandra/output.log"}
+  :cassandra-conf
+  {:type "string"
+   :label "Cassandra Config Directory"
+   :is_directory true
+   :default_value "/etc/dse/cassandra"
+   :tarball_default "resources/cassandra/conf"}
+  :spark-conf-dir
+  {:type "string"
+   :label "Spark Config Directory"
+   :is_directory true
+   :default_value "/etc/dse/spark"
+   :tarball_default "resources/spark/conf"}
   :wait-for-start
   {:type "int"
    :required false
@@ -21,7 +33,8 @@
    :constant "WAIT_FOR_START"
    :disabled true
    :default_value 3
-   :unit "seconds"}
+   :unit "seconds"
+   :description "Increase/decrease if you want longer/shorter waits checking if the service is up"}
   :wait-for-start-sleep
   {:type "int"
    :required false
@@ -29,12 +42,13 @@
    :constant "WAIT_FOR_START_SLEEP"
    :disabled true
    :default_value 5
-   :unit "seconds"}}
+   :unit "seconds"
+   :description "Decrease/increase if you want finer/coarser grained waits while checking if the service is up"}}
  :groupings
  [{:name "General",
    :list
-   ["solr-enabled"
-    "spark-enabled"
-    "graph-enabled"
+   ["output-file"
+    "cassandra-conf"
+    "spark-conf-dir"
     "wait-for-start"
     "wait-for-start-sleep"]}]}
