@@ -35,6 +35,15 @@
    :options
    [{:label "non-root" :value "non-root"}
     {:label "root" :value "root"}]}
+  :cassandra-log-dir
+  {:type "string"
+   :label "Cassandra Log Directory"
+   :required true
+   :depends :install-privileges
+   :conditional [{:eq "non-root"}]
+   :is_directory true
+   :default_value "/var/log/cassandra"
+   :tarball_default "var/log/cassandra"}
   :run-dse-as-user
   {:type "string"
    :label "Run DSE as User"
@@ -53,6 +62,7 @@
           "install-directory"
           "tarball-hash"
           "install-privileges"
+          "cassandra-log-dir"
           "run-dse-as-user"
           "run-dse-as-group"]}]
  }
