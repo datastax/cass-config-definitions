@@ -253,5 +253,6 @@
            :io_global_queue_depth
            {:type "int"
             :required false}))
+ "6.0.2" :no-change
  ;; End DSE 6.0.x transforms.
  )

@@ -88,5 +88,6 @@
                       :required false
                       :default_value "DEBUG"}
                      :group "General"))
+ "6.0.2" :no-change
  ;; End DSE 6.0.x transforms.
  )

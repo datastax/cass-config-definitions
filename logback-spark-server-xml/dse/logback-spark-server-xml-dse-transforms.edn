@@ -76,5 +76,6 @@
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" :no-change
  "6.0.1" :no-change
+ "6.0.2" :no-change
  ;; End DSE 6.0.x transforms.
  )

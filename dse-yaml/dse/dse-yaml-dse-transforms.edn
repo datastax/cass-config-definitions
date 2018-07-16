@@ -496,5 +496,15 @@
  "6.0.0" "dse-yaml-dse-6.0.0.edn"
  "6.0.1" (transforms
           (delete-field :alwayson_sql_options.jps_directory))
- ;; End DSE 6.0.x transforms.
+ "6.0.2" (transforms
+          (update-field :node_health_options.uptime_ramp_up_period_seconds
+                        {:default_value 10800})
+          (add-field :dsefs_options.rest_options.internode_idle_connection_timeout_ms
+                     {:type "int"
+                      :required false
+                      :unit "ms"})
+          (add-field :dsefs_options.rest_options.core_max_concurrent_connections_per_host
+                     {:type "int"
+                      :required false}))
+  ;; End DSE 6.0.x transforms.
  )

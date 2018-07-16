@@ -112,5 +112,6 @@
                       :constant "-Djdk.nio.maxCachedBufferSize"
                       :default_value 1048576}
                      :group "General JVM Parameters"))
+ "6.0.2" :no-change
   ;; End DSE 6.0.x transforms.
 )
