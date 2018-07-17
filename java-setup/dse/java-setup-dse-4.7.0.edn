@@ -17,17 +17,17 @@
                               :description "The version of Java to install. Example: 1.8.0."}
               :update-version {:type "string"
                                :required false
-                               :default_value "172"
+                               :default_value "181"
                                :depends :manage-java
                                :description "Each Java release is identified by an update-version in its filename. For example, the update-version for server-jre-8u121-linux-x64.tar.gz is 121."}
               :build-version {:type "string"
                               :required false
-                              :default_value "11"
+                              :default_value "13"
                               :depends :manage-java
                               :description "Each Java release is additionally identified by a build number in its download url. For example, the build number for '.../java/jdk/8u121-b13/...', is '13'."}
               :build-hash {:type "string"
                            :required false
-                           :default_value "a58eab1ec242421181065cdc37240b08"
+                           :default_value "96a7b8442fe848ef90c96a2fad6ed6d1"
                            :depends :manage-java
                            :description "Java releases from 8u121-b13 onward are additionally identified by a build hash in their download url. For example, build hash in '.../java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/...',  is e9e7ea248e2c4826b92b3f075a80e441. When downloading older Java releases, this can be left blank."}
               :download-url {:type "string"
