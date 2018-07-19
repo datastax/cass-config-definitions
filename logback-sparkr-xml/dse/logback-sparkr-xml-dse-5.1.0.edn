@@ -1,6 +1,5 @@
 {:display-name "logback-sparkR.xml"
  :package-path "/etc/dse/spark/logback-sparkR.xml"
- :tarball-path "resources/spark/conf/logback-sparkR.xml"
  :workload-file-group "spark"
  :ui-visibility :editable
  :valid-dse-versions [:gte "5.1.0"]

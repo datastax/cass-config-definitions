@@ -1,6 +1,5 @@
 {:display-name "hive-site.xml"
  :package-path "/etc/dse/spark/hive-site.xml"
- :tarball-path "resources/spark/conf/hive-site.xml"
  :workload-file-group "hadoop"
  :valid-dse-versions [:lte "4.7.9"]
  :ui-visibility :editable

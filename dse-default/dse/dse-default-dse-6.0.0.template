@@ -43,10 +43,10 @@ PIDFILE=/var/run/$NODEID/$NODEID.pid
 #TOMCAT_LOGS=
 
 # Ths user to use for the service
-CASSANDRA_USER={{cassandra-user}}
+CASSANDRA_USER=cassandra
 
 # Ths group to use for the service
-CASSANDRA_GROUP={{cassandra-group}}
+CASSANDRA_GROUP=cassandra
 
 # Set this if you've installed DSE into a different location from the default
 # (Note: this refers to DSE Spark, not open-source Spark)

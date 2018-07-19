@@ -1,6 +1,5 @@
 {:display-name "logback.xml"
  :package-path "/etc/dse/cassandra/logback.xml"
- :tarball-path "resources/cassandra/conf/logback.xml"
  :workload-file-group "cassandra"
  :ui-visibility :editable
  :valid-dse-versions [:all]

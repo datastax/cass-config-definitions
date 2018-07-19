@@ -1,6 +1,5 @@
 {:display-name "dse.default"
  :package-path "/etc/default/dse"
- :tarball-path "resources/dse/conf/dse.default"
  :workload-file-group "cassandra"
  :ui-visibility :hidden
  :valid-dse-versions [:all]

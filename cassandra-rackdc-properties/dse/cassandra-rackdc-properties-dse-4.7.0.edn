@@ -1,6 +1,5 @@
 {:display-name "cassandra-rackdc.properties"
  :package-path "/etc/dse/cassandra/cassandra-rackdc.properties"
- :tarball-path "resources/cassandra/conf/cassandra-rackdc.properties"
  :workload-file-group "None"
  :ui-visibility :hidden
  :valid-dse-versions [:all]

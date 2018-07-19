@@ -1,6 +1,5 @@
 {:display-name "logback-spark-executor.xml"
  :package-path "/etc/dse/spark/logback-spark-executor.xml"
- :tarball-path "resources/spark/conf/logback-spark-executor.xml"
  :workload-file-group "spark"
  :ui-visibility :editable
  :valid-dse-versions [:all]

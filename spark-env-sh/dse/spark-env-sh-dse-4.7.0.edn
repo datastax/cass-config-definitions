@@ -1,6 +1,5 @@
 {:display-name "spark-env.sh"
  :package-path "/etc/dse/spark/spark-env.sh"
- :tarball-path "resources/spark/conf/spark-env.sh"
  :workload-file-group "spark"
  :ui-visibility :editable
  :valid-dse-versions [:all]

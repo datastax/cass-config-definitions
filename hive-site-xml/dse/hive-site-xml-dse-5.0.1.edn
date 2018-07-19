@@ -1,6 +1,5 @@
 {:display-name "hive-site.xml",
  :package-path "/etc/dse/spark/hive-site.xml"
- :tarball-path "resources/spark/conf/hive-site.xml"
  :workload-file-group "hadoop",
  ;; hive-site.xml is valid in DSE 4.7.x (as a Hadoop config),
  ;; and in 5.1.x (as a Spark config). It's not supported in

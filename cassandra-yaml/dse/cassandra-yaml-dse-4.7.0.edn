@@ -10,7 +10,6 @@
 ;; - rpc_interface_prefer_ipv6 - related to rpc_interface
 {:display-name "cassandra.yaml"
  :package-path "/etc/dse/cassandra/cassandra.yaml"
- :tarball-path "resources/cassandra/conf/cassandra.yaml"
  :workload-file-group "cassandra"
  :ui-visibility :editable
  :valid-dse-versions [:all]

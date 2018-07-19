@@ -12,7 +12,6 @@
 
 {:display-name "jvm.options"
  :package-path "/etc/dse/cassandra/jvm.options"
- :tarball-path "resources/cassandra/conf/jvm.options"
  :workload-file-group "cassandra"
  :ui-visibility :editable
  :valid-dse-versions [:gte "5.1.0"]
