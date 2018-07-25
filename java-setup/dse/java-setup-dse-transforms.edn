@@ -37,7 +37,17 @@
 
 
  ;; Begin DSE 5.0.x transforms.
- "5.0.1" :no-change
+ "5.0.1" (transforms
+          (update-field :java-vendor {:default_value "os-platform"
+                                      :options
+                                      [{:label "Oracle", :value "oracle"}
+                                       {:label "Platform OpenJDK", :value "os-platform"}]})
+          (add-field :os-openjdk-version {:type "string"
+                                          :default_value "1.8"
+                                          :depends :java-vendor
+                                          :conditional "os-platform"
+                                          :options [{:label "Java 8", :value "1.8"}]}
+                     :group "Java"))
  "5.0.2" :no-change
  "5.0.3" :no-change
  "5.0.4" :no-change
