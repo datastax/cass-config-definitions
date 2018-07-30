@@ -1,0 +1,3 @@
+{
+    "do_not_repair": ["system", "system_schema", "system_views", "system_virtual_schema"]
+}
