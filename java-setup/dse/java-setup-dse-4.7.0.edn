@@ -11,6 +11,7 @@
                             :description "Uncheck if a Java Virtual Machine is pre-installed on your targets and you do not want LCM to install or upgrade Java. Unchecking this box will cause the below fields to be ignored."}
               :java-vendor {:type "string"
                             :default_value "oracle"
+                            :depends :manage-java
                             :options
                             [{:label "Oracle", :value "oracle"}]}
               :major-version {:type "string"
@@ -46,6 +47,8 @@
               :manage-jce-policy {:type "boolean"
                                   :required true
                                   :default_value true
+                                  :depends :java-vendor
+                                  :conditional "oracle"
                                   :description "Enable manage-java and manage-jce-policy to configure Lifecycle Manager to deploy Java Cryptography Extension (JCE) Unlimited Strength Policy Files."}
               :jce-download-url {:type "string"
                                  :required false
