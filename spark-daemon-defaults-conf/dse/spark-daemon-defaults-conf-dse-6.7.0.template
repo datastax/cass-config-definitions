@@ -1,0 +1,24 @@
+# This file is managed by DataStax OpsCenter LifeCycle Manager.
+# Manual edits will be overwritten by the next install or configure
+# job that runs on this system.
+
+# Default system properties for Spark Standalone based DSE Resource Manager
+
+# For user application configuration use spark-defaults.conf
+
+# Shuffle service ports
+spark.dseShuffle.sasl.port          {{spark_dse_shuffle_sasl_port}}
+spark.dseShuffle.noSasl.port        {{spark_dse_shuffle_no_sasl_port}}
+
+# Enable authentication by adding com.datastax.bdp.auth.SparkUIAuthFilter filter to
+# the Spark UI. This filter will enforce basic authentication in web browser whenever
+# DSE authentication is enabled.
+# Note that DSE authenticator must support Internal or LDAP authentication scheme
+# in order to make it work.
+spark.ui.filters      {{spark_ui_filters}}
+
+spark.redaction.regex                       {{spark_redaction_regex}}
+
+spark.network.crypto.enabled                    {{spark_network_crypto_enabled}}
+spark.network.crypto.saslFallback               {{spark_network_crypto_saslfallback}}
+

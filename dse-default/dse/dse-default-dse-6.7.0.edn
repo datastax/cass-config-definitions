@@ -1,0 +1,52 @@
+{:display-name "dse.default",
+ :package-path "/etc/default/dse",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :valid-dse-versions [:all],
+ :renderer
+ {:renderer-type :template,
+  :template "dse-default-dse-6.7.0.template"},
+ :properties
+ {:output-file
+  {:type "string",
+   :label "Cassandra Log File",
+   :is_file true,
+   :default_value "/var/log/cassandra/output.log"},
+  :cassandra-conf
+  {:type "string",
+   :label "Cassandra Config Directory",
+   :is_directory true,
+   :default_value "/etc/dse/cassandra"},
+  :spark-conf-dir
+  {:type "string",
+   :label "Spark Config Directory",
+   :is_directory true,
+   :default_value "/etc/dse/spark"},
+  :wait-for-start
+  {:type "int",
+   :required false,
+   :label "Wait for start",
+   :constant "WAIT_FOR_START",
+   :disabled true,
+   :default_value 3,
+   :unit "seconds",
+   :description
+   "Increase/decrease if you want longer/shorter waits checking if the service is up"},
+  :wait-for-start-sleep
+  {:type "int",
+   :required false,
+   :label "Wait for start sleep",
+   :constant "WAIT_FOR_START_SLEEP",
+   :disabled true,
+   :default_value 5,
+   :unit "seconds",
+   :description
+   "Decrease/increase if you want finer/coarser grained waits while checking if the service is up"}},
+ :groupings
+ [{:name "General",
+   :list
+   ["output-file"
+    "cassandra-conf"
+    "spark-conf-dir"
+    "wait-for-start"
+    "wait-for-start-sleep"]}]}

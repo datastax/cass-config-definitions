@@ -1,0 +1,51 @@
+{:display-name "logback.xml",
+ :package-path "/etc/dse/cassandra/logback.xml",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :valid-dse-versions [:all],
+ :renderer
+ {:renderer-type :template,
+  :template "logback-xml-dse-6.7.0.template"},
+ :properties
+ {:systemlog-appender-level
+  {:type "string", :required true, :default_value "INFO"},
+  :debuglog-appender-min-index
+  {:type "int", :required true, :default_value 1},
+  :debuglog-appender-max-file-size
+  {:type "int", :required true, :default_value 20, :unit "MB"},
+  :systemlog-appender-max-index
+  {:type "int", :required true, :default_value 20},
+  :bdp-util-process-internalservicerunner
+  {:type "string", :required false, :default_value "DEBUG"},
+  :debuglog-appender-max-index
+  {:type "int", :required true, :default_value 20},
+  :root-log-level
+  {:type "string", :required true, :default_value "INFO"},
+  :systemlog-appender-min-index
+  {:type "int", :required true, :default_value 1},
+  :bdp-util-process-servicerunner
+  {:type "string", :required false, :default_value "DEBUG"},
+  :systemlog-appender-max-file-size
+  {:type "int", :required true, :default_value 20, :unit "MB"},
+  :loggers
+  {:type "list",
+   :required false,
+   :default_value [],
+   :value_type "dict",
+   :fields
+   {:name {:type "string", :required false},
+    :level {:type "string", :required false}}}},
+ :groupings
+ [{:name "General",
+   :list
+   ["systemlog-appender-level"
+    "systemlog-appender-min-index"
+    "systemlog-appender-max-index"
+    "systemlog-appender-max-file-size"
+    "debuglog-appender-min-index"
+    "debuglog-appender-max-index"
+    "debuglog-appender-max-file-size"
+    "root-log-level"
+    "loggers"
+    "bdp-util-process-servicerunner"
+    "bdp-util-process-internalservicerunner"]}]}

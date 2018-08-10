@@ -255,4 +255,9 @@
             :required false}))
  "6.0.2" :no-change
  ;; End DSE 6.0.x transforms.
+
+
+  ;; Begin DSE 6.7.x transforms.
+  "6.7.0" "cassandra-yaml-dse-6.7.0.edn"
+  ;; End DSE 6.7.x transforms.
  )

@@ -1,0 +1,94 @@
+{:properties
+ {:keystore
+  {:type "string",
+   :depends :use-ssl,
+   :description
+   "The keystore to use for client certificates. Should be the same as the keystore path set for client encryption options in cassandra.yaml.",
+   :render-without-quotes true,
+   :conditional [{:eq true}]},
+  :cassandra-connection-meta-store-column-family-name
+  {:type "string",
+   :required true,
+   :default_value "sparkmetastore",
+   :render-without-quotes true},
+  :hive-server2-logging-operation-enabled
+  {:type "boolean", :required true, :default_value false},
+  :spark-hadoop-com-datastax-bdp-fs-client-authentication-factory
+  {:type "string",
+   :required true,
+   :default_value
+   "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory",
+   :render-without-quotes true},
+  :spark-enable {:type "boolean", :required true, :default_value true},
+  :hive-metastore-rawstore-impl
+  {:type "string",
+   :required true,
+   :default_value
+   "com.datastax.bdp.hadoop.hive.metastore.CassandraHiveMetaStore",
+   :render-without-quotes true},
+  :cassandra-auto-create-hive-schema
+  {:type "boolean", :required true, :default_value true},
+  :hive-server2-transport-mode
+  {:type "string",
+   :required true,
+   :default_value "binary",
+   :render-without-quotes true},
+  :keystore-password
+  {:type "string",
+   :depends :use-ssl,
+   :password true,
+   :description
+   "The password to use for the keystore. Should be the same as the keystore-password set for client encryption in cassandra.yaml.",
+   :render-without-quotes true,
+   :conditional [{:eq true}]},
+  :com-datastax-bdp-fs-client-authentication-factory
+  {:type "string",
+   :required true,
+   :default_value
+   "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory",
+   :render-without-quotes true},
+  :jdbc-auth-type
+  {:type "string",
+   :default_value "NONE",
+   :description
+   "Which type of authentication to use for SparkSQL JDBC connections. Use 'password' when enabling AlwaysOn SQL in dse.yaml.",
+   :options
+   [{:label "none", :value "none"}
+    {:label "password", :value "password"}]},
+  :hive-metastore-warehouse-dir
+  {:type "string",
+   :required true,
+   :default_value "dsefs:///user/spark/warehouse",
+   :render-without-quotes true},
+  :hive-exec-mode-local-auto
+  {:type "boolean", :required true, :default_value false},
+  :use-ssl
+  {:type "boolean",
+   :required true,
+   :description
+   "Specifies whether to use SSL for JDBC connections. If using client-to-node encryption in cassandra.yaml, select use-ssl to enable SSL for JDBC.",
+   :default_value false}},
+ :valid-dse-versions [:all],
+ :groupings
+ [{:name "Security",
+   :list ["jdbc-auth-type" "use-ssl" "keystore" "keystore-password"]}
+  {:name "General",
+   :list
+   ["spark-enable"
+    "hive-exec-mode-local-auto"
+    "hive-metastore-warehouse-dir"
+    "hive-metastore-rawstore-impl"
+    "com-datastax-bdp-fs-client-authentication-factory"
+    "cassandra-auto-create-hive-schema"
+    "cassandra-connection-meta-store-column-family-name"
+    "hive-server2-logging-operation-enabled"
+    "hive-server2-transport-mode"
+    "spark-hadoop-com-datastax-bdp-fs-client-authentication-factory"]}],
+ :ui-visibility :editable,
+ :package-path "/etc/dse/spark/hive-site.xml",
+ :renderer
+ {:renderer-type :template,
+  :template "hive-site-xml-dse-6.7.0.template"},
+ :display-name "hive-site.xml",
+ :workload-file-group "spark",
+ :workload :spark}

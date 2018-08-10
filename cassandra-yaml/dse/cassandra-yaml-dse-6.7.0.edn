@@ -1,0 +1,867 @@
+{:display-name "cassandra.yaml",
+ :package-path "/etc/dse/cassandra/cassandra.yaml",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :valid-dse-versions [:all],
+ :renderer {:renderer-type :yaml},
+ :properties
+ {:hinted_handoff_enabled
+  {:type "boolean", :required true, :default_value true},
+  :tpc_cores {:type "int", :required false},
+  :dynamic_snitch_update_interval_in_ms
+  {:type "int", :required true, :default_value 100, :unit "ms"},
+  :native_transport_port_ssl {:type "int"},
+  :enable_user_defined_functions_threads
+  {:type "boolean", :required true, :default_value true},
+  :user_defined_function_warn_micros
+  {:type "int",
+   :default_value 500,
+   :depends :enable_user_defined_functions_threads},
+  :user_defined_function_fail_micros
+  {:type "int",
+   :default_value 10000,
+   :depends :enable_user_defined_functions_threads},
+  :user_defined_function_warn_heap_mb
+  {:type "int",
+   :default_value 200,
+   :depends :enable_user_defined_functions_threads},
+  :user_defined_function_fail_heap_mb
+  {:type "int",
+   :default_value 500,
+   :depends :enable_user_defined_functions_threads},
+  :user_function_timeout_policy
+  {:type "string",
+   :default_value "die",
+   :options [{:label "die", :value "die"},
+             {:label "die_immediate", :value "die_immediate"},
+             {:label "ignore", :value "ignore"}]
+   :depends :enable_user_defined_functions_threads},
+  :max_hint_window_in_ms
+  {:type "int", :required true, :default_value 10800000, :unit "ms"},
+  :commitlog_sync_batch_window_in_ms
+  {:type "int",
+   :default_value 2,
+   :depends :commitlog_sync,
+   :conditional [{:eq "batch"}]},
+  :allocate_tokens_for_keyspace
+  {:type "string",
+   :depends :partitioner,
+   :conditional [{:eq "Murmur3Partitioner"}]},
+  :cross_node_timeout
+  {:type "boolean", :required true, :default_value false},
+  :unlogged_batch_across_partitions_warn_threshold
+  {:type "int", :required false, :default_value 10},
+  :streaming_keep_alive_period_in_secs
+  {:type "int", :required false, :default_value 300, :unit "s"},
+  :aggregated_request_timeout_in_ms
+  {:type "int", :required true, :default_value 120000, :unit "ms"},
+  :compaction_throughput_mb_per_sec
+  {:type "int", :required true, :default_value 16, :unit "MB/sec"},
+  :storage_port
+  {:type "int", :required true, :default_value 7000, :format false},
+  :start_native_transport
+  {:type "boolean",
+   :required true,
+   :readonly true,
+   :default_value true},
+  :row_cache_class_name
+  {:type "string",
+   :options
+   [{:label "OHCProvider",
+     :value "org.apache.cassandra.cache.OHCProvider"}
+    {:label "SerializingCacheProvider",
+     :value "org.apache.cassandra.cache.SerializingCacheProvider"}],
+   :default_value "org.apache.cassandra.cache.OHCProvider"},
+  :cdc_total_space_in_mb {:type "int", :required false},
+  :snapshot_before_compaction
+  {:type "boolean", :required true, :default_value false},
+  :permissions_validity_in_ms
+  {:type "int", :required true, :default_value 120000},
+  :compaction_large_partition_warning_threshold_mb
+  {:type "int", :required true, :default_value 100},
+  :column_index_cache_size_in_kb
+  {:type "int", :required true, :default_value 2, :unit "KB"},
+  :max_hints_delivery_threads
+  {:type "int", :required true, :default_value 2},
+  :native_transport_max_concurrent_connections
+  {:type "int", :required false, :default_value -1},
+  :gc_warn_threshold_in_ms
+  {:type "int", :required false, :default_value 1000, :unit "ms"},
+  :native_transport_max_frame_size_in_mb
+  {:type "int", :required false, :default_value 256},
+  :data_file_directories
+  {:type "list",
+   :required true,
+   :default_value ["/var/lib/cassandra/data"],
+   :is_directory true,
+   :value_type "string"},
+  :commit_failure_policy
+  {:type "string",
+   :required true,
+   :options
+   [{:label "die", :value "die"}
+    {:label "stop", :value "stop"}
+    {:label "stop commit", :value "stop_commit"}
+    {:label "ignore", :value "ignore"}],
+   :default_value "stop"},
+  :truncate_request_timeout_in_ms
+  {:type "int", :required true, :default_value 60000, :unit "ms"},
+  :commitlog_sync_group_window_in_ms
+  {:type "int",
+   :default_value 1000,
+   :depends :commitlog_sync,
+   :conditional [{:eq "group"}]},
+  :request_timeout_in_ms
+  {:type "int", :required true, :default_value 10000, :unit "ms"},
+  :otc_coalescing_window_us
+  {:type "int",
+   :required false,
+   :depends :otc_coalescing_strategy,
+   :conditional [{:ne "DISABLED"}],
+   :unit "us",
+   :default_value 200},
+  :range_request_timeout_in_ms
+  {:type "int", :required true, :default_value 10000, :unit "ms"},
+  :trickle_fsync_interval_in_kb
+  {:type "int", :required true, :default_value 10240, :unit "KB"},
+  :endpoint_snitch
+  {:type "string",
+   :required true,
+   :options
+   [{:label "GossipingPropertyFileSnitch",
+     :value
+     "org.apache.cassandra.locator.GossipingPropertyFileSnitch"}],
+   :default_value "GossipingPropertyFileSnitch"},
+  :permissions_update_interval_in_ms
+  {:type "int", :required false, :unit "ms"},
+  :role_manager
+  {:type "string",
+   :required true,
+   :options
+   [{:label "DseRoleManager",
+     :value "com.datastax.bdp.cassandra.auth.DseRoleManager"}
+    {:label "CassandraRoleManager",
+     :value "org.apache.cassandra.auth.CassandraRoleManager"}],
+   :default_value "com.datastax.bdp.cassandra.auth.DseRoleManager"},
+  :ssl_storage_port
+  {:type "int", :required true, :default_value 7001, :format false},
+  :tracetype_repair_ttl {:type "int", :default_value 604800},
+  :disk_optimization_strategy
+  {:type "string",
+   :options
+   [{:label "ssd", :value "ssd"}
+    {:label "spinning", :value "spinning"}],
+   :default_value "ssd"},
+  :commitlog_directory
+  {:type "string",
+   :required true,
+   :is_directory true,
+   :default_value "/var/lib/cassandra/commitlog"},
+  :hints_flush_period_in_ms
+  {:type "int", :required true, :default_value 10000},
+  :commitlog_total_space_in_mb
+  {:type "int", :required false, :default_value 8192, :unit "MB"},
+  :counter_cache_save_period
+  {:type "int", :required true, :default_value 7200},
+  :concurrent_validations
+  {:type "int", :required false, :default_value 0},
+  :max_value_size_in_mb {:type "int", :default_value 256},
+  :batch_size_fail_threshold_in_kb
+  {:type "int", :required true, :default_value 640},
+  :memtable_flush_writers
+  {:type "int", :required false, :default_value 4},
+  :continuous_paging
+  {:type "dict",
+   :order [],
+   :fields
+   {:max_concurrent_sessions
+    {:type "int", :required true, :default_value 60},
+    :max_session_pages {:type "int", :required true, :default_value 4},
+    :max_page_size_mb {:type "int", :required true, :default_value 8},
+    :max_local_query_time_ms
+    {:type "int", :required true, :unit "ms", :default_value 5000},
+    :client_timeout_sec
+    {:type "int", :required true, :unit "sec", :default_value 600},
+    :cancel_timeout_sec
+    {:type "int", :required true, :unit "sec", :default_value 5},
+    :paused_check_interval_ms
+    {:type "int", :required true, :unit "ms", :default_value 1}}},
+  :row_cache_size_in_mb
+  {:type "int", :required true, :default_value 0, :unit "MB"},
+  :tombstone_warn_threshold
+  {:type "int", :required true, :default_value 1000},
+  :concurrent_materialized_view_builders
+  {:type "int", :required true, :default_value 2},
+  :incremental_backups
+  {:type "boolean", :required true, :default_value false},
+  :native_transport_max_concurrent_connections_per_ip
+  {:type "int", :required false, :default_value -1},
+  :commitlog_segment_size_in_mb
+  {:type "int", :required true, :default_value 32, :unit "MB"},
+  :tracetype_query_ttl {:type "int", :default_value 86400},
+  :read_request_timeout_in_ms
+  {:type "int", :required true, :default_value 5000, :unit "ms"},
+  :hints_directory
+  {:type "string",
+   :required true,
+   :is_directory true,
+   :default_value "/var/lib/cassandra/hints"},
+  :internode_recv_buff_size_in_bytes {:type "int", :required false},
+  :saved_caches_directory
+  {:type "string",
+   :required true,
+   :is_directory true,
+   :default_value "/var/lib/cassandra/saved_caches"},
+  :dynamic_snitch_reset_interval_in_ms
+  {:type "int", :required true, :default_value 600000, :unit "ms"},
+  :inter_dc_stream_throughput_outbound_megabits_per_sec
+  {:type "int", :required false, :unit "mbps"},
+  :file_cache_size_in_mb
+  {:type "int", :required false, :default_value 4096},
+  :row_cache_keys_to_save {:type "int", :required false, :unit "rows"},
+  :transparent_data_encryption_options
+  {:type "dict",
+   :order [:enabled :chunk_length_kb :cipher :key_alias :key_provider],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :chunk_length_kb {:type "int", :required true, :default_value 64},
+    :cipher
+    {:type "string",
+     :required true,
+     :default_value "AES/CBC/PKCS5Padding"},
+    :key_alias
+    {:type "string", :required true, :default_value "testing:1"},
+    :key_provider
+    {:type "list",
+     :value_type "dict",
+     :fields
+     {:class_name {:type "string"},
+      :parameters
+      {:type "list",
+       :value_type "dict",
+       :fields
+       {:keystore {:type "string"},
+        :keystore_password {:type "string", :password true},
+        :store_type {:type "string"},
+        :key_password {:type "string", :password true}}}}}}},
+  :cdc_raw_directory
+  {:type "string",
+   :is_directory true,
+   :default_value "/var/lib/cassandra/cdc_raw",
+   :required true},
+  :slow_query_log_timeout_in_ms
+  {:type "int", :required true, :default_value 500, :unit "ms"},
+  :counter_cache_size_in_mb {:type "int", :required false},
+  :disk_failure_policy
+  {:type "string",
+   :required true,
+   :options
+   [{:label "die", :value "die"}
+    {:label "stop_paranoid", :value "stop_paranoid"}
+    {:label "stop", :value "stop"}
+    {:label "best effort", :value "best_effort"}
+    {:label "ignore", :value "ignore"}],
+   :default_value "stop"},
+  :commitlog_compression
+  {:type "list",
+   :value_type "dict",
+   :fields
+   {:class_name {:type "string"},
+    :parameters {:type "user_defined", :value_type "string"}}},
+  :memtable_allocation_type
+  {:type "string",
+   :required true,
+   :options
+   [{:label "heap_buffers", :value "heap_buffers"}
+    {:label "offheap_buffers", :value "offheap_buffers"}],
+   :default_value "heap_buffers"},
+  :stream_throughput_outbound_megabits_per_sec
+  {:type "int", :required false, :default_value 200, :unit "mbps"},
+  :counter_cache_keys_to_save {:type "int", :required false},
+  :tombstone_failure_threshold
+  {:type "int", :required true, :default_value 100000},
+  :native_transport_port
+  {:type "int", :required true, :default_value 9042, :format false},
+  :index_summary_capacity_in_mb
+  {:type "int", :required false, :unit "MB"},
+  :commitlog_sync
+  {:type "string",
+   :required true,
+   :options
+   [{:label "periodic", :value "periodic"}
+    {:label "batch", :value "batch"}
+    {:label "group", :value "group"}],
+   :default_value "periodic"},
+  :enable_scripted_user_defined_functions
+  {:type "boolean", :required true, :default_value false},
+  :max_hints_file_size_in_mb
+  {:type "int", :required true, :default_value 128},
+  :nodesync
+  {:type "dict",
+   :order [:rate_in_kb],
+   :fields
+   {:rate_in_kb {:type "int", :required true, :default_value 1024}}},
+  :rpc_keepalive
+  {:type "boolean", :required true, :default_value true},
+  :trickle_fsync
+  {:type "boolean", :required true, :default_value true},
+  :cross_dc_rtt_in_ms
+  {:type "int", :required false, :default_value 0, :unit "ms"},
+  :roles_update_interval_in_ms {:type "int", :required false},
+  :roles_validity_in_ms
+  {:type "int", :default_value 120000, :required true},
+  :prepared_statements_cache_size_mb {:type "string", :required false},
+  :client_encryption_options
+  {:type "dict",
+   :order
+   [:enabled
+    :optional
+    :keystore
+    :keystore_type
+    :keystore_password
+    :require_client_auth
+    :truststore
+    :truststore_type
+    :truststore_password
+    :protocol
+    :algorithm
+    :cipher_suites],
+   :fields
+   {:keystore
+    {:type "string",
+     :is_file true,
+     :default_value "/etc/dse/keystores/client.keystore",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :cipher_suites
+    {:type "list",
+     :required false,
+     :value_type "string",
+     :depends :enabled,
+     :description
+     "A list of encryption cipher-suites that DSE will accept when negotiating TLS connections. In most cases, leaving this list empty is the right thing to do and will allow the JVM to select from its internal list of allowed ciphers. If this list is set explicitly, each text field must contain a single cipher_suite name, for example: TLS_DHE_RSA_WITH_AES_128_CBC_SHA256",
+     :conditional [{:eq true}]},
+    :keystore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length, :params {:min 6}}],
+     :default_value "cassandra",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :keystore_type
+    {:type "string",
+     :required false,
+     :default_value "JKS",
+     :options [{:label "JKS" :value "JKS"}
+               {:label "JCEKS" :value "JCEKS"}
+               {:label "PKCS12" :value "PKCS12"}
+               {:label "PKCS11" :value "PKCS11"}]
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :algorithm
+    {:type "string",
+     :required false,
+     :default_value "SunX509",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :protocol
+    {:type "string",
+     :required false,
+     :default_value "TLS",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :truststore_password
+    {:type "string",
+     :depends :enabled,
+     :password true,
+     :validators [{:name :length, :params {:min 6}}],
+     :default_value "cassandra",
+     :conditional [{:eq true}]},
+    :require_client_auth
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :optional
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :truststore
+    {:type "string",
+     :depends :enabled,
+     :is_file true,
+     :default_value "/etc/dse/keystores/client.truststore",
+     :conditional [{:eq true}]},
+    :truststore_type
+    {:type "string",
+     :required false,
+     :default_value "JKS",
+     :options [{:label "JKS" :value "JKS"}
+               {:label "JCEKS" :value "JCEKS"}
+               {:label "PKCS12" :value "PKCS12"}
+               {:label "PKCS11" :value "PKCS11"}]
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :enabled {:type "boolean", :required true, :default_value false}},
+   :required true},
+  :commitlog_sync_period_in_ms
+  {:type "int",
+   :default_value 10000,
+   :depends :commitlog_sync,
+   :conditional [{:eq "periodic"}]},
+  :batch_size_warn_threshold_in_kb
+  {:type "int", :required true, :default_value 64},
+  :row_cache_save_period
+  {:type "int", :required true, :default_value 0, :unit "seconds"},
+  :inter_dc_tcp_nodelay
+  {:type "boolean", :required true, :default_value false},
+  :num_tokens {:type "int", :required false},
+  :partitioner
+  {:type "string",
+   :required true,
+   :options
+   [{:label "Murmur3Partitioner",
+     :value "org.apache.cassandra.dht.Murmur3Partitioner"}
+    {:label "RandomPartitioner",
+     :value "org.apache.cassandra.dht.RandomPartitioner"}],
+   :default_value "org.apache.cassandra.dht.Murmur3Partitioner"},
+  :column_index_size_in_kb
+  {:type "int", :required true, :default_value 16, :unit "KB"},
+  :internode_compression
+  {:type "string",
+   :required true,
+   :options
+   [{:label "all", :value "all"}
+    {:label "dc", :value "dc"}
+    {:label "none", :value "none"}],
+   :default_value "dc"},
+  :cdc_free_space_check_interval_ms {:type "int", :required false},
+  :otc_coalescing_strategy
+  {:type "string",
+   :required false,
+   :options
+   [{:label "DISABLED", :value "DISABLED"}
+    {:label "FIXED", :value "FIXED"}
+    {:label "MOVINGAVERAGE", :value "MOVINGAVERAGE"}
+    {:label "TIMEHORIZON", :value "TIMEHORIZON"}],
+   :default_value "DISABLED"},
+  :enable_user_defined_functions
+  {:type "boolean", :required true, :default_value false},
+  :dynamic_snitch_badness_threshold
+  {:type "float", :required true, :default_value 0.1},
+  :phi_convict_threshold
+  {:type "int", :default_value 8, :required false},
+  :authorizer
+  {:type "string",
+   :required true,
+   :options
+   [{:label "AllowAllAuthorizer", :value "AllowAllAuthorizer"}
+    {:label "CassandraAuthorizer", :value "CassandraAuthorizer"}
+    {:label "DseAuthorizer",
+     :value "com.datastax.bdp.cassandra.auth.DseAuthorizer"}],
+   :default_value "com.datastax.bdp.cassandra.auth.DseAuthorizer"},
+  :hinted_handoff_disabled_datacenters
+  {:type "list", :value_type "string"},
+  :internode_authenticator
+  {:type "string",
+   :required false,
+   :default_value
+   "org.apache.cassandra.auth.AllowAllInternodeAuthenticator"},
+  :batchlog_replay_throttle_in_kb
+  {:type "int", :required true, :default_value 1024},
+  :hinted_handoff_throttle_in_kb
+  {:type "int", :required true, :default_value 1024, :unit "KB"},
+  :cas_contention_timeout_in_ms
+  {:type "int", :required true, :default_value 1000, :unit "ms"},
+  :ideal_consistency_level
+  {:type "string",
+   :required false,
+   :default_value "EACH_QUORUM",
+   :options
+   [{:label "ALL", :value "ALL"}
+    {:label "EACH_QUORUM", :value "EACH_QUORUM"}
+    {:label "QUORUM", :value "QUORUM"}
+    {:label "LOCAL_QUORUM", :value "LOCAL_QUORUM"}
+    {:label "ONE", :value "ONE"}
+    {:label "TWO", :value "TWO"}
+    {:label "THREE", :value "THREE"}
+    {:label "LOCAL_ONE", :value "LOCAL_ONE"}
+    {:label "ANY", :value "ANY"}]},
+  :cdc_enabled {:type "boolean", :default_value false, :required true},
+  :counter_write_request_timeout_in_ms
+  {:type "int", :required true, :default_value 5000},
+  :system_keyspaces_filtering
+  {:type "boolean", :required true, :default_value false},
+  :windows_timer_interval {:type "int", :default_value 1, :unit "ms"},
+  :streaming_connections_per_host
+  {:type "int", :required false, :default_value 1},
+  :memtable_offheap_space_in_mb
+  {:type "int", :required false, :default_value 2048, :unit "MB"},
+  :memtable_heap_space_in_mb
+  {:type "int", :required false, :default_value 2048, :unit "MB"},
+  :auto_snapshot
+  {:type "boolean", :required true, :default_value true},
+  :memtable_cleanup_threshold {:type "float", :required false},
+  :back_pressure_enabled
+  {:type "boolean", :default_value false, :required true},
+  :write_request_timeout_in_ms
+  {:type "int", :required true, :default_value 2000, :unit "ms"},
+  :io_global_queue_depth
+  {:type "int", :required false, :default_value 128},
+  :gc_log_threshold_in_ms {:type "int", :required false, :unit "ms"},
+  :back_pressure_strategy
+  {:type "list",
+   :depends :back_pressure_enabled,
+   :value_type "dict",
+   :fields
+   {:class_name {:type "string"},
+    :parameters
+    {:type "list",
+     :value_type "dict",
+     :fields
+     {:high_ratio {:type "float"},
+      :factor {:type "int"},
+      :flow {:type "string"}}}},
+   :default_value
+   [{:class_name "org.apache.cassandra.net.RateBasedBackPressure",
+     :parameters [{:high_ratio 0.9, :factor 5, :flow "FAST"}]}],
+   :conditional [{:eq true}]},
+  :otc_coalescing_enough_coalesced_messages
+  {:type "int",
+   :required false,
+   :depends :otc_coalescing_strategy,
+   :conditional [{:ne "DISABLED"}],
+   :default_value 8},
+  :otc_inter_dc_coalescing_strategy
+  {:type "string",
+   :required false,
+   :depends :otc_coalescing_strategy,
+   :conditional [{:ne "DISABLED"}],
+   :options
+   [{:label "", :value ""}
+    {:label "DISABLED", :value "DISABLED"}
+    {:label "FIXED", :value "FIXED"}
+    {:label "MOVINGAVERAGE", :value "MOVINGAVERAGE"}
+    {:label "TIMEHORIZON", :value "TIMEHORIZON"}],
+   :default_value ""},
+  :otc_inter_dc_coalescing_window_us
+  {:type "int",
+   :required false,
+   :depends :otc_inter_dc_coalescing_strategy,
+   :conditional [{:eq "FIXED"} {:eq "MOVINGAVERAGE"} {:eq "TIMEHORIZON"}],
+   :unit "us",
+   :default_value 0},
+  :otc_inter_dc_coalescing_enough_coalesced_messages
+  {:type "int",
+   :required false,
+   :depends :otc_inter_dc_coalescing_strategy,
+   :conditional [{:eq "FIXED"} {:eq "MOVINGAVERAGE"} {:eq "TIMEHORIZON"}],
+   :default_value 0},
+  :authenticator
+  {:type "string",
+   :required true,
+   :options
+   [{:label "AllowAllAuthenticator", :value "AllowAllAuthenticator"}
+    {:label "PasswordAuthenticator", :value "PasswordAuthenticator"}
+    {:label "DseAuthenticator",
+     :value "com.datastax.bdp.cassandra.auth.DseAuthenticator"}],
+   :default_value "com.datastax.bdp.cassandra.auth.DseAuthenticator"},
+  :internode_send_buff_size_in_bytes {:type "int", :required false},
+  :concurrent_compactors {:type "int", :required false},
+  :sstable_preemptive_open_interval_in_mb
+  {:type "int", :required true, :default_value 50, :unit "MB"},
+  :seed_gossip_probability
+  {:type "float", :required false, :default_value 1.0},
+  :index_summary_resize_interval_in_minutes
+  {:type "int", :required true, :default_value 60},
+  :server_encryption_options
+  {:type "dict",
+   :order
+   [:internode_encryption
+    :keystore
+    :keystore_type
+    :keystore_password
+    :truststore
+    :truststore_type
+    :truststore_password
+    :protocol
+    :algorithm
+    :cipher_suites
+    :require_client_auth
+    :require_endpoint_verification],
+   :fields
+   {:keystore
+    {:type "string",
+     :is_file true,
+     :default_value "/etc/dse/keystores/server.keystore",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :cipher_suites
+    {:type "list",
+     :value_type "string",
+     :required false,
+     :description
+     "A list of encryption cipher-suites that DSE will accept when negotiating TLS connections. In most cases, leaving this list empty is the right thing to do and will allow the JVM to select from its internal list of allowed ciphers. If this list is set explicitly, each text field must contain a single cipher_suite name, for example: TLS_DHE_RSA_WITH_AES_128_CBC_SHA256",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :keystore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length, :params {:min 6}}],
+     :default_value "cassandra",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :keystore_type
+    {:type "string",
+     :required false,
+     :default_value "JKS",
+     :options [{:label "JKS" :value "JKS"}
+               {:label "JCEKS" :value "JCEKS"}
+               {:label "PKCS12" :value "PKCS12"}
+               {:label "PKCS11" :value "PKCS11"}]
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :algorithm
+    {:type "string",
+     :required false,
+     :default_value "SunX509",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :protocol
+    {:type "string",
+     :required false,
+     :default_value "TLS",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :internode_encryption
+    {:type "string",
+     :options
+     [{:label "none", :value "none"}
+      {:label "all", :value "all"}
+      {:label "dc", :value "dc"}
+      {:label "rack", :value "rack"}],
+     :default_value "none"},
+    :truststore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length, :params {:min 6}}],
+     :default_value "cassandra",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :require_client_auth
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :require_endpoint_verification
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :truststore
+    {:type "string",
+     :is_file true,
+     :default_value "/etc/dse/keystores/server.truststore",
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+    :truststore_type
+    {:type "string",
+     :required false,
+     :default_value "JKS",
+     :options [{:label "JKS" :value "JKS"}
+               {:label "JCEKS" :value "JCEKS"}
+               {:label "PKCS12" :value "PKCS12"}
+               {:label "PKCS11" :value "PKCS11"}]
+     :depends :internode_encryption,
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]}},
+   :required true},
+  :listen_on_broadcast_address
+  {:type "boolean", :required true, :default_value false},
+  :hints_compression
+  {:type "list",
+   :value_type "dict",
+   :fields
+   {:class_name {:type "string"},
+    :parameters {:type "user_defined", :value_type "string"}}}},
+ :groupings
+ [{:name "Security",
+   :list
+   ["authenticator"
+    "authorizer"
+    "role_manager"
+    "permissions_validity_in_ms"
+    "permissions_update_interval_in_ms"
+    "roles_validity_in_ms"
+    "roles_update_interval_in_ms"
+    "server_encryption_options"
+    "client_encryption_options"
+    "transparent_data_encryption_options"]}
+  {:name "General",
+   :list
+   ["partitioner"
+    "allocate_tokens_for_keyspace"
+    "num_tokens"
+    "tpc_cores"
+    "listen_on_broadcast_address"]}
+  {:name "Directories",
+   :list
+   ["data_file_directories"
+    "commitlog_directory"
+    "saved_caches_directory"]}
+  {:name "Ports",
+   :list
+   ["storage_port"
+    "ssl_storage_port"
+    "native_transport_port"
+    "native_transport_port_ssl"]}
+  {:name "NodeSync", :list ["nodesync"]}
+  {:name "Caches",
+   :list
+   ["row_cache_size_in_mb"
+    "row_cache_keys_to_save"
+    "row_cache_save_period"
+    "row_cache_class_name"]}
+  {:name "Commit Log",
+   :list
+   ["commitlog_sync"
+    "commitlog_total_space_in_mb"
+    "commitlog_segment_size_in_mb"
+    "commitlog_sync_period_in_ms"
+    "commitlog_sync_batch_window_in_ms"
+    "commitlog_sync_group_window_in_ms"
+    "commitlog_compression"]}
+  {:name "Garbage Collection", :list ["gc_warn_threshold_in_ms"]}
+  {:name "Memtable Settings",
+   :list
+   ["memtable_allocation_type"
+    "memtable_heap_space_in_mb"
+    "memtable_offheap_space_in_mb"
+    "memtable_cleanup_threshold"
+    "file_cache_size_in_mb"
+    "memtable_flush_writers"]}
+  {:name "RPC", :list ["rpc_keepalive"]}
+  {:name "Native Transport",
+   :list
+   ["start_native_transport"
+    "native_transport_max_frame_size_in_mb"
+    "native_transport_max_concurrent_connections"
+    "native_transport_max_concurrent_connections_per_ip"]}
+  {:name "Timeouts",
+   :list
+   ["read_request_timeout_in_ms"
+    "range_request_timeout_in_ms"
+    "aggregated_request_timeout_in_ms"
+    "write_request_timeout_in_ms"
+    "cas_contention_timeout_in_ms"
+    "truncate_request_timeout_in_ms"
+    "request_timeout_in_ms"
+    "slow_query_log_timeout_in_ms"
+    "cross_node_timeout"
+    "streaming_keep_alive_period_in_secs"
+    "cross_dc_rtt_in_ms"
+    "counter_write_request_timeout_in_ms"]}
+  {:name "Counter Caches",
+   :list
+   ["counter_cache_size_in_mb"
+    "counter_cache_save_period"
+    "counter_cache_keys_to_save"]}
+  {:name "Tombstones",
+   :list ["tombstone_warn_threshold" "tombstone_failure_threshold"]}
+  {:name "Snapshots",
+   :list
+   ["incremental_backups"
+    "auto_snapshot"
+    "snapshot_before_compaction"]}
+  {:name "Compactions",
+   :list
+   ["compaction_throughput_mb_per_sec"
+    "concurrent_compactors"
+    "concurrent_validations"
+    "sstable_preemptive_open_interval_in_mb"
+    "compaction_large_partition_warning_threshold_mb"]}
+  {:name "Cluster Communication",
+   :list
+   ["endpoint_snitch"
+    "stream_throughput_outbound_megabits_per_sec"
+    "streaming_connections_per_host"
+    "inter_dc_stream_throughput_outbound_megabits_per_sec"
+    "phi_convict_threshold"
+    "dynamic_snitch_update_interval_in_ms"
+    "dynamic_snitch_reset_interval_in_ms"
+    "dynamic_snitch_badness_threshold"
+    "internode_authenticator"
+    "internode_compression"
+    "inter_dc_tcp_nodelay"
+    "internode_send_buff_size_in_bytes"
+    "internode_recv_buff_size_in_bytes"]}
+  {:name "Hinted Handoff",
+   :list
+   ["hinted_handoff_enabled"
+    "max_hint_window_in_ms"
+    "hinted_handoff_throttle_in_kb"
+    "max_hints_delivery_threads"
+    "hinted_handoff_disabled_datacenters"
+    "hints_directory"
+    "hints_flush_period_in_ms"
+    "max_hints_file_size_in_mb"
+    "hints_compression"]}
+  {:name "Indexes",
+   :list
+   ["column_index_size_in_kb"
+    "column_index_cache_size_in_kb"
+    "index_summary_capacity_in_mb"
+    "index_summary_resize_interval_in_minutes"]}
+  {:name "User Defined Functions",
+   :list
+   ["enable_user_defined_functions"
+    "enable_scripted_user_defined_functions"
+    "enable_user_defined_functions_threads"
+    "user_defined_function_warn_micros"
+    "user_defined_function_fail_micros"
+    "user_defined_function_warn_heap_mb"
+    "user_defined_function_fail_heap_mb"
+    "user_function_timeout_policy"]}
+  {:name "Change Data Capture",
+   :list
+   ["cdc_enabled"
+    "cdc_raw_directory"
+    "cdc_total_space_in_mb"
+    "cdc_free_space_check_interval_ms"]}
+  {:name "Back Pressure",
+   :list ["back_pressure_enabled" "back_pressure_strategy"]}
+  {:name "Outbound TCP Coalescing Strategy",
+   :list
+   ["otc_coalescing_strategy"
+    "otc_coalescing_window_us"
+    "otc_coalescing_enough_coalesced_messages"
+    "otc_inter_dc_coalescing_strategy"
+    "otc_inter_dc_coalescing_window_us"
+    "otc_inter_dc_coalescing_enough_coalesced_messages"]}
+  {:name "Miscellaneous",
+   :list
+   ["disk_failure_policy"
+    "seed_gossip_probability"
+    "commit_failure_policy"
+    "concurrent_materialized_view_builders"
+    "io_global_queue_depth"
+    "trickle_fsync"
+    "trickle_fsync_interval_in_kb"
+    "batchlog_replay_throttle_in_kb"
+    "gc_log_threshold_in_ms"
+    "disk_optimization_strategy"
+    "batch_size_warn_threshold_in_kb"
+    "batch_size_fail_threshold_in_kb"
+    "unlogged_batch_across_partitions_warn_threshold"
+    "windows_timer_interval"
+    "tracetype_query_ttl"
+    "tracetype_repair_ttl"
+    "prepared_statements_cache_size_mb"
+    "continuous_paging"
+    "max_value_size_in_mb"
+    "system_keyspaces_filtering"
+    "ideal_consistency_level"]}]}
