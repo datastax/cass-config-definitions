@@ -175,6 +175,9 @@
    :required false,
    :depends :request_scheduler,
    :conditional "org.apache.cassandra.scheduler.RoundRobinScheduler",
+   :order [:throttle_limit
+           :default_weight
+           :weights],
    :fields {:throttle_limit {:type "int",
                              :required true,
                              :default_value 80,
@@ -208,7 +211,7 @@
                                       :protocol
                                       :algorithm
                                       :store_type
-                                      :cipher_suites]
+                                      :cipher_suites],
                               :fields {:enabled {:type "boolean"
                                                  :required true
                                                  :default_value false

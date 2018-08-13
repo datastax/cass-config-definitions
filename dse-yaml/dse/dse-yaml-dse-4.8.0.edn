@@ -7,6 +7,10 @@
  :properties
  {:kerberos_options
   {:type "dict",
+   :order [:keytab
+           :service_principal
+           :http_principal
+           :qop],
    :fields
    {:keytab
     {:type "string", :default_value "/etc/dse/conf/dse.keytab"},
@@ -23,12 +27,15 @@
      :default_value "auth"}}},
   :resource_level_latency_tracking_options
   {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :refresh_rate_ms
     {:type "int", :required false, :default_value 10000}}},
   :cql_slow_log_options
   {:type "dict",
+   :order [:enabled],
    :fields
    {:enabled {:type "boolean", :required true, :default_value true},
     :threshold_ms {:type "int", :required false, :default_value 2000},
@@ -36,6 +43,7 @@
     :async_writers {:type "int", :required false, :default_value 1}}},
   :histogram_data_options
   {:type "dict",
+   :order [:enabled],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :refresh_rate_ms
@@ -52,6 +60,14 @@
   {:type "float", :required false, :default_value 0.2},
   :spark_encryption_options
   {:type "dict",
+   :order [:enabled
+           :keystore
+           :keystore_password
+           :key_password
+           :truststore
+           :truststore_password
+           :protocol
+           :cipher_suites],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :keystore
@@ -86,6 +102,7 @@
    :default_value "/etc/dse/conf"},
   :solr_slow_sub_query_log_options
   {:type "dict",
+   :order [:enabled],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :ttl_seconds {:type "int", :required false, :default_value 604800},
@@ -93,6 +110,7 @@
     :threshold_ms {:type "int", :required false, :default_value 100}}},
   :solr_index_stats_options
   {:type "dict",
+   :order [:enabled],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :ttl_seconds {:type "int", :required false, :default_value 604800},
@@ -100,6 +118,8 @@
     {:type "int", :required false, :default_value 60000}}},
   :hive_options
   {:type "dict",
+   :order [:insert_max_retries
+           :insert_retry_sleep_period],
    :fields
    {:insert_max_retries
     {:type "int", :required false, :default_value 6},
@@ -109,6 +129,10 @@
   {:type "int", :required false, :default_value 2},
   :user_level_latency_tracking_options
   {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms
+           :top_stats_limit
+           :quantiles],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :refresh_rate_ms
@@ -119,9 +143,25 @@
     {:type "boolean", :required true, :default_value false}}},
   :ldap_options
   {:type "dict",
+   :order [:server_host
+           :server_port
+           :search_dn
+           :search_password
+           :use_ssl
+           :use_tls
+           :truststore_path
+           :truststore_password
+           :truststore_type
+           :user_search_base
+           :user_search_filter
+           :credentials_validity_in_ms
+           :search_validity_in_seconds
+           :connection_pool],
    :fields
    {:connection_pool
     {:type "dict",
+     :order [:max_active
+             :max_idle],
      :fields
      {:max_active {:type "int", :required false, :default_value 8},
       :max_idle {:type "int", :required false, :default_value 8}}},
@@ -158,6 +198,9 @@
      :default_value "secret"}}},
   :solr_update_handler_metrics_options
   {:type "dict",
+   :order [:enabled
+           :ttl_seconds
+           :refresh_rate_ms],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :ttl_seconds {:type "int", :required false, :default_value 604800},
@@ -165,6 +208,13 @@
     {:type "int", :required false, :default_value 60000}}},
   :shard_transport_options
   {:type "dict",
+   :order [:type
+           :netty_server_port
+           :netty_server_acceptor_threads
+           :netty_server_worker_threads
+           :netty_client_worker_threads
+           :netty_client_max_connections
+           :netty_client_request_timeout],
    :fields
    {:netty_client_request_timeout
     {:type "int", :required false, :default_value 60000},
@@ -192,6 +242,9 @@
   {:type "boolean", :required true, :default_value false},
   :solr_request_handler_metrics_options
   {:type "dict",
+   :order [:enabled
+           :ttl_seconds
+           :refresh_rate_ms],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :ttl_seconds {:type "int", :required false, :default_value 604800},
@@ -199,12 +252,16 @@
     {:type "int", :required false, :default_value 60000}}},
   :spark_cluster_info_options
   {:type "dict",
+   :order [:enabled],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :refresh_rate_ms
     {:type "int", :required false, :default_value 10000}}},
   :ttl_index_rebuild_options
   {:type "dict",
+   :order [:fixed_rate_period
+           :initial_delay
+           :max_docs_per_batch],
    :fields
    {:fixed_rate_period
     {:type "int", :required false, :default_value 300},
@@ -213,6 +270,7 @@
     {:type "int", :required false, :default_value 200}}},
   :node_health_options
   {:type "dict",
+   :order [:refresh_rate_ms],
    :fields
    {:refresh_rate_ms
     {:type "int", :required true, :default_value 60000}}},
@@ -220,6 +278,9 @@
   {:type "int", :required false, :default_value 10240},
   :solr_latency_snapshot_options
   {:type "dict",
+   :order [:enabled
+           :ttl_seconds
+           :refresh_rate_ms],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :ttl_seconds {:type "int", :required false, :default_value 604800},
@@ -233,6 +294,15 @@
    :key_name "kmip_groupname",
    :value_type "dict",
    :summary_fields [:hosts],
+   :order [:hosts
+           :keystore_path
+           :keystore_type
+           :keystore_password
+           :truststore_path
+           :truststore_type
+           :truststore_password
+           :key_cache_millis
+           :timeout],
    :fields
    {:keystore_password
     {:type "string",
@@ -255,12 +325,20 @@
     :timeout {:type "int", :required false, :default_value 1000}}},
   :cql_system_info_options
   {:type "dict",
+   :order [:enabled],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :refresh_rate_ms
     {:type "int", :required false, :default_value 10000}}},
   :system_info_encryption
   {:type "dict",
+   :order [:enabled
+           :cipher_algorithm
+           :secret_key_strength
+           :chunk_length_kb
+           :key_name
+           :key_provider
+           :kmip_host],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :cipher_algorithm
@@ -284,24 +362,35 @@
    :conditional [{:eq true}]},
   :cluster_summary_stats_options
   {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :refresh_rate_ms
     {:type "int", :required false, :default_value 10000}}},
   :db_summary_stats_options
   {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :refresh_rate_ms
     {:type "int", :required false, :default_value 10000}}},
   :spark_application_info_options
   {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms
+           :driver],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :refresh_rate_ms
     {:type "int", :required false, :default_value 10000},
     :driver
     {:type "dict",
+     :order [:sink
+             :connectorSource
+             :jvmSource
+             :stateSource],
      :fields
      {:sink {:type "boolean", :required true, :default_value false},
       :connectorSource
@@ -312,6 +401,9 @@
       {:type "boolean", :required true, :default_value false}}},
     :executor
     {:type "dict",
+     :order [:sink
+             :connectorSource
+             :jvmSource],
      :fields
      {:sink {:type "boolean", :required true, :default_value false},
       :connectorSource
@@ -320,6 +412,14 @@
       {:type "boolean", :required true, :default_value false}}}}},
   :audit_logging_options
   {:type "dict",
+   :order [:enabled
+           :logger
+           :included_categories
+           :excluded_categories
+           :included_keyspaces
+           :excluded_keyspaces
+           :retention_time
+           :cassandra_audit_writer_options],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :logger
@@ -361,6 +461,12 @@
     {:type "dict",
      :depends :logger,
      :conditional [{:eq "CassandraAuditWriter"}],
+     :order [:mode
+             :batch_size
+             :flush_time
+             :num_writers
+             :queue_size
+             :write_consistency],
      :fields
      {:mode {:type "string", :required false, :default_value "sync"},
       :batch_size {:type "int", :required false},
@@ -375,12 +481,16 @@
   {:type "int", :required false, :default_value 5},
   :solr_indexing_error_log_options
   {:type "dict",
+   :order [:enabled
+           :ttl_seconds],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :ttl_seconds {:type "int", :required false, :default_value 604800},
     :async_writers {:type "int", :required false, :default_value 1}}},
   :solr_cache_stats_options
   {:type "dict",
+   :order [:enabled
+           :ttl_seconds],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
     :ttl_seconds {:type "int", :required false, :default_value 604800},

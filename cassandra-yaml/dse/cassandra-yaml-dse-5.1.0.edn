@@ -213,6 +213,8 @@
   :commitlog_compression
   {:type "list",
    :value_type "dict",
+   :order [:class_name
+           :parameters],
    :fields
    {:class_name {:type "string"},
     :parameters {:type "user_defined", :value_type "string"}}},
@@ -239,6 +241,9 @@
    :depends :request_scheduler,
    :conditional
    [{:eq "org.apache.cassandra.scheduler.RoundRobinScheduler"}],
+   :order [:throttle_limit
+           :default_weight
+           :weights],
    :fields
    {:throttle_limit
     {:type "int" :required true :default_value 80 :unit "requests"}
@@ -280,12 +285,17 @@
   {:type "list"
    :depends :back_pressure_enabled
    :value_type "dict"
+   :order [:class_name
+           :parameters],
    :fields
    {:class_name
     {:type "string"}
     :parameters
     {:type "list"
      :value_type "dict"
+     :order [:high_ratio
+             :factor
+             :flow],
      :fields
      {:high_ratio {:type "string"}
       :factor {:type "string"}
@@ -406,12 +416,18 @@
     :key_provider
     {:type "list"
      :value_type "dict"
+     :order [:class_name
+             :parameters],
      :fields
      {:class_name
       {:type "string"}
       :parameters
       {:type "list"
        :value_type "dict"
+       :order [:keystore
+               :keystore_password
+               :store_type
+               :key_password],
        :fields
        {:keystore {:type "string"}
         :keystore_password {:type "string"
@@ -620,6 +636,8 @@
                                 :default_value false}
   :hints_compression {:type "list",
                       :value_type "dict",
+                      :order [:class_name
+                              :parameters],
                       :fields {:class_name
                                {:type "string"},
                                :parameters
@@ -655,7 +673,12 @@
 
   :continuous_paging
   {:type "dict",
-   :order [],
+   :order [:max_concurrent_sessions
+           :max_session_pages
+           :max_page_size_mb
+           :max_client_wait_time_ms
+           :max_local_query_time_ms
+           :max_threads],
    :fields
    {:max_concurrent_sessions
     {:type "int"

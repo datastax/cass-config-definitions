@@ -193,6 +193,7 @@
                                       :type {:type "string", :default_value "slf4j"},
                                       :white_types {:type "list", :value_type "string"}}},
                           :msg {:type "dict"
+                                :order [:graph_msg_timeout_in_ms],
                                 :fields
                                 {:graph_msg_timeout_in_ms {:type "int",
                                                            :required true,
@@ -218,6 +219,7 @@
                                       :type {:type "string", :default_value "slf4j"},
                                       :white_types {:type "list", :value_type "string"}}},
                           :shared_data {:type "dict",
+                                        :order [:refresh_interval_in_ms],
                                         :fields
                                         {:refresh_interval_in_ms {:type "int"
                                                                   :required true
@@ -400,6 +402,8 @@
                         {:default_value "2000"})
           (add-field :dsefs_options.block_allocator_options
                      {:type "dict"
+                      :order [:overflow_margin_mb
+                              :overflow_factor]
                       :fields {:overflow_margin_mb {:type "int"
                                                     :required true
                                                     :default_value 1024

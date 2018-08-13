@@ -195,6 +195,8 @@
   :commitlog_compression
   {:type "list",
    :value_type "dict",
+   :order [:class_name
+           :parameters],
    :fields
    {:class_name {:type "string"},
     :parameters {:type "user_defined", :value_type "string"}}},
@@ -221,6 +223,9 @@
    :depends :request_scheduler,
    :conditional
    [{:eq "org.apache.cassandra.scheduler.RoundRobinScheduler"}],
+   :order [:throttle_limit
+           :default_weight
+           :weights],
    :fields
    {:throttle_limit
     {:type "int", :required true, :default_value 80, :unit "requests"},
@@ -491,6 +496,8 @@
                                 :default_value false}
   :hints_compression {:type "list",
                       :value_type "dict",
+                      :order [:class_name
+                              :parameters],
                       :fields {:class_name
                                {:type "string"},
                                :parameters

@@ -172,7 +172,13 @@
   {:type "int", :required false, :default_value 4},
   :continuous_paging
   {:type "dict",
-   :order [],
+   :order [:max_concurrent_sessions
+           :max_session_pages
+           :max_page_size_mb
+           :max_local_query_time_ms
+           :client_timeout_sec
+           :cancel_timeout_sec
+           :paused_check_interval_ms],
    :fields
    {:max_concurrent_sessions
     {:type "int", :required true, :default_value 60},
@@ -234,11 +240,17 @@
     :key_provider
     {:type "list",
      :value_type "dict",
+     :order [:class_name
+             :parameters],
      :fields
      {:class_name {:type "string"},
       :parameters
       {:type "list",
        :value_type "dict",
+       :order [:keystore
+               :keystore_password
+               :store_type
+               :key_password]
        :fields
        {:keystore {:type "string"},
         :keystore_password {:type "string", :password true},
@@ -265,6 +277,8 @@
   :commitlog_compression
   {:type "list",
    :value_type "dict",
+   :order [:class_name
+           :parameters],
    :fields
    {:class_name {:type "string"},
     :parameters {:type "user_defined", :value_type "string"}}},
@@ -516,11 +530,16 @@
   {:type "list",
    :depends :back_pressure_enabled,
    :value_type "dict",
+   :order [:class_name
+           :parameters],
    :fields
    {:class_name {:type "string"},
     :parameters
     {:type "list",
      :value_type "dict",
+     :order [:high_ratio
+             :factor
+             :flow],
      :fields
      {:high_ratio {:type "float"},
       :factor {:type "int"},
@@ -685,6 +704,8 @@
   :hints_compression
   {:type "list",
    :value_type "dict",
+   :order [:class_name
+           :parameters],
    :fields
    {:class_name {:type "string"},
     :parameters {:type "user_defined", :value_type "string"}}}},

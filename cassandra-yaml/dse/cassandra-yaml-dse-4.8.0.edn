@@ -173,6 +173,9 @@
    :depends :request_scheduler,
    :conditional
    [{:eq "org.apache.cassandra.scheduler.RoundRobinScheduler"}],
+   :order [:throttle_limit
+           :default_weight
+           :weights],
    :fields
    {:throttle_limit
     {:type "int", :required true, :default_value 80, :unit "requests"},

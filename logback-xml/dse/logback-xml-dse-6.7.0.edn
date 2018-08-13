@@ -32,6 +32,8 @@
    :required false,
    :default_value [],
    :value_type "dict",
+   :order [:name
+           :level]
    :fields
    {:name {:type "string", :required false},
     :level {:type "string", :required false}}}},
