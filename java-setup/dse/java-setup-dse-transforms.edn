@@ -2,6 +2,9 @@
 ;; It just needs a :no-change entry for every version of DSE we support
 (
  ;; Begin DSE 4.7.x transforms.
+ ;; Note that OpsCenter 6.7.0 and ownard only supports DSE 5.1 and greater.
+ ;; However, we still use the DSE 4.7.0 base file to make merges easier with
+ ;; respect to updates of OpsCenter 6.0.x definitions.
  "4.7.0" "java-setup-dse-4.7.0.edn"
  "4.7.1" :no-change
  "4.7.2" :no-change
@@ -37,17 +40,7 @@
 
 
  ;; Begin DSE 5.0.x transforms.
- "5.0.1" (transforms
-          (update-field :java-vendor {:default_value "os-platform"
-                                      :options
-                                      [{:label "Oracle", :value "oracle"}
-                                       {:label "Platform OpenJDK", :value "os-platform"}]})
-          (add-field :os-openjdk-version {:type "string"
-                                          :default_value "1.8"
-                                          :depends :java-vendor
-                                          :conditional "os-platform"
-                                          :options [{:label "Java 8", :value "1.8"}]}
-                     :group "Java"))
+ "5.0.1" :no-change
  "5.0.2" :no-change
  "5.0.3" :no-change
  "5.0.4" :no-change

@@ -8,12 +8,20 @@
  :properties {:manage-java {:type "boolean"
                             :required true
                             :default_value true
-                            :description "Uncheck if a Java Virtual Machine is pre-installed on your targets and you do not want LCM to install or upgrade Java. Unchecking this box will cause the below fields to be ignored."}
+                            :description "Uncheck if a Java Virtual Machine is pre-installed on your targets and you do not want LCM to install or upgrade Java."}
               :java-vendor {:type "string"
-                            :default_value "oracle"
+                            :default_value "os-platform"
                             :depends :manage-java
                             :options
-                            [{:label "Oracle", :value "oracle"}]}
+                            [{:label "Oracle", :value "oracle"}
+                             {:label "Platform OpenJDK", :value "os-platform"}]
+                            :description "LCM is capable of installing java from various vendors, currently both OpenJDK as packaged by the Linux Operating system vendor on the target machine, and Oracle JDK are available. Note that after January of 2019, the terms for Oracle JDK will restrict certain commercial uses unless licensing is purchased from Oracle. It is the customers responsibility to maintain license compliance when selecting that Java vendor. When changing java vendors, LCM will install the new JDK and ensure it is available to DSE."}
+              :os-openjdk-version {:type "string"
+                                   :default_value "1.8"
+                                   :depends :java-vendor
+                                   :conditional "os-platform"
+                                   :options [{:label "Java 8", :value "1.8"}]
+                                   :description "The version of OpenJDK that LCM will attempt to install from the Linux operating system package repositories. If the specified version is not available, jobs will fail."}
               :major-version {:type "string"
                               :required false
                               :default_value "1.8.0"
@@ -49,7 +57,7 @@
                                   :default_value true
                                   :depends :java-vendor
                                   :conditional "oracle"
-                                  :description "Enable manage-java and manage-jce-policy to configure Lifecycle Manager to deploy Java Cryptography Extension (JCE) Unlimited Strength Policy Files."}
+                                  :description "If Lifecycle Manager is managing your Java installation, it can also install the Java Cryptography Extension (JCE) Unlimited Strength Policy files. These files enable the use of strong encryption suites. You must ensure that usage of these files is legal in your jurisdiction. This option is only applicable when Oracle is selected as the Java vendor."}
               :jce-download-url {:type "string"
                                  :required false
                                  :default_value "auto"
@@ -57,8 +65,7 @@
                                  :description "When jce-download-url is set to auto, target nodes download Java Cryptography Extension (JCE) Unlimited Strength Policy Files from their official source. To download the tarball from a local mirror, enter the complete URL to the tarball here."}}
  :groupings [{:name "Java",
               :description "Lifecycle Manager can automatically manage your Java installation. For more details, please refer to the <a href=\"http://docs.datastax.com/en/opscenter/help/lcmManageJava.html\" target=\"_blank\">Lifecycle Manager documentation</a>.",
-              :list ["manage-java" "java-vendor" "major-version" "update-version"
-                     "build-version" "build-hash" "download-url"]}
-             {:name "JCE Policy"
-              :description "If Lifecycle Manager is managing your Java installation, it can also install the Java Cryptography Extension (JCE) Unlimited Strength Policy files. These files enable the use of strong encryption suites. You must ensure that usage of these files is legal in your jurisdiction."
-              :list ["manage-jce-policy" "jce-download-url"]}]}
+              :list ["manage-java" "java-vendor" "os-openjdk-version"
+                     "major-version" "update-version"
+                     "build-version" "build-hash" "download-url"
+                     "manage-jce-policy" "jce-download-url"]}]}
