@@ -7,7 +7,7 @@
             "total": "<b>Total</b> - Sum of the values recorded for each node during a time interval.",
             "min": "<b>Min</b> - The minimal value recorded during a time interval. A lower minimal value could have occurred without it being recorded."
         },
-        "include": ["cassandra-metrics-2.1.8.621.json"],
+        "include": ["cassandra-metrics-2.1.9.791.json"],
         "exclude": [
             "write-latency-op", "read-latency-op", "cf-read-latency-op", "cf-write-latency-op",
             "active-hinted-handoff", "pending-hinted-handoff", "completed-hinted-handoff",
@@ -1218,26 +1218,6 @@
         "storage_name": "getSolrRequests",
         "type": "jmx",
         "unit": "/sec"
-    },
-    "solr-avg-time-per-req": {
-        "aggregation_type": "average",
-        "alerts_label": "Search Request Latency",
-        "allow_alerts": true,
-        "api_key": "solr-avg-time-per-req",
-        "is_table_metric": true,
-        "description": "Average time a search query takes in a DSE cluster using DSE Search.",
-        "group": "solr",
-        "label": "Search: Request Latency",
-        "mbean": "solr/{keyspace}.{table}:type=search,id=org.apache.solr.handler.component.SearchHandler",
-        "other_mbeans": ["solr/{keyspace}.{table}:type=solr_query,id=com.datastax.bdp.search.solr.handler.component.CqlSearchHandler"],
-        "aggregate": "average",
-        "metric_type": "gauge",
-        "path": ["avgTimePerRequest"],
-        "postprocess": ["ensure-float"],
-        "scope": "solr",
-        "storage_name": "getSolrAvgTimePerReq",
-        "type": "jmx",
-        "unit": "ms/request"
     },
     "solr-errors": {
         "aggregation_type": "counter",

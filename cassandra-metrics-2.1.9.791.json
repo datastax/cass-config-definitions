@@ -1,0 +1,32 @@
+{
+    "meta": {
+        "dse_version": "4.8.0",
+        "aggregates": {
+            "max": "<b>Max</b> - The maximum value recorded during a time interval. A higher maximum value could have occurred without it being recorded.",
+            "average": "<b>Avg</b> - The average of values recorded during a time interval.",
+            "total": "<b>Total</b> - Sum of the values recorded for each node during a time interval.",
+            "min": "<b>Min</b> - The minimal value recorded during a time interval. A lower minimal value could have occurred without it being recorded."
+        },
+        "include": ["cassandra-metrics-2.1.8.621.json"]
+    },
+    "solr-avg-time-per-req": {
+        "aggregation_type": "average",
+        "alerts_label": "Search Request Latency",
+        "api_key": "solr-avg-time-per-req",
+        "is_table_metric": true,
+        "description": "Average time a search query takes in a DSE cluster using DSE Search.",
+        "group": "solr",
+        "label": "Search: Request Latency",
+        "mbean": "solr/{keyspace}.{table}:type=search,id=org.apache.solr.handler.component.SearchHandler",
+        "other_mbeans": ["solr/{keyspace}.{table}:type=solr_query,id=com.datastax.bdp.search.solr.handler.component.CqlSearchHandler"],
+        "aggregate": "average",
+        "metric_type": "gauge",
+        "path": ["avgTimePerRequest"],
+        "postprocess": ["ensure-float"],
+        "scope": "solr",
+        "storage_name": "getSolrAvgTimePerReq",
+        "type": "jmx",
+        "unit": "ms/request",
+	"source": ["com.datastax.bdp:type=search,index={keyspace}.{table},name=QueryMetrics","getAverageLatency()","COORDINATE",null]
+    }
+}
