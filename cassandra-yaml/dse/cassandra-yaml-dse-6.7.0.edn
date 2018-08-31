@@ -299,8 +299,6 @@
   {:type "int", :required true, :default_value 100000},
   :native_transport_port
   {:type "int", :required true, :default_value 9042, :format false},
-  :index_summary_capacity_in_mb
-  {:type "int", :required false, :unit "MB"},
   :commitlog_sync
   {:type "string",
    :required true,
@@ -597,8 +595,6 @@
   {:type "int", :required true, :default_value 50, :unit "MB"},
   :seed_gossip_probability
   {:type "float", :required false, :default_value 1.0},
-  :index_summary_resize_interval_in_minutes
-  {:type "int", :required true, :default_value 60},
   :server_encryption_options
   {:type "dict",
    :order
@@ -837,9 +833,7 @@
   {:name "Indexes",
    :list
    ["column_index_size_in_kb"
-    "column_index_cache_size_in_kb"
-    "index_summary_capacity_in_mb"
-    "index_summary_resize_interval_in_minutes"]}
+    "column_index_cache_size_in_kb"]}
   {:name "User Defined Functions",
    :list
    ["enable_user_defined_functions"

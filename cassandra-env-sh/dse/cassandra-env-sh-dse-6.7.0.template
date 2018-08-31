@@ -305,18 +305,18 @@ JMX_PORT={{jmx-port}}
 #MX4J_ADDRESS="127.0.0.1"
 #MX4J_PORT="8081"
 
-if [ "x$MX4J_ADDRESS" == "x" ]; then
+if [ "x$MX4J_ADDRESS" = "x" ]; then
     # override default of 0.0.0.0 if no MX4J_ADDRESS is specified
     MX4J_ADDRESS="127.0.0.1"
 fi
-if [[ "$MX4J_ADDRESS" == \-Dmx4jaddress* ]]; then
+if echo "$MX4J_ADDRESS" | grep -qi '\-Dmx4jaddress=' ; then
     # Backward compatible with the older style #13578
     JVM_OPTS="$JVM_OPTS $MX4J_ADDRESS"
 else
     JVM_OPTS="$JVM_OPTS -Dmx4jaddress=$MX4J_ADDRESS"
 fi
 if [ "x$MX4J_PORT" != "x" ]; then
-    if [[ "$MX4J_PORT" == \-Dmx4jport* ]]; then
+    if echo "$MX4J_PORT" | grep -qi '\-Dmx4jport='; then
         # Backward compatible with the older style #13578
         JVM_OPTS="$JVM_OPTS $MX4J_PORT"
     else
