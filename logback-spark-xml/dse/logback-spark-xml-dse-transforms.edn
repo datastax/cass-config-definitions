@@ -68,7 +68,6 @@
  "5.1.8" :no-change
  "5.1.9" :no-change
  "5.1.10" :no-change
- "5.1.11" :no-change
  ;; End DSE 5.1.x transforms.
 
  ;; Begin DSE 6.0.x transforms.

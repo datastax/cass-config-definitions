@@ -493,22 +493,6 @@
                         {:required false}))
  "5.1.9" :no-change
  "5.1.10" :no-change
- "5.1.11" (transforms
-           (update-field :node_health_options.uptime_ramp_up_period_seconds
-                         {:default_value 10800})
-           (update-field :dsefs_options.service_startup_timeout_ms
-                         {:default_value 600000})
-           (update-field :dsefs_options.rest_options.connection_open_timeout_ms
-                         {:default_value 10000})
-           (add-field :dsefs_options.rest_options.internode_idle_connection_timeout_ms
-                      {:type "int"
-                       :required false
-                       :default_value 120000
-                       :unit "ms"})
-           (add-field :dsefs_options.rest_options.core_max_concurrent_connections_per_host
-                      {:type "int"
-                       :required false
-                       :default_value 8}))
  ;; End DSE 5.1.x transforms.
 
 

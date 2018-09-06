@@ -50,5 +50,5 @@ JVM_ON_OUT_OF_MEMORY_ERROR_OPT="-XX:OnOutOfMemoryError={{on_out_of_memory_error}
 {% endifequal %}
 
 {% comment %} Additional options by Opscenter Provisioning {% endcomment %}
-{% for jvm-opt in additional-jvm-opts %}{{jvm-opt}}
+{% for jvm-opt in additional-jvm-opts %}{{jvm-opt}}"
 {% endfor %}

@@ -77,7 +77,6 @@
   :data_file_directories
   {:type "list",
    :required true,
-   :description "If this list includes a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value ["/var/lib/cassandra/data"],
    :is_directory true,
    :value_type "string"},
@@ -133,7 +132,6 @@
   {:type "string",
    :required true,
    :is_directory true,
-   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/commitlog"},
   :hints_flush_period_in_ms
   {:type "int", :required true, :default_value 10000},
@@ -184,7 +182,6 @@
   {:type "string",
    :required true,
    :is_directory true
-   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/saved_caches"},
   :rpc_server_type
   {:type "string",
@@ -226,8 +223,7 @@
    :required true,
    :options
    [{:label "heap_buffers", :value "heap_buffers"}
-    {:label "offheap_buffers", :value "offheap_buffers"}
-    {:label "offheap_objects", :value "offheap_objects"}],
+    {:label "offheap_buffers", :value "offheap_buffers"}],
    :default_value "heap_buffers"},
   :stream_throughput_outbound_megabits_per_sec
   {:type "int", :required false, :default_value 200, :unit "mbps"},

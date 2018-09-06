@@ -90,18 +90,9 @@
                      :group "General")
           (update-template "cassandra-env-sh-dse-5.1.6.template"))
  "5.1.7" :no-change
- "5.1.8" (transforms
-           (update-template "cassandra-env-sh-dse-5.1.8.template"))
+ "5.1.8" :no-change
  "5.1.9" :no-change
- ;; Minor text change with respect to an error message when patch version is
- ;; less than what is required.
- "5.1.10" (transforms
-            (update-template "cassandra-env-sh-dse-5.1.10.template"))
- ;; Adds support for MX4J_ADDRESS and MX4J_PORT being specified as just an
- ;; address/port as opposed to a full JVM option. It is backwards compatible
- ;; with the old way of doing it.
- "5.1.11" (transforms
-            (update-template "cassandra-env-sh-dse-5.1.11.template"))
+ "5.1.10" :no-change
  ;; End DSE 5.1.x transforms.
 
 
