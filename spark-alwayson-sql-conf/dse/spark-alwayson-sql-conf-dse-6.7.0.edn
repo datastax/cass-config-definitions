@@ -40,6 +40,10 @@
   {:type "boolean", :required true, :default_value false},
   :spark_task_maxFailures
   {:type "int", :required true, :default_value "10"},
+  :spark_executor_memory
+  {:type "string"
+   :required true
+   :default_value "1G"},
   :spark_sql_catalogImplementation
   {:type "string", :required true, :default_value "hive"},
   :spark_network_sasl_serverAlwaysEncrypt
@@ -99,6 +103,7 @@
     "spark_redaction_regex"
     "spark_dse_configuration_fetch_retries"
     "spark_task_maxFailures"
+    "spark_executor_memory"
     "spark_additional_configs"]}
   {:name "Hive Config Settings",
    :list ["spark_hive_alwaysOnSql" "hive_additional_configs"]}

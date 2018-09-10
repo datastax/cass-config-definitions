@@ -40,8 +40,6 @@ spark.dse.configuration.fetch.retries   {{spark_dse_configuration_fetch_retries}
 # Increase retry threshold for greater stability
 spark.task.maxFailures	{{spark_task_maxFailures}}
 
-spark.executor.memory {{spark_executor_memory}}
-
 {% for item in spark_additional_configs %}{{item|key}} {{item|val}}
 {% endfor %}
 
