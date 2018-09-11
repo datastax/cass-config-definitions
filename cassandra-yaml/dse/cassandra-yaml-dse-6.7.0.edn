@@ -510,10 +510,6 @@
   :windows_timer_interval {:type "int", :default_value 1, :unit "ms"},
   :streaming_connections_per_host
   {:type "int", :required false, :default_value 1},
-  :memtable_offheap_space_in_mb
-  {:type "int", :required false, :default_value 2048, :unit "MB"},
-  :memtable_heap_space_in_mb
-  {:type "int", :required false, :default_value 2048, :unit "MB"},
   :auto_snapshot
   {:type "boolean", :required true, :default_value true},
   :memtable_cleanup_threshold {:type "float", :required false},
@@ -756,8 +752,6 @@
   {:name "Memtable Settings",
    :list
    ["memtable_allocation_type"
-    "memtable_heap_space_in_mb"
-    "memtable_offheap_space_in_mb"
     "memtable_cleanup_threshold"
     "file_cache_size_in_mb"
     "memtable_flush_writers"]}
