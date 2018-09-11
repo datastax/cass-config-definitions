@@ -17,10 +17,5 @@ spark.dseShuffle.noSasl.port        {{spark_dse_shuffle_no_sasl_port}}
 # in order to make it work.
 spark.ui.filters      {{spark_ui_filters}}
 
-spark.redaction.regex                       {{spark_redaction_regex}}
-
-spark.network.crypto.enabled                    {{spark_network_crypto_enabled}}
-spark.network.crypto.saslFallback               {{spark_network_crypto_saslfallback}}
-
 # Spark Master REST API is not available in DSE
 spark.master.rest.enabled           false

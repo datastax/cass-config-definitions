@@ -62,7 +62,10 @@
  "5.1.5" :no-change
  "5.1.6" :no-change
  "5.1.7" :no-change
- "5.1.8" :no-change
+ ;; set spark.master.rest.enabled to false as the Spark Master REST API is not
+ ;; supported by DSE
+ "5.1.8" (transforms
+           (update-template "spark-daemon-defaults-conf-dse-5.1.8.template"))
  "5.1.9" :no-change
  "5.1.10" :no-change
  ;; End DSE 5.1.x transforms.
