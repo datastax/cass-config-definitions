@@ -134,6 +134,11 @@
    :default_value "GossipingPropertyFileSnitch"},
   :permissions_update_interval_in_ms
   {:type "int", :required false, :unit "ms"},
+  ;; permissions_cache_max_entries is in DSA documentation, but did not
+  ;; exist in the bdp source copy of cassandra.yaml at the time this was
+  ;; added. Do not remove unless you really mean it!
+  :permissions_cache_max_entries
+  {:type "int", :required false, :default_value 1000},
   :role_manager
   {:type "string",
    :required true,
@@ -709,6 +714,7 @@
     "role_manager"
     "permissions_validity_in_ms"
     "permissions_update_interval_in_ms"
+    "permissions_cache_max_entries"
     "roles_validity_in_ms"
     "roles_update_interval_in_ms"
     "server_encryption_options"
