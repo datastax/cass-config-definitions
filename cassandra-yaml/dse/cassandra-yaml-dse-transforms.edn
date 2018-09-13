@@ -254,32 +254,6 @@
            {:type "int"
             :required false}))
  "6.0.2" :no-change
- "6.0.3" (transforms
-          (delete-field :index_summary_capacity_in_mb)
-          (delete-field :index_summary_resize_interval_in_minutes)
-          (add-field
-           :otc_inter_dc_coalescing_strategy
-           {:type "string"
-            :required true
-            :options [{:label "FIXED" :value "FIXED"}
-                      {:label "MOVINGAVERAGE" :value "MOVINGAVERAGE"}
-                      {:label "TIMEHORIZON" :value "TIMEHORIZON"}
-                      {:label "" :value ""}]
-            :default_value ""}
-           :group "Miscellaneous")
-          (add-field
-           :otc_inter_dc_coalescing_window_us
-           {:type "int"
-            :required false
-            :default_value 0
-            :unit "us"}
-           :group "Miscellaneous")
-          (add-field
-           :otc_inter_dc_coalescing_enough_coalesced_messages
-           {:type "int"
-            :required false
-            :default_value 0}
-           :group "Miscellaneous"))
  ;; End DSE 6.0.x transforms.
 
 
