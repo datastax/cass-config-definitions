@@ -15,7 +15,7 @@
                             :options
                             [{:label "Oracle", :value "oracle"}
                              {:label "Platform OpenJDK", :value "os-platform"}]
-                            :description "LCM is capable of installing java from various vendors, currently both OpenJDK as packaged by the Linux Operating system vendor on the target machine, and Oracle JDK are available. Note that after January of 2019, the terms for Oracle JDK will restrict certain commercial uses unless licensing is purchased from Oracle. It is the customers responsibility to maintain license compliance when selecting that Java vendor. When changing java vendors, LCM will install the new JDK and ensure it is available to DSE."}
+                            :description "LCM installs the OpenJDK runtime environment as packaged by the Linux operating system vendor by default. In accordance with the <a href=\"http://www.oracle.com/technetwork/java/javase/eol-135779.html\">end of public updates</a> for the Oracle runtime, it is your responsibility to maintain license compliance if you choose to install the Oracle runtime. By installing the Oracle runtime, you agree to and accept the <a href=\"http://www.oracle.com/technetwork/java/javase/terms/license/index.html\">Oracle Binary Code License Agreement for Java SE</a>. When changing java vendors, LCM installs the new runtime and ensures it is available to DSE."}
               :os-openjdk-version {:type "string"
                                    :default_value "1.8"
                                    :depends :java-vendor
