@@ -111,6 +111,7 @@
   :data_file_directories
   {:type "list",
    :required true,
+   :description "If this list includes a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value ["/var/lib/cassandra/data"],
    :is_directory true
    :value_type "string"},
@@ -165,6 +166,7 @@
   {:type "string",
    :required true,
    :is_directory true
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/commitlog"},
   :hints_flush_period_in_ms
   {:type "int", :required true, :default_value 10000},
@@ -203,6 +205,7 @@
   {:type "string",
    :required true,
    :is_directory true
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/saved_caches"},
   :dynamic_snitch_reset_interval_in_ms
   {:type "int", :required true, :default_value 600000, :unit "ms"},

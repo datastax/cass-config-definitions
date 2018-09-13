@@ -68,6 +68,7 @@
            (update-template "spark-daemon-defaults-conf-dse-5.1.8.template"))
  "5.1.9" :no-change
  "5.1.10" :no-change
+ "5.1.11" :no-change
  ;; End DSE 5.1.x transforms.
 
 
