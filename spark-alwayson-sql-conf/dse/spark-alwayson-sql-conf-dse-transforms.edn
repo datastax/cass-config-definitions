@@ -83,6 +83,7 @@
                        :default_value "1G"}
                       :group "Spark Config Settings"
                       :after :spark_task_maxFailures))
+ "6.0.3" :no-change
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.

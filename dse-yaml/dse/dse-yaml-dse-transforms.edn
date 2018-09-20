@@ -526,6 +526,7 @@
           (add-field :dsefs_options.rest_options.core_max_concurrent_connections_per_host
                      {:type "int"
                       :required false}))
+ "6.0.3" :no-change
   ;; End DSE 6.0.x transforms.
 
 
