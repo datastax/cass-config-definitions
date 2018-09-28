@@ -168,7 +168,6 @@
  "5.0.8" (transforms
           (add-field :allocate_tokens_for_local_replication_factor
                      {:type "int"
-                      :default_value 3
                       :required false}
                      :group "General")
           (update-field :memtable_allocation_type

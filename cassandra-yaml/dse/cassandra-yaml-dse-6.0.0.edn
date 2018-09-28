@@ -42,6 +42,8 @@
    :default_value 128}
   :system_keyspaces_filtering
   {:type "boolean" :required true :default_value false}
+  :allocate_tokens_for_local_replication_factor
+  {:type "int" :required false}
   :hinted_handoff_enabled
   {:type "boolean", :required true, :default_value true},
   :dynamic_snitch_update_interval_in_ms
@@ -704,6 +706,7 @@
    ["partitioner"
     "allocate_tokens_for_keyspace"
     "num_tokens"
+    "allocate_tokens_for_local_replication_factor"
     "tpc_cores"
     "listen_on_broadcast_address"]}
   {:name "Directories",

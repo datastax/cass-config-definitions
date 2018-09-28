@@ -22,6 +22,8 @@
   {:type "boolean", :required true, :default_value true},
   :rpc_min_threads
   {:type "int", :required false, :unit "threads"},
+  :allocate_tokens_for_local_replication_factor
+  {:type "int" :required false}
   :dynamic_snitch_update_interval_in_ms
   {:type "int", :required true, :default_value 100, :unit "ms"},
   :native_transport_port_ssl
@@ -730,6 +732,7 @@
    ["partitioner"
     "allocate_tokens_for_keyspace"
     "num_tokens"
+    "allocate_tokens_for_local_replication_factor"
     "listen_on_broadcast_address"]}
   {:name "Directories",
    :list
