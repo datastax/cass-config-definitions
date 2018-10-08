@@ -257,6 +257,7 @@
  "6.0.3" (transforms
           (delete-field :index_summary_capacity_in_mb)
           (delete-field :index_summary_resize_interval_in_minutes))
+ "6.0.4" :no-change
  ;; End DSE 6.0.x transforms.
 
 

@@ -24,6 +24,10 @@
  :properties
  {:cross_dc_rtt_in_ms
   {:type "int" :required false :default_value 0 :unit "ms"}
+  ;; We might change disk_access_mode to an ENUM after OPSC-15264 has been merged.
+  :disk_access_mode
+  {:type "string"
+   :required false}
   :seed_gossip_probability
   {:type "float"
    :required false
@@ -664,29 +668,11 @@
      :required true
      :unit "ms"
      :default_value 1}}}
+  ;; ideal_consistency_level is intentionally not an enum because of OPSC-15099.
+  ;; After OPSC-15264, we can change it back to being an enum.
   :ideal_consistency_level
   {:type "string",
-   :required false
-   :default_value "EACH_QUORUM"
-   :options
-   [{:label "ALL",
-     :value "ALL"},
-    {:label "EACH_QUORUM",
-     :value "EACH_QUORUM"},
-    {:label "QUORUM",
-     :value "QUORUM"},
-    {:label "LOCAL_QUORUM",
-     :value "LOCAL_QUORUM"},
-    {:label "ONE",
-     :value "ONE"},
-    {:label "TWO",
-     :value "TWO"},
-    {:label "THREE",
-     :value "THREE"},
-    {:label "LOCAL_ONE",
-     :value "LOCAL_ONE"},
-    {:label "ANY",
-     :value "ANY"}]}}
+   :required false}}
  :groupings
  [{:name "Security",
    :list
@@ -845,6 +831,7 @@
   {:name "Miscellaneous",
    :list
    ["disk_failure_policy"
+    "disk_access_mode"
     "seed_gossip_probability"
     "enable_user_defined_functions_threads"
     "commit_failure_policy"

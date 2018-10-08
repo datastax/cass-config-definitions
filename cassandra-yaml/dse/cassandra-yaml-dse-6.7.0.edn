@@ -7,6 +7,10 @@
  :properties
  {:hinted_handoff_enabled
   {:type "boolean", :required true, :default_value true},
+  ;; We might change disk_access_mode to an ENUM after OPSC-15264 has been merged.
+  :disk_access_mode
+  {:type "string"
+   :required false}
   :allocate_tokens_for_local_replication_factor
   {:type "int" :required false}
   :tpc_cores {:type "int", :required false},
@@ -498,20 +502,11 @@
   {:type "int", :required true, :default_value 1024, :unit "KB"},
   :cas_contention_timeout_in_ms
   {:type "int", :required true, :default_value 1000, :unit "ms"},
+  ;; ideal_consistency_level is intentionally not an enum because of OPSC-15099.
+  ;; After OPSC-15264, we can change it back to being an enum.
   :ideal_consistency_level
   {:type "string",
-   :required false,
-   :default_value "EACH_QUORUM",
-   :options
-   [{:label "ALL", :value "ALL"}
-    {:label "EACH_QUORUM", :value "EACH_QUORUM"}
-    {:label "QUORUM", :value "QUORUM"}
-    {:label "LOCAL_QUORUM", :value "LOCAL_QUORUM"}
-    {:label "ONE", :value "ONE"}
-    {:label "TWO", :value "TWO"}
-    {:label "THREE", :value "THREE"}
-    {:label "LOCAL_ONE", :value "LOCAL_ONE"}
-    {:label "ANY", :value "ANY"}]},
+   :required false},
   :cdc_enabled {:type "boolean", :default_value false, :required true},
   :counter_write_request_timeout_in_ms
   {:type "int", :required true, :default_value 5000},
@@ -866,6 +861,7 @@
   {:name "Miscellaneous",
    :list
    ["disk_failure_policy"
+    "disk_access_mode"
     "seed_gossip_probability"
     "commit_failure_policy"
     "concurrent_materialized_view_builders"

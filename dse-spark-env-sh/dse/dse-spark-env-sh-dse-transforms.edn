@@ -93,6 +93,7 @@
  "6.0.2" :no-change
  "6.0.3" (transforms
           (update-template "dse-spark-env-sh-dse-6.0.3.template"))
+ "6.0.4" :no-change
  ;; End DSE 6.0.0 transforms.
 
 

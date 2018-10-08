@@ -9,6 +9,10 @@
   :hinted_handoff_enabled
   {:type "string", :required true, :default_value "true"},
   :rpc_min_threads {:type "int", :required false, :unit "threads"},
+  ;; We might change disk_access_mode to an ENUM after OPSC-15264 has been merged.
+  :disk_access_mode
+  {:type "string"
+   :required false}
   :dynamic_snitch_update_interval_in_ms
   {:type "int", :required true, :default_value 100, :unit "ms"},
   :max_hint_window_in_ms
@@ -608,6 +612,7 @@
   {:name "Miscellaneous",
    :list
    ["disk_failure_policy"
+    "disk_access_mode"
     "commit_failure_policy"
     "trickle_fsync"
     "trickle_fsync_interval_in_kb"

@@ -22,6 +22,10 @@
   {:type "boolean", :required true, :default_value true},
   :rpc_min_threads
   {:type "int", :required false, :unit "threads"},
+  ;; We might change disk_access_mode to an ENUM after OPSC-15264 has been merged.
+  :disk_access_mode
+  {:type "string"
+   :required false}
   :allocate_tokens_for_local_replication_factor
   {:type "int" :required false}
   :dynamic_snitch_update_interval_in_ms
@@ -886,6 +890,7 @@
   {:name "Miscellaneous",
    :list
    ["disk_failure_policy"
+    "disk_access_mode"
     "commit_failure_policy"
     "trickle_fsync"
     "trickle_fsync_interval_in_kb"
