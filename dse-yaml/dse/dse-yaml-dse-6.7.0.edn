@@ -163,11 +163,12 @@
      :required true,
      :description
      "If enabling AlwaysOn SQL in a configuration profile with internal authentication scheme enabled (which is the default), you must also set the jdbc-auth-type in hive-site.xml to 'password'.",
-     :default_value true},
+     :default_value false},
     :auth_user
     {:type "string",
      :depends :enabled,
      :required true,
+     :description "If enabling AlwaysOn SQL in a configuration profile with internal authentication scheme enabled (which is the default), this role is required and must be created manually. LCM will not create it. See DSE documentation on 'Using authentication with AlwaysOn SQL'.",
      :default_value "alwayson_sql",
      :conditional [{:eq true}]}}},
   :solr_resource_upload_limit_mb
@@ -571,7 +572,7 @@
       {:type "list",
        :value_type "dict",
        :default_value
-       [{:name "alwayson_sql", :cores "0.25", :memory "0.25"}],
+       [],
        :order [:name
                :cores
                :memory],
