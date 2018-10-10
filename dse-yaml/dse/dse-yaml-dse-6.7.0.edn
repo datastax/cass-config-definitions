@@ -1289,7 +1289,7 @@
    :list ["role_management_options"]}
   {:name "DSE Authorizer Options", :list ["authorization_options"]}
   {:name "DSE Graph", :list ["graph_events" "graph"]}
-  {:name "Insightful Monitoring", :list ["insights_options"]}
+  {:name "DSE Metrics Collector", :list ["insights_options"]}
   {:name "DSE Filesystem Options", :list ["dsefs_options"]}
   {:name "Kerberos Support", :list ["kerberos_options"]}
   {:name "LDAP Options", :list ["ldap_options"]}
