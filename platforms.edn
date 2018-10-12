@@ -93,24 +93,12 @@
 
 
  ;; Begin DSE 5.0.x platforms.
- "5.0.1" {"debian" ["7.x" "8.x"]
+ "5.0.1" {"debian" ["8.x" "9.x"]
           "ubuntu" ["12.04" "14.04" "16.04"]
-          "red hat enterprise" ["6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"]
-          "centos" ["6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"]
-          "amazon" ["2016.09" "2017.03"]}
-
- ;; CentOS 6.7.x and 6.8.x really weren't certified until DSE 5.0.2, and
- ;; certification for DSE 5.0.1 was never retroactively done. There are
- ;; no known issues, though, but since it's not officially supported if you
- ;; want to install DSE 5.0.1 on these platforms you need to disable the
- ;; platform check.
- "5.0.2" {"debian" ["7.x" "8.x"]
-          "ubuntu" ["12.04" "14.04" "16.04"]
-          "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x"
-                                "7.4.x"]
-          "centos" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"]
-          "amazon" ["2016.09" "2017.03"]}
-
+          "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "6.10.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x" "7.5.x"]
+          "centos" ["6.7.x" "6.8.x" "6.9.x" "6.10.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x" "7.5.x"]
+          "amazon" ["2016.09"]}
+ "5.0.2" :no-change
  "5.0.3" :no-change
  "5.0.4" :no-change
  "5.0.5" :no-change
@@ -118,13 +106,7 @@
  "5.0.7" :no-change
  "5.0.8" :no-change
  "5.0.9" :no-change
- ;; Add Debian 9.x per OPSC-13209 and DSP-14522
- "5.0.10" {"debian" ["7.x" "8.x" "9.x"]
-           "ubuntu" ["12.04" "14.04" "16.04"]
-           "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x"
-                                 "7.4.x"]
-           "centos" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"]
-           "amazon" ["2016.09" "2017.03"]}
+ "5.0.10" :no-change
  "5.0.11" :no-change
  "5.0.12" :no-change
  "5.0.13" :no-change
@@ -133,56 +115,29 @@
 
 
  ;; Begin DSE 5.1.x platforms.
- ;; Remove Debian 9.x so it doesn't get inherited from 5.0.latest. Debian 9.x
- ;; shipped late in both the DSE 5.0.x and DSE 5.1.x series.
- "5.1.0" {"debian" ["7.x" "8.x"]
+ "5.1.0" {"debian" ["8.x" "9.x"]
           "ubuntu" ["12.04" "14.04" "16.04"]
-          "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x"
-                                "7.4.x"]
-          "centos" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"]
-          "amazon" ["2016.09" "2017.03"]}
+          "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "6.10.x" "7.1.x" "7.2.x" "7.3.x"
+                                "7.4.x" "7.5.x"]
+          "centos" ["6.7.x" "6.8.x" "6.9.x" "6.10.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x" "7.5.x"]
+          "amazon" ["2016.09" "2017.03" "2017.09"]}
  "5.1.1" :no-change
  "5.1.2" :no-change
- ;; Add Debian 9.x back in per OPSC-13209 and DSP-14522
- "5.1.3" {"debian" ["7.x" "8.x" "9.x"]
-          "ubuntu" ["12.04" "14.04" "16.04"]
-          "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x"
-                                "7.4.x"]
-          "centos" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"]
-          "amazon" ["2016.09" "2017.03"]}
+ "5.1.3" :no-change
  "5.1.4" :no-change
  "5.1.5" :no-change
- ;; Add Amazon 2017.09 per OPSC-13641 and DSP-15095
- "5.1.6" {"debian" ["7.x" "8.x" "9.x"]
-          "ubuntu" ["12.04" "14.04" "16.04"]
-          "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x"
-                                "7.4.x"]
-          "centos" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"]
-          "amazon" ["2016.09" "2017.03" "2017.09"]}
+ "5.1.6" :no-change
  "5.1.7" :no-change
  "5.1.8" :no-change
  "5.1.9" :no-change
  "5.1.10" :no-change
- "5.1.11" {"debian" ["7.x" "8.x" "9.x"]
-           "ubuntu" ["12.04" "14.04" "16.04"]
-           "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x"
-                                 "7.4.x" "7.5.x"]
-           "centos" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"
-                     "7.5.x"]
-           "amazon" ["2016.09" "2017.03" "2017.09"]}
+ "5.1.11" :no-change
  ;; End DSE 5.1.x platforms.
 
  ;; Begin DSE 6.0.x platforms.
  "6.0.0" :no-change
  "6.0.1" :no-change
- ;; Add RHEL/CentOS 7.5 per DSP-16339
- "6.0.2" {"debian" ["7.x" "8.x" "9.x"]
-          "ubuntu" ["12.04" "14.04" "16.04"]
-          "red hat enterprise" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x"
-                                "7.4.x" "7.5.x"]
-          "centos" ["6.7.x" "6.8.x" "6.9.x" "7.1.x" "7.2.x" "7.3.x" "7.4.x"
-                    "7.5.x"]
-          "amazon" ["2016.09" "2017.03" "2017.09"]}
+ "6.0.2" :no-change
  "6.0.3" :no-change
  "6.0.4" :no-change
  ;; End DSE 6.0.x platforms.
