@@ -392,6 +392,13 @@
                                           :whitelist_supers []}}}}}))
  "5.0.13" :no-change
  "5.0.14" :no-change
+ "5.0.15" (transforms
+           (update-field :node_health_options.uptime_ramp_up_period_seconds
+                         {:default_value 10800})
+           (update-field :dsefs_options.service_startup_timeout_ms
+                         {:default_value nil})
+           (update-field :dsefs_options.rest_options.connection_open_timeout_ms
+                         {:default_value nil}))
  ;; End DSE 5.0.x transforms.
 
 

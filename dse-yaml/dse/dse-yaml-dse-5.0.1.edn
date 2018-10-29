@@ -583,8 +583,7 @@
      [{:label "kerberos", :value "kerberos"}
       {:label "ldap", :value "ldap"}
       {:label "internal", :value "internal"}],
-     :default_value "internal",
-     :depends :enabled},
+     :default_value "internal"},
     :other_schemes
     {:type "list", :value_type "string", :default_value [], :depends :enabled},
     :scheme_permissions {:type "boolean"

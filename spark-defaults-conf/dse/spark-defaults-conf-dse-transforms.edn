@@ -68,6 +68,7 @@
                        :required true
                        :default_value false}
                       :group "DSE Related Settings"))
+ "5.0.15" :no-change
  ;; End DSE 5.0.x transforms.
 
 
