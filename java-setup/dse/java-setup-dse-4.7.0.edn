@@ -62,7 +62,7 @@
                                  :required false
                                  :default_value "auto"
                                  :depends :manage-jce-policy
-                                 :description "When jce-download-url is set to auto, target nodes download Java Cryptography Extension (JCE) Unlimited Strength Policy Files from their official source. To download the tarball from a local mirror, enter the complete URL to the tarball here."}}
+                                 :description "When jce-download-url is set to auto, target nodes download Java Cryptography Extension (JCE) Unlimited Strength Policy Files from their official source. To download the zip file from a local mirror, enter the complete URL to the zip file here."}}
  :groupings [{:name "Java",
               :description "Lifecycle Manager can automatically manage your Java installation. For more details, please refer to the <a href=\"http://docs.datastax.com/en/opscenter/help/lcmManageJava.html\" target=\"_blank\">Lifecycle Manager documentation</a>.",
               :list ["manage-java" "java-vendor" "os-openjdk-version"
