@@ -779,10 +779,12 @@
      :options
      [{:label "SLF4JAuditWriter", :value "SLF4JAuditWriter"}
       {:label "CassandraAuditWriter", :value "CassandraAuditWriter"}]},
-    :included_categories {:type "list", :required false, :depends :enabled, :value_type "string"},
-    :excluded_categories {:type "list", :required false, :depends :enabled, :value_type "string"},
-    :included_keyspaces {:type "list", :required false, :depends :enabled, :value_type "string"},
-    :excluded_keyspaces {:type "list", :required false, :depends :enabled, :value_type "string"},
+    ;; These are really lists, but they must be rendered as csv strings for DSE.
+    ;; See OPSC-10405 for details.
+    :included_categories {:type "string", :required false, :depends :enabled},
+    :excluded_categories {:type "string", :required false, :depends :enabled},
+    :included_keyspaces {:type "string", :required false, :depends :enabled},
+    :excluded_keyspaces {:type "string", :required false, :depends :enabled},
     :retention_time {:type "int", :required false, :default_value 0, :depends :enabled},
     :cassandra_audit_writer_options
     {:type "dict",
