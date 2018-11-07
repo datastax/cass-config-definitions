@@ -1141,32 +1141,30 @@
            :excluded_categories
            :included_keyspaces
            :excluded_keyspaces
+           :included_roles
+           :excluded_roles
            :retention_time
            :cassandra_audit_writer_options],
    :fields
    {:excluded_categories
-    {:type "list",
+    {:type "string",
      :required false,
      :depends :enabled,
-     :value_type "string",
      :conditional [{:eq true}]},
     :included_roles
-    {:type "list",
+    {:type "string",
      :required false,
      :depends :enabled,
-     :value_type "string",
      :conditional [{:eq true}]},
     :included_categories
-    {:type "list",
+    {:type "string",
      :required false,
      :depends :enabled,
-     :value_type "string",
      :conditional [{:eq true}]},
     :excluded_roles
-    {:type "list",
+    {:type "string",
      :required false,
      :depends :enabled,
-     :value_type "string",
      :conditional [{:eq true}]},
     :logger
     {:type "string",
@@ -1178,16 +1176,14 @@
       {:label "CassandraAuditWriter", :value "CassandraAuditWriter"}],
      :conditional [{:eq true}]},
     :excluded_keyspaces
-    {:type "list",
+    {:type "string",
      :required false,
      :depends :enabled,
-     :value_type "string",
      :conditional [{:eq true}]},
     :included_keyspaces
-    {:type "list",
+    {:type "string",
      :required false,
      :depends :enabled,
-     :value_type "string",
      :conditional [{:eq true}]},
     :enabled {:type "boolean", :required true, :default_value false},
     :cassandra_audit_writer_options
