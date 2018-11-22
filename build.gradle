@@ -5,12 +5,7 @@
  */
 
 buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        mavenCentral()
-    }
+    repositories rootProject.ext.repositoryConfig
     dependencies {
         classpath 'commons-codec:commons-codec:1.11'
         classpath 'us.bpsm:edn-java:0.5.0'
