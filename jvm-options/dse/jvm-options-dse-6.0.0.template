@@ -42,7 +42,8 @@ JVM_ON_OUT_OF_MEMORY_ERROR_OPT="-XX:OnOutOfMemoryError={{on_out_of_memory_error}
 -Dcom.sun.management.jmxremote.ssl=true
 -Dcom.sun.management.jmxremote.ssl.need.client.auth=true
 -Dcom.sun.management.jmxremote.registry.ssl=true
-{%         for ssl-opt in jmx-remote-ssl-opts %}{{jmx-remote-opt}}
+{% jmx-remote-ssl-opts %}
+{%         for jmx-remote-ssl-opt in jmx-remote-ssl-opts %}{{jmx-remote-ssl-opt}}
 {%         endfor %}
 {%     else %}
 -Dcom.sun.management.jmxremote.ssl=false
