@@ -73,6 +73,7 @@
  "5.1.10" (transforms
             (update-template "logback-xml-dse-5.1.10.template"))
  "5.1.11" :no-change
+ "5.1.12" :no-change
  ;; End DSE 5.1.x transforms.
 
 

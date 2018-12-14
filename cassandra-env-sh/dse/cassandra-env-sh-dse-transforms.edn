@@ -107,6 +107,7 @@
  ;; with the old way of doing it.
  "5.1.11" (transforms
             (update-template "cassandra-env-sh-dse-5.1.11.template"))
+ "5.1.12" :no-change
  ;; End DSE 5.1.x transforms.
 
 

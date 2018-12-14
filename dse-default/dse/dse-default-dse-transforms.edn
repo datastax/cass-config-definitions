@@ -92,6 +92,26 @@
  "5.1.9" :no-change
  "5.1.10" :no-change
  "5.1.11" :no-change
+ "5.1.12" (transforms
+            (update-template "dse-default-dse-5.1.12.template")
+            (add-field :wait-for-stop
+                       {:type "int"
+                        :required false
+                        :label "Wait for stop"
+                        :constant "WAIT_FOR_STOP"
+                        :disabled true
+                        :default_value 60
+                        :unit "seconds"}
+                       :group "General")
+            (add-field :wait-for-stop-sleep
+                       {:type "float"
+                        :required false
+                        :label "Wait for stop"
+                        :constant "WAIT_FOR_STOP_SLEEP"
+                        :disabled true
+                        :default_value 60
+                        :unit "seconds"}
+                       :group "General"))
  ;; End DSE 5.1.x transforms.
 
 

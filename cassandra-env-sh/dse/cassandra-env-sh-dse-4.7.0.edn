@@ -15,7 +15,7 @@
    :required false
    :default_value "auto"
    :disabled true
-   :description "The maximum size to which the heap will be allowed to grow for the JVM running DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g)."},
+   :description "The maximum size to which the heap will be allowed to grow for the JVM running DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing."},
 
   ;; Removed in the transforms for 4.8.0 and demoted to being a cms-gc-opt
   ;; Setting heap-newsize for G1 disables many of it's adaptive self-tuning

@@ -210,8 +210,7 @@
    :label "Enable heap-dump on Out-Of-Memory error",
    :default_value true},
   :initial_heap_size
-  {:description
-   "The initial size of the heap when starting the JVM that runs DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing.",
+  {:description "The maximum size to which the heap will be allowed to grow for the JVM running DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing. By default, heap size is automatically calculated by DSE based on this formula: max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))",
    :suppress-equal-sign true,
    :disabled true,
    :constant "-Xms",
