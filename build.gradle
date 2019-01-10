@@ -23,7 +23,7 @@ task tar(type:Tar) {
     compression = Compression.GZIP
     destinationDir buildDir
     into ('/'){
-        from '.'
+        from 'resources'
         exclude 'build'
     }
 }
