@@ -263,12 +263,17 @@
  ;; End DSE 6.0.x transforms.
 
 
-  ;; Begin DSE 6.7.x transforms.
-  ;; NOTE: memtable_heap_space_in_mb and memtable_offheap_space_in_mb are
-  ;; deprecated and should not be added back. As of 9/12/2018
-  ;; resources/cassandra/conf/cassandra.yaml has not been updated to include
-  ;; this change, but DSP-17191 was opened to fix that. Once DSP-17191 is
-  ;; resolved this comment can be removed.
-  "6.7.0" "cassandra-yaml-dse-6.7.0.edn"
-  ;; End DSE 6.7.x transforms.
+ ;; Begin DSE 6.7.x transforms.
+ ;; NOTE: memtable_heap_space_in_mb and memtable_offheap_space_in_mb are
+ ;; deprecated and should not be added back. As of 9/12/2018
+ ;; resources/cassandra/conf/cassandra.yaml has not been updated to include
+ ;; this change, but DSP-17191 was opened to fix that. Once DSP-17191 is
+ ;; resolved this comment can be removed.
+ "6.7.0" "cassandra-yaml-dse-6.7.0.edn"
+ ;; End DSE 6.7.x transforms.
+
+
+ ;; Begin DSE 6.8.x transforms.
+ "6.8.0" "cassandra-yaml-dse-6.8.0.edn"
+ ;; End DSE 6.8.x transforms.
  )

@@ -79,7 +79,12 @@
  ;; End DSE 6.0.x transforms.
 
 
-  ;; Begin DSE 6.7.x transforms.
-  "6.7.0" "spark-env-sh-dse-6.7.0.edn"
-  ;; End DSE 6.7.x transforms.
+ ;; Begin DSE 6.7.x transforms.
+ "6.7.0" "spark-env-sh-dse-6.7.0.edn"
+ ;; End DSE 6.7.x transforms.
+
+
+ ;; Begin DSE 6.8.x transforms.
+ "6.8.0" :no-change
+ ;; End DSE 6.8.x transforms.
  )

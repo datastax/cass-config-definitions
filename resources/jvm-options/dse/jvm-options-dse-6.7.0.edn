@@ -2,7 +2,8 @@
  :package-path "/etc/dse/cassandra/jvm.options",
  :workload-file-group "cassandra",
  :ui-visibility :editable,
- :valid-dse-versions [:gte "5.1.0"],
+ ;; jvm.options is not valid for DSE 6.8.0 and greater
+ :valid-dse-versions [:lte "6.8.0"],
  :renderer
  {:renderer-type :template,
   :template "jvm-options-dse-6.7.0.template"},

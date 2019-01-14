@@ -35,7 +35,6 @@
 
 
  ;; Begin DSE 5.0.x transforms.
- ;; "5.0.0" is not supported by LCM
  "5.0.1" ()
  "5.0.2" ()
  "5.0.3" ()
@@ -67,34 +66,24 @@
  "5.1.9" ()
  "5.1.10" ()
  "5.1.11" ()
- "5.1.12" :no-change
  ;; End DSE 5.1.x transforms.
 
 
  ;; Begin DSE 6.0.x transforms.
- "6.0.0" "spark-alwayson-sql-conf-dse-6.0.0.edn"
- ;; just removes a defunct comment
- "6.0.1" (transforms
-           (update-template "spark-alwayson-sql-conf-dse-6.0.1.template"))
- ;; adds spark.executor.memory config option explicitly with a default value
- "6.0.2" (transforms
-           (update-template "spark-alwayson-sql-conf-dse-6.0.2.template")
-           (add-field :spark_executor_memory
-                      {:type "string"
-                       :required true
-                       :default_value "1G"}
-                      :group "Spark Config Settings"
-                      :after :spark_task_maxFailures))
- "6.0.3" :no-change
- "6.0.4" :no-change
+ "6.0.0" ()
+ "6.0.1" ()
+ "6.0.2" ()
+ "6.0.3" ()
+ "6.0.4" ()
  ;; End DSE 6.0.x transforms.
 
+
  ;; Begin DSE 6.7.x transforms.
- "6.7.0" "spark-alwayson-sql-conf-dse-6.7.0.edn"
+ "6.7.0" ()
  ;; End DSE 6.7.x transforms.
 
 
  ;; Begin DSE 6.8.x transforms.
- "6.8.0" "spark-alwayson-sql-conf-dse-6.8.0.edn"
+ "6.8.0" "jvm11-server-options-dse-6.8.0.edn"
  ;; End DSE 6.8.x transforms.
 )

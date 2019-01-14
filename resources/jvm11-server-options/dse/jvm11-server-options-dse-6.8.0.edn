@@ -1,0 +1,135 @@
+{:display-name "jvm11-server.options",
+ :package-path "/etc/dse/cassandra/jvm11-server.options",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ ;; jvm.options is only valid for DSE 6.8.0 and greater
+ :valid-dse-versions [:gte "6.8.0"],
+ :renderer
+ {:renderer-type :template,
+  :template "jvm11-server-options-dse-6.8.0.template"},
+ :properties
+ {;;
+  ;; Variables that are not rendered by template_iterables
+  ;;
+
+  ;; Additional Options
+  ;; -Xlog settings should be done in additional options
+
+  :additional-jvm-opts
+  {:type "list",
+   :exclude-from-template-iterables true,
+   :label "Additional JVM_OPTS",
+   :value_type "string",
+   :default_value []},
+
+  :garbage_collector
+  {:type "string",
+   :label "Garbage Collector",
+   :exclude-from-template-iterables true,
+   :required true,
+   :options
+   [{:label "G1GC", :value "G1GC"}
+    {:label "ZGC", :value "ZGC"}
+    {:label "Shenandoah", :value "Shenandoah"}
+    {:label "Graal", :value "Graal"}],
+   :default_value "G1GC"},
+
+  ;; JPMS Settings
+
+  :jdk_attach_allow_attach_self
+  {:type "boolean",
+   :label "jdk.attach.allowAttachSelf",
+   :disabled false,
+   :required true,
+   :exclude-from-template-iterables true,
+   :static_constant "-Djdk.attach.allowAttachSelf=true"
+   :render-without-quotes true,
+   :default_value true}
+  :io_netty_try_reflection_set_accessible
+  {:type "boolean",
+   :label "io.netty.tryReflectionSetAccessible",
+   :disabled false,
+   :required true,
+   :exclude-from-template-iterables true,
+   :static_constant "-Dio.netty.tryReflectionSetAccessible=true"
+   :render-without-quotes true,
+   :default_value true}
+
+  ;;
+  ;; Variables that are rendered by template iterables
+  ;;
+
+  ;; General Options
+
+  :thread_priority_policy_42
+  {:type "boolean",
+   :required true,
+   :static_constant "-XX:ThreadPriorityPolicy=42",
+   :label
+   "Enable lowering thread priority without being root on linux",
+   :default_value true},
+
+  ;; GC Options
+
+  :g1r_set_updating_pause_time_percent
+  {:type "int",
+   :label "G1GC Updating Pause Time Percentage",
+   :required true,
+   :default_value "5",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:G1RSetUpdatingPauseTimePercent"},
+  :max_gc_pause_millis
+  {:type "int",
+   :label "G1GC Max GC Pause Milliseconds",
+   :required true,
+   :default_value "500",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:MaxGCPauseMillis"},
+  :initiating_heap_occupancy_percent
+  {:type "int",
+   :label "Initiating Heap Occupancy Percentage",
+   :required false,
+   :disabled true,
+   :default_value "",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:InitiatingHeapOccupancyPercent"},
+  :parallel_gc_threads
+  {:type "int",
+   :label "Parallel GC Threads",
+   :required false,
+   :disabled true,
+   :default_value "",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:ParallelGCThreads"},
+  :conc_gc_threads
+  {:type "int",
+   :label "Concurrent GC Threads",
+   :required false,
+   :disabled true,
+   :default_value "",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:ConcGCThreads"}},
+ :groupings
+ [{:name "General JVM Parameters",
+   :list
+   ["thread_priority_policy_42"]}
+  {:name "Garbage Collector Settings",
+   :list
+   ["garbage_collector"
+    "g1r_set_updating_pause_time_percent"
+    "max_gc_pause_millis"
+    "initiating_heap_occupancy_percent"
+    "parallel_gc_threads"
+    "conc_gc_threads"]}
+  {:name "JPMS Settings",
+   :list
+   ["jdk_attach_allow_attach_self"
+    "io_netty_try_reflection_set_accessible"]}
+  {:name "Advanced",
+   :list
+   ["additional-jvm-opts"]}]}

@@ -158,10 +158,16 @@
  "6.0.2" :no-change
  "6.0.3" :no-change
  "6.0.4" :no-change
-  ;; End DSE 6.0.x transforms.
+ ;; End DSE 6.0.x transforms.
 
 
-  ;; Begin DSE 6.7.x transforms.
-  "6.7.0" "jvm-options-dse-6.7.0.edn"
-  ;; End DSE 6.7.x transforms.
+ ;; Begin DSE 6.7.x transforms.
+ "6.7.0" "jvm-options-dse-6.7.0.edn"
+ ;; End DSE 6.7.x transforms.
+
+
+ ;; jvm.options is not valid for DSE 6.8.0 and greater
+ ;; Begin DSE 6.8.x transforms.
+ "6.8.0" ()
+ ;; End DSE 6.8.x transforms.
 )

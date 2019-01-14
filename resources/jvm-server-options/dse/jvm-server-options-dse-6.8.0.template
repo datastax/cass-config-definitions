@@ -1,0 +1,59 @@
+# This file is managed by DataStax OpsCenter LifeCycle Manager.
+# Manual edits will be overwritten by the next install or configure
+# job that runs on this system.
+
+###########################################################################
+#                         jvm-server.options                              #
+#                                                                         #
+# - all flags defined here will be used by cassandra to startup the JVM   #
+# - one flag should be specified per line                                 #
+# - lines that do not start with '-' will be ignored                      #
+# - only static flags are accepted (no variables or parameters)           #
+# - dynamic flags will be appended to these on cassandra-env              #
+#                                                                         #
+# See jvm8-server.options and jvm11-server.options for Java version       #
+# specific options.                                                       #
+###########################################################################
+
+{% comment %}unlock-diagnostic-vm-options must be set before other related options{% endcomment %}
+
+{{unlock-diagnostic-vm-options}}
+
+{% for template_iterable in template_iterables %}{% if template_iterable %}{{template_iterable}}
+{% endif %}{% endfor %}
+
+JVM_ON_OUT_OF_MEMORY_ERROR_OPT="-XX:OnOutOfMemoryError={{on_out_of_memory_error}}"
+
+{% comment %} JMX Authentication and Configuration {% endcomment %}
+{% ifequal jmx-connection-type "local-no-auth" %}
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcassandra.jmx.local.port={{jmx-port}}
+{% else %}
+{%     ifequal jmx-connection-type "remote-no-auth" %}
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcassandra.jmx.remote.port={{jmx-port}}
+{{jmx-remote-no-auth-port}}{% endifequal %}
+{%     ifequal jmx-connection-type "remote-dse-unified-auth" %}
+-Dcassandra.jmx.remote.login.config=CassandraLogin
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=true
+-Dcassandra.jmx.authorizer=org.apache.cassandra.auth.jmx.AuthorizationProxy
+-Djava.security.auth.login.config=/etc/dse/cassandra/cassandra-jaas.config
+-Dcassandra.jmx.remote.port={{jmx-port}}
+-Dcom.sun.management.jmxremote.authenticate=true
+{%     endifequal %}
+{%     if jmx-remote-ssl %}
+-Dcom.sun.management.jmxremote.ssl=true
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=true
+-Dcom.sun.management.jmxremote.registry.ssl=true
+{%         for ssl-opt in jmx-remote-ssl-opts %}{{jmx-remote-opt}}
+{%         endfor %}
+{%     else %}
+-Dcom.sun.management.jmxremote.ssl=false
+{%     endif %}
+{% endifequal %}
+
+{% comment %} Additional options by Opscenter Provisioning {% endcomment %}
+{% for jvm-opt in additional-jvm-opts %}{{jvm-opt}}
+{% endfor %}
+
+# The newline in the end of file is intentional

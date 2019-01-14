@@ -1,0 +1,43 @@
+{:display-name "logback-spark-server.xml"
+ :package-path "/etc/dse/spark/logback-spark-server.xml"
+ :workload-file-group "spark"
+ :ui-visibility :editable
+ :valid-dse-versions [:all]
+ :renderer
+ {:renderer-type :template
+  :template "logback-spark-server-xml-dse-6.8.0.template"}
+ :workload :spark
+ :properties
+ {:max-file-size
+  {:type "string" :required true :default_value "20" :render-without-quotes true}
+  :org-apache-spark-util-logging-fileappender
+  {:type "string" :required true :default_value "OFF"}
+  :org-spark-project-jetty
+  {:type "string" :required true :default_value "WARN"}
+  :org-spark-project-jetty-util-component-abstractlifecycle
+  {:type "string" :required true :default_value "ERROR"}
+  :org-apache-spark-repl-sparkimain-exprtyper
+  {:type "string" :required true :default_value "INFO"}
+  :org-apache-spark-repl-sparkiloop-sparkiloopinterpreter
+  {:type "string" :required true :default_value "INFO"}
+  :org-apache-parquet
+  {:type "string" :required true :default_value "ERROR"}
+  :parquet
+  {:type "string" :required true :default_value "ERROR"}
+  :org-apache-hadoop-hive-metastore-retryinghmshandler
+  {:type "string" :required true :default_value "FATAL"}
+  :org-apache-hadoop-hive-ql-exec-functionregistry
+  {:type "string" :required true :default_value "ERROR"}}
+ :groupings
+ [{:name "General",
+   :list
+   ["max-file-size"
+    "org-apache-spark-util-logging-fileappender"
+    "org-spark-project-jetty"
+    "org-spark-project-jetty-util-component-abstractlifecycle"
+    "org-apache-spark-repl-sparkimain-exprtyper"
+    "org-apache-spark-repl-sparkiloop-sparkiloopinterpreter"
+    "org-apache-parquet"
+    "parquet"
+    "org-apache-hadoop-hive-metastore-retryinghmshandler"
+    "org-apache-hadoop-hive-ql-exec-functionregistry"]}]}
