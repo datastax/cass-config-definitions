@@ -1,0 +1,82 @@
+{:properties
+ {:spark-cassandra-auth-conf-factory
+  {:type "string",
+   :required true,
+   :default_value "com.datastax.bdp.spark.DseAuthConfFactory"},
+  :spark-network-crypto-saslfallback
+  {:type "boolean", :required true, :default_value false},
+  :spark-sql-hive-metastore-barrier-prefixes
+  {:type "string",
+   :required true,
+   :default_value "org.apache.spark.sql.cassandra"},
+  :spark-dse-configuration-fetch-retries
+  {:type "int", :required true, :default_value "2"},
+  :spark-authenticate
+  {:type "boolean", :required true, :default_value false},
+  :spark-authenticate-secretbitlength
+  {:type "int", :required true, :default_value 256},
+  :spark-sql-catalog-implementation
+  {:type "string", :required true, :default_value "hive"},
+  :spark-hadoop-util
+  {:type "string",
+   :required true,
+   :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"},
+  :spark-hadoop-com-datastax-bdp-fs-client-authentication-factory
+  {:type "string",
+   :required true,
+   :default_value
+   "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"},
+  :spark-authenticate-enable-sasl-encryption
+  {:type "boolean", :required true, :default_value false},
+  :spark-redaction-regex
+  {:type "string",
+   :required true,
+   :default_value "(?i)secret|password|token"},
+  :spark-task-maxfailures
+  {:type "int", :required true, :default_value 10},
+  :spark-extra-listeners
+  {:type "string",
+   :required true,
+   :default_value "com.datastax.bdp.spark.reporting.DseSparkListener"},
+  :spark-network-sasl-serveralwaysencrypt
+  {:type "boolean", :required true, :default_value true},
+  :spark-network-crypto-enabled
+  {:type "boolean", :required true, :default_value false},
+  :spark-hadoop-mapreduce-fileoutputcommitter-algorithm-version
+  {:type "int", :required true, :default_value 2},
+  :spark-cassandra-connection-factory
+  {:type "string",
+   :required true,
+   :default_value
+   "com.datastax.bdp.spark.DseCassandraConnectionFactory"}},
+ :valid-dse-versions [:all],
+ :groupings
+ [{:name "DSE Related Settings",
+   :list
+   ["spark-cassandra-connection-factory"
+    "spark-cassandra-auth-conf-factory"
+    "spark-extra-listeners"
+    "spark-hadoop-util"
+    "spark-sql-catalog-implementation"
+    "spark-sql-hive-metastore-barrier-prefixes"
+    "spark-dse-configuration-fetch-retries"]}
+  {:name "Authentication And Encryption",
+   :list
+   ["spark-authenticate"
+    "spark-authenticate-enable-sasl-encryption"
+    "spark-hadoop-com-datastax-bdp-fs-client-authentication-factory"
+    "spark-hadoop-mapreduce-fileoutputcommitter-algorithm-version"
+    "spark-network-crypto-enabled"
+    "spark-network-crypto-saslfallback"
+    "spark-authenticate-secretbitlength"
+    "spark-network-sasl-serveralwaysencrypt"]}
+  {:name "General Settings",
+   :list ["spark-redaction-regex" "spark-task-maxfailures"]}],
+ :ui-visibility :editable,
+ :package-path "/etc/dse/spark/spark-defaults.conf",
+ :renderer
+ {:renderer-type :template,
+  :template "spark-defaults-conf-dse-6.8.0.template"},
+ :display-name "spark-defaults.conf",
+ :workload-file-group "spark",
+ :workload :spark}

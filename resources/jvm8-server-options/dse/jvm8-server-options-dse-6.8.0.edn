@@ -1,0 +1,238 @@
+{:display-name "jvm8-server.options",
+ :package-path "/etc/dse/cassandra/jvm8-server.options",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ ;; jvm.options is only valid for DSE 6.8.0 and greater
+ :valid-dse-versions [:gte "6.8.0"],
+ :renderer
+ {:renderer-type :template,
+  :template "jvm8-server-options-dse-6.8.0.template"},
+ :properties
+ {;;
+  ;; Variables that are not rendered by template_iterables
+  ;;
+
+  ;; Additional Options
+
+  :additional-jvm-opts
+  {:type "list",
+   :exclude-from-template-iterables true,
+   :label "Additional JVM_OPTS",
+   :value_type "string",
+   :default_value []},
+
+  :garbage_collector
+  {:type "string",
+   :label "Garbage Collector",
+   :exclude-from-template-iterables true,
+   :required true,
+   :options
+   [{:label "CMS", :value "CMS"} {:label "G1GC", :value "G1GC"}],
+   :default_value "G1GC"},
+
+  ;;
+  ;; Variables that are rendered by template iterables
+  ;;
+
+  ;; General Options
+
+  :thread_priority_policy_42
+  {:type "boolean",
+   :required true,
+   :static_constant "-XX:ThreadPriorityPolicy=42",
+   :label
+   "Enable lowering thread priority without being root on linux",
+   :default_value true},
+
+  ;; GC Options
+
+  :heap_size_young_generation
+  {:suppress-equal-sign true,
+   :disabled true,
+   :constant "-Xmn",
+   :type "string",
+   :label "Heap size young generation",
+   :render-without-quotes true,
+   :default_value "",
+   :required false,
+   :depends :garbage_collector,
+   :conditional [{:eq "CMS"}]},
+  :survivor_ratio
+  {:type "int",
+   :label "Survivor Ratio",
+   :required true,
+   :default_value "8",
+   :depends :garbage_collector,
+   :conditional [{:eq "CMS"}],
+   :constant "-XX:SurvivorRatio"},
+  :max_tenuring_threshold
+  {:type "int",
+   :label "Max Tenuring Threshold",
+   :required true,
+   :default_value "1",
+   :depends :garbage_collector,
+   :conditional [{:eq "CMS"}],
+   :constant "-XX:MaxTenuringThreshold"},
+  :cms_initiating_occupancy_fraction
+  {:type "int",
+   :label "CMS Initiating Occupancy Fraction",
+   :required true,
+   :default_value "75",
+   :depends :garbage_collector,
+   :conditional [{:eq "CMS"}],
+   :constant "-XX:CMSInitiatingOccupancyFraction"},
+  :cms_wait_duration
+  {:type "int",
+   :label "CMS Max Duration",
+   :required true,
+   :default_value "10000",
+   :depends :garbage_collector,
+   :conditional [{:eq "CMS"}],
+   :constant "-XX:CMSWaitDuration"},
+  :g1r_set_updating_pause_time_percent
+  {:type "int",
+   :label "G1GC Updating Pause Time Percentage",
+   :required true,
+   :default_value "5",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:G1RSetUpdatingPauseTimePercent"},
+  :max_gc_pause_millis
+  {:type "int",
+   :label "G1GC Max GC Pause Milliseconds",
+   :required true,
+   :default_value "500",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:MaxGCPauseMillis"},
+  :initiating_heap_occupancy_percent
+  {:type "int",
+   :label "Initiating Heap Occupancy Percentage",
+   :required false,
+   :disabled true,
+   :default_value "",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:InitiatingHeapOccupancyPercent"},
+  :parallel_gc_threads
+  {:type "int",
+   :label "Parallel GC Threads",
+   :required false,
+   :disabled true,
+   :default_value "",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:ParallelGCThreads"},
+  :conc_gc_threads
+  {:type "int",
+   :label "Concurrent GC Threads",
+   :required false,
+   :disabled true,
+   :default_value "",
+   :depends :garbage_collector,
+   :conditional [{:eq "G1GC"}],
+   :constant "-XX:ConcGCThreads"},
+
+  ;; GC Logging Options
+
+  :print_gc_details
+  {:type "boolean",
+   :required true,
+   :label "Print GC Details",
+   :static_constant "-XX:+PrintGCDetails",
+   :default_value true},
+  :print_gc_date_stamps
+  {:type "boolean",
+   :required true,
+   :label "Print GC Date Stamps",
+   :static_constant "-XX:+PrintGCDateStamps",
+   :default_value true},
+  :print_heap_at_gc
+  {:type "boolean",
+   :required true,
+   :label "Print Heap at GC",
+   :static_constant "-XX:+PrintHeapAtGC",
+   :default_value true},
+  :print_tenuring_distribution
+  {:type "boolean",
+   :required true,
+   :label "Print Tenuring Distribution",
+   :static_constant "-XX:+PrintTenuringDistribution",
+   :default_value true},
+  :print_gc_application_stopped_time
+  {:type "boolean",
+   :required true,
+   :label "Print GC Application Stopped Time",
+   :static_constant "-XX:+PrintGCApplicationStoppedTime",
+   :default_value true},
+  :print_promotion_failure
+  {:type "boolean",
+   :required true,
+   :label "Print Promotion Failure",
+   :static_constant "-XX:+PrintPromotionFailure",
+   :default_value true},
+  :use_gc_log_file_rotation
+  {:type "boolean",
+   :required true,
+   :label "Use GC Log File Rotation",
+   :static_constant "-XX:+UseGCLogFileRotation",
+   :default_value true},
+  :print_flss_statistics
+  {:type "boolean",
+   :required true,
+   :label "Print FLSS Statistics",
+   :static_constant "-XX:PrintFLSStatistics=1",
+   :default_value false},
+  :log_gc
+  {:type "boolean",
+   :required true,
+   :label "Log GC",
+   :static_constant "-Xloggc:/var/log/cassandra/gc.log",
+   :default_value false},
+  :number_of_gc_log_files
+  {:type "int",
+   :label "Number of GC log files",
+   :disabled false,
+   :required true,
+   :constant "-XX:NumberOfGCLogFiles",
+   :default_value 10},
+  :gc_log_file_size
+  {:type "string",
+   :label "GC log file size",
+   :disabled false,
+   :required true,
+   :constant "-XX:GCLogFileSize",
+   :render-without-quotes true,
+   :default_value "10M"}},
+ :groupings
+ [{:name "General JVM Parameters",
+   :list
+   ["thread_priority_policy_42"]}
+  {:name "Garbage Collector Settings",
+   :list
+   ["garbage_collector"
+    "heap_size_young_generation"
+    "survivor_ratio"
+    "max_tenuring_threshold"
+    "cms_initiating_occupancy_fraction"
+    "cms_wait_duration"
+    "g1r_set_updating_pause_time_percent"
+    "max_gc_pause_millis"
+    "initiating_heap_occupancy_percent"
+    "parallel_gc_threads"
+    "conc_gc_threads"]}
+  {:name "Garbage Collector Logging Options",
+   :list
+   ["print_gc_details"
+    "print_gc_date_stamps"
+    "print_heap_at_gc"
+    "print_tenuring_distribution"
+    "print_gc_application_stopped_time"
+    "print_promotion_failure"
+    "use_gc_log_file_rotation"
+    "print_flss_statistics"
+    "log_gc"
+    "number_of_gc_log_files"
+    "gc_log_file_size"]}
+  {:name "Advanced",
+   :list ["additional-jvm-opts"]}]}

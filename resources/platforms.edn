@@ -147,4 +147,8 @@
  ;; Begin DSE 6.7.x platforms.
  "6.7.0" :no-change
  ;; End DSE 6.7.x platforms
+
+ ;; Begin DSE 6.8.x platforms.
+ "6.8.0" :no-change
+ ;; End DSE 6.8.x platforms
  )

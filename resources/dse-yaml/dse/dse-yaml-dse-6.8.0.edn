@@ -1,0 +1,1383 @@
+{:display-name "dse.yaml",
+ :package-path "/etc/dse/dse.yaml",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :valid-dse-versions [:all],
+ :renderer {:renderer-type :yaml},
+ :properties
+ {:kerberos_options
+  {:type "dict",
+   :order [:keytab
+           :service_principal
+           :http_principal
+           :qop],
+   :fields
+   {:keytab
+    {:type "string",
+     :is_file true,
+     :default_value "/etc/dse/conf/dse.keytab"},
+    :service_principal
+    {:type "string", :default_value "dse/_HOST@REALM"},
+    :http_principal
+    {:type "string", :default_value "HTTP/_HOST@REALM"},
+    :qop
+    {:type "string",
+     :options
+     [{:label "auth", :value "auth"}
+      {:label "auth-int", :value "auth-int"}
+      {:label "auth-conf", :value "auth-conf"}],
+     :default_value "auth"}}},
+  :resource_level_latency_tracking_options
+  {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 10000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :ram_buffer_offheap_space_in_mb
+  {:type "int", :required false, :default_value 1024},
+  :spark_security_enabled
+  {:type "boolean", :required true, :default_value false},
+  :spark_security_encryption_enabled
+  {:type "boolean", :required true, :default_value false},
+  :cql_slow_log_options
+  {:type "dict",
+   :order [:enabled
+           :threshold
+           :minimum_samples
+           :ttl_seconds
+           :skip_writing_to_db
+           :num_slowest_queries],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value true},
+    :threshold
+    {:type "float",
+     :default_value 200.0,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :minimum_samples
+    {:type "int",
+     :default_value 100,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :ttl_seconds
+    {:type "int",
+     :default_value 259200,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :skip_writing_to_db
+    {:type "boolean",
+     :required true,
+     :default_value true,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :num_slowest_queries
+    {:type "int",
+     :default_value 5,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :histogram_data_options
+  {:type "dict",
+   :order [:enabled],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 10000,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :retention_count
+    {:type "int",
+     :required false,
+     :default_value 3,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :back_pressure_threshold_per_core
+  {:type "int", :required false, :default_value 1024},
+  :load_max_time_per_core
+  {:type "int", :required false, :default_value 5},
+  :max_memory_to_lock_fraction
+  {:type "int", :required false, :default_value 0.2},
+  :alwayson_sql_options
+  {:type "dict",
+   :order [:enabled
+           :thrift_port
+           :web_ui_port
+           :reserve_port_wait_time_ms
+           :alwayson_sql_status_check_wait_time_ms
+           :workpool
+           :log_dsefs_dir
+           :auth_user
+           :runner_max_errors]
+   :fields
+   {:reserve_port_wait_time_ms
+    {:type "int",
+     :unit "ms",
+     :depends :enabled,
+     :default_value 100,
+     :conditional [{:eq true}]},
+    :alwayson_sql_status_check_wait_time_ms
+    {:type "int",
+     :unit "ms",
+     :depends :enabled,
+     :default_value 500,
+     :conditional [{:eq true}]},
+    :runner_max_errors
+    {:type "int",
+     :depends :enabled,
+     :required true,
+     :default_value 10,
+     :conditional [{:eq true}]},
+    :log_dsefs_dir
+    {:type "string",
+     :depends :enabled,
+     :required true,
+     :description
+     "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+     :is_directory true,
+     :default_value "/spark/log/alwayson_sql",
+     :conditional [{:eq true}]},
+    :web_ui_port
+    {:type "int",
+     :depends :enabled,
+     :default_value 9077,
+     :conditional [{:eq true}]},
+    :thrift_port
+    {:type "int",
+     :depends :enabled,
+     :default_value 10000,
+     :conditional [{:eq true}]},
+    :workpool
+    {:type "string",
+     :depends :enabled,
+     :default_value "alwayson_sql",
+     :conditional [{:eq true}]},
+    :enabled
+    {:type "boolean",
+     :required true,
+     :description
+     "If enabling AlwaysOn SQL in a configuration profile with internal authentication scheme enabled (which is the default), you must also set the jdbc-auth-type in hive-site.xml to 'password'.",
+     :default_value false},
+    :auth_user
+    {:type "string",
+     :depends :enabled,
+     :required true,
+     :description "If enabling AlwaysOn SQL in a configuration profile with internal authentication scheme enabled (which is the default), this role is required and must be created manually. LCM will not create it. See DSE documentation on 'Using authentication with AlwaysOn SQL'.",
+     :default_value "alwayson_sql",
+     :conditional [{:eq true}]}}},
+  :solr_resource_upload_limit_mb
+  {:type "int", :required true, :default_value 10},
+  :system_key_directory
+  {:type "string",
+   :required true,
+   :description
+   "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+   :is_directory true,
+   :default_value "/etc/dse/conf"},
+  :tiered_storage_options
+  {:type "user_defined",
+   :key_name "strategy_name",
+   :value_type "dict",
+   :order [:tiers
+           :local_options],
+   :fields
+   {:tiers
+    {:type "list",
+     :value_type "dict",
+     :order [:paths],
+     :fields {:paths {:type "list", :value_type "string"}}},
+    :local_options {:type "user_defined", :value_type "string"}}},
+  :solr_slow_sub_query_log_options
+  {:type "dict",
+   :order [:enabled],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds
+    {:type "int",
+     :required false,
+     :default_value 604800,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :async_writers
+    {:type "int",
+     :required false,
+     :default_value 1,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :threshold_ms
+    {:type "int",
+     :required false,
+     :default_value 100,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :advanced_replication_options
+  {:type "dict",
+   :order
+   [:enabled
+    :conf_driver_password_encryption_enabled
+    :advanced_replication_directory
+    :security_base_path],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :conf_driver_password_encryption_enabled
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :advanced_replication_directory
+    {:type "string",
+     :description
+     "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+     :is_directory true,
+     :default_value "/var/lib/cassandra/advrep",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :security_base_path
+    {:type "string",
+     :is_directory true,
+     :default_value "/var/lib/cassandra/advrep/security",
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :solr_index_stats_options
+  {:type "dict",
+   :order [:enabled],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds
+    {:type "int",
+     :required false,
+     :default_value 604800,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 60000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :internode_messaging_options
+  {:type "dict",
+   :order
+   [:port
+    :frame_length_in_mb
+    :server_acceptor_threads
+    :server_worker_threads
+    :client_max_connections
+    :client_worker_threads
+    :handshake_timeout_seconds
+    :client_request_timeout_seconds],
+   :fields
+   {:port {:type "int", :required true, :default_value 8609},
+    :frame_length_in_mb {:type "int", :default_value 256},
+    :server_acceptor_threads {:type "int", :default_value 8},
+    :server_worker_threads {:type "int", :default_value 16},
+    :client_max_connections {:type "int", :default_value 100},
+    :client_worker_threads {:type "int", :default_value 16},
+    :handshake_timeout_seconds {:type "int", :default_value 10},
+    :client_request_timeout_seconds {:type "int", :default_value 60}}},
+  :user_level_latency_tracking_options
+  {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms
+           :top_stats_limit
+           :quantiles],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 10000,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :top_stats_limit
+    {:type "int",
+     :required false,
+     :default_value 100,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :quantiles
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :ldap_options
+  {:type "dict",
+   :order [:server_host
+           :server_port
+           :search_dn
+           :search_password
+           :use_ssl
+           :use_tls
+           :truststore_path
+           :truststore_password
+           :truststore_type
+           :user_search_base
+           :user_search_filter
+           :user_memberof_attribute
+           :group_search_type
+           :group_search_base
+           :group_search_filter
+           :group_name_attribute
+           :credentials_validity_in_ms
+           :search_validity_in_seconds
+           :connection_pool],
+   :fields
+   {:connection_pool
+    {:type "dict",
+     :order [:max_active
+             :max_idle],
+     :fields
+     {:max_active {:type "int", :required false, :default_value 8},
+      :max_idle {:type "int", :required false, :default_value 8}}},
+    :search_validity_in_seconds
+    {:type "int", :required false, :default_value 0},
+    :user_search_base
+    {:type "string", :required false, :default_value ""},
+    :search_dn {:type "string", :required false, :default_value ""},
+    :group_search_filter
+    {:type "string", :default_value "(uniquemember={0})"},
+    :credentials_validity_in_ms
+    {:type "int", :required false, :default_value 0},
+    :group_search_type
+    {:type "string",
+     :options
+     [{:label "directory_search", :value "directory_search"}
+      {:label "memberof_search", :value "memberof_search"}],
+     :default_value "directory_search"},
+    :user_search_filter
+    {:type "string", :required false, :default_value "(uid={0})"},
+    :truststore_type
+    {:type "string", :required false, :default_value "jks"},
+    :group_search_base {:type "string"},
+    :truststore_path
+    {:type "string", :required false, :default_value ""},
+    :use_tls {:type "boolean", :required true, :default_value false},
+    :truststore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length, :params {:min 6}}],
+     :required false},
+    :use_ssl {:type "boolean", :required true, :default_value false},
+    :group_name_attribute {:type "string", :default_value "cn"},
+    :server_host {:type "string", :required false, :default_value ""},
+    :server_port {:type "int", :required false, :default_value 389},
+    :search_password
+    {:type "string",
+     :password true,
+     :required false,
+     :default_value ""},
+    :user_memberof_attribute
+    {:type "string", :default_value "memberof"}}},
+  :async_bootstrap_reindex
+  {:type "boolean", :required true, :default_value false},
+  :role_management_options
+  {:type "dict",
+   :order [:mode],
+   :fields
+   {:mode
+    {:type "string",
+     :options
+     [{:label "internal", :value "internal"}
+      {:label "ldap", :value "ldap"}]}}},
+  :solr_update_handler_metrics_options
+  {:type "dict",
+   :order [:enabled],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds
+    {:type "int",
+     :required false,
+     :default_value 604800,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 60000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :shard_transport_options
+  {:type "dict",
+   :order [:netty_client_request_timeout],
+   :fields
+   {:netty_client_request_timeout
+    {:type "int", :required false, :default_value 60000}}},
+  :cql_solr_query_paging
+  {:type "string", :required false, :default_value "off"},
+  :solr_field_cache_enabled
+  {:type "boolean", :required true, :default_value false},
+  :enable_index_disk_failure_policy
+  {:type "boolean", :required true, :default_value false},
+  :solr_request_handler_metrics_options
+  {:type "dict",
+   :order [:enabled
+           :ttl_seconds
+           :refresh_rate_ms],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds
+    {:type "int",
+     :required false,
+     :default_value 604800,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 60000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :spark_cluster_info_options
+  {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 10000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :authorization_options
+  {:type "dict",
+   :order [:enabled
+           :allow_row_level_security
+           :transitional_mode],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :transitional_mode
+    {:type "string",
+     :options
+     [{:label "disabled", :value "disabled"}
+      {:label "normal", :value "normal"}
+      {:label "strict", :value "strict"}],
+     :default_value "disabled",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :allow_row_level_security
+    {:type "boolean",
+     :depends :enabled,
+     :required true,
+     :default_value false,
+     :conditional [{:eq true}]}}},
+  :lease_metrics_options
+  {:type "dict",
+   :order [:enabled],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds
+    {:type "int",
+     :required false,
+     :default_value 604800,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :ttl_index_rebuild_options
+  {:type "dict",
+   :order [:fixed_rate_period
+           :initial_delay
+           :max_docs_per_batch
+           :thread_pool_size],
+   :fields
+   {:fixed_rate_period
+    {:type "int", :required false, :default_value 300},
+    :initial_delay {:type "int", :required false, :default_value 20},
+    :max_docs_per_batch
+    {:type "int", :required false, :default_value 4096},
+    :thread_pool_size {:type "int", :default_value 1}}},
+  :node_health_options
+  {:type "dict",
+   :order [:refresh_rate_ms
+           :uptime_ramp_up_period_seconds
+           :dropped_mutation_window_minutes],
+   :fields
+   {:refresh_rate_ms
+    {:type "int", :required true, :default_value 60000},
+    :uptime_ramp_up_period_seconds
+    {:type "int", :required true, :default_value 10800},
+    :dropped_mutation_window_minutes
+    {:type "int", :required true, :default_value 30}}},
+  :max_memory_to_lock_mb
+  {:type "int", :required false, :default_value 10240},
+  :solr_latency_snapshot_options
+  {:type "dict",
+   :order [:enabled
+           :ttl_seconds
+           :refresh_rate_ms],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds
+    {:type "int",
+     :required false,
+     :default_value 604800,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 60000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :spark_shared_secret_bit_length
+  {:type "int", :required true, :default_value 256},
+  :solr_data_dir {:type "string", :required false},
+  :config_encryption_active
+  {:type "boolean", :required true, :default_value false},
+  :spark_process_runner
+  {:type "dict",
+   :order [:runner_type
+           :run_as_runner_options],
+   :fields
+   {:runner_type
+    {:type "string",
+     :options
+     [{:label "default", :value "default"}
+      {:label "run_as", :value "run_as"}],
+     :default_value "default"},
+    :run_as_runner_options
+    {:type "dict",
+     :depends :runner_type,
+     :conditional [{:eq "run_as"}],
+     :order [:user_slots],
+     :fields
+     {:user_slots
+      {:type "list",
+       :required true,
+       :value_type "string",
+       :default_value ["slot1" "slot2"]}}}}},
+  :resource_manager_options
+  {:type "dict",
+   :required false,
+   :order [:worker_options]
+   :fields
+   {:worker_options
+    {:type "dict",
+     :order [:cores_total
+             :memory_total
+             :workpools],
+     :fields
+     {:cores_total
+      {:type "string", :required true, :default_value "0.7"},
+      :memory_total
+      {:type "string", :required true, :default_value "0.6"},
+      :workpools
+      {:type "list",
+       :value_type "dict",
+       :default_value
+       [],
+       :order [:name
+               :cores
+               :memory],
+       :fields
+       {:name {:type "string", :required false},
+        :cores {:type "string", :required false},
+        :memory {:type "string", :required false}}}}}}},
+  :kmip_hosts
+  {:type "user_defined",
+   :key_name "kmip_groupname",
+   :value_type "dict",
+   :summary_fields [:hosts],
+   :order [:hosts
+           :keystore_path
+           :keystore_type
+           :keystore_password
+           :truststore_path
+           :truststore_type
+           :truststore_password
+           :key_cache_millis
+           :timeout],
+   :fields
+   {:keystore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length, :params {:min 6}}],
+     :required false},
+    :hosts {:type "string", :required false},
+    :truststore_type {:type "string", :required false},
+    :truststore_path {:type "string", :required false},
+    :key_cache_millis
+    {:type "int", :required false, :default_value 300000},
+    :truststore_password
+    {:type "string",
+     :password true,
+     :validators [{:name :length, :params {:min 6}}],
+     :required false},
+    :keystore_type
+    {:type "string", :required false, :default_value "jks"},
+    :keystore_path {:type "string", :required false},
+    :timeout {:type "int", :required false, :default_value 1000}}},
+  :spark_ui_options
+  {:type "dict",
+   :order [:encryption
+           :encryption_options],
+   :fields
+   {:encryption
+    {:type "string",
+     :options
+     [{:label "inherit", :value "inherit"}
+      {:label "custom", :value "custom"}],
+     :default_value "inherit"},
+    :encryption_options
+    {:type "dict",
+     :order [:enabled
+             :keystore
+             :keystore_type
+             :keystore_password
+             :truststore
+             :truststore_type
+             :truststore_password
+             :protocol
+             :algorithm
+             :cipher_suites
+             :require_client_auth]
+     :fields
+     {:keystore
+      {:type "string",
+       :depends :enabled,
+       :required true,
+       :is_file true,
+       :default_value "/etc/dse/conf/.ui-keystore",
+       :conditional [{:eq true}]},
+      :cipher_suites
+      {:type "list",
+       :depends :enabled,
+       :required false,
+       :value_type "string",
+       :default_value
+       ["TLS_RSA_WITH_AES_128_CBC_SHA"
+        "TLS_RSA_WITH_AES_256_CBC_SHA"
+        "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
+        "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
+        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"],
+       :conditional [{:eq true}]},
+      :keystore_password
+      {:type "string",
+       :password true,
+       :validators [{:name :length, :params {:min 6}}],
+       :depends :enabled,
+       :required true,
+       :default_value "cassandra",
+       :conditional [{:eq true}]},
+      :keystore_type
+      {:type "string",
+       :required false,
+       :default_value "JKS",
+       :options [{:label "JKS" :value "JKS"}
+                 {:label "JCEKS" :value "JCEKS"}
+                 {:label "PKCS12" :value "PKCS12"}
+                 {:label "PKCS11" :value "PKCS11"}],
+       :depends :enabled,
+       :conditional [{:eq true}]},
+      :algorithm
+      {:type "string",
+       :depends :enabled,
+       :required false,
+       :default_value "SunX509",
+       :conditional [{:eq true}]},
+      :protocol
+      {:type "string",
+       :depends :enabled,
+       :required false,
+       :default_value "TLS",
+       :conditional [{:eq true}]},
+      :truststore_password
+      {:type "string",
+       :password true,
+       :validators [{:name :length, :params {:min 6}}],
+       :depends :require_client_auth,
+       :required false,
+       :default_value "cassandra",
+       :conditional [{:eq true}]},
+      :truststore_type
+      {:type "string",
+       :required false,
+       :default_value "JKS",
+       :options [{:label "JKS" :value "JKS"}
+                 {:label "JCEKS" :value "JCEKS"}
+                 {:label "PKCS12" :value "PKCS12"}
+                 {:label "PKCS11" :value "PKCS11"}],
+       :depends :enabled,
+       :conditional [{:eq true}]},
+      :require_client_auth
+      {:type "boolean",
+       :depends :enabled,
+       :required true,
+       :default_value false,
+       :conditional [{:eq true}]},
+      :truststore
+      {:type "string",
+       :depends :require_client_auth,
+       :required false,
+       :is_file true,
+       :default_value "/etc/dse/conf/.ui-truststore",
+       :conditional [{:eq true}]},
+      :enabled
+      {:type "boolean", :required true, :default_value false}}}}},
+  :graph_events
+  {:type "dict",
+   :order [:ttl_seconds],
+   :fields {:ttl_seconds {:type "int", :default_value 600}}},
+  :cql_system_info_options
+  {:type "dict",
+   :order [:enabled],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 10000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :system_info_encryption
+  {:type "dict",
+   :order [:enabled
+           :cipher_algorithm
+           :secret_key_strength
+           :chunk_length_kb
+           :key_provider
+           :kmip_host],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :cipher_algorithm
+    {:type "string",
+     :required false,
+     :default_value "AES",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :secret_key_strength
+    {:type "int",
+     :required false,
+     :default_value 128,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :chunk_length_kb
+    {:type "int",
+     :required false,
+     :default_value 64,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :key_provider
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :kmip_host
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :dsefs_options
+  {:type "dict",
+   :order
+   [:enabled
+    :keyspace_name
+    :work_dir
+    :public_port
+    :private_port
+    :data_directories
+    :service_startup_timeout_ms
+    :service_close_timeout_ms
+    :server_close_timeout_ms
+    :compression_frame_max_size
+    :query_cache_size
+    :query_cache_expire_after_ms
+    :internode_authentication
+    :gossip_options
+    :rest_options
+    :transaction_options
+    :block_allocator_options],
+   :fields
+   {:data_directories
+    {:type "list",
+     :value_type "dict",
+     :default_value
+     [{:dir "/var/lib/dsefs/data",
+       :storage_weight 1.0,
+       :min_free_space 268435456}],
+     :order [:dir
+             :storage_weight
+             :min_free_space],
+     :fields
+     {:dir
+      {:type "string",
+       :is_directory true,
+       :default_value "/var/lib/dsefs/data"},
+      :storage_weight {:type "float", :default_value 1.0},
+      :min_free_space {:type "int", :default_value 268435456}},
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :query_cache_size
+    {:type "int",
+     :required true,
+     :default_value 2048,
+     :unit "cached elements"},
+    :keyspace_name
+    {:type "string",
+     :default_value "dsefs",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :internode_authentication
+    {:type "dict",
+     :order [:enabled
+             :algorithm],
+     :fields
+     {:enabled
+      {:type "boolean"
+       :required true
+       :default_value true}
+      :algorithm
+      {:type "string"
+       :required true
+       :default_value "HmacSHA256"}}}
+    :block_allocator_options
+    {:type "dict",
+     :order [:overflow_margin_mb
+             :overflow_factor],
+     :fields
+     {:overflow_margin_mb
+      {:type "int", :required true, :default_value 1024, :unit "MB"},
+      :overflow_factor
+      {:type "float", :required true, :default_value 1.05}},
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :server_close_timeout_ms
+    {:type "int",
+     :default_value 2147483647,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :compression_frame_max_size
+    {:type "int",
+     :default_value 1048576,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :private_port
+    {:type "int",
+     :default_value 5599,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :query_cache_expire_after_ms
+    {:type "int",
+     :required true,
+     :default_value 2000,
+     :unit "milliseconds"},
+    :service_startup_timeout_ms
+    {:type "int",
+     :default_value 30000,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :gossip_options
+    {:type "dict",
+     :depends :enabled,
+     :order [:round_delay_ms
+             :startup_delay_ms
+             :shutdown_delay_ms],
+     :fields
+     {:round_delay_ms
+      {:type "int", :required false, :default_value 2000},
+      :startup_delay_ms {:type "int", :default_value 5000},
+      :shutdown_delay_ms
+      {:type "int", :required false, :default_value 10000}},
+     :conditional [{:eq true}]},
+    :public_port
+    {:type "int",
+     :default_value 5598,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :transaction_options
+    {:type "dict",
+     :depends :enabled,
+     :order [:transaction_timeout_ms
+             :conflict_retry_delay_ms
+             :conflict_retry_count
+             :execution_retry_delay_ms
+             :execution_retry_count],
+     :fields
+     {:transaction_timeout_ms {:type "int", :default_value 60000},
+      :conflict_retry_delay_ms {:type "int", :default_value 10},
+      :conflict_retry_count {:type "int", :default_value 40},
+      :execution_retry_delay_ms {:type "int", :default_value 1000},
+      :execution_retry_count {:type "int", :default_value 3}},
+     :conditional [{:eq true}]},
+    :enabled
+    {:type "boolean",
+     :required false,
+     :default_value nil,
+     :description
+     "Default instructs this node to enable DSEFS only if the node is configured with an analytic workload."},
+    :work_dir
+    {:type "string",
+     :description
+     "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it.",
+     :is_directory true,
+     :default_value "/var/lib/dsefs",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :rest_options
+    {:type "dict",
+     :depends :enabled,
+     :order [:request_timeout_ms
+             :connection_open_timeout_ms
+             :client_close_timeout_ms
+             :server_request_timeout_ms
+             :idle_connection_timeout_ms
+             :internode_idle_connection_timeout_ms
+             :core_max_concurrent_connections_per_host],
+     :fields
+     {:request_timeout_ms {:type "int", :default_value 330000},
+      :connection_open_timeout_ms {:type "int", :default_value 55000},
+      :client_close_timeout_ms {:type "int", :default_value 60000},
+      :server_request_timeout_ms {:type "int", :default_value 300000},
+      :idle_connection_timeout_ms {:type "int", :default_value 0},
+      :internode_idle_connection_timeout_ms
+      {:type "int", :required false, :unit "ms"},
+      :core_max_concurrent_connections_per_host
+      {:type "int", :required false}},
+     :conditional [{:eq true}]},
+    :service_close_timeout_ms
+    {:type "int",
+     :default_value 600000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :config_encryption_key_name
+  {:type "string",
+   :required false,
+   :default_value "system_key",
+   :depends :config_encryption_active,
+   :conditional [{:eq true}]},
+  :performance_max_threads
+  {:type "int", :default_value 324, :required false},
+  :cluster_summary_stats_options
+  {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 10000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :graph
+  {:type "dict",
+   :order
+   [:adjacency_cache_size_in_mb
+    :analytic_evaluation_timeout_in_minutes
+    :index_cache_size_in_mb
+    :max_query_queue
+    :max_query_threads
+    :realtime_evaluation_timeout_in_seconds
+    :schema_agreement_timeout_in_ms
+    :system_evaluation_timeout_in_seconds
+    :gremlin_server],
+   :fields
+   {:max_query_params
+    {:type "int",
+     :required false,
+     :default_value 16,
+     :unit "parameters per graph query"},
+    :adjacency_cache_size_in_mb
+    {:type "int", :required false, :default_value 128},
+    :system_evaluation_timeout_in_seconds
+    {:type "int", :required false, :default_value 180},
+    :gremlin_server
+    {:type "dict",
+     :order [:port
+             :threadPoolWorker
+             :gremlinPool
+             :scriptEngines],
+     :fields
+     {:port {:type "int", :required false, :default_value 8182},
+      :threadPoolWorker
+      {:type "int", :required false, :default_value 2},
+      :gremlinPool {:type "int", :required false, :default_value 0},
+      :scriptEngines
+      {:type "dict",
+       :required false,
+       :order [:gremlin-groovy]
+       :fields
+       {:gremlin-groovy
+        {:type "dict",
+         :order [:config]
+         :fields
+         {:config
+          {:type "dict",
+           :order [:sandbox_enabled
+                   :sandbox_rules]
+           :fields
+           {:sandbox_enabled
+            {:type "boolean", :required true, :default_value false},
+            :sandbox_rules
+            {:type "dict",
+             :depends :sandbox_enabled,
+             :order [:whitelist_packages
+                     :whitelist_types
+                     :whitelist_supers]
+             :fields
+             {:whitelist_packages {:type "list", :value_type "string"},
+              :whitelist_types {:type "list", :value_type "string"},
+              :whitelist_supers {:type "list", :value_type "string"}},
+             :conditional [{:eq true}]}}}}}}}}},
+    :index_cache_size_in_mb
+    {:type "int", :required false, :default_value 128},
+    :analytic_evaluation_timeout_in_minutes
+    {:type "int", :required false, :default_value 10080},
+    :schema_agreement_timeout_in_ms
+    {:type "int", :required false, :default_value 10000},
+    :max_query_threads {:type "int", :required false},
+    :realtime_evaluation_timeout_in_seconds
+    {:type "int", :required false, :default_value 30},
+    :max_query_queue
+    {:type "int", :required false, :default_value 10000}}},
+  :db_summary_stats_options
+  {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 10000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :spark_application_info_options
+  {:type "dict",
+   :order [:enabled
+           :refresh_rate_ms
+           :driver],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 10000,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :driver
+    {:type "dict",
+     :depends :enabled,
+     :order [:sink
+             :connectorSource
+             :jvmSource
+             :stateSource],
+     :fields
+     {:sink {:type "boolean", :required true, :default_value false},
+      :connectorSource
+      {:type "boolean", :required true, :default_value false},
+      :jvmSource
+      {:type "boolean", :required true, :default_value false},
+      :stateSource
+      {:type "boolean", :required true, :default_value false}},
+     :conditional [{:eq true}]},
+    :executor
+    {:type "dict",
+     :depends :enabled,
+     :order [:sink
+             :connectorSource
+             :jvmSource],
+     :fields
+     {:sink {:type "boolean", :required true, :default_value false},
+      :connectorSource
+      {:type "boolean", :required true, :default_value false},
+      :jvmSource
+      {:type "boolean", :required true, :default_value false}},
+     :conditional [{:eq true}]}}},
+  :authentication_options
+  {:type "dict",
+   :order
+   [:enabled
+    :default_scheme
+    :other_schemes
+    :scheme_permissions
+    :allow_digest_with_kerberos
+    :plain_text_without_ssl
+    :transitional_mode],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value true},
+    :default_scheme
+    {:type "string",
+     :options
+     [{:label "kerberos", :value "kerberos"}
+      {:label "ldap", :value "ldap"}
+      {:label "internal", :value "internal"}],
+     :default_value "internal",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :other_schemes
+    {:type "list",
+     :value_type "string",
+     :default_value [],
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :scheme_permissions
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :allow_digest_with_kerberos
+    {:type "boolean",
+     :required true,
+     :default_value true,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :plain_text_without_ssl
+    {:type "string",
+     :options
+     [{:label "block", :value "block"}
+      {:label "warn", :value "warn"}
+      {:label "allow", :value "allow"}],
+     :default_value "warn",
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :transitional_mode
+    {:type "string",
+     :options
+     [{:label "disabled", :value "disabled"}
+      {:label "permissive", :value "permissive"}
+      {:label "normal", :value "normal"}
+      {:label "strict", :value "strict"}],
+     :default_value "disabled",
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :performance_queue_capacity {:type "int", :default_value 32000},
+  :audit_logging_options
+  {:type "dict",
+   :order [:enabled
+           :logger
+           :included_categories
+           :excluded_categories
+           :included_keyspaces
+           :excluded_keyspaces
+           :included_roles
+           :excluded_roles
+           :retention_time
+           :cassandra_audit_writer_options],
+   :fields
+   {:excluded_categories
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :included_roles
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :included_categories
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :excluded_roles
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :logger
+    {:type "string",
+     :required false,
+     :default_value "SLF4JAuditWriter",
+     :depends :enabled,
+     :options
+     [{:label "SLF4JAuditWriter", :value "SLF4JAuditWriter"}
+      {:label "CassandraAuditWriter", :value "CassandraAuditWriter"}],
+     :conditional [{:eq true}]},
+    :excluded_keyspaces
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :included_keyspaces
+    {:type "string",
+     :required false,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :enabled {:type "boolean", :required true, :default_value false},
+    :cassandra_audit_writer_options
+    {:type "dict",
+     :depends :logger,
+     :conditional [{:eq "CassandraAuditWriter"}],
+     :order [:mode
+             :batch_size
+             :flush_time
+             :queue_size
+             :write_consistency
+             :dropped_event_log
+             :day_partition_millis],
+     :fields
+     {:mode
+      {:type "string",
+       :required true,
+       :default_value "sync",
+       :options
+       [{:label "sync", :value "sync"}
+        {:label "async", :value "async"}]},
+      :batch_size
+      {:type "int",
+       :required true,
+       :default_value 50,
+       :depends :mode,
+       :conditional [{:eq "async"}]},
+      :flush_time
+      {:type "int",
+       :required true,
+       :default_value 25,
+       :depends :mode,
+       :conditional [{:eq "async"}]},
+      :queue_size {:type "int", :required true, :default_value 30000},
+      :write_consistency
+      {:type "string", :required true, :default_value "QUORUM"},
+      :dropped_event_log
+      {:type "string",
+       :required false,
+       :is_file true,
+       :default_value "/var/log/cassandra/dropped_audit_events.log"},
+      :day_partition_millis
+      {:type "int", :required false, :default_value 3600000}}},
+    :retention_time
+    {:type "int",
+     :required false,
+     :default_value 0,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :cql_solr_query_row_timeout
+  {:type "int", :required false, :default_value 10000},
+  :performance_core_threads
+  {:type "int", :default_value 4, :required false},
+  :solr_encryption_options
+  {:type "dict",
+   :required false,
+   :order [:decryption_cache_offheap_allocation
+           :decryption_cache_size_in_mb],
+   :fields
+   {:decryption_cache_offheap_allocation
+    {:type "boolean", :required true, :default_value true},
+    :decryption_cache_size_in_mb
+    {:type "int", :required false, :default_value 256}}},
+  :flush_max_time_per_core
+  {:type "int", :required false, :default_value 5},
+  :enable_health_based_routing
+  {:type "boolean", :required true, :default_value true},
+  :solr_cache_stats_options
+  {:type "dict",
+   :order [:enabled
+           :ttl_seconds],
+   :fields
+   {:enabled {:type "boolean", :required true, :default_value false},
+    :ttl_seconds
+    {:type "int",
+     :required false,
+     :default_value 604800,
+     :depends :enabled,
+     :conditional [{:eq true}]},
+    :refresh_rate_ms
+    {:type "int",
+     :required false,
+     :default_value 60000,
+     :depends :enabled,
+     :conditional [{:eq true}]}}},
+  :ram_buffer_heap_space_in_mb
+  {:type "int", :required false, :default_value 1024},
+  :spark_daemon_readiness_assertion_interval
+  {:type "int", :default_value 1000},
+  :insights_options
+  {:type "dict"
+   :order [:data_dir, :log_dir]
+   :fields
+   {:data_dir {:type "string", :is_directory true},
+    :log_dir {:type "string", :is_directory true}}}},
+ :groupings
+ [{:name "DSE Authenticator Options", :list ["authentication_options"]}
+  {:name "DSE Role Management Options",
+   :list ["role_management_options"]}
+  {:name "DSE Authorizer Options", :list ["authorization_options"]}
+  {:name "DSE Graph", :list ["graph_events" "graph"]}
+  {:name "DSE Metrics Collector", :list ["insights_options"]}
+  {:name "DSE Filesystem Options", :list ["dsefs_options"]}
+  {:name "Kerberos Support", :list ["kerberos_options"]}
+  {:name "LDAP Options", :list ["ldap_options"]}
+  {:name "Solr Index Scheduler Settings",
+   :list ["ttl_index_rebuild_options"]}
+  {:name "Solr Shard Transport Options",
+   :list ["shard_transport_options"]}
+  {:name "Solr Indexing",
+   :list
+   ["solr_encryption_options"
+    "back_pressure_threshold_per_core"
+    "flush_max_time_per_core"
+    "load_max_time_per_core"
+    "solr_field_cache_enabled"]}
+  {:name "Solr CQL Query Options",
+   :list
+   ["solr_data_dir"
+    "cql_solr_query_row_timeout"
+    "cql_solr_query_paging"]}
+  {:name "Solr Performance Service Options",
+   :list
+   ["solr_slow_sub_query_log_options"
+    "solr_update_handler_metrics_options"
+    "solr_request_handler_metrics_options"
+    "solr_index_stats_options"
+    "solr_cache_stats_options"
+    "solr_resource_upload_limit_mb"
+    "solr_latency_snapshot_options"]}
+  {:name "Spark Service Options",
+   :list
+   ["spark_cluster_info_options"
+    "spark_application_info_options"
+    "spark_ui_options"
+    "spark_process_runner"]}
+  {:name "Cassandra Disk Failure Policy",
+   :list ["enable_index_disk_failure_policy"]}
+  {:name "CQL Performance Service Options",
+   :list
+   ["cql_slow_log_options"
+    "cql_system_info_options"
+    "resource_level_latency_tracking_options"
+    "db_summary_stats_options"
+    "cluster_summary_stats_options"
+    "histogram_data_options"
+    "user_level_latency_tracking_options"
+    "performance_core_threads"
+    "performance_max_threads"
+    "performance_queue_capacity"]}
+  {:name "Encryption Settings",
+   :description
+   "When config_encryption_active is enabled, DSE expects encrypted strings for several configuration values in dse.yaml and cassandra.yaml. LCM does not automatically encrypt these values; they must be manually encrypted and entered into the configuration profile. LCM passes through the encrypted values to DSE without any modification. For more details, refer to the <a href=\"http://docs.datastax.com/en/opscenter/help/DseYamlConfigEncrypt.html\" target=\"blank\">documentation</a>.",
+   :list
+   ["system_key_directory"
+    "config_encryption_active"
+    "config_encryption_key_name"
+    "system_info_encryption"]}
+  {:name "Audit Logging Settings", :list ["audit_logging_options"]}
+  {:name "KMIP Encryption Options", :list ["kmip_hosts"]}
+  {:name "AlwaysOn SQL Server Options", :list ["alwayson_sql_options"]}
+  {:name "Miscellaneous",
+   :list
+   ["spark_shared_secret_bit_length"
+    "spark_security_enabled"
+    "spark_security_encryption_enabled"
+    "node_health_options"
+    "enable_health_based_routing"
+    "spark_daemon_readiness_assertion_interval"
+    "tiered_storage_options"
+    "async_bootstrap_reindex"
+    "advanced_replication_options"
+    "ram_buffer_offheap_space_in_mb"
+    "ram_buffer_heap_space_in_mb"
+    "max_memory_to_lock_fraction"
+    "max_memory_to_lock_mb"
+    "resource_manager_options"
+    "lease_metrics_options"
+    "internode_messaging_options"]}]}

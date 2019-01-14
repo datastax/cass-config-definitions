@@ -536,10 +536,15 @@
                       :required false}))
  "6.0.3" :no-change
  "6.0.4" :no-change
-  ;; End DSE 6.0.x transforms.
+ ;; End DSE 6.0.x transforms.
 
 
-  ;; Begin DSE 6.7.x transforms.
-  "6.7.0" "dse-yaml-dse-6.7.0.edn"
-  ;; End DSE 6.7.x transforms.
+ ;; Begin DSE 6.7.x transforms.
+ "6.7.0" "dse-yaml-dse-6.7.0.edn"
+ ;; End DSE 6.7.x transforms.
+
+
+ ;; Begin DSE 6.8.x transforms.
+ "6.8.0" "dse-yaml-dse-6.8.0.edn"
+ ;; End DSE 6.8.x transforms.
  )
