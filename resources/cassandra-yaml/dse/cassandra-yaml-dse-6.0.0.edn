@@ -246,7 +246,8 @@
    :required true,
    :options
    [{:label "heap_buffers", :value "heap_buffers"}
-    {:label "offheap_buffers", :value "offheap_buffers"}],
+    {:label "offheap_buffers", :value "offheap_buffers"},
+    {:label "offheap_objects", :value "offheap_objects"}],
    :default_value "heap_buffers"},
   :stream_throughput_outbound_megabits_per_sec
   {:type "int", :required false, :default_value 200, :unit "mbps"},
