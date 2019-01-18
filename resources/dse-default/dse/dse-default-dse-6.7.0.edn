@@ -12,16 +12,6 @@
    :label "Cassandra Log File",
    :is_file true,
    :default_value "/var/log/cassandra/output.log"},
-  :cassandra-conf
-  {:type "string",
-   :label "Cassandra Config Directory",
-   :is_directory true,
-   :default_value "/etc/dse/cassandra"},
-  :spark-conf-dir
-  {:type "string",
-   :label "Spark Config Directory",
-   :is_directory true,
-   :default_value "/etc/dse/spark"},
   :wait-for-start
   {:type "int",
    :required false,
@@ -46,7 +36,5 @@
  [{:name "General",
    :list
    ["output-file"
-    "cassandra-conf"
-    "spark-conf-dir"
     "wait-for-start"
     "wait-for-start-sleep"]}]}

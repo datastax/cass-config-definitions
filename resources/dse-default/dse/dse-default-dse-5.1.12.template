@@ -41,7 +41,7 @@ fi
 OUTPUT_FILE={{output-file}}
 
 # Configuration directory
-CASSANDRA_CONF={{cassandra-conf}}
+CASSANDRA_CONF=/etc/dse/cassandra
 
 # Set the PID file location here
 PIDFILE=/var/run/$NODEID/$NODEID.pid
@@ -63,7 +63,7 @@ CASSANDRA_GROUP=cassandra
 #SPARK_HOME=your_spark_install_location
 
 # Spark configuration files location
-SPARK_CONF_DIR={{spark-conf-dir}}
+SPARK_CONF_DIR=/etc/dse/spark
 
 # Uncomment and increase/decrease if you want longer/shorter waits checking if the service is up
 {{wait-for-start}}
