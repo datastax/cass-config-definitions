@@ -1,0 +1,98 @@
+;; For more information, see:
+;; https://collectd.org/documentation/manpages/collectd.conf.5.shtml#plugin_write_graphite
+{:display-name "10-write-graphite",
+ :package-path "/usr/share/dse/collectd/etc/collectd/10-write-graphite.conf",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ ;; jvm.options is only valid for DSE 6.7.0 and greater
+ :valid-dse-versions [:gte "6.7.0"],
+ :renderer
+ {:renderer-type :template,
+  :template "10-write-graphite-conf-dse-6.7.0.template"},
+ :properties
+ {
+  ;; General Options
+
+  :enabled
+  {:type "boolean",
+   :required true,
+   :label
+   "Enable Graphite",
+   :default_value false},
+
+  :nodes
+  {:type "user_defined",
+   :key_name "node-name",
+   :value_type "dict",
+   :depends :enabled,
+   :conditional [{:eq true}],
+   :summary_fields [:host]
+   :order [:host
+           :port
+           :reconnect-interval
+           :prefix
+           :postfix
+           :protocol
+           :log-send-errors
+           :escape-character
+           :separate-instances
+           :store-rates
+           :preserve-separator
+           :drop-duplicate-fields
+           :always-append-ds],
+   :fields
+   {:host
+    {:type "string",
+     :required true,
+     :default_value false},
+    :port
+    {:type "int",
+     :required true,
+     :default_value 2003},
+    :reconnect-interval
+    {:type "int",
+     :required false},
+
+    :prefix
+    {:type "string",
+     :required false},
+    :postfix
+    {:type "string",
+     :required false},
+    :protocol
+    {:type "string",
+     :required false},
+
+    :log-send-errors
+    {:type "boolean",
+     :required true,
+     :default_value false},
+    :escape-character
+    {:type "string",
+     :required true,
+     :default_value "_"},
+    :separate-instances
+    {:type "boolean",
+     :required true,
+     :default_value true},
+    :store-rates
+    {:type "boolean",
+     :required true,
+     :default_value false},
+    :preserve-separator
+    {:type "boolean",
+     :required true,
+     :default_value false},
+    :drop-duplicate-fields
+    {:type "boolean",
+     :required true,
+     :default_value false},
+    :always-append-ds
+    {:type "boolean",
+     :required true,
+     :default_value false}}}},
+ :groupings
+ [{:name "General Parameters",
+   :list
+   ["enabled",
+    "nodes"]}]}

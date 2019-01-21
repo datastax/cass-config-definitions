@@ -1,0 +1,12 @@
+
+{% if enabled %}
+LoadPlugin write_prometheus
+
+<Plugin write_prometheus>
+  Port "{{port}}"
+  {% if staleness-delta %}
+  StalenessDelta "{{staleness-delta}}"
+  {% endif %}
+</Plugin>
+{% endif %}
+
