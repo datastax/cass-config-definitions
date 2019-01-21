@@ -1,0 +1,116 @@
+;; For more information, see: 
+;; https://collectd.org/documentation/manpages/collectd.conf.5.shtml#plugin_statsd
+{:display-name "10-statsd.conf",
+ :package-path "/usr/share/dse/collectd/etc/collectd/10-statsd.conf",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ ;; jvm.options is only valid for DSE 6.7.0 and greater
+ :valid-dse-versions [:gte "6.7.0"],
+ :renderer
+ {:renderer-type :template,
+  :template "10-statsd-conf-dse-6.7.0.template"},
+ :properties
+ {
+  ;; General Options
+
+  :enabled
+  {:type "boolean",
+   :required true,
+   :label
+   "Enable Statsd",
+   :default_value false},
+
+  :host
+  {:type "int",
+   :label "Host",
+   :default_value "::",
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+  :port
+  {:type "int",
+   :label "Port",
+   :default_value "8125",
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+
+  :delete-counters
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+  :delete-timers
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+  :delete-gauges
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+  :delete-sets
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+  :counter-sum
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+
+  :timer-percentiles
+  {:type "list",
+   :label "TimerPercentiles",
+   :value_type "string",
+   :default_value [],
+   :depends :enabled,
+   :conditional [{:eq true}]}
+
+  :timer-lower
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+  :timer-upper
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+  :timer-sum
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}
+  :timer-count
+  {:type "boolean",
+   :default_value false,
+   :required true,
+   :depends :enabled,
+   :conditional [{:eq true}]}},
+ :groupings
+ [{:name "General Parameters",
+   :list
+   ["enabled",
+    "host",
+    "port",
+    "delete-counters",
+    "delete-timers",
+    "delete-gauges",
+    "delete-sets",
+    "counter-sum",
+    "timer-percentiles",
+    "timer-lower",
+    "timer-upper",
+    "timer-sum",
+    "timer-count"]}]}

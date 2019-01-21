@@ -1,0 +1,20 @@
+
+{% if enabled %}
+LoadPlugin statsd
+<Plugin statsd>
+  Host "{{host}}"
+  Port "{{port}}"
+  DeleteCounters {{delete-counters}}
+  DeleteTimers   {{delete-timers}}
+  DeleteGauges   {{delete-gauges}}
+  DeleteSets     {{delete-sets}}
+  CounterSum     {{counter-sum}}
+{% for percentile in timer-percentiles %}{{percentile}}
+{% endfor %}
+  TimerLower     {{timer-lower}}
+  TimerUpper     {{timer-upper}}
+  TimerSum       {{timer-sum}}
+  TimerCount     {{timer-count}}
+</Plugin>
+{% endif %}
+

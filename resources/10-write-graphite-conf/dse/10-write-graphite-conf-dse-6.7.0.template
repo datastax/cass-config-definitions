@@ -1,0 +1,35 @@
+
+{% if enabled %}
+LoadPlugin "write_graphite"
+
+<Plugin "write_graphite">
+{% for node in nodes%}
+{% comment %}The |json removes a preceeding : from a keyword. Also note that |json will add quotation marks.{% endcomment %}
+ <Node {{node.0|json}}>
+   Host "{{node.1.host}}"
+   Port "{{node.1.port}}"
+   {% if node.1.reconnect-interval %}
+   ReconnectInterval "{{node.1.reconnect-interval}}"
+   {% endif %}
+   {% if node.1.prefix %}
+   Prefix "{{node.1.prefix}}"
+   {% endif %}
+   {% if node.1.postfix %}
+   Postfix "{{node.1.postfix}}"
+   {% endif %}
+   {% if node.1.protocol %}
+   Protocol "{{node.1.protocol}}"
+   {% endif %}
+   LogSendErrors {{node.1.log-send-errors}}
+   EscapeCharacter "{{node.1.escape-character}}"
+   SeparateInstances {{node.1.separate-instances}}
+   StoreRates {{node.1.store-rates}}
+   PreserveSeparator {{node.1.preserve-separator}}
+   DropDuplicateFields {{node.1.drop-duplicate-fields}}
+   AlwaysAppendDS {{node.1.always-append-ds}}
+ </Node>
+{% endfor %}
+
+</Plugin>
+{% endif %}
+
