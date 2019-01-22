@@ -999,7 +999,7 @@
      {:port {:type "int", :required false, :default_value 8182},
       :threadPoolWorker
       {:type "int", :required false, :default_value 2},
-      :gremlinPool {:type "int", :required false, :default_value 0},
+      :gremlinPool {:type "int", :required false},
       :scriptEngines
       {:type "dict",
        :required false,
