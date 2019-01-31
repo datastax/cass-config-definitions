@@ -61,14 +61,6 @@
 
   ;; General Options
 
-  :thread_priority_policy_42
-  {:type "boolean",
-   :required true,
-   :static_constant "-XX:ThreadPriorityPolicy=42",
-   :label
-   "Enable lowering thread priority without being root on linux",
-   :default_value true},
-
   ;; GC Options
 
   :g1r_set_updating_pause_time_percent
@@ -115,10 +107,7 @@
    :conditional [{:eq "G1GC"}],
    :constant "-XX:ConcGCThreads"}},
  :groupings
- [{:name "General JVM Parameters",
-   :list
-   ["thread_priority_policy_42"]}
-  {:name "Garbage Collector Settings",
+ [{:name "Garbage Collector Settings",
    :list
    ["garbage_collector"
     "g1r_set_updating_pause_time_percent"
