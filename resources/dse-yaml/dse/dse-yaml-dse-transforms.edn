@@ -536,8 +536,33 @@
                       :required false}))
  "6.0.3" :no-change
  "6.0.4" :no-change
+ "6.0.5" (transforms
+          (add-field :dsefs_options.internode_authentication
+                     {:type "dict"
+                      :fields
+                      {:enabled {:type "boolean"
+                                 :required false
+                                 :default_value true}
+                       :algorithm {:type "string"
+                                   :required false
+                                   :default_value "HmacSHA256"}}
+                      :order [:enabled :algorithm]})
+          (add-group "Insightful Monitoring"
+                     :after "DSE Authorizer Options")
+          (add-field :insights_options
+                     {:type "dict"
+                      :fields
+                      {:data_dir {:type "string"
+                                  :required false
+                                  :default_value "/var/lib/cassandra/insights_data"
+                                  :description "Directory to store insights data"}
+                       :log_dir {:type "string"
+                                 :required false
+                                 :default_value "/var/log/cassandra/"
+                                 :description "Directory tl store insights logs"}}
+                      :order [:data_dir :log_dir]}
+                      :group "Insightful Monitoring"))
  ;; End DSE 6.0.x transforms.
-
 
  ;; Begin DSE 6.7.x transforms.
  "6.7.0" "dse-yaml-dse-6.7.0.edn"

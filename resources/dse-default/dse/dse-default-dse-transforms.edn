@@ -106,10 +106,10 @@
             (add-field :wait-for-stop-sleep
                        {:type "float"
                         :required false
-                        :label "Wait for stop"
+                        :label "Wait for stop sleep"
                         :constant "WAIT_FOR_STOP_SLEEP"
                         :disabled true
-                        :default_value 60
+                        :default_value 0.5
                         :unit "seconds"}
                        :group "General"))
  ;; End DSE 5.1.x transforms.
@@ -121,6 +121,26 @@
  "6.0.2" :no-change
  "6.0.3" :no-change
  "6.0.4" :no-change
+ "6.0.5" (transforms
+          (update-template "dse-default-dse-6.0.5.template")
+          (add-field :wait-for-stop
+                     {:type "int"
+                      :required false
+                      :label "Wait for stop"
+                      :constant "WAIT_FOR_STOP"
+                      :disabled true
+                      :default_value 60
+                      :unit "seconds"}
+                     :group "General")
+          (add-field :wait-for-stop-sleep
+                     {:type "float"
+                      :required false
+                      :label "Wait for stop sleep"
+                      :constant "WAIT_FOR_STOP_SLEEP"
+                      :disabled true
+                      :default_value 0.5
+                      :unit "seconds"}
+                     :group "General"))
  ;; End DSE 6.0.x transforms.
 
 
