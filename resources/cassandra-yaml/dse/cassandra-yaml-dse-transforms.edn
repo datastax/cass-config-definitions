@@ -276,6 +276,11 @@
  ;; this change, but DSP-17191 was opened to fix that. Once DSP-17191 is
  ;; resolved this comment can be removed.
  "6.7.0" "cassandra-yaml-dse-6.7.0.edn"
+ "6.7.1" (transforms
+          (add-field
+           :echo_attempts_before_reset
+           {:type "int", :default_value 10, :required false}
+           :group "Cluster Communication"))
  ;; End DSE 6.7.x transforms.
 
 

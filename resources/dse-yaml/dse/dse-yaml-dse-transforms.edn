@@ -566,6 +566,31 @@
 
  ;; Begin DSE 6.7.x transforms.
  "6.7.0" "dse-yaml-dse-6.7.0.edn"
+ "6.7.1" (transforms
+          (add-field :dsefs_options.internode_authentication
+                     {:type "dict"
+                      :depends :enabled
+                      :order [:enabled :algorithm]
+                      :fields {
+                          :enabled {:type "boolean" :default_value true :required true}
+                          :algorithm {:type "string"
+                                      :depends :enabled
+                                      :required true
+                                      :default_value "HmacSHA256"}}})
+          (update-field :dsefs_options
+                        {:order [:enabled
+                                 :keyspace_name
+                                 :work_dir
+                                 :public_port
+                                 :private_port
+                                 :data_directories
+                                 :service_startup_timeout_ms
+                                 :service_close_timeout_ms
+                                 :internode_authentication
+                                 :gossip_options
+                                 :rest_options
+                                 :transaction_options
+                                 :block_allocator_options]}))
  ;; End DSE 6.7.x transforms.
 
 

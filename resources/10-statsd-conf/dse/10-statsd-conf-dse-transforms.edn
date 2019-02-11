@@ -82,6 +82,7 @@
 
  ;; Begin DSE 6.7.x transforms.
  "6.7.0" "10-statsd-conf-dse-6.7.0.edn"
+ "6.7.1" :no-change
  ;; End DSE 6.7.x transforms.
 
 

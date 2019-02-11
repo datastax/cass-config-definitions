@@ -82,6 +82,7 @@
 
  ;; Begin DSE 6.7.x transforms.
  "6.7.0" ()
+ "6.7.1" ()
  ;; End DSE 6.7.x transforms.
 
 

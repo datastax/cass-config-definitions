@@ -204,6 +204,8 @@
 
  ;; Begin DSE 6.7.x transforms.
  "6.7.0" "jvm-options-dse-6.7.0.edn"
+ "6.7.1" (transforms
+          (delete-field :page-align-direct-memory))
  ;; End DSE 6.7.x transforms.
 
 
