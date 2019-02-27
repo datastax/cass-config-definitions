@@ -7,6 +7,7 @@
  {:renderer-type :template,
   :template "cassandra-env-sh-dse-6.8.0.template"},
  :properties
+
  {:malloc-arena-max
   {:type "int",
    :constant "MALLOC_ARENA_MAX",
@@ -14,5 +15,22 @@
    :required false,
    :default_value 4,
    :disabled true,
-   :add-export true}},
- :groupings [{:name "General", :list ["malloc-arena-max"]}]}
+   :add-export true}
+
+  :enable_on_out_of_memory_error
+  {:type "boolean"
+   :required true
+   :default_value true
+   :description "Should the 'OnOutOfMemoryError' option be supplied to the JVM when launching DSE in order to provide a command that will be used to stop the JVM on OutOfMemoryError. This is useful to prevent potential data-corruption from executing on a JVM that fails to allocate memory reliably. This setting is mutually exclusive with ExitOnOutOfMemoryError and CrashOnOutOfMemoryError in the jvm.options files."}
+
+  :on_out_of_memory_error
+  {:type "string"
+   :depends :enable_on_out_of_memory_error
+   :required true
+   :default_value "kill -9 %p"
+   :description "The command used to kill the JVM when memory allocation fails."}
+  }
+ :groupings [{:name "General"
+              :list ["malloc-arena-max"
+                     "enable_on_out_of_memory_error"
+                     "on_out_of_memory_error"]}]}

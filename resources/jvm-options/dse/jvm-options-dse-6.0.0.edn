@@ -150,17 +150,12 @@
    :constant "-Dcassandra.printHeapHistogramOnOutOfMemoryError"
    :default_value false}
 
-  :on_out_of_memory_error
-  {:type "string"
-   :required true
-   :exclude-from-template-iterables true
-   :default_value "kill -9 %p"}
-
   :exit_on_out_of_memory_error
   {:type "boolean"
    :required true
    :static_constant "-XX:+ExitOnOutOfMemoryError"
    :label "Exit on out of memory error"
+   :description "Should the JVM exit when it encounters an out of memory error in order to prevent potential data-corruption from executing on a JVM that fails to allocate memory reliably. This setting is mutually exclusive with CrashOnOutOfMemoryError in this file and with CrashOnOutOfMemoryError in cassandra-env.sh."
    :default_value false}
 
   :crash_on_out_of_memory_error
@@ -170,6 +165,7 @@
    :depends :exit_on_out_of_memory_error
    :conditional [{:eq false}]
    :label "Crash on out of memory error"
+   :description "Should the JVM crash when it encounters an out of memory error in order to prevent potential data-corruption from executing on a JVM that fails to allocate memory reliably. This setting is mutually exclusive with ExitOnOutOfMemoryError in this file and with CrashOnOutOfMemoryError in cassandra-env.sh."
    :default_value false}
 
   :io_netty_eventloop_maxpendingtasks
@@ -652,7 +648,6 @@
     "perf_disable_shared_mem"
     "java_net_prefer_ipv4_stack"
     "print_heap_histogram_on_out_of_memory_error"
-    "on_out_of_memory_error"
     "exit_on_out_of_memory_error"
     "crash_on_out_of_memory_error"
     "io_netty_eventloop_maxpendingtasks"]}

@@ -19,8 +19,6 @@
 -XX:+UseG1GC
 {% endifequal %}
 
-JVM_ON_OUT_OF_MEMORY_ERROR_OPT="-XX:OnOutOfMemoryError={{on_out_of_memory_error}}"
-
 {% comment %} JMX Authentication and Configuration {% endcomment %}
 {% ifequal jmx-connection-type "local-no-auth" %}
 -Dcom.sun.management.jmxremote.authenticate=false
