@@ -241,6 +241,7 @@
  "5.1.10" :no-change
  "5.1.11" :no-change
  "5.1.12" :no-change
+ "5.1.13" :no-change
  ;; End DSE 5.1.x transforms.
 
 
@@ -266,6 +267,7 @@
                       :default_value 10
                       :required false}
                      :group  "Cluster Communication"))
+ "6.0.6" :no-change
  ;; End DSE 6.0.x transforms.
 
 
@@ -281,6 +283,7 @@
            :echo_attempts_before_reset
            {:type "int", :default_value 10, :required false}
            :group "Cluster Communication"))
+ "6.7.2" :no-change
  ;; End DSE 6.7.x transforms.
 
 
