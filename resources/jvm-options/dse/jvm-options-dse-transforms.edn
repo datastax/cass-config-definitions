@@ -142,6 +142,7 @@
                        :render-without-quotes true
                        :required false}
                       :group "Startup Parameters"))
+ "5.1.13" :no-change
  ;; End DSE 5.1.x transforms.
 
 
@@ -200,12 +201,14 @@
                       :required false}
                      :group "Startup Parameters")
           (delete-field :page-align-direct-memory))
+ "6.0.6" :no-change
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
  "6.7.0" "jvm-options-dse-6.7.0.edn"
  "6.7.1" (transforms
           (delete-field :page-align-direct-memory))
+ "6.7.2" :no-change
  ;; End DSE 6.7.x transforms.
 
 

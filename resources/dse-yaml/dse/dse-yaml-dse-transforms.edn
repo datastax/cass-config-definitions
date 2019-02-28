@@ -517,6 +517,7 @@
                        :required false
                        :default_value 8}))
  "5.1.12" :no-change
+ "5.1.13" :no-change
  ;; End DSE 5.1.x transforms.
 
 
@@ -561,7 +562,8 @@
                                  :default_value "/var/log/cassandra/"
                                  :description "Directory tl store insights logs"}}
                       :order [:data_dir :log_dir]}
-                      :group "Insightful Monitoring"))
+                     :group "Insightful Monitoring"))
+ "6.0.6" :no-change
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
@@ -591,6 +593,7 @@
                                  :rest_options
                                  :transaction_options
                                  :block_allocator_options]}))
+ "6.7.2" :no-change
  ;; End DSE 6.7.x transforms.
 
 
