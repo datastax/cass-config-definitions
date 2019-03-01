@@ -319,7 +319,12 @@
    :order [:enabled, :optional, :keystore, :keystore_password, :require_client_auth, :truststore, :truststore_password, :protocol, :algorithm, :store_type, :cipher_suites],
    :fields
    {:enabled {:type "boolean", :required true, :default_value false},
-    :optional {:type "boolean", :required true, :default_value false, :depends :enabled},
+    :optional
+    {:type "boolean",
+     :required true,
+     :default_value false,
+     :depends :enabled,
+     :description "When 'optional' is selected, both encrypted and unencrypted connections over native transport are allowed. This is a necessary transition state to facilitate enabling client to node encryption on live clusters without inducing an outage for existing unencrypted clients. Typically, once existing clients are migrated to encrypted connections 'optional' is unselected in order to enforce native transport encryption."},
     :keystore
     {:type "string",
      :is_file true,
