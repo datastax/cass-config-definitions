@@ -218,7 +218,7 @@
   :inter_dc_stream_throughput_outbound_megabits_per_sec
   {:type "int", :required false, :unit "mbps"},
   :file_cache_size_in_mb
-  {:type "int", :required false :default_value 4096},
+  {:type "int", :required false},
   :row_cache_keys_to_save
   {:type "int", :required false, :unit "rows"},
   :counter_cache_size_in_mb
