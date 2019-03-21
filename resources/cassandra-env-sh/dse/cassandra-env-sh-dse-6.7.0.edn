@@ -16,6 +16,14 @@
    :disabled true,
    :add-export true}
 
+  :heap-dump-dir
+  {:type "string"
+   :constant "CASSANDRA_HEAPDUMP_DIR"
+   :label "Cassandra Heapdump Directory"
+   :required false
+   :is_directory true
+   :add-export true}
+
   :enable_on_out_of_memory_error
   {:type "boolean"
    :required true
@@ -32,5 +40,6 @@
 
  :groupings [{:name "General",
               :list ["malloc-arena-max"
+                     "heap-dump-dir"
                      "enable_on_out_of_memory_error"
                      "on_out_of_memory_error"]}]}

@@ -15,9 +15,19 @@
    :required false
    :default_value 4
    :disabled true
-   :add-export true}}
+   :add-export true}
+
+  :heap-dump-dir
+  {:type "string"
+   :constant "CASSANDRA_HEAPDUMP_DIR"
+   :label "Cassandra Heapdump Directory"
+   :required false
+   :is_directory true
+   :add-export true}
+  }
 
  :groupings
  [{:name "General",
    :list
-   ["malloc-arena-max"]}]}
+   ["malloc-arena-max"
+    "heap-dump-dir"]}]}
