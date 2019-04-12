@@ -1,5 +1,6 @@
 {:display-name "cassandra.yaml",
  :package-path "/etc/dse/cassandra/cassandra.yaml",
+ :tarball-path "resources/cassandra/conf/cassandra.yaml"
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  :valid-dse-versions [:all],
@@ -110,6 +111,7 @@
    :required true,
    :description "If this list includes a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value ["/var/lib/cassandra/data"],
+   :tarball_default ["var/lib/cassandra/data"],
    :is_directory true,
    :value_type "string"},
   :commit_failure_policy
@@ -179,7 +181,8 @@
    :required true,
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true,
-   :default_value "/var/lib/cassandra/commitlog"},
+   :default_value "/var/lib/cassandra/commitlog"
+   :tarball_default "var/lib/cassandra/commitlog"},
   :hints_flush_period_in_ms
   {:type "int", :required true, :default_value 10000},
   :commitlog_total_space_in_mb
@@ -234,14 +237,16 @@
   {:type "string",
    :required true,
    :is_directory true,
-   :default_value "/var/lib/cassandra/hints"},
+   :default_value "/var/lib/cassandra/hints"
+   :tarball_default "var/lib/cassandra/hints"},
   :internode_recv_buff_size_in_bytes {:type "int", :required false},
   :saved_caches_directory
   {:type "string",
    :required true,
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true,
-   :default_value "/var/lib/cassandra/saved_caches"},
+   :default_value "/var/lib/cassandra/saved_caches"
+   :tarball_default "var/lib/cassandra/saved_caches"},
   :dynamic_snitch_reset_interval_in_ms
   {:type "int", :required true, :default_value 600000, :unit "ms"},
   :inter_dc_stream_throughput_outbound_megabits_per_sec
@@ -284,6 +289,7 @@
   {:type "string",
    :is_directory true,
    :default_value "/var/lib/cassandra/cdc_raw",
+   :tarball_default "var/lib/cassandra/cdc_raw"
    :required true},
   :slow_query_log_timeout_in_ms
   {:type "int", :required true, :default_value 500, :unit "ms"},
@@ -368,6 +374,7 @@
     {:type "string",
      :is_file true,
      :default_value "/etc/dse/keystores/client.keystore",
+     :tarball_default "resources/dse/conf/keystores/client.keystore",
      :depends :enabled,
      :conditional [{:eq true}]},
     :cipher_suites
@@ -430,6 +437,7 @@
     {:type "string",
      :depends :enabled,
      :is_file true,
+     :tarball_default "resources/dse/conf/keystores/client.truststore",
      :default_value "/etc/dse/keystores/client.truststore",
      :conditional [{:eq true}]},
     :truststore_type
@@ -599,6 +607,7 @@
     {:type "string",
      :is_file true,
      :default_value "/etc/dse/keystores/server.keystore",
+     :tarball_default "resources/dse/conf/keystores/server.keystore",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :cipher_suites
@@ -669,6 +678,7 @@
     {:type "string",
      :is_file true,
      :default_value "/etc/dse/keystores/server.truststore",
+     :tarball_default "resources/dse/conf/keystores/server.truststore",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :truststore_type

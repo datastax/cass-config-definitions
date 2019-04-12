@@ -1,5 +1,6 @@
 {:display-name "Package Proxy",
  :package-path "",
+ :tarball-path ""
  :workload-file-group "lifecycle manager",
  :ui-visibility :editable,
  :valid-dse-versions [:all],

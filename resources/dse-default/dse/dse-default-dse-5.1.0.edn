@@ -1,5 +1,6 @@
 {:display-name "dse.default"
  :package-path "/etc/default/dse"
+ :tarball-path "resources/dse/conf/dse.default"
  :workload-file-group "cassandra"
  :ui-visibility :hidden
  :valid-dse-versions [:all]
@@ -11,7 +12,20 @@
   {:type "string"
    :label "Cassandra Log File"
    :is_file true
-   :default_value "/var/log/cassandra/output.log"}
+   :default_value "/var/log/cassandra/output.log"
+   :tarball_default "var/log/cassandra/output.log"}
+  :cassandra-conf
+  {:type "string"
+   :label "Cassandra Config Directory"
+   :is_directory true
+   :default_value "/etc/dse/cassandra"
+   :tarball_default "resources/cassandra/conf"}
+  :spark-conf-dir
+  {:type "string"
+   :label "Spark Config Directory"
+   :is_directory true
+   :default_value "/etc/dse/spark"
+   :tarball_default "resources/spark/conf"}
   :wait-for-start
   {:type "int"
    :required false

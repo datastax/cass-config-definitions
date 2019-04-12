@@ -42,6 +42,7 @@
    :label "Spark Worker Directory",
    :add-export true,
    :default_value "/var/lib/spark/worker",
+   :tarball_default "var/lib/spark/worker",
    :required false,
    :is_directory true},
   :spark-master-port
@@ -69,6 +70,7 @@
    :label "Spark Master Log Directory",
    :add-export true,
    :default_value "/var/log/spark/master",
+   :tarball_default "var/log/spark/master",
    :required true,
    :is_directory true},
   :spark-conf-dir
@@ -128,6 +130,7 @@
    :label "AlwaysOn SQL Log Directory",
    :add-export true,
    :default_value "/var/log/spark/alwayson_sql",
+   :tarball_default "var/log/spark/alwayson_sql",
    :required false,
    :is_directory true},
   :spark-worker-opts
@@ -163,6 +166,7 @@
    :label "Spark Worker Log Directory",
    :add-export true,
    :default_value "/var/log/spark/worker",
+   :tarball_default "var/log/spark/worker",
    :required false,
    :is_directory true},
   :spark-executor-dirs
@@ -174,6 +178,7 @@
    :label "Spark Executor Directories",
    :add-export true,
    :default_value "/var/lib/spark/rdd",
+   :tarball_default "var/lib/spark/rdd",
    :required false,
    :is_directory true},
   :spark-driver-host
@@ -293,6 +298,7 @@
    ["hive-server2-thrift-port" "hive-server2-thrift-bind-host"]}],
  :ui-visibility :editable,
  :package-path "/etc/dse/spark/spark-env.sh",
+ :tarball-path "resources/spark/conf/spark-env.sh"
  :renderer
  {:renderer-type :template,
   :template "spark-env-sh-dse-6.7.0.template"},

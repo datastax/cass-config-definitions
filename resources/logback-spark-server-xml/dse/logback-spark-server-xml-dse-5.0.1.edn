@@ -2,6 +2,7 @@
 ;; https://github.com/riptano/bdp/tree/0393815a411d80034d9eb2c79e55960bba2e462d
 {:display-name "logback-spark-server.xml"
  :package-path "/etc/dse/spark/logback-spark-server.xml"
+ :tarball-path "resources/spark/conf/logback-spark-server.xml"
  :workload-file-group "spark"
  :ui-visibility :editable
  :valid-dse-versions [:all]

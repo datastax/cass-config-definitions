@@ -1,5 +1,6 @@
 {:display-name "cassandra-env.sh",
  :package-path "/etc/dse/cassandra/cassandra-env.sh"
+ :tarball-path "resources/cassandra/conf/cassandra-env.sh"
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  :valid-dse-versions [:all],

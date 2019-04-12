@@ -1,5 +1,6 @@
 {:display-name "spark-defaults.conf",
  :package-path "/etc/dse/spark/spark-defaults.conf"
+ :tarball-path "resources/spark/conf/spark-defaults.conf"
  :workload-file-group "spark",
  :ui-visibility :editable,
  :valid-dse-versions [:all],

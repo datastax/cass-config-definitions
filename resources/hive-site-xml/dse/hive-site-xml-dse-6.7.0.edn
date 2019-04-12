@@ -86,6 +86,7 @@
     "spark-hadoop-com-datastax-bdp-fs-client-authentication-factory"]}],
  :ui-visibility :editable,
  :package-path "/etc/dse/spark/hive-site.xml",
+ :tarball-path "resources/spark/conf/hive-site.xml"
  :renderer
  {:renderer-type :template,
   :template "hive-site-xml-dse-6.7.0.template"},

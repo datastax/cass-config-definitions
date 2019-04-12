@@ -74,6 +74,7 @@
    :list ["spark-redaction-regex" "spark-task-maxfailures"]}],
  :ui-visibility :editable,
  :package-path "/etc/dse/spark/spark-defaults.conf",
+ :tarball-path "resources/spark/conf/spark-defaults.conf"
  :renderer
  {:renderer-type :template,
   :template "spark-defaults-conf-dse-6.8.0.template"},
