@@ -243,6 +243,12 @@
  "5.1.11" :no-change
  "5.1.12" :no-change
  "5.1.13" :no-change
+ "5.1.14" (tranforms
+           (add-field :echo_attempts_before_resst
+                      {:type "int"
+                       :default_value 10
+                       :required false}
+                      :group  "Cluster Communication"))
  ;; End DSE 5.1.x transforms.
 
 
