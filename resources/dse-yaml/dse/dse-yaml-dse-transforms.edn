@@ -518,6 +518,22 @@
                        :default_value 8}))
  "5.1.12" :no-change
  "5.1.13" :no-change
+ "5.1.14" (transforms
+           (add-group "Insightful Monitoring"
+                      :after "DSE Authorizer Options")
+           (add-field :insights_options
+                      {:type "dict"
+                       :fields
+                       {:data_dir {:type "string"
+                                   :required false
+                                   :default_value "/var/lib/cassandra/insights_data"
+                                   :description "Directory to store insights data"}
+                        :log_dir {:type "string"
+                                  :required false
+                                  :default_value "/var/log/cassandra/"
+                                  :description "Directory to store insights logs"}}
+                       :order [:data_dir :log_dir]}
+                      :group "Insightful Monitoring"))
  ;; End DSE 5.1.x transforms.
 
 
@@ -560,7 +576,7 @@
                        :log_dir {:type "string"
                                  :required false
                                  :default_value "/var/log/cassandra/"
-                                 :description "Directory tl store insights logs"}}
+                                 :description "Directory to store insights logs"}}
                       :order [:data_dir :log_dir]}
                      :group "Insightful Monitoring"))
  "6.0.6" :no-change
