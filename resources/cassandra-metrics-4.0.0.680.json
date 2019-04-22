@@ -1,0 +1,18 @@
+{
+    "meta": {
+        "dse_version": "6.8.0",
+        "aggregates": {
+            "max": "<b>Max</b> - The maximum value recorded during a time interval. A higher maximum value could have occurred without it being recorded.",
+            "average": "<b>Avg</b> - The average of values recorded during a time interval.",
+            "total": "<b>Total</b> - Sum of the values recorded for each node during a time interval.",
+            "min": "<b>Min</b> - The minimal value recorded during a time interval. A lower minimal value could have occurred without it being recorded."
+        },
+        "include": ["cassandra-metrics-4.0.0.670.json"],
+        "exclude": ["active-eventloop-park", "completed-eventloop-park", "completed-eventloop-processed-tasks", "active-eventloop-processed-tasks",
+                    "active-eventloop-scheduled-tasks", "completed-eventloop-scheduled-tasks", "active-eventloop-selector-events", "completed-eventloop-selector-events",
+                    "active-eventloop-select-calls", "completed-eventloop-select-calls", "active-eventloop-select-now-calls", "completed-eventloop-select-now-calls",
+                    "active-eventloop-spin", "completed-eventloop-spin", "active-eventloop-yield", "completed-eventloop-yield",
+                    "pending-frame-decode", "total-blocked-frame-decode", "active-read-deferred", "completed-read-deferred",
+                    "pending-read-deferred", "total-blocked-read-deferred"]
+    }
+}
