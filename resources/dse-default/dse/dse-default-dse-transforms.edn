@@ -175,6 +175,7 @@
                       "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped"}
                      :group "General"))
  "6.7.2" :no-change
+ "6.7.3" :no-change
  ;; End DSE 6.7.x transforms.
 
 

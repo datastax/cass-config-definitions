@@ -611,6 +611,22 @@
                                  :transaction_options
                                  :block_allocator_options]}))
  "6.7.2" :no-change
+ "6.7.3" (transforms
+          (add-field :alwayson_sql_options.heartbeat_update_interval_seconds
+                     {:type "int"
+                      :depends :enabled
+                      :default_value 30})
+          (update-field :alwayson_sql_options
+                        {:order [:enabled
+                                 :thrift_port
+                                 :web_ui_port
+                                 :reserve_port_wait_time_ms
+                                 :alwayson_sql_status_check_wait_time_ms
+                                 :workpool
+                                 :log_dsefs_dir
+                                 :auth_user
+                                 :runner_max_errors
+                                 :heartbeat_update_interval_seconds]}))
  ;; End DSE 6.7.x transforms.
 
 
