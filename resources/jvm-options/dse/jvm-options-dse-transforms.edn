@@ -218,6 +218,13 @@
  "6.7.1" (transforms
           (delete-field :page-align-direct-memory))
  "6.7.2" :no-change
+ "6.7.3" (transforms
+           (add-field :io_netty_maxdirectmemory
+                      {:type "int"
+                       :required false
+                       :constant "-Dio.netty.maxDirectMemory"
+                       :label "io.netty.maxDirectMemory"}
+                      :group "General JVM Parameters"))
  ;; End DSE 6.7.x transforms.
 
 

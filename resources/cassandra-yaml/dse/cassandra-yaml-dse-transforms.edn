@@ -298,6 +298,13 @@
            {:type "int", :default_value 10, :required false}
            :group "Cluster Communication"))
  "6.7.2" :no-change
+ "6.7.3" (transforms
+          (add-field :direct_reads_size_in_mb
+                     {:type "int", :required false}
+                     :group "Memtable Settings")
+          (add-field :pick_level_on_streaming
+                     {:type "boolean" :required true :default_value false}
+                     :group "Compactions"))
  ;; End DSE 6.7.x transforms.
 
 
