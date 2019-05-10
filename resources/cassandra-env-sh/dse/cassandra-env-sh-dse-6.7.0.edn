@@ -8,7 +8,16 @@
  {:renderer-type :template,
   :template "cassandra-env-sh-dse-6.7.0.template"},
  :properties
- {:malloc-arena-max
+ {:cassandra-log-dir
+  {:type "string"
+   :required true
+   :constant "CASSANDRA_LOG_DIR"
+   :is_directory true
+   :default_value "/var/log/cassandra"
+   :tarball_default "var/log/cassandra"
+   :add-export true}
+
+  :malloc-arena-max
   {:type "int",
    :constant "MALLOC_ARENA_MAX",
    :label "Malloc Arena Max",
@@ -40,7 +49,8 @@
   }
 
  :groupings [{:name "General",
-              :list ["malloc-arena-max"
+              :list ["cassandra-log-dir"
+                     "malloc-arena-max"
                      "heap-dump-dir"
                      "enable_on_out_of_memory_error"
                      "on_out_of_memory_error"]}]}
