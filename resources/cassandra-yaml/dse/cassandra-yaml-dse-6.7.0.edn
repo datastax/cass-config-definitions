@@ -7,6 +7,9 @@
  :properties
  {:hinted_handoff_enabled
   {:type "boolean", :required true, :default_value true},
+  :memtable_space_in_mb
+  {:type "int"
+   :required false}
   ;; We might change disk_access_mode to an ENUM after OPSC-15264 has been merged.
   :disk_access_mode
   {:type "string"
@@ -303,7 +306,7 @@
    [{:label "heap_buffers", :value "heap_buffers"}
     {:label "offheap_buffers", :value "offheap_buffers"},
     {:label "offheap_objects", :value "offheap_objects"}],
-   :default_value "heap_buffers"},
+   :default_value "offheap_objects"},
   :stream_throughput_outbound_megabits_per_sec
   {:type "int", :required false, :default_value 200, :unit "mbps"},
   :counter_cache_keys_to_save {:type "int", :required false},
@@ -761,6 +764,7 @@
    :list
    ["memtable_allocation_type"
     "memtable_cleanup_threshold"
+    "memtable_space_in_mb"
     "file_cache_size_in_mb"
     "memtable_flush_writers"]}
   {:name "RPC", :list ["rpc_keepalive"]}
