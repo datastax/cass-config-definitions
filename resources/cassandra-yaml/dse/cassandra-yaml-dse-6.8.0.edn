@@ -138,7 +138,7 @@
    :depends :otc_coalescing_strategy,
    :conditional [{:ne "DISABLED"}],
    :unit "us",
-   :default_value 200},
+   :default_value 100},
   :range_request_timeout_in_ms
   {:type "int", :required true, :default_value 10000, :unit "ms"},
   :trickle_fsync_interval_in_kb
@@ -195,7 +195,7 @@
   :batch_size_fail_threshold_in_kb
   {:type "int", :required true, :default_value 640},
   :memtable_flush_writers
-  {:type "int", :required false, :default_value 4},
+  {:type "int", :required false, :default_value 8},
   :continuous_paging
   {:type "dict",
    :order [:max_concurrent_sessions
@@ -492,7 +492,7 @@
     {:label "FIXED", :value "FIXED"}
     {:label "MOVINGAVERAGE", :value "MOVINGAVERAGE"}
     {:label "TIMEHORIZON", :value "TIMEHORIZON"}],
-   :default_value "DISABLED"},
+   :default_value "FIXED"},
   :enable_user_defined_functions
   {:type "boolean", :required true, :default_value false},
   :dynamic_snitch_badness_threshold
@@ -571,7 +571,44 @@
    :required false,
    :depends :otc_coalescing_strategy,
    :conditional [{:ne "DISABLED"}],
-   :default_value 8},
+   :default_value 32},
+  :otc_small_max_message_buffer_kb
+  {:type "int",
+   :required false,
+   :depends :otc_coalescing_strategy,
+   :conditional [{:ne "DISABLED"}],
+   :default_value 64},
+  :otc_large_max_message_buffer_kb
+  {:type "int",
+   :required false,
+   :depends :otc_coalescing_strategy,
+   :conditional [{:ne "DISABLED"}],
+   :default_value 1024},
+  :otc_inter_dc_coalescing_strategy
+  {:type "string",
+   :required false,
+   :depends :otc_coalescing_strategy,
+   :conditional [{:ne "DISABLED"}],
+   :options
+   [{:label "", :value ""}
+    {:label "DISABLED", :value "DISABLED"}
+    {:label "FIXED", :value "FIXED"}
+    {:label "MOVINGAVERAGE", :value "MOVINGAVERAGE"}
+    {:label "TIMEHORIZON", :value "TIMEHORIZON"}],
+   :default_value ""}
+  :otc_inter_dc_coalescing_window_us
+  {:type "int",
+   :required false,
+   :depends :otc_inter_dc_coalescing_strategy,
+   :conditional [{:eq "FIXED"} {:eq "MOVINGAVERAGE"} {:eq "TIMEHORIZON"}],
+   :unit "us",
+   :default_value 0},
+  :otc_inter_dc_coalescing_enough_coalesced_messages
+  {:type "int",
+   :required false,
+   :depends :otc_inter_dc_coalescing_strategy,
+   :conditional [{:eq "FIXED"} {:eq "MOVINGAVERAGE"} {:eq "TIMEHORIZON"}],
+   :default_value 0},
   :authenticator
   {:type "string",
    :required true,
@@ -585,6 +622,8 @@
   :concurrent_compactors {:type "int", :required false},
   :sstable_preemptive_open_interval_in_mb
   {:type "int", :required true, :default_value 50, :unit "MB"},
+  :pick_level_on_streaming
+  {:type "boolean" :required true :default_value true}
   :seed_gossip_probability
   {:type "float", :required false, :default_value 1.0},
   :server_encryption_options
@@ -798,6 +837,7 @@
     "concurrent_compactors"
     "concurrent_validations"
     "sstable_preemptive_open_interval_in_mb"
+    "pick_level_on_streaming"
     "compaction_large_partition_warning_threshold_mb"]}
   {:name "Cluster Communication",
    :list
@@ -851,7 +891,12 @@
    :list
    ["otc_coalescing_strategy"
     "otc_coalescing_window_us"
-    "otc_coalescing_enough_coalesced_messages"]}
+    "otc_coalescing_enough_coalesced_messages"
+    "otc_small_max_message_buffer_kb"
+    "otc_large_max_message_buffer_kb"
+    "otc_inter_dc_coalescing_strategy"
+    "otc_inter_dc_coalescing_window_us"
+    "otc_inter_dc_coalescing_enough_coalesced_messages"]}
   {:name "Miscellaneous",
    :list
    ["disk_failure_policy"
