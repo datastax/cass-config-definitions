@@ -10,14 +10,15 @@
 # JMX-to-web bridge install libmx4j-java and uncomment the following.
 #EXTRA_CLASSPATH="/usr/share/java/mx4j-tools.jar"
 
+## The following workload variables have been moved to cassandra-env.sh
+## by LCM in order to unify workload configuration for package and tarball
+## installations.
 # Enable the DSE Graph service on this node
-GRAPH_ENABLED={{graph-enabled}}
-
+# GRAPH_ENABLED=0
 # Start the node in DSE Search mode
-SOLR_ENABLED={{solr-enabled}}
-
+# SOLR_ENABLED=0
 # Start the node in Spark mode
-SPARK_ENABLED={{spark-enabled}}
+# SPARK_ENABLED=0
 
 # Determine install root location (applicable for standalone installer or
 # Debian/RedHat packages; not used in tarball installs)
