@@ -590,12 +590,11 @@
    :depends :otc_coalescing_strategy,
    :conditional [{:ne "DISABLED"}],
    :options
-   [{:label "", :value ""}
+   [{:label "", :value nil}
     {:label "DISABLED", :value "DISABLED"}
     {:label "FIXED", :value "FIXED"}
     {:label "MOVINGAVERAGE", :value "MOVINGAVERAGE"}
-    {:label "TIMEHORIZON", :value "TIMEHORIZON"}],
-   :default_value ""}
+    {:label "TIMEHORIZON", :value "TIMEHORIZON"}]}
   :otc_inter_dc_coalescing_window_us
   {:type "int",
    :required false,
