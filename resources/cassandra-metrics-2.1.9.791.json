@@ -22,7 +22,7 @@
         "aggregate": "average",
         "metric_type": "gauge",
         "path": ["avgTimePerRequest"],
-        "postprocess": ["ensure-float"],
+        "postprocess": ["ensure-float", "us->ms"],
         "scope": "solr",
         "storage_name": "getSolrAvgTimePerReq",
         "type": "jmx",
