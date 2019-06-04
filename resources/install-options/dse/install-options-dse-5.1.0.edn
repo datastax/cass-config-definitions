@@ -24,45 +24,10 @@
    :label "Tarball SHA-256 Hash"
    :required false
    :depends :install-type
-   :conditional [{:eq "tarball"}]}
-  :install-privileges
-  {:type "string"
-   :label "Install privileges"
-   :required true
-   :depends :install-type
-   :conditional [{:eq "tarball"}]
-   :default_value "non-root"
-   :options
-   [{:label "non-root" :value "non-root"}
-    {:label "root" :value "root"}]}
-  :cassandra-log-dir
-  {:type "string"
-   :label "Cassandra Log Directory"
-   :required true
-   :depends :install-privileges
-   :conditional [{:eq "non-root"}]
-   :is_directory true
-   :default_value "/var/log/cassandra"
-   :tarball_default "var/log/cassandra"}
-  :run-dse-as-user
-  {:type "string"
-   :label "Run DSE as User"
-   :depends :install-privileges
-   :conditional [{:eq "root"}]
-   :default_value "cassandra"}
-  :run-dse-as-group
-  {:type "string"
-   :label "Run DSE as Group"
-   :depends :install-privileges
-   :conditional [{:eq "root"}]
-   :default_value "cassandra"}}
+   :conditional [{:eq "tarball"}]}}
  :groupings
  [{:name ""
    :list ["install-type"
           "install-directory"
-          "tarball-hash"
-          "install-privileges"
-          "cassandra-log-dir"
-          "run-dse-as-user"
-          "run-dse-as-group"]}]
+          "tarball-hash"]}]
  }
