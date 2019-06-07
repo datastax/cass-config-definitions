@@ -27,6 +27,7 @@
         "storage_name": "getSolrAvgTimePerReq",
         "type": "jmx",
         "unit": "ms/request",
-	"source": ["com.datastax.bdp:type=search,index={keyspace}.{table},name=QueryMetrics","getAverageLatency()","COORDINATE",null]
+        "source": ["com.datastax.bdp:type=search,index={keyspace}.{table},name=QueryMetrics","getAverageLatency()","COORDINATE",null],
+        "source_postprocess": ["ensure-float","us->ms"]
     }
 }
