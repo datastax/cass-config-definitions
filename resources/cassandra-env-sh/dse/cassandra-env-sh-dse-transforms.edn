@@ -132,6 +132,7 @@
  ;;   already in jvm.options
  "6.0.7" (transforms
            (update-template "cassandra-env-sh-dse-6.0.7.template"))
+ "6.0.8" :no-change
  ;; End DSE 6.0.x transforms.
 
 

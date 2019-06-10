@@ -210,6 +210,7 @@
                        :constant "-Dio.netty.maxDirectMemory"
                        :label "io.netty.maxDirectMemory"}
                       :group "General JVM Parameters"))
+ "6.0.8" :no-change
  ;; End DSE 6.0.x transforms.
 
 
@@ -232,4 +233,5 @@
  ;; Begin DSE 6.8.x transforms.
  "6.8.0" ()
  ;; End DSE 6.8.x transforms.
+
 )
