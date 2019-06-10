@@ -534,6 +534,7 @@
                                   :description "Directory to store insights logs"}}
                        :order [:data_dir :log_dir]}
                       :group "Insightful Monitoring"))
+ "5.1.15" :no-change
  ;; End DSE 5.1.x transforms.
 
 
