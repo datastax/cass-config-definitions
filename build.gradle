@@ -13,6 +13,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'maven-publish'
+}
+
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.codec.binary.Hex
 
@@ -25,6 +29,47 @@ task tar(type:Tar) {
     into ('/'){
         from 'resources'
         exclude 'build'
+    }
+}
+
+defaultPropertyValue('publishingUrl', 'http://repo.sjc.dsinternal.org/artifactory/datastax-releases-local')
+defaultPropertyValue('publishRepositoryUsername', rootProject.hasProperty('datastaxRepositoryUsername') ? datastaxRepositoryUsername : null)
+defaultPropertyValue('publishRepositoryPassword', rootProject.hasProperty('datastaxRepositoryPassword') ? datastaxRepositoryPassword : null)
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.datastax.opscenter'
+            artifactId = project.name
+            version = project.version.replace('SNAPSHOT', "-${gitCurrentHeadId().substring(0,7)}")
+
+            artifact tar
+            pom {
+                licenses {
+                    license {
+                        name = 'DataStax Proprietary License'
+                        url = 'http://www.datastax.com/enterprise-terms'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = publishingUrl
+            if (publishRepositoryUsername != null && publishRepositoryPassword != null) {
+               credentials {
+                   username publishRepositoryUsername
+                   password publishRepositoryPassword
+               }
+            }
+        }
+    }
+}
+
+tasks.withType(PublishToMavenRepository) {
+    doFirst {
+        logger.lifecycle("Publish ${publication.groupId}:${publication.artifactId}:${publication.version} to $repository.url")
     }
 }
 
@@ -48,3 +93,4 @@ task md5hash(dependsOn: tar) {
 
 task dist(dependsOn: md5hash) {
 }
+
