@@ -95,6 +95,7 @@
  ; minor comment change
  "6.7.3" (transforms
            (update-template "spark-env-sh-dse-6.7.3.template"))
+ "6.7.4" :no-change
  ;; End DSE 6.7.x transforms.
 
 

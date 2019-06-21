@@ -324,6 +324,24 @@
           (add-field :pick_level_on_streaming
                      {:type "boolean" :required true :default_value false}
                      :group "Compactions"))
+ "6.7.4" (transforms
+          (add-field :leaks_detection_params
+                     {:type "dict"
+                      :required false
+                      :order [:sampling_probability
+                              :max_stacks_cache_size_mb
+                              :num_access_records
+                              :max_stack_depth]
+                      :fields
+                      {:sampling_probability
+                       {:type "int" :required false :default_value 0}
+                       :max_stacks_cache_size_mb
+                       {:type "int" :required false :default_value 32}
+                       :num_access_records
+                       {:type "int" :required false :default_value 0}
+                       :max_stack_depth
+                       {:type "int" :required false :default_value 30}}}
+                     :group "Miscellaneous"))
  ;; End DSE 6.7.x transforms.
 
 
