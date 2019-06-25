@@ -287,19 +287,24 @@
           (add-field :leaks_detection_params
                      {:type "dict"
                       :required false
+                      :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."
                       :order [:sampling_probability
                               :max_stacks_cache_size_mb
                               :num_access_records
                               :max_stack_depth]
                       :fields
                       {:sampling_probability
-                       {:type "int" :required false :default_value 0}
+                       {:type "int" :required false
+                        :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :max_stacks_cache_size_mb
-                       {:type "int" :required false :default_value 32}
+                       {:type "int" :required false
+                        :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :num_access_records
-                       {:type "int" :required false :default_value 0}
+                       {:type "int" :required false
+                        :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :max_stack_depth
-                       {:type "int" :required false :default_value 30}}}
+                       {:type "int" :required false
+                        :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}}}
                      :group "Miscellaneous"))
  ;; End DSE 6.0.x transforms.
 
@@ -328,19 +333,24 @@
           (add-field :leaks_detection_params
                      {:type "dict"
                       :required false
+                      :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."
                       :order [:sampling_probability
                               :max_stacks_cache_size_mb
                               :num_access_records
                               :max_stack_depth]
                       :fields
                       {:sampling_probability
-                       {:type "int" :required false :default_value 0}
+                       {:type "int" :required false
+                        :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :max_stacks_cache_size_mb
-                       {:type "int" :required false :default_value 32}
+                       {:type "int" :required false
+                        :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :num_access_records
-                       {:type "int" :required false :default_value 0}
+                       {:type "int" :required false
+                        :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :max_stack_depth
-                       {:type "int" :required false :default_value 30}}}
+                       {:type "int" :required false
+                        :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}}}
                      :group "Miscellaneous"))
  ;; End DSE 6.7.x transforms.
 
