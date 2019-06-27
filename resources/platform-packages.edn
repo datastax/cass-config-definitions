@@ -19,7 +19,12 @@
 
                                   ["5.x"]
                                   {}}
+            "oracle" {["7.4.x"]
+                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
 
+                      ["6.9.x"]
+                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
+                      }
 
             "amazon" {["2018.09" "2017.09" "2017.03" "2016.09" "2"]
                       {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}}
