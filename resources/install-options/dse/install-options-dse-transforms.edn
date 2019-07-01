@@ -72,6 +72,7 @@
  "5.1.13" :no-change
  "5.1.14" :no-change
  "5.1.15" :no-change
+ "5.1.16" :no-change
  ;; End DSE 5.1.x transforms.
 
 
@@ -85,6 +86,7 @@
  "6.0.6" :no-change
  "6.0.7" :no-change
  "6.0.8" :no-change
+ "6.0.9" :no-change
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
