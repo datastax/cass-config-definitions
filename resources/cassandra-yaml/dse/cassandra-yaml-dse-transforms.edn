@@ -250,6 +250,7 @@
                        :required false}
                       :group  "Cluster Communication"))
  "5.1.15" :no-change
+ "5.1.16" :no-change
  ;; End DSE 5.1.x transforms.
 
 
@@ -306,6 +307,7 @@
                        {:type "int" :required false
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}}}
                      :group "Miscellaneous"))
+ "6.0.9" :no-change
  ;; End DSE 6.0.x transforms.
 
 
