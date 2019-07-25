@@ -1,6 +1,6 @@
 {:display-name "spark-alwayson-sql.conf",
  :package-path "/etc/dse/spark/spark-alwayson-sql.conf",
- :tarball-path "resources/spark/conf/spark-always-on-sql.conf"
+ :tarball-path "resources/spark/conf/spark-alwayson-sql.conf"
  :workload-file-group "spark",
  :ui-visibility :editable,
  :valid-dse-versions [:gte "6.0.0"],
