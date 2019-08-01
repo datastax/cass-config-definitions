@@ -1,0 +1,23 @@
+{:display-name "datastax-env.sh"
+ :package-path ""
+ :tarball-path "resources/datastax-env.sh"
+ :workload-file-group "cassandra"
+ :valid-dse-versions [:all]
+ :ui-visibility :hidden
+ :renderer
+ {:renderer-type :template
+  :template "datastax-env-sh-dse-6.0.0.template"}
+ :properties
+ {
+  :manage-java
+  {:type "boolean"
+   :required true}
+  :java-vendor
+  {:type "string"
+   :default_value ""}
+  :install-directory
+  {:type "string"
+   :required true}
+  }
+ }
+

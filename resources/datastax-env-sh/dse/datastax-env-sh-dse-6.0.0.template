@@ -1,0 +1,14 @@
+# This file is managed by DataStax OpsCenter LifeCycle Manager.
+# Manual edits will be overwritten by the next install or configure
+# job that runs on this system.
+
+###########################################################################
+#                          datastax-env.sh                                #
+#                                                                         #
+###########################################################################
+{% if manage-java %}{% ifequal java-vendor "oracle" %}
+export JAVA_HOME="{{install-directory}}/java"
+PATH="{{install-directory}}/java/jre/bin:$PATH"
+{% endifequal %}{% endif %}
+PATH="$PATH:{{install-directory}}/dse/bin"
+
