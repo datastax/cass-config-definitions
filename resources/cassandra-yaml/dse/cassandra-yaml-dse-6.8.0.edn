@@ -432,7 +432,8 @@
      :required true,
      :default_value false,
      :depends :enabled,
-     :conditional [{:eq true}]},
+     :conditional [{:eq true}]
+     :description "When 'optional' is selected, both encrypted and unencrypted connections over native transport are allowed. That is a necessary transition state to facilitate enabling client to node encryption on live clusters without inducing an outage for existing unencrypted clients. Typically, once existing clients are migrated to encrypted connections, 'optional' is unselected in order to enforce native transport encryption."},
     :truststore
     {:type "string",
      :depends :enabled,
