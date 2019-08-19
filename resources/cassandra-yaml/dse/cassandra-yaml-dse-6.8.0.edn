@@ -12,6 +12,7 @@
   :metadata_directory
   {:type "string"
    :default_value "/var/lib/cassandra/metadata"
+   :tarball_default "var/lib/cassandra/metadata"
    :required true}
   :memtable_space_in_mb
   {:type "int"
