@@ -771,7 +771,7 @@
   :performance_core_threads
   {:type "int" :default_value 4 :required false}
   :performance_max_threads
-  {:type "int" :default_value 324 :required false}
+  {:type "int" :default_value 32 :required false}
   :performance_queue_capacity
   {:type "int" :default_value 32000}
   :cluster_summary_stats_options
