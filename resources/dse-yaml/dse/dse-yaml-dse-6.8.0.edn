@@ -967,7 +967,7 @@
    :depends :config_encryption_active,
    :conditional [{:eq true}]},
   :performance_max_threads
-  {:type "int", :default_value 324, :required false},
+  {:type "int", :default_value 32, :required false},
   :cluster_summary_stats_options
   {:type "dict",
    :order [:enabled
