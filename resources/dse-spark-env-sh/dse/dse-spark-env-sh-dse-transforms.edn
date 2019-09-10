@@ -1,29 +1,4 @@
 (
- ;; Begin DSE 4.7.x transforms.
- "4.7.0" "dse-spark-env-sh-dse-4.7.0.edn"
-
- ;; add -Ddse.client.configuration.impl=com.datastax.bdp.transport.client.HadoopBasedClientConfiguration
- ;; to SPARK_EXECUTOR_OPTS and SPARK_DRIVER_OPTS
- "4.7.1" (transforms
-          (update-template "dse-spark-env-sh-dse-4.7.1.template"))
-
- "4.7.2" :no-change
- "4.7.3" :no-change
- "4.7.4" :no-change
- "4.7.5" :no-change
- "4.7.6" :no-change
- "4.7.7" :no-change
- "4.7.8" :no-change
- "4.7.9" (transforms
-          (update-template "dse-spark-env-sh-dse-4.7.9.template")
-          (add-field :spark-hadoop-util
-                     {:type "string"
-                      :required true
-                      :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"}
-                     :group "General"))
- ;; End DSE 4.7.x transforms.
-
-
  ;; Begin DSE 4.8.x transforms.
  "4.8.0" "dse-spark-env-sh-dse-4.8.0.edn"
  "4.8.1" :no-change
