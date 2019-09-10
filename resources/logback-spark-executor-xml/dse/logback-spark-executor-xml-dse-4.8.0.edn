@@ -1,12 +1,12 @@
-{:display-name "logback-spark-server.xml"
- :package-path "/etc/dse/spark/logback-spark-server.xml"
- :tarball-path "resources/spark/conf/logback-spark-server.xml"
+{:display-name "logback-spark-executor.xml"
+ :package-path "/etc/dse/spark/logback-spark-executor.xml"
+ :tarball-path "resources/spark/conf/logback-spark-executor.xml"
  :workload-file-group "spark"
  :ui-visibility :editable
  :valid-dse-versions [:all]
  :renderer
  {:renderer-type :template
-  :template "logback-spark-server-xml-dse-4.7.0.template"}
+  :template "logback-spark-executor-xml-dse-4.8.0.template"}
  :workload :spark
  :properties
  {:root-level

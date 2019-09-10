@@ -1,42 +1,4 @@
 (
- ;; Begin DSE 4.7.x transforms.
- "4.7.0" "dse-yaml-dse-4.7.0.edn"
- "4.7.1" (transforms
-          (add-field :enable_back_pressure_adaptive_nrt_commit
-                     {:type "boolean", :required true, :default_value true}
-                     :group "Solr Indexing"))
- "4.7.2" :no-change
- "4.7.3" :no-change
- "4.7.4" (transforms
-          (update-field :load_max_time_per_core
-                        {:default_value 5}))
-
- "4.7.5" :no-change
- "4.7.6" :no-change
- "4.7.7" :no-change
- "4.7.8" (transforms
-          (add-field :node_health_options.uptime_ramp_up_period_seconds
-                     {:type "int", :default_value 86400}))
- "4.7.9" (transforms
-          (add-field :solr_resource_upload_limit_mb
-                     {:type "int"
-                      :required true
-                      :default_value 10
-                      :unit "MB"}
-                     :group "Solr Performance Service Options")
-          (add-field :node_health_options.dropped_mutation_window_minutes
-                     {:type "int", :default_value 30, :unit "minutes"})
-          (add-field :enable_health_based_routing
-                     {:type "boolean", :required true, :default_value true}
-                     :group "Miscellaneous")
-          (add-field :async_bootstrap_reindex
-                     {:type "boolean" :required true :default_value false}
-                     :group "Solr Indexing")
-          (update-field :solr_slow_sub_query_log_options.threshold_ms
-                        {:default_value 3000}))
- ;; End DSE 4.7.x transforms.
-
-
  ;; Begin DSE 4.8.x transforms.
  "4.8.0" "dse-yaml-dse-4.8.0.edn"
  "4.8.1" :no-change
