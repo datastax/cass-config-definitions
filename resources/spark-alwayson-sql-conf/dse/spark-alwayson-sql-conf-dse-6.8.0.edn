@@ -35,7 +35,7 @@
   :spark_redaction_regex
   {:type "string",
    :required true,
-   :default_value "(?i)secret|password|token"},
+   :default_value "(?i)credentials|secret|password|token"},
   :resource_manager_additional_configs
   {:type "user_defined",
    :key_name "key",

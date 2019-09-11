@@ -89,6 +89,6 @@
 
 
  ;; Begin DSE 6.8.x transforms.
- "6.8.0" :no-change
+ "6.8.0" "spark-daemon-defaults-conf-dse-6.8.0.edn"
  ;; End DSE 6.8.x transforms.
 )

@@ -17,6 +17,58 @@
   :memtable_space_in_mb
   {:type "int"
    :required false}
+  :native_transport_allow_older_protocols
+  {:type "boolean"
+   :required true
+   :default_value true}
+  :concurrent_lw_transactions
+  {:type "int"
+   :required false
+   :default_value 128}
+  :max_pending_lw_transactions
+  {:type "int"
+   :required false
+   :default_value 10000}
+  :stream_entire_sstables
+  {:type "boolean"
+   :required false}
+  :leaks_detection_params
+  {:type "dict",
+   :required false,
+   :order [:sampling_probability
+           :max_stacks_cache_size_mb
+           :num_access_records
+           :max_stack_depth],
+   :fields
+   {:sampling_probability
+    {:type "float" :default_value 0.01}
+    :max_stacks_cache_size_mb
+    {:type "int" :default_value 32}
+    :num_access_records
+    {:type "int" :default_value 0}
+    :max_stack_depth
+    {:type "int" :default_value 30}}}
+  :guardrails
+  {:type "dict",
+   :order [:tombstone_warn_threshold
+           :tombstone_failure_threshold
+           :partition_size_warn_threshold_in_mb
+           :batch_size_warn_threshold_in_kb
+           :batch_size_fail_threshold_in_kb
+           :unlogged_batch_across_partitions_warn_threshold]
+   :fields
+   {:tombstone_warn_threshold
+    {:type "int", :required true, :default_value 1000},
+    :tombstone_failure_threshold
+    {:type "int", :required true, :default_value 100000},
+    :partition_size_warn_threshold_in_mb
+    {:type "int", :required true, :default_value 100},
+    :batch_size_warn_threshold_in_kb
+    {:type "int", :required true, :default_value 64},
+    :batch_size_fail_threshold_in_kb
+    {:type "int", :required true, :default_value 640},
+    :unlogged_batch_across_partitions_warn_threshold
+    {:type "int", :required false, :default_value 10}}}
   :echo_attempts_before_reset
   {:type "int"
    :required false}
@@ -67,8 +119,6 @@
    :conditional [{:eq "Murmur3Partitioner"}]},
   :cross_node_timeout
   {:type "boolean", :required true, :default_value false},
-  :unlogged_batch_across_partitions_warn_threshold
-  {:type "int", :required false, :default_value 10},
   :streaming_keep_alive_period_in_secs
   {:type "int", :required false, :default_value 300, :unit "s"},
   :aggregated_request_timeout_in_ms
@@ -95,8 +145,6 @@
   {:type "boolean", :required true, :default_value false},
   :permissions_validity_in_ms
   {:type "int", :required true, :default_value 120000},
-  :compaction_large_partition_warning_threshold_mb
-  {:type "int", :required true, :default_value 100},
   :column_index_cache_size_in_kb
   {:type "int", :required true, :default_value 2, :unit "KB"},
   :max_hints_delivery_threads
@@ -193,8 +241,6 @@
   :concurrent_validations
   {:type "int", :required false, :default_value 0},
   :max_value_size_in_mb {:type "int", :default_value 256},
-  :batch_size_fail_threshold_in_kb
-  {:type "int", :required true, :default_value 640},
   :memtable_flush_writers
   {:type "int", :required false, :default_value 8},
   :continuous_paging
@@ -221,8 +267,6 @@
     {:type "int", :required true, :unit "ms", :default_value 1}}},
   :row_cache_size_in_mb
   {:type "int", :required true, :default_value 0, :unit "MB"},
-  :tombstone_warn_threshold
-  {:type "int", :required true, :default_value 1000},
   :concurrent_materialized_view_builders
   {:type "int", :required true, :default_value 2},
   :incremental_backups
@@ -324,8 +368,6 @@
   :stream_throughput_outbound_megabits_per_sec
   {:type "int", :required false, :default_value 200, :unit "mbps"},
   :counter_cache_keys_to_save {:type "int", :required false},
-  :tombstone_failure_threshold
-  {:type "int", :required true, :default_value 100000},
   :native_transport_port
   {:type "int", :required true, :default_value 9042, :format false},
   :commitlog_sync
@@ -459,8 +501,6 @@
    :default_value 10000,
    :depends :commitlog_sync,
    :conditional [{:eq "periodic"}]},
-  :batch_size_warn_threshold_in_kb
-  {:type "int", :required true, :default_value 64},
   :row_cache_save_period
   {:type "int", :required true, :default_value 0, :unit "seconds"},
   :inter_dc_tcp_nodelay
@@ -494,7 +534,7 @@
     {:label "FIXED", :value "FIXED"}
     {:label "MOVINGAVERAGE", :value "MOVINGAVERAGE"}
     {:label "TIMEHORIZON", :value "TIMEHORIZON"}],
-   :default_value "FIXED"},
+   :default_value "DISABLED"},
   :enable_user_defined_functions
   {:type "boolean", :required true, :default_value false},
   :dynamic_snitch_badness_threshold
@@ -586,30 +626,6 @@
    :depends :otc_coalescing_strategy,
    :conditional [{:ne "DISABLED"}],
    :default_value 1024},
-  :otc_inter_dc_coalescing_strategy
-  {:type "string",
-   :required false,
-   :depends :otc_coalescing_strategy,
-   :conditional [{:ne "DISABLED"}],
-   :options
-   [{:label "", :value nil}
-    {:label "DISABLED", :value "DISABLED"}
-    {:label "FIXED", :value "FIXED"}
-    {:label "MOVINGAVERAGE", :value "MOVINGAVERAGE"}
-    {:label "TIMEHORIZON", :value "TIMEHORIZON"}]}
-  :otc_inter_dc_coalescing_window_us
-  {:type "int",
-   :required false,
-   :depends :otc_inter_dc_coalescing_strategy,
-   :conditional [{:eq "FIXED"} {:eq "MOVINGAVERAGE"} {:eq "TIMEHORIZON"}],
-   :unit "us",
-   :default_value 0},
-  :otc_inter_dc_coalescing_enough_coalesced_messages
-  {:type "int",
-   :required false,
-   :depends :otc_inter_dc_coalescing_strategy,
-   :conditional [{:eq "FIXED"} {:eq "MOVINGAVERAGE"} {:eq "TIMEHORIZON"}],
-   :default_value 0},
   :authenticator
   {:type "string",
    :required true,
@@ -805,7 +821,8 @@
    ["start_native_transport"
     "native_transport_max_frame_size_in_mb"
     "native_transport_max_concurrent_connections"
-    "native_transport_max_concurrent_connections_per_ip"]}
+    "native_transport_max_concurrent_connections_per_ip"
+    "native_transport_allow_older_protocols"]}
   {:name "Timeouts",
    :list
    ["read_request_timeout_in_ms"
@@ -825,8 +842,8 @@
    ["counter_cache_size_in_mb"
     "counter_cache_save_period"
     "counter_cache_keys_to_save"]}
-  {:name "Tombstones",
-   :list ["tombstone_warn_threshold" "tombstone_failure_threshold"]}
+  {:name "Guardrails",
+   :list ["guardrails"]}
   {:name "Snapshots",
    :list
    ["incremental_backups"
@@ -838,8 +855,7 @@
     "concurrent_compactors"
     "concurrent_validations"
     "sstable_preemptive_open_interval_in_mb"
-    "pick_level_on_streaming"
-    "compaction_large_partition_warning_threshold_mb"]}
+    "pick_level_on_streaming"]}
   {:name "Cluster Communication",
    :list
    ["endpoint_snitch"
@@ -894,14 +910,15 @@
     "otc_coalescing_window_us"
     "otc_coalescing_enough_coalesced_messages"
     "otc_small_max_message_buffer_kb"
-    "otc_large_max_message_buffer_kb"
-    "otc_inter_dc_coalescing_strategy"
-    "otc_inter_dc_coalescing_window_us"
-    "otc_inter_dc_coalescing_enough_coalesced_messages"]}
+    "otc_large_max_message_buffer_kb"]}
   {:name "Miscellaneous",
    :list
    ["disk_failure_policy"
     "disk_access_mode"
+    "concurrent_lw_transactions"
+    "max_pending_lw_transactions"
+    "stream_entire_sstables"
+    "leaks_detection_params"
     "echo_attempts_before_reset"
     "metadata_directory"
     "seed_gossip_probability"
@@ -913,14 +930,12 @@
     "batchlog_replay_throttle_in_kb"
     "gc_log_threshold_in_ms"
     "disk_optimization_strategy"
-    "batch_size_warn_threshold_in_kb"
-    "batch_size_fail_threshold_in_kb"
-    "unlogged_batch_across_partitions_warn_threshold"
     "windows_timer_interval"
     "tracetype_query_ttl"
     "tracetype_repair_ttl"
     "prepared_statements_cache_size_mb"
     "continuous_paging"
+    "leaks_detection_params"
     "max_value_size_in_mb"
     "system_keyspaces_filtering"
     "ideal_consistency_level"]}]}
