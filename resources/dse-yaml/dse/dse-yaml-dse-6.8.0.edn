@@ -973,8 +973,6 @@
    [:adjacency_cache_size_in_mb
     :analytic_evaluation_timeout_in_minutes
     :index_cache_size_in_mb
-    :max_query_queue
-    :max_query_threads
     :realtime_evaluation_timeout_in_seconds
     :schema_agreement_timeout_in_ms
     :system_evaluation_timeout_in_seconds
@@ -1033,11 +1031,8 @@
     {:type "int", :required false, :default_value 10080},
     :schema_agreement_timeout_in_ms
     {:type "int", :required false, :default_value 10000},
-    :max_query_threads {:type "int", :required false},
     :realtime_evaluation_timeout_in_seconds
-    {:type "int", :required false, :default_value 30},
-    :max_query_queue
-    {:type "int", :required false, :default_value 10000}}},
+    {:type "int", :required false, :default_value 30}}},
   :db_summary_stats_options
   {:type "dict",
    :order [:enabled

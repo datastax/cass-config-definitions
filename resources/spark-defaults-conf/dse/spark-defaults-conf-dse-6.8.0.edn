@@ -31,7 +31,7 @@
   :spark-redaction-regex
   {:type "string",
    :required true,
-   :default_value "(?i)secret|password|token"},
+   :default_value "(?i)credentials|secret|password|token"},
   :spark-task-maxfailures
   {:type "int", :required true, :default_value 10},
   :spark-extra-listeners
