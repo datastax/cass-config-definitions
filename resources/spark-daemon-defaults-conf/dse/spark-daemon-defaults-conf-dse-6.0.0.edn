@@ -31,7 +31,7 @@
   :spark_redaction_regex
   {:type "string"
    :label "Spark Redaction Regex"
-   :default_value "(?i)secret|password|token"
+   :default_value "(?i)credentials|secret|password|token"
    :required true}
 
   :spark_network_crypto_enabled

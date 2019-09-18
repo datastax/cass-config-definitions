@@ -108,6 +108,7 @@
            (update-template "cassandra-env-sh-dse-6.0.7.template"))
  "6.0.8" :no-change
  "6.0.9" :no-change
+ "6.0.10" :no-change
  ;; End DSE 6.0.x transforms.
 
 
