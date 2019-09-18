@@ -86,7 +86,7 @@
   :spark_redaction_regex
   {:type "string"
    :required true
-   :default_value "(?i)secret|password|token"}
+   :default_value "(?i)credentials|secret|password|token"}
 
   :spark_dse_configuration_fetch_retries
   {:type "int"

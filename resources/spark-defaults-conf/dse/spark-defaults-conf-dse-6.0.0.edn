@@ -47,7 +47,7 @@
   {:type "boolean" :required true :default_value true}
 
   :spark-redaction-regex
-  {:type "string" :required true :default_value "(?i)secret|password|token"}}
+  {:type "string" :required true :default_value "(?i)credentials|secret|password|token"}}
  :groupings
  [{:name "DSE Related Settings"
    :list
