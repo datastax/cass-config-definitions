@@ -19,10 +19,10 @@
 
                                   ["5.x"]
                                   {}}
-            "oracle" {["7.4.x"]
+            "oracle" {["7.x"]
                       {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
 
-                      ["6.9.x"]
+                      ["6.x"]
                       {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
                       }
 
