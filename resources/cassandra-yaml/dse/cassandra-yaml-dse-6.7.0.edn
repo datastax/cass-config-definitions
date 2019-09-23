@@ -96,7 +96,7 @@
   :native_transport_max_concurrent_connections
   {:type "int", :required false, :default_value -1},
   :gc_warn_threshold_in_ms
-  {:type "int", :required false, :default_value 1000, :unit "ms"},
+  {:type "int", :required false, :unit "ms"},
   :native_transport_max_frame_size_in_mb
   {:type "int", :required false, :default_value 256},
   :data_file_directories
