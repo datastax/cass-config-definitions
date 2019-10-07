@@ -435,6 +435,8 @@
   {:type "boolean", :required true, :default_value false},
   :max_hints_file_size_in_mb
   {:type "int", :required true, :default_value 128},
+  :emulate_dbaas_defaults
+  {:type "boolean", :required false},
   :nodesync
   {:type "dict",
    :order [:rate_in_kb],
@@ -987,4 +989,5 @@
     "leaks_detection_params"
     "max_value_size_in_mb"
     "system_keyspaces_filtering"
+    "emulate_dbaas_defaults"
     "ideal_consistency_level"]}]}
