@@ -1,5 +1,6 @@
 {:display-name "jvm-server.options",
  :package-path "/etc/dse/cassandra/jvm-server.options",
+ :tarball-path "resources/cassandra/conf/jvm-server.options"
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  ;; jvm.options is only valid for DSE 6.8.0 and greater
