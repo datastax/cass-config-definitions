@@ -19,5 +19,10 @@
   {:type "string"
    :required true}
   }
- }
-
+ :groupings
+ [{:name "General Parameters",
+   :list
+   ["manage-java",
+    "java-vendor"
+    "install-directory"
+   ]}]}
