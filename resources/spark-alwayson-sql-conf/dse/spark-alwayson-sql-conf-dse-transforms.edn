@@ -100,6 +100,9 @@
  "6.7.3" :no-change
  "6.7.4" :no-change
  "6.7.5" :no-change
+ "6.7.6" (transforms
+          (update-field :spark_redaction_regex
+                        {:default_value "(?i)credentials|secret|password|token"}))
  ;; End DSE 6.7.x transforms.
 
 
