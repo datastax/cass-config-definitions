@@ -288,6 +288,7 @@
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}}}
                      :group "Miscellaneous"))
  "6.7.5" :no-change
+ "6.7.6" :no-change
  ;; End DSE 6.7.x transforms.
 
 
