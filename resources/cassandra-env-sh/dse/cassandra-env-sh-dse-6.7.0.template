@@ -20,12 +20,6 @@
 
 {{cassandra-log-dir}}
 
-# Workload vars moved here by LCM for consistency between tarball and
-# package installs.
-GRAPH_ENABLED={{graph-enabled}}
-SOLR_ENABLED={{solr-enabled}}
-SPARK_ENABLED={{spark-enabled}}
-
 calculate_system_memory_sizes()
 {
     if [ "$system_memory_sizes_calculated" = true ] ; then
