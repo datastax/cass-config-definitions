@@ -217,6 +217,7 @@
      :depends :enabled}
     :security_base_path
     {:type "string"
+     :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
      :is_directory true
      :default_value "/var/lib/cassandra/advrep/security"
      :depends :enabled}}}
@@ -735,6 +736,7 @@
              :min_free_space],
      :fields
      {:dir {:type "string"
+            :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
             :is_directory true
             :default_value "/var/lib/dsefs/data"}
       :storage_weight {:type "float" :default_value 1.0}

@@ -29,7 +29,8 @@
    :default_value 10000}
   :stream_entire_sstables
   {:type "boolean"
-   :required false}
+   :required true
+   :default_value true}
   :leaks_detection_params
   {:type "dict",
    :required false,
@@ -338,6 +339,7 @@
   {:type "string",
    :required true,
    :is_directory true,
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/hints"},
   :internode_recv_buff_size_in_bytes {:type "int", :required false},
   :saved_caches_directory
@@ -387,6 +389,7 @@
   :cdc_raw_directory
   {:type "string",
    :is_directory true,
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/cdc_raw",
    :required true},
   :slow_query_log_timeout_in_ms
@@ -436,7 +439,7 @@
   :max_hints_file_size_in_mb
   {:type "int", :required true, :default_value 128},
   :emulate_dbaas_defaults
-  {:type "boolean", :required false},
+  {:type "boolean", :required true :default_value false},
   :nodesync
   {:type "dict",
    :order [:rate_in_kb],
@@ -986,7 +989,6 @@
     "tracetype_repair_ttl"
     "prepared_statements_cache_size_mb"
     "continuous_paging"
-    "leaks_detection_params"
     "max_value_size_in_mb"
     "system_keyspaces_filtering"
     "emulate_dbaas_defaults"

@@ -178,6 +178,7 @@
   :hints_directory
   {:type "string",
    :required true,
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true,
    :default_value "/var/lib/cassandra/hints"},
   :rpc_send_buff_size_in_bytes
@@ -388,6 +389,7 @@
   :cdc_raw_directory
   {:type "string"
    :is_directory true
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/cdc_raw"
    :required true}
   :cdc_total_space_in_mb

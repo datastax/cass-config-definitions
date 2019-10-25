@@ -125,11 +125,13 @@
     :advanced_replication_directory
     {:type "string"
      :is_directory true
+     :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
      :default_value "/var/lib/cassandra/advrep"
      :depends :enabled}
     :security_base_path
     {:type "string"
      :is_directory true
+     :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
      :default_value "/var/lib/cassandra/advrep/security"
      :depends :enabled}}}
   :solr_index_stats_options
@@ -576,6 +578,7 @@
     :work_dir
     {:type "string"
      :is_directory true
+     :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
      :default_value "/var/lib/dsefs"
      :depends :enabled}
     :public_port
@@ -649,6 +652,7 @@
      :fields
      {:dir {:type "string"
             :is_directory true
+            :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
             :default_value "/var/lib/dsefs/data"}
       :storage_weight {:type "float" :default_value 1.0}
       :min_free_space {:type "int" :default_value 5368709120}}

@@ -226,6 +226,7 @@
   :hints_directory
   {:type "string",
    :required true,
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true,
    :default_value "/var/lib/cassandra/hints"},
   :internode_recv_buff_size_in_bytes {:type "int", :required false},
@@ -276,6 +277,7 @@
   :cdc_raw_directory
   {:type "string",
    :is_directory true,
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/cdc_raw",
    :required true},
   :slow_query_log_timeout_in_ms
