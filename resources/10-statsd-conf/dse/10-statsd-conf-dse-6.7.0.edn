@@ -2,6 +2,7 @@
 ;; https://collectd.org/documentation/manpages/collectd.conf.5.shtml#plugin_statsd
 {:display-name "10-statsd.conf",
  :package-path "/usr/share/dse/collectd/etc/collectd/10-statsd.conf",
+ :tarball-path ""
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  ;; jvm.options is only valid for DSE 6.7.0 and greater

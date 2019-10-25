@@ -14,6 +14,7 @@
    :required true
    :constant "CASSANDRA_LOG_DIR"
    :is_directory true
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/log/cassandra"
    :tarball_default "var/log/cassandra"
    :add-export true}
@@ -32,6 +33,7 @@
    :constant "CASSANDRA_HEAPDUMP_DIR"
    :label "Cassandra Heapdump Directory"
    :required false
+   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true
    :add-export true}
 

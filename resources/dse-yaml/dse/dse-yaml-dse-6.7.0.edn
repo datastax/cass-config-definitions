@@ -248,6 +248,7 @@
     {:type "string",
      :is_directory true,
      :tarball_default "var/lib/cassandra/advrep/security"
+     :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
      :default_value "/var/lib/cassandra/advrep/security",
      :depends :enabled,
      :conditional [{:eq true}]}}},
@@ -817,6 +818,7 @@
       {:type "string",
        :is_directory true,
        :tarball_default "var/lib/dsefs/data"
+       :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
        :default_value "/var/lib/dsefs/data"},
       :storage_weight {:type "float", :default_value 1.0},
       :min_free_space {:type "int", :default_value 5368709120}},
@@ -1291,8 +1293,12 @@
   {:type "dict"
    :order [:data_dir, :log_dir]
    :fields
-   {:data_dir {:type "string", :is_directory true},
-    :log_dir {:type "string", :is_directory true}}}},
+   {:data_dir {:type "string",
+               :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
+               :is_directory true},
+    :log_dir {:type "string",
+               :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
+              :is_directory true}}}},
  :groupings
  [{:name "DSE Authenticator Options", :list ["authentication_options"]}
   {:name "DSE Role Management Options",

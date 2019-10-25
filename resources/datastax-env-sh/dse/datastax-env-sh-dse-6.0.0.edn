@@ -11,6 +11,7 @@
  {
   :manage-java
   {:type "boolean"
+   :default_value true
    :required true}
   :java-vendor
   {:type "string"

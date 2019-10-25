@@ -129,12 +129,14 @@
     {:type "string"
      :is_directory true
      :tarball_default "var/lib/cassandra/advrep"
+     :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
      :default_value "/var/lib/cassandra/advrep"
      :depends :enabled}
     :security_base_path
     {:type "string"
      :is_directory true
      :tarball_default "var/lib/cassandra/advrep/security"
+     :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
      :default_value "/var/lib/cassandra/advrep/security"
      :depends :enabled}}}
   :solr_index_stats_options
@@ -583,6 +585,7 @@
     :work_dir
     {:type "string"
      :is_directory true
+     :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
      :default_value "/var/lib/dsefs"
      :tarball_default "var/lib/dsefs"
      :depends :enabled}
@@ -660,6 +663,7 @@
      :fields
      {:dir {:type "string"
             :is_directory true
+            :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
             :default_value "/var/lib/dsefs/data"
             :tarball_default "var/lib/dsefs/data"}
       :storage_weight {:type "float" :default_value 1.0}

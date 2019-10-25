@@ -1,5 +1,6 @@
 {:display-name "10-write-prom.conf",
  :package-path "/usr/share/dse/collectd/etc/collectd/10-write-prom.conf",
+ :tarball-path ""
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  ;; jvm.options is only valid for DSE 6.7.0 and greater

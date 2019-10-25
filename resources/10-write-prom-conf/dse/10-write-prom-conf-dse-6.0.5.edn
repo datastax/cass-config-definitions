@@ -1,5 +1,6 @@
 {:display-name "10-write-prom.conf",
  :package-path "/usr/share/dse/collectd/etc/collectd/10-write-prom.conf",
+ :tarball-path ""
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  :valid-dse-versions [:gte "6.0.5"],
