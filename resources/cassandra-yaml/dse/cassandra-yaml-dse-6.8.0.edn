@@ -29,10 +29,6 @@
   {:type "int"
    :required false
    :default_value 10000}
-  :stream_entire_sstables
-  {:type "boolean"
-   :required true
-   :default_value true}
   :leaks_detection_params
   {:type "dict",
    :required false,
@@ -982,7 +978,6 @@
     "disk_access_mode"
     "concurrent_lw_transactions"
     "max_pending_lw_transactions"
-    "stream_entire_sstables"
     "leaks_detection_params"
     "echo_attempts_before_reset"
     "metadata_directory"

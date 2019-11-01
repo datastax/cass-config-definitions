@@ -24,6 +24,7 @@
    :label "Spark Local Directories",
    :add-export true,
    :default_value "/tmp",
+   :tarball_default "tmp",
    :required false,
    :is_directory true},
   :spark-worker-port
