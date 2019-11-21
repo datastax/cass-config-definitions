@@ -5,7 +5,7 @@
  :ui-visibility :editable
  :valid-dse-versions [:all]
  :renderer {:renderer-type :template
-            :template "java-setup-dse-4.8.0.template"}
+            :template "java-setup-dse-6.0.0.template"}
  :properties {:manage-java {:type "boolean"
                             :required true
                             :default_value true

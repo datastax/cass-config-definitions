@@ -8,7 +8,7 @@
  :valid-dse-versions [:all]
  :renderer
  {:renderer-type :template
-  :template "logback-spark-server-xml-dse-5.0.1.template"}
+  :template "logback-spark-server-xml-dse-6.0.0.template"}
  :workload :spark
  :properties
  {:max-file-size

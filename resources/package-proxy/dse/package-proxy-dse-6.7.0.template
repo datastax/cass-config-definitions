@@ -1,1 +1,0 @@
-{% if enabled %}{{protocol}}://{% if authentication-required %}{{username|urlencode}}:{{password|urlencode}}@{% endif %}{{host}}:{{port}}{% endif %}

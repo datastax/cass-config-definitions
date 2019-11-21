@@ -6,7 +6,7 @@
  :valid-dse-versions [:all]
  :renderer
  {:renderer-type :template
-  :template "logback-spark-xml-dse-5.1.0.template"}
+  :template "logback-spark-xml-dse-6.0.0.template"}
  :workload :spark
  :properties
  {:root-level
