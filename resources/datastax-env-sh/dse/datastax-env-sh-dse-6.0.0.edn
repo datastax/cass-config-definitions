@@ -1,7 +1,7 @@
 {:display-name "datastax-env.sh"
  :package-path ""
  :tarball-path "resources/datastax-env.sh"
- :workload-file-group "cassandra"
+ :workload-file-group "None"
  :valid-dse-versions [:all]
  :ui-visibility :hidden
  :renderer
