@@ -8,17 +8,7 @@
  {:renderer-type :template,
   :template "cassandra-env-sh-dse-6.7.0.template"},
  :properties
- {:cassandra-log-dir
-  {:type "string"
-   :required true
-   :constant "CASSANDRA_LOG_DIR"
-   :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
-   :is_directory true
-   :default_value "/var/log/cassandra"
-   :tarball_default "var/log/cassandra"
-   :add-export true}
-
-  :malloc-arena-max
+ {:malloc-arena-max
   {:type "int",
    :constant "MALLOC_ARENA_MAX",
    :label "Malloc Arena Max",
@@ -51,8 +41,7 @@
   }
 
  :groupings [{:name "General",
-              :list ["cassandra-log-dir"
-                     "malloc-arena-max"
+              :list ["malloc-arena-max"
                      "heap-dump-dir"
                      "enable_on_out_of_memory_error"
                      "on_out_of_memory_error"]}]}
