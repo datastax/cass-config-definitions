@@ -15,9 +15,8 @@
   :install-directory
   {:type "string"
    :label "Installation Directory"
-   :required true
-   :default_value "/opt/datastax"
    :depends :install-type
+   :validators [{:name :absolute-path :params {:allow-nil true}}]
    :conditional [{:eq "tarball"}]}
   :tarball-hash
   {:type "string"
