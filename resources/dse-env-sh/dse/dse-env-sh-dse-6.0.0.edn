@@ -1,0 +1,29 @@
+{:display-name "dse-env.sh"
+ :package-path "/etc/dse/dse-env.sh"
+ :tarball-path "bin/dse-env.sh"
+ :workload-file-group "cassandra"
+ :ui-visibility :editable
+ :renderer
+ {:renderer-type :template
+  :template "dse-env-sh-dse-6.0.0.template"}
+ :properties
+ {
+  :dse-log-root
+  {:type "string"
+   :constant "DSE_LOG_ROOT"
+   :disabled true
+   :description "Sets the base directory for all DSE logs. Defaults to /var/log for package installs and $DSE_HOME/logs for tarball installs."
+   :is_directory true
+   :add-export true}
+  :cassandra-log-dir
+  {:type "string"
+   :constant "CASSANDRA_LOG_DIR"
+   :disabled true
+   :description "Sets the directory where Cassandra will write logs. Defaults to $DSE_LOG_ROOT/cassandra, but can be overridden here."
+   :is_directory true
+   :add-export true}
+  }
+ :groupings
+ [{:name "Log Settings"
+   :list ["dse-log-root"
+          "cassandra-log-dir"]}]}
