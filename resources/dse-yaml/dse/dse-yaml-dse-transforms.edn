@@ -13,8 +13,6 @@
           (add-field :dsefs_options.rest_options.core_max_concurrent_connections_per_host
                      {:type "int"
                       :required false}))
- "6.0.3" :no-change
- "6.0.4" :no-change
  "6.0.5" (transforms
           (add-field :dsefs_options.internode_authentication
                      {:type "dict"
@@ -41,12 +39,6 @@
                                  :description "Directory to store insights logs"}}
                       :order [:data_dir :log_dir]}
                      :group "Insightful Monitoring"))
- "6.0.6" :no-change
- "6.0.7" :no-change
- "6.0.8" :no-change
- "6.0.9" :no-change
- "6.0.10" :no-change
- "6.0.11" :no-change
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
@@ -76,7 +68,6 @@
                                  :rest_options
                                  :transaction_options
                                  :block_allocator_options]}))
- "6.7.2" :no-change
  "6.7.3" (transforms
           (add-field :alwayson_sql_options.heartbeat_update_interval_seconds
                      {:type "int"
@@ -93,9 +84,6 @@
                                  :auth_user
                                  :runner_max_errors
                                  :heartbeat_update_interval_seconds]}))
- "6.7.4" :no-change
- "6.7.5" :no-change
- "6.7.6" :no-change
  ;; End DSE 6.7.x transforms.
 
 

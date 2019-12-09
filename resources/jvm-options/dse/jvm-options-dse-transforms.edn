@@ -9,9 +9,6 @@
                       :constant "-Djdk.nio.maxCachedBufferSize"
                       :default_value 1048576}
                      :group "General JVM Parameters"))
- "6.0.2" :no-change
- "6.0.3" :no-change
- "6.0.4" :no-change
  "6.0.5" (transforms
           (add-field :dse_consistent_replace
                      {:type "string"
@@ -54,7 +51,6 @@
                       :required false}
                      :group "Startup Parameters")
           (delete-field :page-align-direct-memory))
- "6.0.6" :no-change
  "6.0.7" (transforms
            (add-field :io_netty_maxdirectmemory
                       {:type "int"
@@ -62,17 +58,12 @@
                        :constant "-Dio.netty.maxDirectMemory"
                        :label "io.netty.maxDirectMemory"}
                       :group "General JVM Parameters"))
- "6.0.8" :no-change
- "6.0.9" :no-change
- "6.0.10" :no-change
- "6.0.11" :no-change
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
  "6.7.0" "jvm-options-dse-6.7.0.edn"
  "6.7.1" (transforms
           (delete-field :page-align-direct-memory))
- "6.7.2" :no-change
  "6.7.3" (transforms
            (add-field :io_netty_maxdirectmemory
                       {:type "int"
@@ -80,9 +71,6 @@
                        :constant "-Dio.netty.maxDirectMemory"
                        :label "io.netty.maxDirectMemory"}
                       :group "General JVM Parameters"))
- "6.7.4" :no-change
- "6.7.5" :no-change
- "6.7.6" :no-change
  ;; End DSE 6.7.x transforms.
 
 

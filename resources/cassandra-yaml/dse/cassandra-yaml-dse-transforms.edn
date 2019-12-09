@@ -97,6 +97,7 @@
                        {:type "int" :required false
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}}}
                      :group "Miscellaneous"))
+ ;; End DSE 6.7.x transforms.
 
  "6.8.0" "cassandra-yaml-dse-6.8.0.edn"
  )
