@@ -120,12 +120,12 @@ JVM_VERSION=${jvmver%_*}
 JVM_PATCH_VERSION=${jvmver#*_}
 
 if [ "$JVM_VERSION" \< "1.8" ] || [ "$JVM_VERSION" \> "1.8.2" ] ; then
-    echo "DSE 6.0 requires Java 8 update 151 or later. Java $JVM_VERSION is not supported."
+    echo "DSE 6.7 requires Java 8 update 151 or later. Java $JVM_VERSION is not supported."
     exit 1;
 fi
 
 if [ "$JVM_PATCH_VERSION" -lt 151 ] ; then
-    echo "DSE 6.0 requires Java 8 update 151 or later. Java 8 update $JVM_PATCH_VERSION is not supported."
+    echo "DSE 6.7 requires Java 8 update 151 or later. Java 8 update $JVM_PATCH_VERSION is not supported."
     exit 1;
 fi
 
@@ -216,7 +216,7 @@ fi
 if [ "x$MAX_HEAP_SIZE" = "x" ] && [ "x$HEAP_NEWSIZE" = "x" -o $USING_G1 -eq 0 ]; then
     calculate_heap_sizes
 elif [ "x$MAX_HEAP_SIZE" = "x" ] ||  [ "x$HEAP_NEWSIZE" = "x" -a $USING_G1 -ne 0 ]; then
-    echo "please set or unset MAX_HEAP_SIZE and HEAP_NEWSIZE in pairs when using CMS GC (see cassandra-env.sh)"
+    echo "Please set or unset MAX_HEAP_SIZE and HEAP_NEWSIZE in pairs when using CMS GC (see cassandra-env.sh)"
     exit 1
 fi
 
@@ -237,13 +237,13 @@ fi
 memory_remaining_in_mb="$((${system_memory_in_mb} - ${heap_size_in_mb}))"
 
 if [ "x$MAX_DIRECT_MEMORY" = "x" ]; then
-# Calculate direct memory as 1/2 of memory available after heap:
-MAX_DIRECT_MEMORY="$((memory_remaining_in_mb / 2))M"
+   # Calculate direct memory as 1/2 of memory available after heap:
+   MAX_DIRECT_MEMORY="$((memory_remaining_in_mb / 2))M"
 fi
 
 # We only set -XX:MaxDirectMemorySize if not already set in jvm.options
 if [ $DEFINED_MAXDM -ne 0 ]; then
-JVM_OPTS="$JVM_OPTS -XX:MaxDirectMemorySize=$MAX_DIRECT_MEMORY"
+   JVM_OPTS="$JVM_OPTS -XX:MaxDirectMemorySize=$MAX_DIRECT_MEMORY"
 fi
 
 # Set this to control the amount of arenas per-thread in glibc
