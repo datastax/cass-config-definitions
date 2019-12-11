@@ -207,5 +207,27 @@
         "plot": "StackedAreas",
         "priority": 25,
         "unit": "tasks"
+    },
+    "nodesync-tbl-incremental-validation-covered-ages-seconds":{
+        "aggregation_type": "histogram",
+        "histogram": true,
+        "metric_type": "histogram",
+        "api_key": "nodesync-tbl-incremental-validation-covered-ages-seconds",
+        "description": "The oldest data validated by Incremental NodeSync in seconds for a given time interval",
+        "group": "nodesync",
+        "label": "NodeSync TBL: Incremental Validation Covered Ages Seconds",
+        "mbean": "org.apache.cassandra.metrics:type=Table,keyspace={keyspace},scope={table},name=NodeSyncIncrementalValidationsCoveredAgesSeconds",
+        "max": "<b>Max</b> - The oldest data (in seconds since insertion) incremental NodeSync has had to validate",
+        "median": "<b>Median</b> - 50 percent of validations validated data whose age (seconds since their insertion) was either at or below this value",
+        "min": "<b>Min</b> - The newest data (in seconds since insertion) incremental NodeSync has had to validate",
+        "p90th": "<b>90th</b> - 90 percent of validations validated data whose age (seconds since their insertion) was either at or below this value",
+        "p99th": "<b>99th</b> - 99 percent of validations validated data whose age (seconds since their insertion) was either at or below this value",
+        "invoke": ["values"],
+        "plot": "Areas",
+        "priority": 27,
+        "is_table_metric": true,
+        "scope": "cf",
+        "type": "jmx",
+        "unit": "seconds"
     }
 }
