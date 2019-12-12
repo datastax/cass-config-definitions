@@ -3,6 +3,11 @@
 # add any environment overrides you need here. This is where users
 # may set thirdparty variables.
 
+{% comment %} Custom Environment Variables by Opscenter Provisioning {% endcomment %}
+{% for custom-env-var in custom-env-vars %}
+export {{custom-env-var|name}}="{{custom-env-var|val|sanitize-bash-env-var-value}}"
+{% endfor %}
+
 # This is here so the installer can force set DSE_HOME
 #DSE_HOME="/usr/share/dse"
 #export DSE_HOME
