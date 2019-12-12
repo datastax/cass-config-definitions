@@ -22,8 +22,13 @@
    :description "Sets the directory where Cassandra will write logs. Defaults to $DSE_LOG_ROOT/cassandra, but can be overridden here."
    :is_directory true
    :add-export true}
-  }
+  :custom-env-vars
+  {:type "user_defined"
+   :key_name "name"
+   :value_type "string"}
+ }
  :groupings
  [{:name "Log Settings"
    :list ["dse-log-root"
-          "cassandra-log-dir"]}]}
+          "cassandra-log-dir"
+          "custom-env-vars"]}]}
