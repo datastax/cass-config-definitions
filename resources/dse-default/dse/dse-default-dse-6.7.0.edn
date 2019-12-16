@@ -2,7 +2,6 @@
  :package-path "/etc/default/dse",
  :workload-file-group "cassandra",
  :ui-visibility :editable,
- :valid-dse-versions [:all],
  :renderer
  {:renderer-type :template,
   :template "dse-default-dse-6.7.0.template"},

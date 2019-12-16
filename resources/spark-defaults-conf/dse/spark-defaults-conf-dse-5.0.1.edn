@@ -2,7 +2,6 @@
  :package-path "/etc/dse/spark/spark-defaults.conf"
  :workload-file-group "spark",
  :ui-visibility :editable,
- :valid-dse-versions [:all],
  :renderer
  {:renderer-type :template,
   :template "spark-defaults-conf-dse-5.0.1.template"},

@@ -47,7 +47,6 @@
    :required true,
    :default_value
    "com.datastax.bdp.spark.DseCassandraConnectionFactory"}},
- :valid-dse-versions [:all],
  :groupings
  [{:name "DSE Related Settings",
    :list

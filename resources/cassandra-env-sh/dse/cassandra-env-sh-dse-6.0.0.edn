@@ -2,7 +2,6 @@
  :package-path "/etc/dse/cassandra/cassandra-env.sh"
  :workload-file-group "cassandra"
  :ui-visibility :editable
- :valid-dse-versions [:all]
  :renderer
  {:renderer-type :template
   :template "cassandra-env-sh-dse-6.0.0.template"}

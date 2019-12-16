@@ -68,7 +68,6 @@
    :description
    "Specifies whether to use SSL for JDBC connections. If using client-to-node encryption in cassandra.yaml, select use-ssl to enable SSL for JDBC.",
    :default_value false}},
- :valid-dse-versions [:all],
  :groupings
  [{:name "Security",
    :list ["jdbc-auth-type" "use-ssl" "keystore" "keystore-password"]}

@@ -2,7 +2,6 @@
  :package-path ""
  :workload-file-group "lifecycle manager"
  :ui-visibility :editable
- :valid-dse-versions [:all]
  :renderer {:renderer-type :template
             :template "java-setup-dse-4.8.0.template"}
  :properties {:manage-java {:type "boolean"

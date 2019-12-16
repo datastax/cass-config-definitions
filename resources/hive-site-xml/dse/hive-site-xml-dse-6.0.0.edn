@@ -1,7 +1,6 @@
 {:display-name "hive-site.xml"
  :package-path "/etc/dse/spark/hive-site.xml"
  :workload-file-group "spark"
- :valid-dse-versions [:all]
  :ui-visibility :editable
  :renderer
  {:renderer-type :template

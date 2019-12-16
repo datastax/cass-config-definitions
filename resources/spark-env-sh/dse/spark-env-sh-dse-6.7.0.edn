@@ -256,7 +256,6 @@
    :default_value "",
    :disabled true,
    :add-export true}},
- :valid-dse-versions [:all],
  :groupings
  [{:name "General",
    :list

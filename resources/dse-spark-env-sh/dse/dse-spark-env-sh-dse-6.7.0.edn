@@ -33,7 +33,6 @@
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true,
    :default_value "/var/log/spark/alwayson_sql"}},
- :valid-dse-versions [:all],
  :groupings
  [{:name "General",
    :list

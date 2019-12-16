@@ -2,7 +2,6 @@
  :package-path "/etc/dse/spark/logback-sparkR.xml",
  :workload-file-group "spark",
  :ui-visibility :editable,
- :valid-dse-versions [:gte "5.1.0"],
  :renderer
  {:renderer-type :template,
   :template "logback-sparkr-xml-dse-6.7.0.template"},
