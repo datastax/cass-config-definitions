@@ -3,7 +3,6 @@
  :tarball-path "resources/spark/conf/spark-alwayson-sql.conf"
  :workload-file-group "spark"
  :ui-visibility :editable
- :valid-dse-versions [:gte "6.0.0"]
  :renderer
  {:renderer-type :template
   :template "spark-alwayson-sql-conf-dse-6.0.0.template"}

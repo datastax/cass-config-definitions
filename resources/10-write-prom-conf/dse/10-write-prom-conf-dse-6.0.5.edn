@@ -3,7 +3,6 @@
  :tarball-path ""
  :workload-file-group "cassandra",
  :ui-visibility :editable,
- :valid-dse-versions [:gte "6.0.5"],
  :renderer
  {:renderer-type :template,
   :template "10-write-prom-conf-dse-6.0.5.template"},

@@ -38,7 +38,6 @@
    :is_directory true,
    :tarball_default "var/log/spark/alwayson_sql"
    :default_value "/var/log/spark/alwayson_sql"}},
- :valid-dse-versions [:all],
  :groupings
  [{:name "General",
    :list

@@ -3,7 +3,6 @@
  :tarball-path "resources/cassandra/conf/cassandra-rackdc.properties"
  :workload-file-group "None"
  :ui-visibility :hidden
- :valid-dse-versions [:all]
  :renderer
  {:renderer-type :template
   :template "cassandra-rackdc-properties-dse-6.0.0.template"}

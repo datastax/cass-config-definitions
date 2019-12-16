@@ -4,7 +4,6 @@
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  ;; jvm.options is only valid for DSE 6.8.0 and greater
- :valid-dse-versions [:gte "6.8.0"],
  :renderer
  {:renderer-type :template,
   :template "jvm11-server-options-dse-6.8.0.template"},

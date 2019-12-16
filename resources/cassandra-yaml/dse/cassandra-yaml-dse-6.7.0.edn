@@ -3,7 +3,6 @@
  :tarball-path "resources/cassandra/conf/cassandra.yaml"
  :workload-file-group "cassandra",
  :ui-visibility :editable,
- :valid-dse-versions [:all],
  :renderer {:renderer-type :yaml},
  :properties
  {:hinted_handoff_enabled

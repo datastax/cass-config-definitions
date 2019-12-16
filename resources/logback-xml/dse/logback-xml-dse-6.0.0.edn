@@ -3,7 +3,6 @@
  :tarball-path "resources/cassandra/conf/logback.xml"
  :workload-file-group "cassandra"
  :ui-visibility :editable
- :valid-dse-versions [:all]
  :renderer {:renderer-type :template
             :template "logback-xml-dse-6.0.0.template"}
  :properties {:systemlog-appender-level {:type "string"

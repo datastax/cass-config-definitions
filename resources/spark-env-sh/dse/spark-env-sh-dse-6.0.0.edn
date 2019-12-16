@@ -3,7 +3,6 @@
  :tarball-path "resources/spark/conf/spark-env.sh"
  :workload-file-group "spark",
  :ui-visibility :editable,
- :valid-dse-versions [:all],
  :renderer
  {:renderer-type :template,
   :template "spark-env-sh-dse-6.0.0.template"},

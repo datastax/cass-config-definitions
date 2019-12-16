@@ -5,7 +5,6 @@
  :tarball-path "resources/spark/conf/logback-spark-server.xml"
  :workload-file-group "spark"
  :ui-visibility :editable
- :valid-dse-versions [:all]
  :renderer
  {:renderer-type :template
   :template "logback-spark-server-xml-dse-6.0.0.template"}
