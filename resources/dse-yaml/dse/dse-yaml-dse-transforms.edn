@@ -18,7 +18,7 @@
                      {:type "dict"
                       :fields
                       {:enabled {:type "boolean"
-                                 :required false
+                                 :required true
                                  :default_value true}
                        :algorithm {:type "string"
                                    :required false

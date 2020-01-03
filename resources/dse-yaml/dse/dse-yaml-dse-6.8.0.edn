@@ -921,8 +921,7 @@
       :execution_retry_count {:type "int", :default_value 3}},
      :conditional [{:eq true}]},
     :enabled
-    {:type "boolean",
-     :required false,
+    {:type "ternary_boolean",
      :default_value nil,
      :description
      "Default instructs this node to enable DSEFS only if the node is configured with an analytic workload."},

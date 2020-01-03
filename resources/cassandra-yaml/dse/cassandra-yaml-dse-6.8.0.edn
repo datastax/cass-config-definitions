@@ -94,7 +94,7 @@
     :items_per_collection_warn_threshold
     {:type "int", :required false},
     :read_before_write_list_operations_enabled
-    {:type "boolean", :required false},
+    {:type "boolean", :required true, :default_value true},
     :secondary_index_per_table_failure_threshold
     {:type "int", :required false},
     :materialized_view_per_table_failure_threshold
@@ -109,7 +109,7 @@
      :description "Prevent creating tables with provided configurations."
      :value_type "string"},
     :user_timestamps_enabled
-    {:type "boolean", :required false},
+    {:type "boolean", :required true, :default_value true},
     :write_consistency_levels_disallowed
     {:type "list",
      :required false,

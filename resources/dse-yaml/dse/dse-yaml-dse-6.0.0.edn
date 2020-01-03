@@ -657,8 +657,7 @@
     ;; true, false, and nil each have different behaviors, so we mark this as
     ;; an optional boolean in order to display it as a 3-way dropdown.
     ;; See DSP-12877 for details.
-    :enabled {:type "boolean"
-              :required false
+    :enabled {:type "ternary_boolean"
               :default_value nil
               :description "Default instructs this node to enable DSEFS only if the node is configured with an analytic workload."}
     :keyspace_name
