@@ -91,20 +91,17 @@
   :cassandra_available_processors
   {:type "int",
    :constant "-Dcassandra.available_processors",
-   :disabled true,
    :label "Available CPU processors",
    :required false},
   :cassandra_config_directory
   {:type "string",
    :constant "-Dcassandra.config",
-   :disabled true,
    :label "Location of the cassandra.yaml file",
    :render-without-quotes true,
    :required false},
   :cassandra_initial_token
   {:type "string",
    :constant "-Dcassandra.initial_token",
-   :disabled true,
    :label "Initial token for first start of node",
    :render-without-quotes true,
    :required false},
@@ -124,55 +121,47 @@
   {:type "string",
    :constant "-Dcassandra.metricsReporterConfigFile",
    :label "Enable pluggable metrics reporter",
-   :disabled true,
    :render-without-quotes true,
    :required false},
   :cassandra_replace_address
   {:type "string",
    :constant "-Dcassandra.replace_address",
    :label "Address of dead node to be replaced",
-   :disabled true,
    :render-without-quotes true,
    :required false},
   :dse_consistent_replace
   {:type "string",
    :constant "-Ddse.consistent_replace",
    :label "Perform consistent replace",
-   :disabled true,
    :render-without-quotes true,
    :required false},
   :dse_consistent_replace_parallelism
   {:type "string",
    :constant "-Ddse.consistent_replace.parallelism",
    :label "How many ranges will be repaired simultaneously during consistent replace",
-   :disabled true,
    :render-without-quotes true,
    :required false},
   :dse_consistent_replace_retries
   {:type "string",
    :constant "-Ddse.consistent_replace.retries",
    :label "How many times a failed repair will be retried",
-   :disabled true,
    :render-without-quotes true,
    :required false},
   :dse_consistent_replace_whitelist
   {:type "string",
    :constant "-Ddse.consistent_replace.whitelist",
    :label "Targeted keyspaces or tables for consistent replace",
-   :disabled true,
    :render-without-quotes true,
    :required false},
   :cassandra_replay_list
   {:type "string",
    :constant "-Dcassandra.replayList",
    :label "Restore specific tables from archived commit log",
-   :disabled true,
    :render-without-quotes true,
    :required false},
   :cassandra_ring_delay_ms
   {:type "int",
    :required false,
-   :disabled true,
    :constant "-Dcassandra.ring_delay_ms",
    :label "Amount of time node waits before joining ring",
    :unit "ms"},
@@ -180,7 +169,6 @@
   {:type "string",
    :constant "-Dcassandra.triggers_dir",
    :label "Default location for the trigger JARs",
-   :disabled true,
    :render-without-quotes true,
    :required false},
   :cassandra_write_survey
@@ -206,7 +194,6 @@
   {:type "string",
    :constant "-Dcassandra.maxHintTTL",
    :label "Imposes an upper bound on hint lifetime below the normal min gc_grace_seconds",
-   :disabled true,
    :render-without-quotes true,
    :required false},
 
@@ -347,26 +334,22 @@
   ;; Heap Settings
 
   :initial_heap_size
-  {:description
-   "The initial size of the heap when starting the JVM that runs DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing.",
+  {
+   :description "The initial size of the heap when starting the JVM that runs DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing."
    :suppress-equal-sign true,
-   :disabled true,
    :constant "-Xms",
    :type "string",
    :label "Initial Heap Size",
    :render-without-quotes true,
-   :default_value "auto",
    :required false},
   :max_heap_size
-  {:description
-   "The maximum size to which the heap will be allowed to grow for the JVM running DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing.",
+  {
+   :description "The maximum size to which the heap will be allowed to grow for the JVM running DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing."
    :suppress-equal-sign true,
-   :disabled true,
    :constant "-Xmx",
    :type "string",
    :label "Max Heap Size",
    :render-without-quotes true,
-   :default_value "auto",
    :required false},
 
   ;; NIO Settings
@@ -419,7 +402,6 @@
    :label "Max Direct Memory",
    :render-without-quotes true,
    :required false,
-   :disabled false,
    :add-export false},
   :print_heap_histogram_on_out_of_memory_error
   {:type "boolean",

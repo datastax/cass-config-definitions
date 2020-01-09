@@ -12,9 +12,8 @@
    :constant "MALLOC_ARENA_MAX",
    :label "Malloc Arena Max",
    :required false,
-   :default_value 4,
-   :disabled true,
-   :add-export true}
+   :add-export true
+   :description "Example value: 4"}
 
   :heap-dump-dir
   {:type "string"

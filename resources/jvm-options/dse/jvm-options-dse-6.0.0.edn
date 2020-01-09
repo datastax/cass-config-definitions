@@ -24,14 +24,12 @@
   :cassandra_available_processors
   {:type "int"
    :constant "-Dcassandra.available_processors"
-   :disabled true
    :label "Available CPU processors"
    :required false}
 
   :cassandra_config_directory
   {:type "string"
    :constant "-Dcassandra.config"
-   :disabled true
    :label "Location of the cassandra.yaml file"
    :render-without-quotes true
    :required false}
@@ -39,7 +37,6 @@
   :cassandra_initial_token
   {:type "string"
    :constant "-Dcassandra.initial_token"
-   :disabled true
    :label "Initial token for first start of node"
    :render-without-quotes true
    :required false}
@@ -62,7 +59,6 @@
   {:type "string"
    :constant "-Dcassandra.metricsReporterConfigFile"
    :label "Enable pluggable metrics reporter"
-   :disabled true
    :render-without-quotes true
    :required false}
 
@@ -70,7 +66,6 @@
   {:type "string"
    :constant "-Dcassandra.replace_address"
    :label "Address of dead node to be replaced"
-   :disabled true
    :render-without-quotes true
    :required false}
 
@@ -78,14 +73,12 @@
   {:type "string"
    :constant "-Dcassandra.replayList"
    :label "Restore specific tables from archived commit log"
-   :disabled true
    :render-without-quotes true
    :required false}
 
   :cassandra_ring_delay_ms
   {:type "int"
    :required false
-   :disabled true
    :constant "-Dcassandra.ring_delay_ms"
    :label "Amount of time node waits before joining ring"
    :unit "ms"}
@@ -94,7 +87,6 @@
   {:type "string"
    :constant "-Dcassandra.triggers_dir"
    :label "Default location for the trigger JARs"
-   :disabled true
    :render-without-quotes true
    :required false}
 
@@ -139,7 +131,6 @@
    :label "Max Direct Memory"
    :render-without-quotes true
    :required false
-   :disabled false
    :add-export false}
 
   ;; General JVM Settings
@@ -311,24 +302,20 @@
   :initial_heap_size
   {:type "string"
    :label "Initial Heap Size"
-   :disabled true
    :required false
    :constant "-Xms"
    :suppress-equal-sign true
    :render-without-quotes true
-   :default_value "auto"
    :description "The initial size of the heap when starting the JVM that runs DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing."}
 
   ;; -Xmx
   :max_heap_size
   {:type "string"
    :label "Max Heap Size"
-   :disabled true
    :required false
    :constant "-Xmx"
    :suppress-equal-sign true
    :render-without-quotes true
-   :default_value "auto"
    :description "The maximum size to which the heap will be allowed to grow for the JVM running DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing. By default, heap size is automatically calculated by DSE based on this formula: max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))"}
 
 
@@ -361,11 +348,9 @@
    :required false
    :depends :garbage_collector
    :conditional "CMS"
-   :disabled true
    :constant "-Xmn"
    :render-without-quotes true
-   :suppress-equal-sign true
-   :default_value ""}
+   :suppress-equal-sign true}
 
   :survivor_ratio
   {:type "int"
@@ -427,8 +412,6 @@
   {:type "int"
    :label "Initiating Heap Occupancy Percentage"
    :required false
-   :disabled true
-   :default_value ""
    :depends :garbage_collector
    :conditional "G1GC"
    :constant "-XX:InitiatingHeapOccupancyPercent"}
@@ -437,8 +420,6 @@
   {:type "int"
    :label "Parallel GC Threads"
    :required false
-   :disabled true
-   :default_value ""
    :depends :garbage_collector
    :conditional "G1GC"
    :constant "-XX:ParallelGCThreads"}
@@ -447,8 +428,6 @@
   {:type "int"
    :label "Concurrent GC Threads"
    :required false
-   :disabled true
-   :default_value ""
    :depends :garbage_collector
    :conditional "G1GC"
    :constant "-XX:ConcGCThreads"}
@@ -559,7 +538,6 @@
   :number_of_gc_log_files
   {:type "int"
    :label "Number of GC log files"
-   :disabled false
    :required true
    :constant "-XX:NumberOfGCLogFiles"
    :default_value 10}
@@ -567,7 +545,6 @@
   :gc_log_file_size
   {:type "string"
    :label "GC log file size"
-   :disabled false
    :required true
    :constant "-XX:GCLogFileSize"
    :render-without-quotes true

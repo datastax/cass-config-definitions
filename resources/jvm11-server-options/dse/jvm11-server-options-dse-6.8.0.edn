@@ -39,7 +39,6 @@
   :jdk_attach_allow_attach_self
   {:type "boolean",
    :label "jdk.attach.allowAttachSelf",
-   :disabled false,
    :required true,
    :exclude-from-template-iterables true,
    :static_constant "-Djdk.attach.allowAttachSelf=true"
@@ -48,7 +47,6 @@
   :io_netty_try_reflection_set_accessible
   {:type "boolean",
    :label "io.netty.tryReflectionSetAccessible",
-   :disabled false,
    :required true,
    :exclude-from-template-iterables true,
    :static_constant "-Dio.netty.tryReflectionSetAccessible=true"
@@ -83,8 +81,6 @@
   {:type "int",
    :label "Initiating Heap Occupancy Percentage",
    :required false,
-   :disabled true,
-   :default_value "",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:InitiatingHeapOccupancyPercent"},
@@ -92,8 +88,6 @@
   {:type "int",
    :label "Parallel GC Threads",
    :required false,
-   :disabled true,
-   :default_value "",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:ParallelGCThreads"},
@@ -101,8 +95,6 @@
   {:type "int",
    :label "Concurrent GC Threads",
    :required false,
-   :disabled true,
-   :default_value "",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:ConcGCThreads"}},

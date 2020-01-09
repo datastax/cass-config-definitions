@@ -18,41 +18,33 @@
    :required false,
    :label "Wait for start",
    :constant "WAIT_FOR_START",
-   :disabled true,
-   :default_value 3,
    :unit "seconds",
    :description
-   "Increase/decrease if you want longer/shorter waits checking if the service is up"},
+   "Increase/decrease if you want longer/shorter waits checking if the service is up. Unit is seconds. Example value: 3"},
   :wait-for-start-sleep
   {:type "int",
    :required false,
    :label "Wait for start sleep",
    :constant "WAIT_FOR_START_SLEEP",
-   :disabled true,
-   :default_value 5,
    :unit "seconds",
    :description
-   "Decrease/increase if you want finer/coarser grained waits while checking if the service is up"},
+   "Decrease/increase if you want finer/coarser grained waits while checking if the service is up. Unit is seconds. Example value: 5"},
   :wait-for-stop
   {:type "int",
    :required false,
    :label "Wait for stop",
    :constant "WAIT_FOR_STOP",
-   :disabled true,
-   :default_value 60,
    :unit "seconds",
    :description
-   "Increase/decrease if you want longer/shorter waits checking if the service stopped"},
+   "Increase/decrease if you want longer/shorter waits checking if the service stopped. Unit is seconds. Example value: 60"},
   :wait-for-stop-sleep
-  {:type "int",
+  {:type "float",
    :required false,
    :label "Wait for stop sleep",
    :constant "WAIT_FOR_STOP_SLEEP",
-   :disabled true,
-   :default_value 0.5,
    :unit "seconds",
    :description
-   "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped"}},
+   "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped. Unit is seconds. Example value: 0.5"}},
   :groupings
  [{:name "General",
    :list

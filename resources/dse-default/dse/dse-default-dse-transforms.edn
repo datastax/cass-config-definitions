@@ -1,8 +1,3 @@
-;; Attributes in this file are :disabled-true because it gets special
-;; handling in order to pull workload fields off the data-model. Consequently,
-;; nothing in here is editable from the UI. The wait-for-start setting we want
-;; to make available though, per OPSC-10190.
-
 (
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "dse-default-dse-6.0.0.edn"
@@ -13,8 +8,8 @@
                       :required false
                       :label "Wait for stop"
                       :constant "WAIT_FOR_STOP"
-                      :disabled true
-                      :default_value 60
+                      :description
+                      "Increase/decrease if you want longer/shorter waits checking if the service stopped. Unit is seconds. Example value: 60"
                       :unit "seconds"}
                      :group "General")
           (add-field :wait-for-stop-sleep
@@ -22,8 +17,8 @@
                       :required false
                       :label "Wait for stop sleep"
                       :constant "WAIT_FOR_STOP_SLEEP"
-                      :disabled true
-                      :default_value 0.5
+                      :description
+                      "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped. Unit is seconds. Example value: 0.5"
                       :unit "seconds"}
                      :group "General"))
  ;; End DSE 6.0.x transforms.
@@ -38,22 +33,18 @@
                       :required false,
                       :label "Wait for stop",
                       :constant "WAIT_FOR_STOP",
-                      :disabled true,
-                      :default_value 60,
                       :unit "seconds",
                       :description
-                      "Increase/decrease if you want longer/shorter waits checking if the service stopped"}
+                      "Increase/decrease if you want longer/shorter waits checking if the service stopped. Unit is seconds. Example value: 60"}
                       :group "General")
           (add-field :wait-for-stop-sleep
                      {:type "float",
                       :required false,
                       :label "Wait for stop sleep",
                       :constant "WAIT_FOR_STOP_SLEEP",
-                      :disabled true,
-                      :default_value 0.5,
                       :unit "seconds",
                       :description
-                      "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped"}
+                      "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped. Unit is seconds. Example value: 0.5"}
                      :group "General"))
  ;; End DSE 6.7.x transforms.
 

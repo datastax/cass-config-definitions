@@ -20,25 +20,20 @@
                        {:label "LOCAL_QUORUM" :value "LOCAL_QUORUM"}
                        {:label "QUORUM" :value "QUORUM"}]
                       :default_value nil
-                      :disabled true
                       :render-without-quotes true
                       :required false}
                      :group "Startup Parameters")
           (add-field :dse_consistent_replace_parallelism
                      {:type "int"
-                      :description "Specifies how many ranges will be repaired simultaneously during consistent replace. The higher the parallelism, the more resources will be consumed cluster-wide, what may affect cluster performance."
+                      :description "Specifies how many ranges will be repaired simultaneously during consistent replace. The higher the parallelism, the more resources will be consumed cluster-wide, what may affect cluster performance. Example value: 2"
                       :constant "-Ddse.consistent_replace.parallelism"
-                      :default_value 2
-                      :disabled true
                       :render-without-quotes true
                       :required false}
                      :group "Startup Parameters")
           (add-field :dse_consistent_replace_retries
                      {:type "int"
-                      :description "Specifies how many times a failed repair will be retried during consistent replace. If all retries fail, consistent replace will fail, but can be resumed with nodetool bootstrap resume."
+                      :description "Specifies how many times a failed repair will be retried during consistent replace. If all retries fail, consistent replace will fail, but can be resumed with nodetool bootstrap resume. Example value: 3"
                       :constant "-Ddse.consistent_replace.retries"
-                      :default_value 3
-                      :disabled true
                       :render-without-quotes true
                       :required false}
                      :group "Startup Parameters")
@@ -46,7 +41,6 @@
                      {:type "string"
                       :description "Targeted keyspaces or tables for consistent replace can be specified as: \"ks1,ks2.cf1\". By default it's empty, all tables and keyspaces will be consistent replaced."
                       :constant "-Ddse.consistent_replace.whitelist"
-                      :disabled true
                       :render-without-quotes true
                       :required false}
                      :group "Startup Parameters")

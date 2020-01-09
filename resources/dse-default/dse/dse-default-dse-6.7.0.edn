@@ -18,21 +18,17 @@
    :required false,
    :label "Wait for start",
    :constant "WAIT_FOR_START",
-   :disabled true,
-   :default_value 3,
    :unit "seconds",
    :description
-   "Increase/decrease if you want longer/shorter waits checking if the service is up"},
+   "Increase/decrease if you want longer/shorter waits checking if the service is up. Unit is seconds. Example value: 3"},
   :wait-for-start-sleep
   {:type "int",
    :required false,
    :label "Wait for start sleep",
    :constant "WAIT_FOR_START_SLEEP",
-   :disabled true,
-   :default_value 5,
    :unit "seconds",
    :description
-   "Decrease/increase if you want finer/coarser grained waits while checking if the service is up"}},
+   "Decrease/increase if you want finer/coarser grained waits while checking if the service is up. Unit is seconds. Example value: 5"}},
  :groupings
  [{:name "General",
    :list
