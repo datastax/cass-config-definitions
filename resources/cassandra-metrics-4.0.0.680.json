@@ -13,7 +13,9 @@
                     "active-eventloop-select-calls", "completed-eventloop-select-calls", "active-eventloop-select-now-calls", "completed-eventloop-select-now-calls",
                     "active-eventloop-spin", "completed-eventloop-spin", "active-eventloop-yield", "completed-eventloop-yield",
                     "pending-frame-decode", "total-blocked-frame-decode", "active-read-deferred", "completed-read-deferred",
-                    "pending-read-deferred", "total-blocked-read-deferred"]
+                    "pending-read-deferred", "total-blocked-read-deferred", "completed-read-repair-stage", "pending-read-repair-stage", "active-read-repair-stage",
+                    "hint-replay-error-rate", "hint-replay-success-rate", "hint-replay-timeout-rate", "stream-in-total", "stream-out-total", "active-cas",
+                    "completed-cas", "active-read-repair-stage", "completed-read-repair-stage", "pending-read-repair-stage"]
     },
     "native-graph-request-latencies": {
         "aggregation_type": "histogram",
@@ -84,7 +86,7 @@
         "invoke": ["values"],
         "plot": "Areas",
         "scale": "logScale",
-        "scope": "general",
+        "scope": "native-graph",
         "type": "jmx",
         "to_unit": "nsToMs",
         "from_unit": "msToNs",
@@ -132,7 +134,7 @@
         "invoke": ["values"],
         "plot": "Areas",
         "scale": "logScale",
-        "scope": "general",
+        "scope": "native-graph",
         "type": "jmx",
         "to_unit": "nsToMs",
         "from_unit": "msToNs",
