@@ -11,17 +11,14 @@
  :properties
  {:max-heap-free-ratio
   {:type "int"
-   :required true
    :default_value 50}
 
   :min-heap-free-ratio
   {:type "int"
-   :required true
    :default_value 20}
 
   :spark-worker-dir
   {:type "string"
-   :required true
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true
    :tarball_default "var/lib/spark/worker"
@@ -29,7 +26,6 @@
 
   :spark-executor-dirs
   {:type "string"
-   :required true
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true
    :tarball_default "var/lib/spark/rdd"
@@ -37,7 +33,6 @@
 
   :spark-worker-log-dir
   {:type "string"
-   :required true
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true
    :tarball_default "var/log/spark/worker"
@@ -45,7 +40,6 @@
 
   :spark-master-log-dir
   {:type "string"
-   :required true
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true
    :tarball_default "var/log/spark/master"
@@ -53,7 +47,6 @@
 
   :alwayson-sql-log-dir
   {:type "string"
-   :required true
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true
    :tarball_default "var/log/spark/alwayson_sql"

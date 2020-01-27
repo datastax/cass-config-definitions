@@ -15,54 +15,46 @@
 
   :enabled
   {:type "boolean",
-   :required true,
    :label
    "Enable Statsd",
    :default_value false},
 
   :host
-  {:type "int",
+  {:type "string",
    :label "Host",
    :default_value "::",
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
   :port
   {:type "int",
    :label "Port",
    :default_value "8125",
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
 
   :delete-counters
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
   :delete-timers
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
   :delete-gauges
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
   :delete-sets
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
   :counter-sum
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
 
@@ -77,25 +69,21 @@
   :timer-lower
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
   :timer-upper
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
   :timer-sum
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
   :timer-count
   {:type "boolean",
    :default_value false,
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}},
  :groupings

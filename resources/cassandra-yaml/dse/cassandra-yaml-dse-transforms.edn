@@ -4,32 +4,28 @@
  "6.0.1" (transforms
           (update-field
            :memtable_flush_writers
-           {:type "int"
-            :required false})
+           {:type "int"})
           (update-field
            :io_global_queue_depth
-           {:type "int"
-            :required false}))
+           {:type "int"}))
  "6.0.3" (transforms
           (delete-field :index_summary_capacity_in_mb)
           (delete-field :index_summary_resize_interval_in_minutes))
  "6.0.5" (transforms
           (add-field :echo_attempts_before_reset
                      {:type "int"
-                      :default_value 10
-                      :required false}
+                      :description "Example value: 10"}
                      :group  "Cluster Communication"))
  "6.0.7" (transforms
           (add-field :direct_reads_size_in_mb
-                     {:type "int", :required false}
+                     {:type "int"}
                      :group "Memtable Settings")
           (add-field :pick_level_on_streaming
-                     {:type "boolean" :required true :default_value false}
+                     {:type "boolean" :default_value false}
                      :group "Compactions"))
  "6.0.8" (transforms
           (add-field :leaks_detection_params
                      {:type "dict"
-                      :required false
                       :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."
                       :order [:sampling_probability
                               :max_stacks_cache_size_mb
@@ -37,16 +33,16 @@
                               :max_stack_depth]
                       :fields
                       {:sampling_probability
-                       {:type "int" :required false
+                       {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :max_stacks_cache_size_mb
-                       {:type "int" :required false
+                       {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :num_access_records
-                       {:type "int" :required false
+                       {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :max_stack_depth
-                       {:type "int" :required false
+                       {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}}}
                      :group "Miscellaneous"))
  "6.0.9" :no-change
@@ -65,19 +61,19 @@
  "6.7.1" (transforms
           (add-field
            :echo_attempts_before_reset
-           {:type "int", :default_value 10, :required false}
+           {:type "int",
+            :description "Example value: 10"}
            :group "Cluster Communication"))
  "6.7.3" (transforms
           (add-field :direct_reads_size_in_mb
-                     {:type "int", :required false}
+                     {:type "int"}
                      :group "Memtable Settings")
           (add-field :pick_level_on_streaming
-                     {:type "boolean" :required true :default_value false}
+                     {:type "boolean" :default_value false}
                      :group "Compactions"))
  "6.7.4" (transforms
           (add-field :leaks_detection_params
                      {:type "dict"
-                      :required false
                       :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."
                       :order [:sampling_probability
                               :max_stacks_cache_size_mb
@@ -85,16 +81,16 @@
                               :max_stack_depth]
                       :fields
                       {:sampling_probability
-                       {:type "int" :required false
+                       {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :max_stacks_cache_size_mb
-                       {:type "int" :required false
+                       {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :num_access_records
-                       {:type "int" :required false
+                       {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}
                        :max_stack_depth
-                       {:type "int" :required false
+                       {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}}}
                      :group "Miscellaneous"))
  ;; End DSE 6.7.x transforms.

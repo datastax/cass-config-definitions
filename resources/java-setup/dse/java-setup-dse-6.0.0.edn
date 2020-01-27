@@ -6,7 +6,6 @@
  :renderer {:renderer-type :template
             :template "java-setup-dse-6.0.0.template"}
  :properties {:manage-java {:type "boolean"
-                            :required true
                             :default_value true
                             :description "Uncheck if a Java Virtual Machine is pre-installed on your targets and you do not want LCM to install or upgrade Java."}
               :java-vendor {:type "string"
@@ -23,30 +22,25 @@
                                    :options [{:label "Java 8", :value "1.8"}]
                                    :description "The version of OpenJDK that LCM will attempt to install from the Linux operating system package repositories. If the specified version is not available, jobs will fail."}
               :major-version {:type "string"
-                              :required false
                               :default_value "1.8.0"
                               :depends :java-vendor
                               :conditional "oracle"
-                              :description "The version of Java to install. Example: 1.8.0."}
+                              :description "The version of Oracle Java to install. Example: 1.8.0."}
               :update-version {:type "string"
-                               :required false
                                :default_value "202"
                                :depends :java-vendor
                                :conditional "oracle"
                                :description "Each Java release is identified by an update-version in its filename. For example, the update-version for server-jre-8u121-linux-x64.tar.gz is 121."}
               :download-url {:type "string"
-                             :required true
                              :depends :java-vendor
                              :conditional "oracle"
                              :description "If manage-java is checked and Oracle is selected as the java-vendor, you must specify the download-url. With the <a href=\"http://www.oracle.com/technetwork/java/javase/eol-135779.html\">end of public updates for Oracle JRE</a>, LCM cannot download the JRE directly from Oracle. To automatically install OpenJDK, select Platform OpenJDK as the java-vendor to switch from Oracle JRE to the OpenJDK provided by your operating system. To continue managing Oracle JRE, follow <a href=\"https://support.datastax.com/hc/en-us/articles/213304303-Lifecycle-Manager-Offline-Installation-of-DSE\">these instructions to self-host Oracle JRE at a custom URL</a>."}
               :manage-jce-policy {:type "boolean"
-                                  :required true
                                   :default_value true
                                   :depends :java-vendor
                                   :conditional "oracle"
                                   :description "If Lifecycle Manager is managing your Java installation, it can also install the Java Cryptography Extension (JCE) Unlimited Strength Policy files. These files enable the use of strong encryption suites. You must ensure that usage of these files is legal in your jurisdiction. This option is only applicable when Oracle is selected as the Java vendor."}
               :jce-download-url {:type "string"
-                                 :required true
                                  :depends :manage-jce-policy
                                  :description "When jce-download-url is set to auto, target nodes download Java Cryptography Extension (JCE) Unlimited Strength Policy Files from their official source. To download the zip file from a local mirror, enter the complete URL to the zip file here."}}
  :groupings [{:name "Java",

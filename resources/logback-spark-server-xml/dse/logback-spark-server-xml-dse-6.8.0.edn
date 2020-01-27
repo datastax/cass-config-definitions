@@ -9,25 +9,25 @@
  :workload :spark
  :properties
  {:max-file-size
-  {:type "string" :required true :default_value "20" :render-without-quotes true}
+  {:type "string" :default_value "20" :render-without-quotes true}
   :org-apache-spark-util-logging-fileappender
-  {:type "string" :required true :default_value "OFF"}
+  {:type "string" :default_value "OFF"}
   :org-spark-project-jetty
-  {:type "string" :required true :default_value "WARN"}
+  {:type "string" :default_value "WARN"}
   :org-spark-project-jetty-util-component-abstractlifecycle
-  {:type "string" :required true :default_value "ERROR"}
+  {:type "string" :default_value "ERROR"}
   :org-apache-spark-repl-sparkimain-exprtyper
-  {:type "string" :required true :default_value "INFO"}
+  {:type "string" :default_value "INFO"}
   :org-apache-spark-repl-sparkiloop-sparkiloopinterpreter
-  {:type "string" :required true :default_value "INFO"}
+  {:type "string" :default_value "INFO"}
   :org-apache-parquet
-  {:type "string" :required true :default_value "ERROR"}
+  {:type "string" :default_value "ERROR"}
   :parquet
-  {:type "string" :required true :default_value "ERROR"}
+  {:type "string" :default_value "ERROR"}
   :org-apache-hadoop-hive-metastore-retryinghmshandler
-  {:type "string" :required true :default_value "FATAL"}
+  {:type "string" :default_value "FATAL"}
   :org-apache-hadoop-hive-ql-exec-functionregistry
-  {:type "string" :required true :default_value "ERROR"}}
+  {:type "string" :default_value "ERROR"}}
  :groupings
  [{:name "General",
    :list

@@ -15,14 +15,12 @@
    :tarball_default "var/log/cassandra/output.log"}
   :wait-for-start
   {:type "int"
-   :required false
    :label "Wait for start"
    :constant "WAIT_FOR_START"
    :unit "seconds"
    :description "Increase/decrease if you want longer/shorter waits checking if the service is up. Unit is seconds. Example value: 3"}
   :wait-for-start-sleep
   {:type "int"
-   :required false
    :label "Wait for start sleep"
    :constant "WAIT_FOR_START_SLEEP"
    :unit "seconds"

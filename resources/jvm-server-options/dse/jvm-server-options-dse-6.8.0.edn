@@ -45,7 +45,6 @@
 
   :jmx-remote-ssl
   {:type "boolean",
-   :required true,
    :exclude-from-template-iterables true,
    :label "Enable SSL?",
    :default_value false,
@@ -59,7 +58,6 @@
   {:type "string",
    :label "JMX Connection Type",
    :exclude-from-template-iterables true,
-   :required true,
    :options
    [{:label "Local JMX - No Authentication", :value "local-no-auth"}
     {:label "Remote JMX - No Authentication", :value "remote-no-auth"}
@@ -73,12 +71,10 @@
   {:type "int",
    :exclude-from-template-iterables true,
    :label "JMX Port",
-   :required true,
    :default_value 7199},
 
   :unlock-diagnostic-vm-options
   {:type "boolean",
-   :required true,
    :label "Unlock diagnostic vm options",
    :static_constant "-XX:+UnlockDiagnosticVMOptions",
    :exclude-from-template-iterables true,
@@ -91,29 +87,24 @@
   :cassandra_available_processors
   {:type "int",
    :constant "-Dcassandra.available_processors",
-   :label "Available CPU processors",
-   :required false},
+   :label "Available CPU processors"},
   :cassandra_config_directory
   {:type "string",
    :constant "-Dcassandra.config",
    :label "Location of the cassandra.yaml file",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :cassandra_initial_token
   {:type "string",
    :constant "-Dcassandra.initial_token",
    :label "Initial token for first start of node",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :cassandra_join_ring
   {:type "boolean",
-   :required true,
    :constant "-Dcassandra.join_ring",
    :label "Set to false to keep node from joining cluster",
    :default_value true},
   :cassandra_load_ring_state
   {:type "boolean",
-   :required true,
    :constant "-Dcassandra.load_ring_state",
    :label "Set to false to clear gossip state on restart",
    :default_value true},
@@ -121,47 +112,39 @@
   {:type "string",
    :constant "-Dcassandra.metricsReporterConfigFile",
    :label "Enable pluggable metrics reporter",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :cassandra_replace_address
   {:type "string",
    :constant "-Dcassandra.replace_address",
    :label "Address of dead node to be replaced",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :dse_consistent_replace
   {:type "string",
    :constant "-Ddse.consistent_replace",
    :label "Perform consistent replace",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :dse_consistent_replace_parallelism
   {:type "string",
    :constant "-Ddse.consistent_replace.parallelism",
    :label "How many ranges will be repaired simultaneously during consistent replace",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :dse_consistent_replace_retries
   {:type "string",
    :constant "-Ddse.consistent_replace.retries",
    :label "How many times a failed repair will be retried",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :dse_consistent_replace_whitelist
   {:type "string",
    :constant "-Ddse.consistent_replace.whitelist",
    :label "Targeted keyspaces or tables for consistent replace",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :cassandra_replay_list
   {:type "string",
    :constant "-Dcassandra.replayList",
    :label "Restore specific tables from archived commit log",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :cassandra_ring_delay_ms
   {:type "int",
-   :required false,
    :constant "-Dcassandra.ring_delay_ms",
    :label "Amount of time node waits before joining ring",
    :unit "ms"},
@@ -169,23 +152,19 @@
   {:type "string",
    :constant "-Dcassandra.triggers_dir",
    :label "Default location for the trigger JARs",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :cassandra_write_survey
   {:type "boolean",
-   :required true,
    :constant "-Dcassandra.write_survey",
    :label "For testing new compaction and compression strategies",
    :default_value false},
   :cassandra_disable_auth_caches_remote_configuration
   {:type "boolean",
-   :required true,
    :constant "-Dcassandra.disable_auth_caches_remote_configuration",
    :label "Disable configuration via JMX of auth caches",
    :default_value false},
   :cassandra_force_default_indexing_page_size
   {:type "boolean",
-   :required true,
    :constant "-Dcassandra.force_default_indexing_page_size",
    :label
    "Disable dynamic calculation of the page size used when indexing an entire partition (during initial index build/rebuild).",
@@ -194,32 +173,27 @@
   {:type "string",
    :constant "-Dcassandra.maxHintTTL",
    :label "Imposes an upper bound on hint lifetime below the normal min gc_grace_seconds",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
 
   ;; General JVM Settings
 
   :enable_assertions
   {:type "boolean",
-   :required true,
    :static_constant "-ea",
    :label "Enable assertions",
    :default_value true},
   :use_thread_priorities
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+UseThreadPriorities",
    :label "Enable thread priorities",
    :default_value true},
   :heap_dump_on_out_of_memory_error
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+HeapDumpOnOutOfMemoryError",
    :label "Enable heap-dump on Out-Of-Memory error",
    :default_value true},
   :per_thread_stack_size
   {:type "string",
-   :required true,
    :constant "-Xss",
    :label "Per-thread stack size",
    :suppress-equal-sign true,
@@ -227,68 +201,57 @@
    :default_value "256k"},
   :string_table_size
   {:type "string",
-   :required true,
    :constant "-XX:StringTableSize",
    :label "Larger interned string table, for gossip's benefit",
    :render-without-quotes true,
    :default_value "1000003"},
   :always_pre_touch
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+AlwaysPreTouch",
    :label "Ensure all memory is faulted and zeroed on startup",
    :default_value true},
   :use_tlb
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+UseTLAB",
    :label "Enable thread-local allocation blocks",
    :default_value true},
   :resize_tlb
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+ResizeTLAB",
    :label "Allow resizing of thread-local allocation blocks",
    :default_value true},
   :use_numa
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+UseNUMA",
    :default_value true},
   :perf_disable_shared_mem
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+PerfDisableSharedMem",
    :label "Disable hsperfdata mmap'ed file",
    :default_value true},
   :java_net_prefer_ipv4_stack
   {:type "boolean",
-   :required true,
    :static_constant "-Djava.net.preferIPv4Stack=true",
    :label "Prefer binding to IPv4 network interfaces",
    :default_value true},
   :page-align-direct-memory
   {:type "boolean",
-   :required true,
    :label "Align direct memory allocations",
    :static_constant "-Dsun.nio.PageAlignDirectMemory=true",
    :default_value true},
   :restrict-contended
   {:type "boolean",
-   :required true,
    :label "Honor user code @Contended annotations",
    :static_constant "-XX:-RestrictContended",
    :default_value true},
   :guaranteed-safepoint-interval
   {:type "string",
-   :required true,
    :constant "-XX:GuaranteedSafepointInterval",
    :label "Decrease frequency of guaranteed safepoints to avoid needless pauses",
    :render-without-quotes true,
    :default_value "300000"},
   :use-biased-locking
   {:type "boolean",
-   :required true,
    :label "Disable biased locking to avoid biased lock revokation pauses",
    :static_constant "-XX:-UseBiasedLocking",
    :default_value true},
@@ -296,37 +259,31 @@
   ;; Debug/profiling options
   :debug-non-safepoints
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+DebugNonSafepoints",
    :default_value true},
   :preserve-frame-pointer
   {:type "boolean",
-   :required true,
    :label "Preserve Frame Pointer",
    :static_constant "-XX:+PreserveFramePointer",
    :default_value true},
   :unlock_commercial_features
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+UnlockCommercialFeatures",
    :label "Unlock commercial features",
    :default_value false},
   :flight_recorder
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+FlightRecorder",
    :label "Enable flight recorder (Use in production is subject to Oracle licensing)",
    :default_value false},
   :agent_lib_jdwp
   {:type "boolean",
-   :required true,
    :static_constant
    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1414",
    :label "Listen for JVM remote debuggers on port 1414",
    :default_value false},
   :log_compilation
   {:type "boolean",
-   :required true,
    :label "Make Cassandra JVM log internal method compilation (developers only)",
    :static_constant "-XX:+LogCompilation",
    :default_value false},
@@ -340,8 +297,7 @@
    :constant "-Xms",
    :type "string",
    :label "Initial Heap Size",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
   :max_heap_size
   {
    :description "The maximum size to which the heap will be allowed to grow for the JVM running DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing."
@@ -349,8 +305,7 @@
    :constant "-Xmx",
    :type "string",
    :label "Max Heap Size",
-   :render-without-quotes true,
-   :required false},
+   :render-without-quotes true},
 
   ;; NIO Settings
 
@@ -358,7 +313,6 @@
   {:type "int",
    :description
    "Limit maximum cached thread local direct buffer to 1MB to avoid native OOM. See https://bugs.openjdk.java.net/browse/JDK-8147468",
-   :required true,
    :constant "-Djdk.nio.maxCachedBufferSize",
    :default_value 1048576},
 
@@ -366,21 +320,19 @@
 
   :cassandra_expiration_date_overflow_policy
   {:type "string",
-   :required false,
    :constant "-Dcassandra.expiration_date_overflow_policy",
-   :label
+   :label "Expiration Data Overflow Policy",
+   :description
    "Defines how to handle INSERT requests with TTL exceeding the maximum supported expiration date.",
    :options
    [{:label "REJECT", :value "REJECT"}
     {:label "CAP", :value "CAP"}
-    {:label "CAP_NOWARN", :value "CAP_NOWARN"}],
-   :default_value "REJECT"},
+    {:label "CAP_NOWARN", :value "CAP_NOWARN"}]},
 
   ;; netty
 
   :io_netty_eventloop_maxpendingtasks
   {:type "int",
-   :required true,
    :constant "-Dio.netty.eventLoop.maxPendingTasks",
    :label "Netty queue limit (per core).",
    :default_value 65536},
@@ -389,7 +341,6 @@
 
   :crash_on_out_of_memory_error
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+CrashOnOutOfMemoryError",
    :depends :exit_on_out_of_memory_error,
    :conditional [{:eq false}],
@@ -401,16 +352,13 @@
    :constant "MAX_DIRECT_MEMORY",
    :label "Max Direct Memory",
    :render-without-quotes true,
-   :required false,
    :add-export false},
   :print_heap_histogram_on_out_of_memory_error
   {:type "boolean",
-   :required true,
    :constant "-Dcassandra.printHeapHistogramOnOutOfMemoryError",
    :default_value false},
   :exit_on_out_of_memory_error
   {:type "boolean",
-   :required true,
    :static_constant "-XX:+ExitOnOutOfMemoryError",
    :label "Exit on out of memory error",
    :description "Should the JVM exit when it encounters an out of memory error in order to prevent potential data-corruption from executing on a JVM that fails to allocate memory reliably. This setting is mutually exclusive with CrashOnOutOfMemoryError in this file and with CrashOnOutOfMemoryError in cassandra-env.sh."

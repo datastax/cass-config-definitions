@@ -42,10 +42,10 @@ PIDFILE=/var/run/$NODEID/$NODEID.pid
 # Where do Tomcat log files go? This will override the default
 #TOMCAT_LOGS=
 
-# Ths user to use for the service
+# The user to use for the service
 CASSANDRA_USER=cassandra
 
-# Ths group to use for the service
+# The group to use for the service
 CASSANDRA_GROUP=cassandra
 
 # Set this if you've installed DSE into a different location from the default

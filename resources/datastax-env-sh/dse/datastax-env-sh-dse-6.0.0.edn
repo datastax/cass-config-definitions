@@ -10,14 +10,12 @@
  {
   :manage-java
   {:type "boolean"
-   :default_value true
-   :required true}
+   :default_value true}
   :java-vendor
   {:type "string"
    :default_value ""}
   :install-directory
-  {:type "string"
-   :required true}
+  {:type "string"}
   }
  :groupings
  [{:name "General Parameters",

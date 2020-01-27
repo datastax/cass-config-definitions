@@ -57,17 +57,17 @@ calculate_system_memory_sizes()
         system_cpu_cores="1"
     fi
 
+    # cap here to 32765M because the JVM switches to 64 bit references at 32767M
+    # details are described in http://java-performance.info/over-32g-heap-java/
+    capped_heap_size="32765"
+
     # set max heap size based on the following
     # max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))
     # calculate 1/2 ram and cap to 1024MB
     # calculate 1/4 ram and cap to capped_heap_size
     # pick the max
 
-    # cap here to 32765M because the JVM switches to 64 bit references at 32767M
-    # details are described in http://java-performance.info/over-32g-heap-java/
-
     # set max heap size by calculating 1/2 ram and capping to 32Gb
-    capped_heap_size="32765"
     half_system_memory_in_mb=`expr $system_memory_in_mb / 2`
     quarter_system_memory_in_mb=`expr $half_system_memory_in_mb / 2`
     if [ "$half_system_memory_in_mb" -gt "1024" ]
@@ -97,7 +97,6 @@ calculate_system_memory_sizes
 
 calculate_heap_sizes()
 {
-
     MAX_HEAP_SIZE="${max_heap_size_in_mb}M"
 
     # Young gen: min(max_sensible_per_modern_cpu_core * num_cores, 1/4 * heap size)
@@ -194,6 +193,9 @@ USING_G1=$?
 # times. If in doubt, and if you do not particularly want to tweak, go with
 # 100 MB per physical CPU core.
 
+# Set this to control the amount of arenas per-thread in glibc
+{{malloc-arena-max}}
+
 {% comment %}
 max-heap-size is now set through jvm.options
 Setting HEAP_NEWSIZE with G1 is poor practice. Intentionally omitted per OPSC-8504.
@@ -227,9 +229,6 @@ if [ "x$MAX_DIRECT_MEMORY" = "x" ]; then
 fi
 JVM_OPTS="$JVM_OPTS -XX:MaxDirectMemorySize=$MAX_DIRECT_MEMORY"
 
-# Set this to control the amount of arenas per-thread in glibc
-{{malloc-arena-max}}
-
 if [ "x$MALLOC_ARENA_MAX" = "x" ] ; then
     export MALLOC_ARENA_MAX=4
 fi
@@ -237,11 +236,11 @@ fi
 # We only set -Xms and -Xmx if they were not defined on jvm.options file
 # If defined, both Xmx and Xms should be defined together.
 if [ $DEFINED_XMX -ne 0 ] && [ $DEFINED_XMS -ne 0 ]; then
-     JVM_OPTS="$JVM_OPTS -Xms${MAX_HEAP_SIZE}"
-     JVM_OPTS="$JVM_OPTS -Xmx${MAX_HEAP_SIZE}"
+    JVM_OPTS="$JVM_OPTS -Xms${MAX_HEAP_SIZE}"
+    JVM_OPTS="$JVM_OPTS -Xmx${MAX_HEAP_SIZE}"
 elif [ $DEFINED_XMX -ne 0 ] || [ $DEFINED_XMS -ne 0 ]; then
-     echo "Please set or unset -Xmx and -Xms flags in pairs on jvm.options file."
-     exit 1
+    echo "Please set or unset -Xmx and -Xms flags in pairs on jvm.options file."
+    exit 1
 fi
 
 # We only set -Xmn flag if it was not defined in jvm.options file
@@ -265,6 +264,7 @@ JVM_OPTS="$JVM_OPTS -XX:CompileCommandFile=$CASSANDRA_CONF/hotspot_compiler"
 JVM_OPTS="$JVM_OPTS -javaagent:$CASSANDRA_HOME/lib/jamm-0.3.2.jar"
 
 {{heap-dump-dir}}
+# set jvm HeapDumpPath with CASSANDRA_HEAPDUMP_DIR
 if [ "x$CASSANDRA_HEAPDUMP_DIR" != "x" ]; then
     JVM_OPTS="$JVM_OPTS -XX:HeapDumpPath=$CASSANDRA_HEAPDUMP_DIR/cassandra-`date +%s`-pid$$.hprof"
 fi
@@ -334,7 +334,7 @@ fi
 # to the location of the native libraries.
 JVM_OPTS="$JVM_OPTS -Djava.library.path=$JAVA_LIBRARY_PATH"
 
-# APOLLO-342: we need to expose the available system memory so that the
+# We need to expose the available system memory so that the
 # MemoryOnlyStrategy can do proper fraction calculations.
 # See max_memory_to_lock_fraction setting in cassandra.yaml for details.
 JVM_OPTS="$JVM_OPTS -Dsystem_memory_in_mb=$system_memory_in_mb"

@@ -8,35 +8,34 @@
   :template "logback-xml-dse-6.7.0.template"},
  :properties
  {:systemlog-appender-level
-  {:type "string", :required true, :default_value "INFO"},
+  {:type "string", :default_value "INFO"},
   :debuglog-appender-min-index
-  {:type "int", :required true, :default_value 1},
+  {:type "int", :default_value 1},
   :debuglog-appender-max-file-size
-  {:type "int", :required true, :default_value 20, :unit "MB"},
+  {:type "int", :default_value 20, :unit "MB"},
   :systemlog-appender-max-index
-  {:type "int", :required true, :default_value 20},
+  {:type "int", :default_value 20},
   :bdp-util-process-internalservicerunner
-  {:type "string", :required false, :default_value "DEBUG"},
+  {:type "string", :default_value "DEBUG"},
   :debuglog-appender-max-index
-  {:type "int", :required true, :default_value 20},
+  {:type "int", :default_value 20},
   :root-log-level
-  {:type "string", :required true, :default_value "INFO"},
+  {:type "string", :default_value "INFO"},
   :systemlog-appender-min-index
-  {:type "int", :required true, :default_value 1},
+  {:type "int", :default_value 1},
   :bdp-util-process-servicerunner
-  {:type "string", :required false, :default_value "DEBUG"},
+  {:type "string", :default_value "DEBUG"},
   :systemlog-appender-max-file-size
-  {:type "int", :required true, :default_value 20, :unit "MB"},
+  {:type "int", :default_value 20, :unit "MB"},
   :loggers
   {:type "list",
-   :required false,
-   :default_value [],
    :value_type "dict",
    :order [:name
            :level]
    :fields
-   {:name {:type "string", :required false},
-    :level {:type "string", :required false}}}},
+   {:name {:type "string"},
+    :level {:type "string"}}
+   :description "Set logging levels for specific logger names."}},
  :groupings
  [{:name "General",
    :list

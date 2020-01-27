@@ -9,45 +9,45 @@
  :workload :spark
  :properties
  {:spark-cassandra-connection-factory
-  {:type "string" :required true :default_value "com.datastax.bdp.spark.DseCassandraConnectionFactory"}
+  {:type "string" :default_value "com.datastax.bdp.spark.DseCassandraConnectionFactory"}
   :spark-cassandra-auth-conf-factory
-  {:type "string" :required true :default_value "com.datastax.bdp.spark.DseAuthConfFactory"}
+  {:type "string" :default_value "com.datastax.bdp.spark.DseAuthConfFactory"}
   :spark-task-maxfailures
-  {:type "int" :required true :default_value 10}
+  {:type "int" :default_value 10}
   :spark-extra-listeners
-  {:type "string" :required true :default_value "com.datastax.bdp.spark.reporting.DseSparkListener"}
+  {:type "string" :default_value "com.datastax.bdp.spark.reporting.DseSparkListener"}
   :spark-hadoop-util
-  {:type "string" :required true :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"}
+  {:type "string" :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"}
   :spark-sql-catalog-implementation
-  {:type "string" :required true :default_value "hive"}
+  {:type "string" :default_value "hive"}
   :spark-sql-hive-metastore-barrier-prefixes
-  {:type "string" :required true :default_value "org.apache.spark.sql.cassandra"}
+  {:type "string" :default_value "org.apache.spark.sql.cassandra"}
 
   :spark-authenticate
-  {:type "boolean" :required true :default_value false}
+  {:type "boolean" :default_value false}
   :spark-authenticate-enable-sasl-encryption
-  {:type "boolean" :required true :default_value false}
+  {:type "boolean" :default_value false}
 
   :spark-hadoop-com-datastax-bdp-fs-client-authentication-factory
-  {:type "string" :required true :default_value "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"}
+  {:type "string" :default_value "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"}
 
   :spark-dse-configuration-fetch-retries
-  {:type "int" :required true :default_value "2"}
+  {:type "int" :default_value "2"}
 
   :spark-network-crypto-enabled
-  {:type "boolean" :required true :default_value false}
+  {:type "boolean" :default_value false}
 
   :spark-network-crypto-saslfallback
-  {:type "boolean" :required true :default_value false}
+  {:type "boolean" :default_value false}
 
   :spark-authenticate-secretbitlength
-  {:type "int" :required true :default_value 256}
+  {:type "int" :default_value 256}
 
   :spark-network-sasl-serveralwaysencrypt
-  {:type "boolean" :required true :default_value true}
+  {:type "boolean" :default_value true}
 
   :spark-redaction-regex
-  {:type "string" :required true :default_value "(?i)credentials|secret|password|token"}}
+  {:type "string" :default_value "(?i)credentials|secret|password|token"}}
  :groupings
  [{:name "DSE Related Settings"
    :list

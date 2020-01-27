@@ -25,7 +25,6 @@
   {:type "string",
    :label "Garbage Collector",
    :exclude-from-template-iterables true,
-   :required true,
    :options
    [{:label "CMS", :value "CMS"} {:label "G1GC", :value "G1GC"}],
    :default_value "G1GC"},
@@ -38,7 +37,6 @@
 
   :thread_priority_policy_42
   {:type "boolean",
-   :required true,
    :static_constant "-XX:ThreadPriorityPolicy=42",
    :label
    "Enable lowering thread priority without being root on linux",
@@ -52,13 +50,11 @@
    :type "string",
    :label "Heap size young generation",
    :render-without-quotes true,
-   :required false,
    :depends :garbage_collector,
    :conditional [{:eq "CMS"}]},
   :survivor_ratio
   {:type "int",
    :label "Survivor Ratio",
-   :required true,
    :default_value "8",
    :depends :garbage_collector,
    :conditional [{:eq "CMS"}],
@@ -66,7 +62,6 @@
   :max_tenuring_threshold
   {:type "int",
    :label "Max Tenuring Threshold",
-   :required true,
    :default_value "1",
    :depends :garbage_collector,
    :conditional [{:eq "CMS"}],
@@ -74,7 +69,6 @@
   :cms_initiating_occupancy_fraction
   {:type "int",
    :label "CMS Initiating Occupancy Fraction",
-   :required true,
    :default_value "75",
    :depends :garbage_collector,
    :conditional [{:eq "CMS"}],
@@ -82,7 +76,6 @@
   :cms_wait_duration
   {:type "int",
    :label "CMS Max Duration",
-   :required true,
    :default_value "10000",
    :depends :garbage_collector,
    :conditional [{:eq "CMS"}],
@@ -90,7 +83,6 @@
   :g1r_set_updating_pause_time_percent
   {:type "int",
    :label "G1GC Updating Pause Time Percentage",
-   :required true,
    :default_value "5",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
@@ -98,7 +90,6 @@
   :max_gc_pause_millis
   {:type "int",
    :label "G1GC Max GC Pause Milliseconds",
-   :required true,
    :default_value "500",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
@@ -106,21 +97,18 @@
   :initiating_heap_occupancy_percent
   {:type "int",
    :label "Initiating Heap Occupancy Percentage",
-   :required false,
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:InitiatingHeapOccupancyPercent"},
   :parallel_gc_threads
   {:type "int",
    :label "Parallel GC Threads",
-   :required false,
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:ParallelGCThreads"},
   :conc_gc_threads
   {:type "int",
    :label "Concurrent GC Threads",
-   :required false,
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:ConcGCThreads"},
@@ -129,68 +117,57 @@
 
   :print_gc_details
   {:type "boolean",
-   :required true,
    :label "Print GC Details",
    :static_constant "-XX:+PrintGCDetails",
    :default_value true},
   :print_gc_date_stamps
   {:type "boolean",
-   :required true,
    :label "Print GC Date Stamps",
    :static_constant "-XX:+PrintGCDateStamps",
    :default_value true},
   :print_heap_at_gc
   {:type "boolean",
-   :required true,
    :label "Print Heap at GC",
    :static_constant "-XX:+PrintHeapAtGC",
    :default_value true},
   :print_tenuring_distribution
   {:type "boolean",
-   :required true,
    :label "Print Tenuring Distribution",
    :static_constant "-XX:+PrintTenuringDistribution",
    :default_value true},
   :print_gc_application_stopped_time
   {:type "boolean",
-   :required true,
    :label "Print GC Application Stopped Time",
    :static_constant "-XX:+PrintGCApplicationStoppedTime",
    :default_value true},
   :print_promotion_failure
   {:type "boolean",
-   :required true,
    :label "Print Promotion Failure",
    :static_constant "-XX:+PrintPromotionFailure",
    :default_value true},
   :use_gc_log_file_rotation
   {:type "boolean",
-   :required true,
    :label "Use GC Log File Rotation",
    :static_constant "-XX:+UseGCLogFileRotation",
    :default_value true},
   :print_flss_statistics
   {:type "boolean",
-   :required true,
    :label "Print FLSS Statistics",
    :static_constant "-XX:PrintFLSStatistics=1",
    :default_value false},
   :log_gc
   {:type "boolean",
-   :required true,
    :label "Log GC",
    :static_constant "-Xloggc:/var/log/cassandra/gc.log",
    :default_value false},
   :number_of_gc_log_files
   {:type "int",
    :label "Number of GC log files",
-   :required true,
    :constant "-XX:NumberOfGCLogFiles",
    :default_value 10},
   :gc_log_file_size
   {:type "string",
    :label "GC log file size",
-   :required true,
    :constant "-XX:GCLogFileSize",
    :render-without-quotes true,
    :default_value "10M"}},

@@ -5,7 +5,6 @@
           (add-field :jdk_nio_maxcachedbuffersize
                      {:type "int"
                       :description "Limit maximum cached thread local direct buffer to 1MB to avoid native OOM. See https://bugs.openjdk.java.net/browse/JDK-8147468"
-                      :required true
                       :constant "-Djdk.nio.maxCachedBufferSize"
                       :default_value 1048576}
                      :group "General JVM Parameters"))
@@ -20,35 +19,30 @@
                        {:label "LOCAL_QUORUM" :value "LOCAL_QUORUM"}
                        {:label "QUORUM" :value "QUORUM"}]
                       :default_value nil
-                      :render-without-quotes true
-                      :required false}
+                      :render-without-quotes true}
                      :group "Startup Parameters")
           (add-field :dse_consistent_replace_parallelism
                      {:type "int"
                       :description "Specifies how many ranges will be repaired simultaneously during consistent replace. The higher the parallelism, the more resources will be consumed cluster-wide, what may affect cluster performance. Example value: 2"
                       :constant "-Ddse.consistent_replace.parallelism"
-                      :render-without-quotes true
-                      :required false}
+                      :render-without-quotes true}
                      :group "Startup Parameters")
           (add-field :dse_consistent_replace_retries
                      {:type "int"
                       :description "Specifies how many times a failed repair will be retried during consistent replace. If all retries fail, consistent replace will fail, but can be resumed with nodetool bootstrap resume. Example value: 3"
                       :constant "-Ddse.consistent_replace.retries"
-                      :render-without-quotes true
-                      :required false}
+                      :render-without-quotes true}
                      :group "Startup Parameters")
           (add-field :dse_consitent_replace_whitelist
                      {:type "string"
                       :description "Targeted keyspaces or tables for consistent replace can be specified as: \"ks1,ks2.cf1\". By default it's empty, all tables and keyspaces will be consistent replaced."
                       :constant "-Ddse.consistent_replace.whitelist"
-                      :render-without-quotes true
-                      :required false}
+                      :render-without-quotes true}
                      :group "Startup Parameters")
           (delete-field :page-align-direct-memory))
  "6.0.7" (transforms
            (add-field :io_netty_maxdirectmemory
                       {:type "int"
-                       :required false
                        :constant "-Dio.netty.maxDirectMemory"
                        :label "io.netty.maxDirectMemory"}
                       :group "General JVM Parameters"))
@@ -61,7 +55,6 @@
  "6.7.3" (transforms
            (add-field :io_netty_maxdirectmemory
                       {:type "int"
-                       :required false
                        :constant "-Dio.netty.maxDirectMemory"
                        :label "io.netty.maxDirectMemory"}
                       :group "General JVM Parameters"))

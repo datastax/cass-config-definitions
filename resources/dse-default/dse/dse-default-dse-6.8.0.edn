@@ -15,7 +15,6 @@
    :tarball_default "var/log/cassandra/output.log"},
   :wait-for-start
   {:type "int",
-   :required false,
    :label "Wait for start",
    :constant "WAIT_FOR_START",
    :unit "seconds",
@@ -23,7 +22,6 @@
    "Increase/decrease if you want longer/shorter waits checking if the service is up. Unit is seconds. Example value: 3"},
   :wait-for-start-sleep
   {:type "int",
-   :required false,
    :label "Wait for start sleep",
    :constant "WAIT_FOR_START_SLEEP",
    :unit "seconds",
@@ -31,7 +29,6 @@
    "Decrease/increase if you want finer/coarser grained waits while checking if the service is up. Unit is seconds. Example value: 5"},
   :wait-for-stop
   {:type "int",
-   :required false,
    :label "Wait for stop",
    :constant "WAIT_FOR_STOP",
    :unit "seconds",
@@ -39,7 +36,6 @@
    "Increase/decrease if you want longer/shorter waits checking if the service stopped. Unit is seconds. Example value: 60"},
   :wait-for-stop-sleep
   {:type "float",
-   :required false,
    :label "Wait for stop sleep",
    :constant "WAIT_FOR_STOP_SLEEP",
    :unit "seconds",

@@ -5,12 +5,10 @@
           (update-template "logback-xml-dse-6.0.1.template")
           (add-field :bdp-util-process-servicerunner
                      {:type "string"
-                      :required false
                       :default_value "DEBUG"}
                      :group "General")
           (add-field :bdp-util-process-internalservicerunner
                      {:type "string"
-                      :required false
                       :default_value "DEBUG"}
                      :group "General"))
  ;; End DSE 6.0.x transforms.

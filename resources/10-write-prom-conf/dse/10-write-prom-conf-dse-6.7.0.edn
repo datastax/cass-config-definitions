@@ -13,7 +13,6 @@
 
   :enabled
   {:type "boolean",
-   :required true,
    :label
    "Enable Prometheus",
    :default_value false},
@@ -22,13 +21,11 @@
   {:type "int",
    :label "Port",
    :default_value "9103",
-   :required true,
    :depends :enabled,
    :conditional [{:eq true}]}
 
   :staleness-delta
   {:type "int",
-   :required false,
    :depends :enabled,
    :conditional [{:eq true}]}},
  :groupings

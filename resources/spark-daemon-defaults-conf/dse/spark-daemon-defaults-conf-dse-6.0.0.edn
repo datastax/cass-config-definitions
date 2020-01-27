@@ -12,38 +12,32 @@
   :spark_dse_shuffle_sasl_port
   {:type "int"
    :label "DSE Shuffle SASL Port"
-   :default_value 7447
-   :required true}
+   :default_value 7447}
 
   :spark_dse_shuffle_no_sasl_port
   {:type "int"
    :label "DSE Shuffle No-SASL Port"
-   :default_value 7437
-   :required true}
+   :default_value 7437}
 
   :spark_ui_filters
   {:type "string"
    :label "Spark UI Filters"
-   :default_value "com.datastax.bdp.auth.SparkUIAuthFilter,com.datastax.bdp.auth.SparkUIAuthzFilter"
-   :required false}
+   :default_value "com.datastax.bdp.auth.SparkUIAuthFilter,com.datastax.bdp.auth.SparkUIAuthzFilter"}
 
   :spark_redaction_regex
   {:type "string"
    :label "Spark Redaction Regex"
-   :default_value "(?i)credentials|secret|password|token"
-   :required true}
+   :default_value "(?i)credentials|secret|password|token"}
 
   :spark_network_crypto_enabled
   {:type "boolean"
    :label "Enable Spark Network Cryptography"
-   :default_value false
-   :required true}
+   :default_value false}
 
   :spark_network_crypto_saslfallback
   {:type "boolean"
    :label "Spark Network Cryptography SASL Fallback"
-   :default_value false
-   :required true}}
+   :default_value false}}
 
  :groupings
  [{:name "Shuffle Service Ports"

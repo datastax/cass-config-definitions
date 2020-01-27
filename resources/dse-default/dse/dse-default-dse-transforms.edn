@@ -5,7 +5,6 @@
           (update-template "dse-default-dse-6.0.5.template")
           (add-field :wait-for-stop
                      {:type "int"
-                      :required false
                       :label "Wait for stop"
                       :constant "WAIT_FOR_STOP"
                       :description
@@ -14,7 +13,6 @@
                      :group "General")
           (add-field :wait-for-stop-sleep
                      {:type "float"
-                      :required false
                       :label "Wait for stop sleep"
                       :constant "WAIT_FOR_STOP_SLEEP"
                       :description
@@ -30,7 +28,6 @@
           (update-template "dse-default-dse-6.7.1.template")
           (add-field :wait-for-stop
                      {:type "int",
-                      :required false,
                       :label "Wait for stop",
                       :constant "WAIT_FOR_STOP",
                       :unit "seconds",
@@ -39,7 +36,6 @@
                       :group "General")
           (add-field :wait-for-stop-sleep
                      {:type "float",
-                      :required false,
                       :label "Wait for stop sleep",
                       :constant "WAIT_FOR_STOP_SLEEP",
                       :unit "seconds",

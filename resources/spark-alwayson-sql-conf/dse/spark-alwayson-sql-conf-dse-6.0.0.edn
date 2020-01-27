@@ -10,111 +10,90 @@
  :properties
  {:spark_cassandra_connection_factory
   {:type "string"
-   :required true
    :default_value "com.datastax.bdp.spark.DseCassandraConnectionFactory"}
 
   :spark_cassandra_auth_conf_factory
   {:type "string"
-   :required true
    :default_value "com.datastax.bdp.spark.ha.alwaysonsql.auth.AlwaysOnSqlInClusterAuthConfFactory"}
 
   :spark_extraListeners
   {:type "string"
-   :required true
    :default_value "com.datastax.bdp.spark.reporting.DseSparkListener,org.apache.spark.sql.hive.thriftserver.AlwaysOnSqlSparkListener"}
 
   :spark_SparkHadoopUtil
   {:type "string"
-   :required true
    :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"}
 
   :spark_hadoop_com_datastax_bdp_fs_client_authentication_factory
   {:type "string"
-   :required true
    :default_value "com.datastax.bdp.spark.ha.alwaysonsql.auth.DseFsRestClientAuthProviderFactory"}
 
   :spark_sql_catalogImplementation
   {:type "string"
-   :required true
    :default_value "hive"}
 
   :spark_sql_extensions
   {:type "string"
-   :required true
    :default_value "org.apache.spark.sql.hive.thriftserver.AlwaysOnSqlExtensions"}
 
   :spark_sql_hive_metastore_barrierPrefixes
   {:type "string"
-   :required true
    :default_value "org.apache.spark.sql.cassandra"}
 
   :spark_hive_alwaysOnSql
   {:type "boolean"
-   :required true
    :default_value true}
 
   :spark_authenticate
   {:type "boolean"
-   :required true
    :default_value false}
 
   :spark_network_crypto_enabled
   {:type "boolean"
-   :required true
    :default_value false}
 
   :spark_network_crypto_saslFallback
   {:type "boolean"
-   :required true
    :default_value false}
 
   :spark_authenticate_secretBitLength
   {:type "int"
-   :required true
    :default_value 256}
 
   :spark_authenticate_enableSaslEncryption
   {:type "boolean"
-   :required true
    :default_value false}
 
   :spark_network_sasl_serverAlwaysEncrypt
   {:type "boolean"
-   :required true
    :default_value true}
 
   :spark_redaction_regex
   {:type "string"
-   :required true
    :default_value "(?i)credentials|secret|password|token"}
 
   :spark_dse_configuration_fetch_retries
   {:type "int"
-   :required true
    :default_value "2"}
 
   :spark_task_maxFailures
   {:type "int"
-   :required true
    :default_value "10"}
 
   :spark_additional_configs
   {:type "user_defined"
    :key_name "key"
-   :value_type "string"
-   :required true}
+   :value_type "string"}
 
   :hive_additional_configs
   {:type "user_defined"
    :key_name "key"
-   :value_type "string"
-   :required true}
+   :value_type "string"}
 
   :resource_manager_additional_configs
   {:type "user_defined"
    :key_name "key"
-   :value_type "string"
-   :required true}}
+   :value_type "string"}}
 
  :groupings
  [{:name "Spark Config Settings"

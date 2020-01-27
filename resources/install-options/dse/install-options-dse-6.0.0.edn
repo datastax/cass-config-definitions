@@ -8,7 +8,6 @@
  {:install-type
   {:type "string"
    :label "Installation Type"
-   :required true
    :default_value "package"
    :options [{:label "package" :value "package"}
              {:label "tarball" :value "tarball"}]}
@@ -21,7 +20,6 @@
   :tarball-hash
   {:type "string"
    :label "Tarball SHA-256 Hash"
-   :required false
    :depends :install-type
    :conditional [{:eq "tarball"}]}}
  :groupings

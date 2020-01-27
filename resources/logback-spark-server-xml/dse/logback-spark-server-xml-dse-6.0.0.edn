@@ -11,7 +11,7 @@
  :workload :spark
  :properties
  {:max-file-size
-  {:type "string" :required true :default_value "20" :render-without-quotes true}}
+  {:type "string" :default_value "20" :render-without-quotes true}}
  :groupings
  [{:name "General",
    :list

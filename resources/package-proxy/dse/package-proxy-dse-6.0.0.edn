@@ -6,30 +6,24 @@
  :renderer {:renderer-type :template
             :template "package-proxy-dse-6.0.0.template"}
  :properties {:enabled {:type "boolean"
-                        :required true
                         :default_value false}
               :protocol {:type "string"
-                         :required false
                          :options [{:label "http" :value "http"}
                                    {:label "https" :value "https"}]
                          :default_value "http"
                          :depends :enabled}
               :host {:type "string"
-                     :required true
                      :depends :enabled}
               :port {:type "int"
-                     :required false
+                     :depends :enabled
                      :default_value 3128
-                     :depends :enabled}
+                     :description "Example value: 3128"}
               :authentication-required {:type "boolean"
-                                        :required true
                                         :default_value false}
               :username {:type "string"
-                         :required true
                          :depends :authentication-required}
               :password {:type "string"
                          :password true
-                         :required true
                          :depends :authentication-required}}
  :groupings [{:name "General",
               :description "Configuring an http or https proxy expedites package downloads. For more details, please refer to the <a href=\"http://docs.datastax.com/en/opscenter/help/lcmPackageProxy.html\" target=\"_blank\">Lifecycle Manager documentation</a>.",

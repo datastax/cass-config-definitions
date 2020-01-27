@@ -6,22 +6,20 @@
  :renderer {:renderer-type :yaml},
  :properties
  {:hinted_handoff_enabled
-  {:type "boolean", :required true, :default_value true},
+  {:type "boolean", :default_value true},
   :memtable_space_in_mb
-  {:type "int"
-   :required false}
+  {:type "int"}
   ;; We might change disk_access_mode to an ENUM after OPSC-15264 has been merged.
   :disk_access_mode
-  {:type "string"
-   :required false}
+  {:type "string"}
   :allocate_tokens_for_local_replication_factor
-  {:type "int" :required false}
-  :tpc_cores {:type "int", :required false},
+  {:type "int"}
+  :tpc_cores {:type "int"},
   :dynamic_snitch_update_interval_in_ms
-  {:type "int", :required true, :default_value 100, :unit "ms"},
+  {:type "int", :default_value 100, :unit "ms"},
   :native_transport_port_ssl {:type "int"},
   :enable_user_defined_functions_threads
-  {:type "boolean", :required true, :default_value true},
+  {:type "boolean", :default_value true},
   :user_defined_function_warn_micros
   {:type "int",
    :default_value 500,
@@ -46,7 +44,7 @@
              {:label "ignore", :value "ignore"}]
    :depends :enable_user_defined_functions_threads},
   :max_hint_window_in_ms
-  {:type "int", :required true, :default_value 10800000, :unit "ms"},
+  {:type "int", :default_value 10800000, :unit "ms"},
   :commitlog_sync_batch_window_in_ms
   {:type "int",
    :default_value 2,
@@ -57,20 +55,22 @@
    :depends :partitioner,
    :conditional [{:eq "Murmur3Partitioner"}]},
   :cross_node_timeout
-  {:type "boolean", :required true, :default_value false},
+  {:type "boolean", :default_value false},
   :unlogged_batch_across_partitions_warn_threshold
-  {:type "int", :required false, :default_value 10},
+  {:type "int",
+   :default_value 10},
   :streaming_keep_alive_period_in_secs
-  {:type "int", :required false, :default_value 300, :unit "s"},
+  {:type "int",
+   :unit "s"
+   :description "Example value: 300"},
   :aggregated_request_timeout_in_ms
-  {:type "int", :required true, :default_value 120000, :unit "ms"},
+  {:type "int", :default_value 120000, :unit "ms"},
   :compaction_throughput_mb_per_sec
-  {:type "int", :required true, :default_value 16, :unit "MB/sec"},
+  {:type "int", :default_value 16, :unit "MB/sec"},
   :storage_port
-  {:type "int", :required true, :default_value 7000, :format false},
+  {:type "int", :default_value 7000, :format false},
   :start_native_transport
   {:type "boolean",
-   :required true,
    :readonly true,
    :default_value true},
   :row_cache_class_name
@@ -81,26 +81,27 @@
     {:label "SerializingCacheProvider",
      :value "org.apache.cassandra.cache.SerializingCacheProvider"}],
    :default_value "org.apache.cassandra.cache.OHCProvider"},
-  :cdc_total_space_in_mb {:type "int", :required false},
+  :cdc_total_space_in_mb {:type "int"},
   :snapshot_before_compaction
-  {:type "boolean", :required true, :default_value false},
+  {:type "boolean", :default_value false},
   :permissions_validity_in_ms
-  {:type "int", :required true, :default_value 120000},
+  {:type "int", :default_value 120000},
   :compaction_large_partition_warning_threshold_mb
-  {:type "int", :required true, :default_value 100},
+  {:type "int", :default_value 100},
   :column_index_cache_size_in_kb
-  {:type "int", :required true, :default_value 2, :unit "KB"},
+  {:type "int", :default_value 2, :unit "KB"},
   :max_hints_delivery_threads
-  {:type "int", :required true, :default_value 2},
+  {:type "int", :default_value 2},
   :native_transport_max_concurrent_connections
-  {:type "int", :required false, :default_value -1},
+  {:type "int",
+   :description "Example value: -1"},
   :gc_warn_threshold_in_ms
-  {:type "int", :required false, :unit "ms"},
+  {:type "int", :unit "ms"},
   :native_transport_max_frame_size_in_mb
-  {:type "int", :required false, :default_value 256},
+  {:type "int",
+   :description "Example value: 256"},
   :data_file_directories
   {:type "list",
-   :required true,
    :description "If this list includes a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value ["/var/lib/cassandra/data"],
    :tarball_default ["var/lib/cassandra/data"],
@@ -108,7 +109,6 @@
    :value_type "string"},
   :commit_failure_policy
   {:type "string",
-   :required true,
    :options
    [{:label "die", :value "die"}
     {:label "stop", :value "stop"}
@@ -116,43 +116,41 @@
     {:label "ignore", :value "ignore"}],
    :default_value "stop"},
   :truncate_request_timeout_in_ms
-  {:type "int", :required true, :default_value 60000, :unit "ms"},
+  {:type "int", :default_value 60000, :unit "ms"},
   :commitlog_sync_group_window_in_ms
   {:type "int",
    :default_value 1000,
    :depends :commitlog_sync,
    :conditional [{:eq "group"}]},
   :request_timeout_in_ms
-  {:type "int", :required true, :default_value 10000, :unit "ms"},
+  {:type "int", :default_value 10000, :unit "ms"},
   :otc_coalescing_window_us
   {:type "int",
-   :required false,
    :depends :otc_coalescing_strategy,
    :conditional [{:ne "DISABLED"}],
    :unit "us",
-   :default_value 200},
+   :description "Example value: 200"},
   :range_request_timeout_in_ms
-  {:type "int", :required true, :default_value 10000, :unit "ms"},
+  {:type "int", :default_value 10000, :unit "ms"},
   :trickle_fsync_interval_in_kb
-  {:type "int", :required true, :default_value 10240, :unit "KB"},
+  {:type "int", :default_value 10240, :unit "KB"},
   :endpoint_snitch
   {:type "string",
-   :required true,
    :options
    [{:label "GossipingPropertyFileSnitch",
      :value
      "org.apache.cassandra.locator.GossipingPropertyFileSnitch"}],
    :default_value "GossipingPropertyFileSnitch"},
   :permissions_update_interval_in_ms
-  {:type "int", :required false, :unit "ms"},
+  {:type "int", :unit "ms"},
   ;; permissions_cache_max_entries is in DSA documentation, but did not
   ;; exist in the bdp source copy of cassandra.yaml at the time this was
   ;; added. Do not remove unless you really mean it!
   :permissions_cache_max_entries
-  {:type "int", :required false, :default_value 1000},
+  {:type "int",
+   :description "Example value: 1000"},
   :role_manager
   {:type "string",
-   :required true,
    :options
    [{:label "DseRoleManager",
      :value "com.datastax.bdp.cassandra.auth.DseRoleManager"}
@@ -160,7 +158,7 @@
      :value "org.apache.cassandra.auth.CassandraRoleManager"}],
    :default_value "com.datastax.bdp.cassandra.auth.DseRoleManager"},
   :ssl_storage_port
-  {:type "int", :required true, :default_value 7001, :format false},
+  {:type "int", :default_value 7001, :format false},
   :tracetype_repair_ttl {:type "int", :default_value 604800},
   :disk_optimization_strategy
   {:type "string",
@@ -170,24 +168,26 @@
    :default_value "ssd"},
   :commitlog_directory
   {:type "string",
-   :required true,
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true,
    :default_value "/var/lib/cassandra/commitlog"
    :tarball_default "var/lib/cassandra/commitlog"},
   :hints_flush_period_in_ms
-  {:type "int", :required true, :default_value 10000},
+  {:type "int", :default_value 10000},
   :commitlog_total_space_in_mb
-  {:type "int", :required false, :default_value 8192, :unit "MB"},
+  {:type "int",
+   :unit "MB" :description "Example value: 8192"},
   :counter_cache_save_period
-  {:type "int", :required true, :default_value 7200},
+  {:type "int", :default_value 7200},
   :concurrent_validations
-  {:type "int", :required false, :default_value 0},
+  {:type "int",
+   :description "Example value: 0"},
   :max_value_size_in_mb {:type "int", :default_value 256},
   :batch_size_fail_threshold_in_kb
-  {:type "int", :required true, :default_value 640},
+  {:type "int", :default_value 640},
   :memtable_flush_writers
-  {:type "int", :required false, :default_value 4},
+  {:type "int",
+   :description "Example value: 4"},
   :continuous_paging
   {:type "dict",
    :order [:max_concurrent_sessions
@@ -199,66 +199,64 @@
            :paused_check_interval_ms],
    :fields
    {:max_concurrent_sessions
-    {:type "int", :required true, :default_value 60},
-    :max_session_pages {:type "int", :required true, :default_value 4},
-    :max_page_size_mb {:type "int", :required true, :default_value 8},
+    {:type "int", :default_value 60},
+    :max_session_pages {:type "int", :default_value 4},
+    :max_page_size_mb {:type "int", :default_value 8},
     :max_local_query_time_ms
-    {:type "int", :required true, :unit "ms", :default_value 5000},
+    {:type "int", :unit "ms", :default_value 5000},
     :client_timeout_sec
-    {:type "int", :required true, :unit "sec", :default_value 600},
+    {:type "int", :unit "sec", :default_value 600},
     :cancel_timeout_sec
-    {:type "int", :required true, :unit "sec", :default_value 5},
+    {:type "int", :unit "sec", :default_value 5},
     :paused_check_interval_ms
-    {:type "int", :required true, :unit "ms", :default_value 1}}},
+    {:type "int", :unit "ms", :default_value 1}}},
   :row_cache_size_in_mb
-  {:type "int", :required true, :default_value 0, :unit "MB"},
+  {:type "int", :default_value 0, :unit "MB"},
   :tombstone_warn_threshold
-  {:type "int", :required true, :default_value 1000},
+  {:type "int", :default_value 1000},
   :concurrent_materialized_view_builders
-  {:type "int", :required true, :default_value 2},
+  {:type "int", :default_value 2},
   :incremental_backups
-  {:type "boolean", :required true, :default_value false},
+  {:type "boolean", :default_value false},
   :native_transport_max_concurrent_connections_per_ip
-  {:type "int", :required false, :default_value -1},
+  {:type "int",
+   :description "Example value: -1"},
   :commitlog_segment_size_in_mb
-  {:type "int", :required true, :default_value 32, :unit "MB"},
+  {:type "int", :default_value 32, :unit "MB"},
   :tracetype_query_ttl {:type "int", :default_value 86400},
   :read_request_timeout_in_ms
-  {:type "int", :required true, :default_value 5000, :unit "ms"},
+  {:type "int", :default_value 5000, :unit "ms"},
   :hints_directory
   {:type "string",
-   :required true,
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true,
    :default_value "/var/lib/cassandra/hints"
    :tarball_default "var/lib/cassandra/hints"},
-  :internode_recv_buff_size_in_bytes {:type "int", :required false},
+  :internode_recv_buff_size_in_bytes {:type "int"},
   :saved_caches_directory
   {:type "string",
-   :required true,
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true,
    :default_value "/var/lib/cassandra/saved_caches"
    :tarball_default "var/lib/cassandra/saved_caches"},
   :dynamic_snitch_reset_interval_in_ms
-  {:type "int", :required true, :default_value 600000, :unit "ms"},
+  {:type "int", :default_value 600000, :unit "ms"},
   :inter_dc_stream_throughput_outbound_megabits_per_sec
-  {:type "int", :required false, :unit "mbps"},
+  {:type "int", :unit "mbps"},
   :file_cache_size_in_mb
-  {:type "int", :required false},
-  :row_cache_keys_to_save {:type "int", :required false, :unit "rows"},
+  {:type "int"},
+  :row_cache_keys_to_save {:type "int", :unit "rows"},
   :transparent_data_encryption_options
   {:type "dict",
    :order [:enabled :chunk_length_kb :cipher :key_alias :key_provider],
    :fields
-   {:enabled {:type "boolean", :required true, :default_value false},
-    :chunk_length_kb {:type "int", :required true, :default_value 64},
+   {:enabled {:type "boolean", :default_value false},
+    :chunk_length_kb {:type "int", :default_value 64},
     :cipher
     {:type "string",
-     :required true,
      :default_value "AES/CBC/PKCS5Padding"},
     :key_alias
-    {:type "string", :required true, :default_value "testing:1"},
+    {:type "string", :default_value "testing:1"},
     :key_provider
     {:type "list",
      :value_type "dict",
@@ -283,14 +281,12 @@
    :is_directory true,
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :default_value "/var/lib/cassandra/cdc_raw",
-   :tarball_default "var/lib/cassandra/cdc_raw"
-   :required true},
+   :tarball_default "var/lib/cassandra/cdc_raw"},
   :slow_query_log_timeout_in_ms
-  {:type "int", :required true, :default_value 500, :unit "ms"},
-  :counter_cache_size_in_mb {:type "int", :required false},
+  {:type "int", :default_value 500, :unit "ms"},
+  :counter_cache_size_in_mb {:type "int"},
   :disk_failure_policy
   {:type "string",
-   :required true,
    :options
    [{:label "die", :value "die"}
     {:label "stop_paranoid", :value "stop_paranoid"}
@@ -308,46 +304,46 @@
     :parameters {:type "user_defined", :value_type "string"}}},
   :memtable_allocation_type
   {:type "string",
-   :required true,
    :options
    [{:label "heap_buffers", :value "heap_buffers"}
     {:label "offheap_buffers", :value "offheap_buffers"},
     {:label "offheap_objects", :value "offheap_objects"}],
    :default_value "offheap_objects"},
   :stream_throughput_outbound_megabits_per_sec
-  {:type "int", :required false, :default_value 200, :unit "mbps"},
-  :counter_cache_keys_to_save {:type "int", :required false},
+  {:type "int",
+   :unit "mbps" :description "Example value: 200"},
+  :counter_cache_keys_to_save {:type "int"},
   :tombstone_failure_threshold
-  {:type "int", :required true, :default_value 100000},
+  {:type "int", :default_value 100000},
   :native_transport_port
-  {:type "int", :required true, :default_value 9042, :format false},
+  {:type "int", :default_value 9042, :format false},
   :commitlog_sync
   {:type "string",
-   :required true,
    :options
    [{:label "periodic", :value "periodic"}
     {:label "batch", :value "batch"}
     {:label "group", :value "group"}],
    :default_value "periodic"},
   :enable_scripted_user_defined_functions
-  {:type "boolean", :required true, :default_value false},
+  {:type "boolean", :default_value false},
   :max_hints_file_size_in_mb
-  {:type "int", :required true, :default_value 128},
+  {:type "int", :default_value 128},
   :nodesync
   {:type "dict",
    :order [:rate_in_kb],
    :fields
-   {:rate_in_kb {:type "int", :required true, :default_value 1024}}},
+   {:rate_in_kb {:type "int", :default_value 1024}}},
   :rpc_keepalive
-  {:type "boolean", :required true, :default_value true},
+  {:type "boolean", :default_value true},
   :trickle_fsync
-  {:type "boolean", :required true, :default_value true},
+  {:type "boolean", :default_value true},
   :cross_dc_rtt_in_ms
-  {:type "int", :required false, :default_value 0, :unit "ms"},
-  :roles_update_interval_in_ms {:type "int", :required false},
+  {:type "int",
+   :unit "ms" :description "Example value: 0"},
+  :roles_update_interval_in_ms {:type "int"},
   :roles_validity_in_ms
-  {:type "int", :default_value 120000, :required true},
-  :prepared_statements_cache_size_mb {:type "string", :required false},
+  {:type "int", :default_value 120000},
+  :prepared_statements_cache_size_mb {:type "string"},
   :client_encryption_options
   {:type "dict",
    :order
@@ -373,7 +369,6 @@
      :conditional [{:eq true}]},
     :cipher_suites
     {:type "list",
-     :required false,
      :value_type "string",
      :depends :enabled,
      :description
@@ -388,26 +383,23 @@
      :conditional [{:eq true}]},
     :keystore_type
     {:type "string",
-     :required false,
-     :default_value "JKS",
      :options [{:label "JKS" :value "JKS"}
                {:label "JCEKS" :value "JCEKS"}
                {:label "PKCS12" :value "PKCS12"}
                {:label "PKCS11" :value "PKCS11"}]
      :depends :enabled,
-     :conditional [{:eq true}]},
+     :conditional [{:eq true}]
+     :description "Example value: \"JKS\""},
     :algorithm
     {:type "string",
-     :required false,
-     :default_value "SunX509",
      :depends :enabled,
-     :conditional [{:eq true}]},
+     :conditional [{:eq true}]
+     :description "Example value: \"SunX509\""},
     :protocol
     {:type "string",
-     :required false,
-     :default_value "TLS",
      :depends :enabled,
-     :conditional [{:eq true}]},
+     :conditional [{:eq true}]
+     :description "Example value: \"TLS\""},
     :truststore_password
     {:type "string",
      :depends :enabled,
@@ -417,13 +409,11 @@
      :conditional [{:eq true}]},
     :require_client_auth
     {:type "boolean",
-     :required true,
      :default_value false,
      :depends :enabled,
      :conditional [{:eq true}]},
     :optional
     {:type "boolean",
-     :required true,
      :default_value false,
      :depends :enabled,
      :conditional [{:eq true}]
@@ -437,31 +427,28 @@
      :conditional [{:eq true}]},
     :truststore_type
     {:type "string",
-     :required false,
-     :default_value "JKS",
      :options [{:label "JKS" :value "JKS"}
                {:label "JCEKS" :value "JCEKS"}
                {:label "PKCS12" :value "PKCS12"}
                {:label "PKCS11" :value "PKCS11"}]
      :depends :enabled,
-     :conditional [{:eq true}]},
-    :enabled {:type "boolean", :required true, :default_value false}},
-   :required true},
+     :conditional [{:eq true}]
+     :description "Example value: \"JKS\""},
+    :enabled {:type "boolean", :default_value false}}},
   :commitlog_sync_period_in_ms
   {:type "int",
    :default_value 10000,
    :depends :commitlog_sync,
    :conditional [{:eq "periodic"}]},
   :batch_size_warn_threshold_in_kb
-  {:type "int", :required true, :default_value 64},
+  {:type "int", :default_value 64},
   :row_cache_save_period
-  {:type "int", :required true, :default_value 0, :unit "seconds"},
+  {:type "int", :default_value 0, :unit "seconds"},
   :inter_dc_tcp_nodelay
-  {:type "boolean", :required true, :default_value false},
-  :num_tokens {:type "int", :required false},
+  {:type "boolean", :default_value false},
+  :num_tokens {:type "int"},
   :partitioner
   {:type "string",
-   :required true,
    :options
    [{:label "Murmur3Partitioner",
      :value "org.apache.cassandra.dht.Murmur3Partitioner"}
@@ -469,19 +456,17 @@
      :value "org.apache.cassandra.dht.RandomPartitioner"}],
    :default_value "org.apache.cassandra.dht.Murmur3Partitioner"},
   :column_index_size_in_kb
-  {:type "int", :required true, :default_value 16, :unit "KB"},
+  {:type "int", :default_value 16, :unit "KB"},
   :internode_compression
   {:type "string",
-   :required true,
    :options
    [{:label "all", :value "all"}
     {:label "dc", :value "dc"}
     {:label "none", :value "none"}],
    :default_value "dc"},
-  :cdc_free_space_check_interval_ms {:type "int", :required false},
+  :cdc_free_space_check_interval_ms {:type "int"},
   :otc_coalescing_strategy
   {:type "string",
-   :required false,
    :options
    [{:label "DISABLED", :value "DISABLED"}
     {:label "FIXED", :value "FIXED"}
@@ -489,14 +474,14 @@
     {:label "TIMEHORIZON", :value "TIMEHORIZON"}],
    :default_value "DISABLED"},
   :enable_user_defined_functions
-  {:type "boolean", :required true, :default_value false},
+  {:type "boolean", :default_value false},
   :dynamic_snitch_badness_threshold
-  {:type "float", :required true, :default_value 0.1},
+  {:type "float", :default_value 0.1},
   :phi_convict_threshold
-  {:type "int", :default_value 8, :required false},
+  {:type "int",
+   :description "Example value: 8"},
   :authorizer
   {:type "string",
-   :required true,
    :options
    [{:label "AllowAllAuthorizer", :value "AllowAllAuthorizer"}
     {:label "CassandraAuthorizer", :value "CassandraAuthorizer"}
@@ -507,38 +492,37 @@
   {:type "list", :value_type "string"},
   :internode_authenticator
   {:type "string",
-   :required false,
-   :default_value
-   "org.apache.cassandra.auth.AllowAllInternodeAuthenticator"},
+   :description "Example value: \"org.apache.cassandra.auth.AllowAllInternodeAuthenticator\""},
   :batchlog_replay_throttle_in_kb
-  {:type "int", :required true, :default_value 1024},
+  {:type "int", :default_value 1024},
   :hinted_handoff_throttle_in_kb
-  {:type "int", :required true, :default_value 1024, :unit "KB"},
+  {:type "int", :default_value 1024, :unit "KB"},
   :cas_contention_timeout_in_ms
-  {:type "int", :required true, :default_value 1000, :unit "ms"},
+  {:type "int", :default_value 1000, :unit "ms"},
   ;; ideal_consistency_level is intentionally not an enum because of OPSC-15099.
   ;; After OPSC-15264, we can change it back to being an enum.
   :ideal_consistency_level
-  {:type "string",
-   :required false},
-  :cdc_enabled {:type "boolean", :default_value false, :required true},
+  {:type "string"},
+  :cdc_enabled {:type "boolean", :default_value false},
   :counter_write_request_timeout_in_ms
-  {:type "int", :required true, :default_value 5000},
+  {:type "int", :default_value 5000},
   :system_keyspaces_filtering
-  {:type "boolean", :required true, :default_value false},
+  {:type "boolean", :default_value false},
   :windows_timer_interval {:type "int", :default_value 1, :unit "ms"},
   :streaming_connections_per_host
-  {:type "int", :required false, :default_value 1},
+  {:type "int",
+   :description "Example value: 1"},
   :auto_snapshot
-  {:type "boolean", :required true, :default_value true},
-  :memtable_cleanup_threshold {:type "float", :required false},
+  {:type "boolean", :default_value true},
+  :memtable_cleanup_threshold {:type "float"},
   :back_pressure_enabled
-  {:type "boolean", :default_value false, :required true},
+  {:type "boolean", :default_value false},
   :write_request_timeout_in_ms
-  {:type "int", :required true, :default_value 2000, :unit "ms"},
+  {:type "int", :default_value 2000, :unit "ms"},
   :io_global_queue_depth
-  {:type "int", :required false, :default_value 128},
-  :gc_log_threshold_in_ms {:type "int", :required false, :unit "ms"},
+  {:type "int",
+   :description "Example value: 128"},
+  :gc_log_threshold_in_ms {:type "int", :unit "ms"},
   :back_pressure_strategy
   {:type "list",
    :depends :back_pressure_enabled,
@@ -563,13 +547,11 @@
    :conditional [{:eq true}]},
   :otc_coalescing_enough_coalesced_messages
   {:type "int",
-   :required false,
    :depends :otc_coalescing_strategy,
    :conditional [{:ne "DISABLED"}],
-   :default_value 8},
+   :description "Example value: 8"},
   :otc_inter_dc_coalescing_strategy
   {:type "string",
-   :required false,
    :depends :otc_coalescing_strategy,
    :conditional [{:ne "DISABLED"}],
    :options
@@ -578,35 +560,33 @@
     {:label "FIXED", :value "FIXED"}
     {:label "MOVINGAVERAGE", :value "MOVINGAVERAGE"}
     {:label "TIMEHORIZON", :value "TIMEHORIZON"}],
-   :default_value ""},
+   },
   :otc_inter_dc_coalescing_window_us
   {:type "int",
-   :required false,
    :depends :otc_inter_dc_coalescing_strategy,
    :conditional [{:eq "FIXED"} {:eq "MOVINGAVERAGE"} {:eq "TIMEHORIZON"}],
    :unit "us",
-   :default_value 0},
+   :description "Example value: 0"},
   :otc_inter_dc_coalescing_enough_coalesced_messages
   {:type "int",
-   :required false,
    :depends :otc_inter_dc_coalescing_strategy,
    :conditional [{:eq "FIXED"} {:eq "MOVINGAVERAGE"} {:eq "TIMEHORIZON"}],
-   :default_value 0},
+   :description "Example value: 0"},
   :authenticator
   {:type "string",
-   :required true,
    :options
    [{:label "AllowAllAuthenticator", :value "AllowAllAuthenticator"}
     {:label "PasswordAuthenticator", :value "PasswordAuthenticator"}
     {:label "DseAuthenticator",
      :value "com.datastax.bdp.cassandra.auth.DseAuthenticator"}],
    :default_value "com.datastax.bdp.cassandra.auth.DseAuthenticator"},
-  :internode_send_buff_size_in_bytes {:type "int", :required false},
-  :concurrent_compactors {:type "int", :required false},
+  :internode_send_buff_size_in_bytes {:type "int"},
+  :concurrent_compactors {:type "int"},
   :sstable_preemptive_open_interval_in_mb
-  {:type "int", :required true, :default_value 50, :unit "MB"},
+  {:type "int", :default_value 50, :unit "MB"},
   :seed_gossip_probability
-  {:type "float", :required false, :default_value 1.0},
+  {:type "float",
+   :description "Example value: 1.0"},
   :server_encryption_options
   {:type "dict",
    :order
@@ -633,7 +613,6 @@
     :cipher_suites
     {:type "list",
      :value_type "string",
-     :required false,
      :description
      "A list of encryption cipher-suites that DSE will accept when negotiating TLS connections. In most cases, leaving this list empty is the right thing to do and will allow the JVM to select from its internal list of allowed ciphers. If this list is set explicitly, each text field must contain a single cipher_suite name, for example: TLS_DHE_RSA_WITH_AES_128_CBC_SHA256",
      :depends :internode_encryption,
@@ -647,26 +626,23 @@
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :keystore_type
     {:type "string",
-     :required false,
-     :default_value "JKS",
      :options [{:label "JKS" :value "JKS"}
                {:label "JCEKS" :value "JCEKS"}
                {:label "PKCS12" :value "PKCS12"}
                {:label "PKCS11" :value "PKCS11"}]
      :depends :internode_encryption,
-     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]
+     :description "Example value: \"JKS\""},
     :algorithm
     {:type "string",
-     :required false,
-     :default_value "SunX509",
      :depends :internode_encryption,
-     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]
+     :description "Example value: \"SunX509\""},
     :protocol
     {:type "string",
-     :required false,
-     :default_value "TLS",
      :depends :internode_encryption,
-     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]
+     :description "Example value: \"TLS\""},
     :internode_encryption
     {:type "string",
      :options
@@ -684,13 +660,11 @@
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :require_client_auth
     {:type "boolean",
-     :required true,
      :default_value false,
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :require_endpoint_verification
     {:type "boolean",
-     :required true,
      :default_value false,
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
@@ -703,17 +677,15 @@
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :truststore_type
     {:type "string",
-     :required false,
-     :default_value "JKS",
      :options [{:label "JKS" :value "JKS"}
                {:label "JCEKS" :value "JCEKS"}
                {:label "PKCS12" :value "PKCS12"}
                {:label "PKCS11" :value "PKCS11"}]
      :depends :internode_encryption,
-     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]}},
-   :required true},
+     :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]
+     :description "Example value: \"JKS\""}}},
   :listen_on_broadcast_address
-  {:type "boolean", :required true, :default_value false},
+  {:type "boolean", :default_value false},
   :hints_compression
   {:type "list",
    :value_type "dict",

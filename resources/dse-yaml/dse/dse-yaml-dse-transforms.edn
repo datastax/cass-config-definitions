@@ -8,21 +8,17 @@
                         {:default_value 10800})
           (add-field :dsefs_options.rest_options.internode_idle_connection_timeout_ms
                      {:type "int"
-                      :required false
                       :unit "ms"})
           (add-field :dsefs_options.rest_options.core_max_concurrent_connections_per_host
-                     {:type "int"
-                      :required false}))
+                     {:type "int"}))
  "6.0.5" (transforms
           (add-field :dsefs_options.internode_authentication
                      {:type "dict"
                       :fields
                       {:enabled {:type "boolean"
-                                 :required true
                                  :default_value true}
                        :algorithm {:type "string"
-                                   :required false
-                                   :default_value "HmacSHA256"}}
+                                   :description "Example value: \"HmacSHA256\""}}
                       :order [:enabled :algorithm]})
           (add-group "Insightful Monitoring"
                      :after "DSE Authorizer Options")
@@ -30,13 +26,9 @@
                      {:type "dict"
                       :fields
                       {:data_dir {:type "string"
-                                  :required false
-                                  :default_value "/var/lib/cassandra/insights_data"
-                                  :description "Directory to store insights data"}
+                                  :description "Directory to store insights data. Example value: \"/var/lib/cassandra/insights_data\""}
                        :log_dir {:type "string"
-                                 :required false
-                                 :default_value "/var/log/cassandra/"
-                                 :description "Directory to store insights logs"}}
+                                 :description "Directory to store insights logs. Example value: \"/var/log/cassandra/\""}}
                       :order [:data_dir :log_dir]}
                      :group "Insightful Monitoring"))
  ;; End DSE 6.0.x transforms.
@@ -49,10 +41,9 @@
                       :depends :enabled
                       :order [:enabled :algorithm]
                       :fields {
-                          :enabled {:type "boolean" :default_value true :required true}
+                          :enabled {:type "boolean" :default_value true}
                           :algorithm {:type "string"
                                       :depends :enabled
-                                      :required true
                                       :default_value "HmacSHA256"}}})
           (update-field :dsefs_options
                         {:order [:enabled

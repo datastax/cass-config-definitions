@@ -9,7 +9,6 @@
            (update-template "spark-alwayson-sql-conf-dse-6.0.2.template")
            (add-field :spark_executor_memory
                       {:type "string"
-                       :required true
                        :default_value "1G"}
                       :group "Spark Config Settings"
                       :after :spark_task_maxFailures))
@@ -17,7 +16,6 @@
           (update-template "spark-alwayson-sql-conf-dse-6.0.5.template")
           (add-field :spark_sql_thriftServer_incrementalCollect
                      {:type "boolean"
-                      :required true
                       :default_value true}
                      :group "Spark Config Settings"
                      :after :spark_sql_hive_metastore_barrierPrefixes))

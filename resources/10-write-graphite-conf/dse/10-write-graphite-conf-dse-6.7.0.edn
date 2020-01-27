@@ -15,7 +15,6 @@
 
   :enabled
   {:type "boolean",
-   :required true,
    :label
    "Enable Graphite",
    :default_value false},
@@ -42,54 +41,40 @@
            :always-append-ds],
    :fields
    {:host
-    {:type "string",
-     :required true,
-     :default_value false},
+    {:type "string"},
     :port
     {:type "int",
-     :required true,
      :default_value 2003},
     :reconnect-interval
-    {:type "int",
-     :required false},
+    {:type "int"},
 
     :prefix
-    {:type "string",
-     :required false},
+    {:type "string"},
     :postfix
-    {:type "string",
-     :required false},
+    {:type "string"},
     :protocol
-    {:type "string",
-     :required false},
+    {:type "string"},
 
     :log-send-errors
     {:type "boolean",
-     :required true,
      :default_value false},
     :escape-character
     {:type "string",
-     :required true,
      :default_value "_"},
     :separate-instances
     {:type "boolean",
-     :required true,
      :default_value true},
     :store-rates
     {:type "boolean",
-     :required true,
      :default_value false},
     :preserve-separator
     {:type "boolean",
-     :required true,
      :default_value false},
     :drop-duplicate-fields
     {:type "boolean",
-     :required true,
      :default_value false},
     :always-append-ds
     {:type "boolean",
-     :required true,
      :default_value false}}}},
  :groupings
  [{:name "General Parameters",
