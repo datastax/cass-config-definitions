@@ -24,7 +24,7 @@
             <onMismatch>NEUTRAL</onMismatch>
         </filter>
         <encoder>
-            <pattern>%-5level %date{yyyy-MM-dd HH:mm:ss} %c: %msg%n</pattern>
+            <pattern>%-5level %date{ISO8601} %c: %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -34,7 +34,7 @@
             <level>WARN</level>
         </filter>
         <encoder>
-            <pattern>%-5level %date{yyyy-MM-dd HH:mm:ss} %F:%L - %c: %msg%n</pattern>
+            <pattern>%-5level %date{ISO8601} %F:%L - %c: %msg%n</pattern>
         </encoder>
     </appender>
 

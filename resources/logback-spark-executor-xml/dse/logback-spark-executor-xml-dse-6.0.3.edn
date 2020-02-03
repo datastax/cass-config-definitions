@@ -4,7 +4,7 @@
  :ui-visibility :editable
  :renderer
  {:renderer-type :template
-  :template "logback-spark-executor-xml-dse-6.8.0.template"}
+  :template "logback-spark-executor-xml-dse-6.0.3.template"}
  :workload :spark
  :properties
  {:root-level

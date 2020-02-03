@@ -13,6 +13,7 @@ spark.hadoop.com.datastax.bdp.fs.client.authentication.factory     {{spark_hadoo
 spark.sql.catalogImplementation             {{spark_sql_catalogImplementation}}
 spark.sql.extensions                        {{spark_sql_extensions}}
 spark.sql.hive.metastore.barrierPrefixes    {{spark_sql_hive_metastore_barrierPrefixes}}
+spark.sql.thriftServer.incrementalCollect   {{spark_sql_thriftServer_incrementalCollect}}
 spark.hive.alwaysOnSql                      {{spark_hive_alwaysOnSql}}
 
 

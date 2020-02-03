@@ -181,6 +181,7 @@ appender reference in the root level section below.
 
   <logger name="org.apache.cassandra" level="DEBUG"/>
   <logger name="com.datastax.apollo" level="DEBUG"/>
+  <logger name="com.datastax.bdp.indexing" level="DEBUG"/>
   <logger name="com.datastax.driver.core.NettyUtil" level="ERROR"/>
 
   <!--Enable for debugging of Lease problems (output will appear in debug.log) -->

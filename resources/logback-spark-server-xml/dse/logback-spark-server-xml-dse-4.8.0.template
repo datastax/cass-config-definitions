@@ -14,7 +14,7 @@
     <jmxConfigurator />
 
     <!--Do not change this pattern-->
-    <property name="CONSOLE_PATTERN" value="%level %date{yyyy-MM-dd HH:mm:ss} %c: %msg%n"/>
+    <property name="CONSOLE_PATTERN" value="%level %date{ISO8601} %c: %msg%n"/>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${spark.log.dir}/${spark.log.file}</file>

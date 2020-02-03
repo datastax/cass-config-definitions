@@ -12,6 +12,10 @@
    :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"},
   :spark_network_crypto_enabled
   {:type "boolean", :required true, :default_value false},
+  :spark_sql_thriftServer_incrementalCollect
+  {:type "boolean"
+   :required true
+   :default_value true}
   :spark_cassandra_connection_factory
   {:type "string",
    :required true,
@@ -93,6 +97,7 @@
     "spark_sql_catalogImplementation"
     "spark_sql_extensions"
     "spark_sql_hive_metastore_barrierPrefixes"
+    "spark_sql_thriftServer_incrementalCollect"
     "spark_authenticate"
     "spark_network_crypto_enabled"
     "spark_network_crypto_saslFallback"
