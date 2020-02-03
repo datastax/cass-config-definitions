@@ -37,8 +37,10 @@
    :conditional [{:eq true}],
    :default_value
    ["-Djavax.net.ssl.keyStore=/path/to/keystore"
+    "-Djavax.net.ssl.keyStoreType=<keystore-type>"
     "-Djavax.net.ssl.keyStorePassword=<keystore-password>"
     "-Djavax.net.ssl.trustStore=/path/to/truststore"
+    "-Djavax.net.ssl.trustStoreType=<truststore-type>"
     "-Djavax.net.ssl.trustStorePassword=<truststore-password>"
     "-Dcom.sun.management.jmxremote.ssl.enabled.protocols=<enabled-protocols>"
     "-Dcom.sun.management.jmxremote.ssl.enabled.cipher.suites=<enabled-cipher-suites>"]},

@@ -23,7 +23,7 @@
   :spark_sql_hive_metastore_barrierPrefixes
   {:type "string",
    :default_value "org.apache.spark.sql.cassandra"},
-  :spark_sql_thriftserver_incrementalcollect
+  :spark_sql_thriftServer_incrementalCollect
   {:type "boolean",
    :default_value true},
   :spark_redaction_regex
@@ -85,7 +85,7 @@
     "spark_sql_catalogImplementation"
     "spark_sql_extensions"
     "spark_sql_hive_metastore_barrierPrefixes"
-    "spark_sql_thriftserver_incrementalcollect"
+    "spark_sql_thriftServer_incrementalCollect"
     "spark_authenticate"
     "spark_network_crypto_enabled"
     "spark_network_crypto_saslFallback"

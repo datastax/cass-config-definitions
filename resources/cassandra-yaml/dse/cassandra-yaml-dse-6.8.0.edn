@@ -12,6 +12,21 @@
   {:type "string"
    :default_value "/var/lib/cassandra/metadata"
    :tarball_default "var/lib/cassandra/metadata"}
+  :zerocopy_streaming_enabled
+  {:type "boolean"
+   :default_value true}
+  :zerocopy_max_unused_metadata_in_mb
+  {:type "int"
+   :depends :zerocopy_streaming_enabled
+   :default_value 200}
+  :zerocopy_max_sstables
+  {:type "int"
+   :depends :zerocopy_streaming_enabled
+   :default_value 256}
+  :stream_outbound_buffer_in_kb
+  {:type "int"}
+  :stream_max_outbound_buffers_in_kb
+  {:type "int"}
   :memtable_space_in_mb
   {:type "int"}
   :native_transport_allow_older_protocols
@@ -885,6 +900,11 @@
    ["endpoint_snitch"
     "stream_throughput_outbound_megabits_per_sec"
     "streaming_connections_per_host"
+    "stream_outbound_buffer_in_kb"
+    "stream_max_outbound_buffers_in_kb"
+    "zerocopy_streaming_enabled"
+    "zerocopy_max_unused_metadata_in_mb"
+    "zerocopy_max_sstables"
     "inter_dc_stream_throughput_outbound_megabits_per_sec"
     "phi_convict_threshold"
     "dynamic_snitch_update_interval_in_ms"
