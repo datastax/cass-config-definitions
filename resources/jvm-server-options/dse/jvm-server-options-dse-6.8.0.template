@@ -33,7 +33,6 @@
 {{jmx-remote-no-auth-port}}{% endifequal %}
 {%     ifequal jmx-connection-type "remote-dse-unified-auth" %}
 -Dcassandra.jmx.remote.login.config=CassandraLogin
--Dcom.sun.management.jmxremote.ssl.need.client.auth=true
 -Dcassandra.jmx.authorizer=org.apache.cassandra.auth.jmx.AuthorizationProxy
 -Djava.security.auth.login.config=/etc/dse/cassandra/cassandra-jaas.config
 -Dcassandra.jmx.remote.port={{jmx-port}}
@@ -41,9 +40,11 @@
 {%     endifequal %}
 {%     if jmx-remote-ssl %}
 -Dcom.sun.management.jmxremote.ssl=true
--Dcom.sun.management.jmxremote.ssl.need.client.auth=true
 -Dcom.sun.management.jmxremote.registry.ssl=true
-{%         for ssl-opt in jmx-remote-ssl-opts %}{{jmx-remote-opt}}
+{%         if jmx-remote-ssl-require-client-auth %}
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=true
+{%         endif %}
+{%         for jmx-remote-ssl-opt in jmx-remote-ssl-opts %}{{jmx-remote-ssl-opt}}
 {%         endfor %}
 {%     else %}
 -Dcom.sun.management.jmxremote.ssl=false
