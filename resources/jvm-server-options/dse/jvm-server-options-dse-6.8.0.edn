@@ -57,7 +57,6 @@
 
   :jmx-remote-ssl-require-client-auth
   {:type "boolean",
-   :required true,
    :exclude-from-template-iterables true,
    :label "Require Client Authentication?",
    :default_value false,
