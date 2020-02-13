@@ -53,8 +53,17 @@
    :depends :jmx-connection-type,
    :conditional
    [{:eq "remote-no-auth"}
-    {:eq "remote-file-based-auth"}
     {:eq "remote-dse-unified-auth"}]},
+
+  :jmx-remote-ssl-require-client-auth
+  {:type "boolean",
+   :required true,
+   :exclude-from-template-iterables true,
+   :label "Require Client Authentication?",
+   :default_value false,
+   :depends :jmx-remote-ssl,
+   :conditional
+   [{:eq true}]},
 
   :jmx-connection-type
   {:type "string",
@@ -430,6 +439,7 @@
    ["jmx-port"
     "jmx-connection-type"
     "jmx-remote-ssl"
+    "jmx-remote-ssl-require-client-auth"
     "jmx-remote-ssl-opts"]}
   {:name "Advanced",
    :list ["additional-jvm-opts"]}]}
