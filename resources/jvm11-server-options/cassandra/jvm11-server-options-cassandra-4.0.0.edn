@@ -1,0 +1,11 @@
+{:display-name "jvm11-server.options",
+ :package-path "/etc/cassandra/jvm11-server.options",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :renderer
+ {:renderer-type :template,
+  :template "jvm11-server-options-cassandra-4.0.0.template"},
+ :properties
+ {},
+ :groupings
+ []}
