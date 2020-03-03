@@ -221,7 +221,7 @@
   :cassandra_write_survey
   {:type "boolean",
    :constant "-Dcassandra.write_survey",
-   :default_value true
+   :default_value false
    :label "For testing new compaction and compression strategies"},
   :print_gc_application_stopped_time
   {:type "boolean",

@@ -93,7 +93,7 @@
   :cassandra_write_survey
   {:type "boolean"
    :constant "-Dcassandra.write_survey"
-   :default_value true
+   :default_value false
    :label "For testing new compaction and compression strategies"}
 
   :cassandra_disable_auth_caches_remote_configuration
