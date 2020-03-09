@@ -306,6 +306,8 @@
    :default_value "org.apache.cassandra.dht.Murmur3Partitioner"},
   :column_index_size_in_kb
   {:type "int", :required true, :default_value 64, :unit "KB"},
+  :enable_sasi_indexes
+  {:type "boolean", :required false, :default_value true},
   :internode_compression
   {:type "string",
    :required true,
@@ -341,6 +343,8 @@
   {:type "boolean", :default_value false, :required true},
   :write_request_timeout_in_ms
   {:type "int", :required true, :default_value 2000, :unit "ms"},
+  :enable_materialized_views
+  {:type "boolean", :required false, :default_value true},
   :back_pressure_strategy
   {:type "list",
    :depends :back_pressure_enabled,

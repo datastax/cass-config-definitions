@@ -1,7 +1,3 @@
-# This file is managed by DataStax OpsCenter LifeCycle Manager.
-# Manual edits will be overwritten by the next install or configure
-# job that runs on this system.
-
 {% for template_iterable in template_iterables %}{% if template_iterable %}{{template_iterable}}
 {% endif %}{% endfor %}
 
