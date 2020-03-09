@@ -1,0 +1,48 @@
+{% for template_iterable in template_iterables %}{% if template_iterable %}{{template_iterable}}
+{% endif %}{% endfor %}
+
+{% ifequal garbage_collector "CMS" %}
+-XX:+UseParNewGC
+-XX:+UseConcMarkSweepGC
+-XX:+CMSParallelRemarkEnabled
+-XX:+UseCMSInitiatingOccupancyOnly
+-XX:+CMSParallelInitialMarkEnabled
+-XX:+CMSEdenChunksRecordAlways
+-XX:+CMSClassUnloadingEnabled
+{% endifequal %}
+
+{% ifequal garbage_collector "G1GC" %}
+-XX:+UseG1GC
+{% endifequal %}
+
+{% comment %} JMX Authentication and Configuration {% endcomment %}
+{% ifequal jmx-connection-type "local-no-auth" %}
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcassandra.jmx.local.port={{jmx-port}}
+{% else %}
+{%     ifequal jmx-connection-type "remote-no-auth" %}
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.port={{jmx-port}}
+{{jmx-remote-no-auth-port}}{% endifequal %}
+{%     ifequal jmx-connection-type "remote-dse-unified-auth" %}
+-Dcassandra.jmx.remote.login.config=CassandraLogin
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=true
+-Dcassandra.jmx.authorizer=org.apache.cassandra.auth.jmx.AuthorizationProxy
+-Djava.security.auth.login.config=/etc/dse/cassandra/cassandra-jaas.config
+-Dcassandra.jmx.remote.port={{jmx-port}}
+-Dcom.sun.management.jmxremote.authenticate=true
+{%     endifequal %}
+{%     if jmx-remote-ssl %}
+-Dcom.sun.management.jmxremote.ssl=true
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=true
+-Dcom.sun.management.jmxremote.registry.ssl=true
+{%         for jmx-remote-ssl-opt in jmx-remote-ssl-opts %}{{jmx-remote-ssl-opt}}
+{%         endfor %}
+{%     else %}
+-Dcom.sun.management.jmxremote.ssl=false
+{%     endif %}
+{% endifequal %}
+
+{% comment %} Additional options by Opscenter Provisioning {% endcomment %}
+{% for jvm-opt in additional-jvm-opts %}{{jvm-opt}}
+{% endfor %}
