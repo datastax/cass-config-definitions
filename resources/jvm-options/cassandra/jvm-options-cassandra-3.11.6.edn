@@ -1,0 +1,630 @@
+;; The following options are not supported via jvm.options in LCM,
+;; because there are other ways of setting the fields in the config profile.
+;;
+;; cassandra-yaml
+;;   cassandra_native_transport_port
+;;   cassandra_partitioner
+;;   cassandra_rpc_port
+;;   cassandra_ssl_storage_port
+;;   cassandra_start_native_transport
+;;   cassandra_start_rpc
+;;   cassandra_storage_port
+
+{:display-name "jvm.options"
+ :package-path "/etc/cassandra/jvm.options"
+ :workload-file-group "cassandra"
+ :ui-visibility :editable
+ :renderer
+ {:renderer-type :template
+  :template "jvm-options-cassandra-3.11.6.template"}
+
+ :properties
+ {;; Startup Options
+  :cassandra_available_processors
+  {:type "int"
+   :constant "-Dcassandra.available_processors"
+   :disabled true
+   :label "Available CPU processors"
+   :required false}
+
+  :cassandra_config_directory
+  {:type "string"
+   :constant "-Dcassandra.config"
+   :disabled true
+   :label "Location of the cassandra.yaml file"
+   :render-without-quotes true
+   :required false}
+
+  :cassandra_initial_token
+  {:type "string"
+   :constant "-Dcassandra.initial_token"
+   :disabled true
+   :label "Initial token for first start of node"
+   :render-without-quotes true
+   :required false}
+
+  :cassandra_join_ring
+  {:type "boolean"
+   :required true
+   :constant "-Dcassandra.join_ring"
+   :label "Set to false to keep node from joining cluster"
+   :default_value true}
+
+  :cassandra_load_ring_state
+  {:type "boolean"
+   :required true
+   :constant "-Dcassandra.load_ring_state"
+   :label "Set to false to clear gossip state on restart"
+   :default_value true}
+
+  :cassandra_metrics_reporter_config_file
+  {:type "string"
+   :constant "-Dcassandra.metricsReporterConfigFile"
+   :label "Enable pluggable metrics reporter"
+   :disabled true
+   :render-without-quotes true
+   :required false}
+
+  :cassandra_replace_address
+  {:type "string"
+   :constant "-Dcassandra.replace_address"
+   :label "Address of dead node to be replaced"
+   :disabled true
+   :render-without-quotes true
+   :required false}
+
+  :cassandra_replay_list
+  {:type "string"
+   :constant "-Dcassandra.replayList"
+   :label "Restore specific tables from archived commit log"
+   :disabled true
+   :render-without-quotes true
+   :required false}
+
+  :cassandra_ring_delay_ms
+  {:type "int"
+   :required false
+   :disabled true
+   :constant "-Dcassandra.ring_delay_ms"
+   :label "Amount of time node waits before joining ring"
+   :unit "ms"}
+
+  :cassandra_triggers_dir
+  {:type "string"
+   :constant "-Dcassandra.triggers_dir"
+   :label "Default location for the trigger JARs"
+   :disabled true
+   :render-without-quotes true
+   :required false}
+
+  :cassandra_write_survey
+  {:type "boolean"
+   :required true
+   :constant "-Dcassandra.write_survey"
+   :label "For testing new compaction and compression strategies"
+   :default_value false}
+
+  :cassandra_disable_auth_caches_remote_configuration
+  {:type "boolean"
+   :required true
+   :constant "-Dcassandra.disable_auth_caches_remote_configuration"
+   :label "Disable configuration via JMX of auth caches"
+   :default_value false}
+
+  :cassandra_force_default_indexing_page_size
+  {:type "boolean"
+   :required true
+   :constant "-Dcassandra.force_default_indexing_page_size"
+   :label "Disable dynamic calculation of the page size used when indexing an entire partition (during initial index build/rebuild)."
+   :default_value false}
+
+  :cassandra_force_3_0_protocol_version
+  {:type "boolean"
+   :required true
+   :static_constant "-Dcassandra.force_3_0_protocol_version=true"
+   :label "Force the use of the older 3.0 protocol version (compatibility mode). Useful for upgrading to versions supporting 3.0.14 protocol."
+   :default_value false}
+
+  ;; General JVM Settings
+
+  :enable_assertions
+  {:type "boolean"
+   :required true
+   :static_constant "-ea"
+   :label "Enable assertions"
+   :default_value true}
+
+  :use_thread_priorities
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:+UseThreadPriorities"
+   :label "Enable thread priorities"
+   :default_value true}
+
+  :thread_priority_policy_42
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:ThreadPriorityPolicy=42"
+   :label "Enable lowering thread priority without being root on linux"
+   :default_value true}
+
+  :heap_dump_on_out_of_memory_error
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:+HeapDumpOnOutOfMemoryError"
+   :label "Enable heap-dump on Out-Of-Memory error"
+   :default_value true}
+
+  :per_thread_stack_size
+  {:type "string"
+   :required true
+   :constant "-Xss"
+   :label "Per-thread stack size"
+   :suppress-equal-sign true
+   :render-without-quotes true
+   :default_value "256k"}
+
+  :string_table_size
+  {:type "string"
+   :required true
+   :constant "-XX:StringTableSize"
+   :label "Larger interned string table"
+   :render-without-quotes true
+   :default_value "1000003"}
+
+  :always_pre_touch
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:+AlwaysPreTouch"
+   :label "Ensure all memory is faulted and zeroed on startup"
+   :default_value true}
+
+  :use_biased_locking
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:-UseBiasedLocking"
+   :label "Disable biased locking"
+   :default_value false}
+
+  :use_tlb
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:+UseTLAB"
+   :label "Enable thread-local allocation blocks"
+   :default_value true}
+
+  :resize_tlb
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:+ResizeTLAB"
+   :label "Allow resizing of thread-local allocation blocks"
+   :default_value true}
+
+  :perf_disable_shared_mem
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:+PerfDisableSharedMem"
+   :label "Disable hsperfdata mmap'ed file"
+   :default_value true}
+
+  :java_net_prefer_ipv4_stack
+  {:type "boolean"
+   :required true
+   :static_constant "-Djava.net.preferIPv4Stack=true"
+   :label "Prefer binding to IPv4 network interfaces"
+   :default_value true}
+
+  ;; Debug Options
+
+  :unlock_commercial_features
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:+UnlockCommercialFeatures"
+   :label "Unlock commercial features"
+   :default_value false}
+
+  :flight_recorder
+  {:type "boolean"
+   :required true
+   :static_constant "-XX:+FlightRecorder"
+   :label "Enable fligght recorder"
+   :default_value false}
+
+  ;; If the user needs to tweak this value, they should
+  ;; use the additional jvm options field instead
+  :agent_lib_jdwp
+  {:type "boolean"
+   :required true
+   :static_constant "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1414"
+   :label "Listen for JVM remote debuggers on port 1414"
+   :default_value false}
+
+;; These options are for developers only, and require more
+;; tweaking than simply enabling them.  Therefore we are not
+;; presenting them to our end users.
+;;
+;;   :unlock_diagnostic_vm_options
+;;   {:type "boolean"
+;;    :required true
+;;    :static_constant "-XX:+UnlockDiagnosticVMOptions"
+;;    :label "Unlock diagnostic vm options"
+;;    :default_value false}
+;;
+;;   :debug_non_safepoints
+;;   {:type "boolean"
+;;    :required true
+;;    :static_constant "-XX:+DebugNonSafepoints"
+;;    :label "Debug non Safepoints"
+;;    :default_value false}
+;;
+;;   :log_compilation
+;;   {:type "boolean"
+;;    :required true
+;;    :static_constant "-XX:+LogCompilation"
+;;    :label "Log compilation"
+;;    :default_value false}
+
+  ;; Heap Settings
+
+  ;; -Xms
+  :initial_heap_size
+  {:type "string"
+   :label "Initial Heap Size"
+   :disabled true
+   :required false
+   :constant "-Xms"
+   :suppress-equal-sign true
+   :render-without-quotes true
+   :default_value "auto"
+   :description "The initial size of the heap when starting the JVM that runs DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing."}
+
+  ;; -Xmx
+  :max_heap_size
+  {:type "string"
+   :label "Max Heap Size"
+   :disabled true
+   :required false
+   :constant "-Xmx"
+   :suppress-equal-sign true
+   :render-without-quotes true
+   :default_value "auto"
+   :description "The maximum size to which the heap will be allowed to grow for the JVM running DSE. May be specified in megabytes (ie: 2048m) or gigabytes (ie: 2g). It's recommended to set the initial_heap_size equal to the max_heap_size in order to prevent latency spikes caused by heap resizing. By default, heap size is automatically calculated by DSE based on this formula: max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))"}
+
+
+  ;; Note CMS will enable the following options:
+  ;; -XX:+UseParNewGC
+  ;; -XX:+UseConcMarkSweepGC
+  ;; -XX:+CMSParallelRemarkEnabled
+  ;; -XX:+UseCMSInitiatingOccupancyOnly
+  ;; -XX:+CMSParallelInitialMarkEnabled
+  ;; -XX:+CMSEdenChunksRecordAlways
+  ;; -XX:+CMSClassUnloadingEnabled
+  ;;
+  ;; G1GC will enable the following options:
+  ;; -XX:+UseG1GC
+  ;; -XX:G1RSetUpdatingPauseTimePercent=5
+
+  :garbage_collector
+  {:type "string"
+   :label "Garbage Collector"
+   :exclude-from-template-iterables true
+   :required true
+   :options
+   [{:label "CMS" :value "CMS"}
+    {:label "G1GC" :value "G1GC"}]
+   :default_value "G1GC"}
+
+  :heap_size_young_generation
+  {:type "string"
+   :label "Heap size young generation"
+   :required false
+   :depends :garbage_collector
+   :conditional "CMS"
+   :disabled true
+   :constant "-Xmn"
+   :render-without-quotes true
+   :suppress-equal-sign true
+   :default_value ""}
+
+  :survivor_ratio
+  {:type "int"
+   :label "Survivor Ratio"
+   :required true
+   :default_value "8"
+   :depends :garbage_collector
+   :conditional "CMS"
+   :constant "-XX:SurvivorRatio"}
+
+  :max_tenuring_threshold
+  {:type "int"
+   :label "Max Tenuring Threshold"
+   :required true
+   :default_value "1"
+   :depends :garbage_collector
+   :conditional "CMS"
+   :constant "-XX:MaxTenuringThreshold"}
+
+  :cms_initiating_occupancy_fraction
+  {:type "int"
+   :label "CMS Initiating Occupancy Fraction"
+   :required true
+   :default_value "75"
+   :depends :garbage_collector
+   :conditional "CMS"
+   :constant "-XX:CMSInitiatingOccupancyFraction"}
+
+  :cms_wait_duration
+  {:type "int"
+   :label "CMS Max Duration"
+   :required true
+   :default_value "10000"
+   :depends :garbage_collector
+   :conditional "CMS"
+   :constant "-XX:CMSWaitDuration"}
+
+  ;; g1gc options
+
+  :g1r_set_updating_pause_time_percent
+  {:type "int"
+   :label "G1GC Updating Pause Time Percentage"
+   :required true
+   :default_value "5"
+   :depends :garbage_collector
+   :conditional "G1GC"
+   :constant "-XX:G1RSetUpdatingPauseTimePercent"}
+
+  :max_gc_pause_millis
+  {:type "int"
+   :label "G1GC Max GC Pause Milliseconds"
+   :required true
+   :default_value "500"
+   :depends :garbage_collector
+   :conditional "G1GC"
+   :constant "-XX:MaxGCPauseMillis"}
+
+  :initiating_heap_occupancy_percent
+  {:type "int"
+   :label "Initiating Heap Occupancy Percentage"
+   :required false
+   :disabled true
+   :default_value ""
+   :depends :garbage_collector
+   :conditional "G1GC"
+   :constant "-XX:InitiatingHeapOccupancyPercent"}
+
+  :parallel_gc_threads
+  {:type "int"
+   :label "Parallel GC Threads"
+   :required false
+   :disabled true
+   :default_value ""
+   :depends :garbage_collector
+   :conditional "G1GC"
+   :constant "-XX:ParallelGCThreads"}
+
+  :conc_gc_threads
+  {:type "int"
+   :label "Concurrent GC Threads"
+   :required false
+   :disabled true
+   :default_value ""
+   :depends :garbage_collector
+   :conditional "G1GC"
+   :constant "-XX:ConcGCThreads"}
+
+  ;; GC Logging Options
+
+  :print_gc_details
+  {:type "boolean"
+   :required true
+   :label "Print GC Details"
+   :static_constant "-XX:+PrintGCDetails"
+   :default_value false}
+
+  :print_gc_date_stamps
+  {:type "boolean"
+   :required true
+   :label "Print GC Date Stamps"
+   :static_constant "-XX:+PrintGCDateStamps"
+   :default_value false}
+
+  :print_heap_at_gc
+  {:type "boolean"
+   :required true
+   :label "Print Heap at GC"
+   :static_constant "-XX:+PrintHeapAtGC"
+   :default_value false}
+
+  :print_tenuring_distribution
+  {:type "boolean"
+   :required true
+   :label "Print Tenuring Distribution"
+   :static_constant "-XX:+PrintTenuringDistribution"
+   :default_value false}
+
+  :print_gc_application_stopped_time
+  {:type "boolean"
+   :required true
+   :label "Print GC Application Stopped Time"
+   :static_constant "-XX:+PrintGCApplicationStoppedTime"
+   :default_value false}
+
+  :print_promotion_failure
+  {:type "boolean"
+   :required true
+   :label "Print Promotion Failure"
+   :static_constant "-XX:+PrintPromotionFailure"
+   :default_value false}
+
+  :use_gc_log_file_rotation
+  {:type "boolean"
+   :required true
+   :label "Use GC Log File Rotation"
+   :static_constant "-XX:+UseGCLogFileRotation"
+   :default_value false}
+
+  :print_flss_statistics
+  {:type "boolean"
+   :required true
+   :label "Print FLSS Statistics"
+   :static_constant "-XX:PrintFLSStatistics=1"
+   :default_value false}
+
+  ;; If the path needs to be customized, the user
+  ;; should use additional jvm options
+  :log_gc
+  {:type "boolean"
+   :required true
+   :label "Log GC"
+   :static_constant "-Xloggc:/var/log/cassandra/gc.log"
+   :default_value false}
+
+  :number_of_gc_log_files
+  {:type "int"
+   :label "Number of GC log files"
+   :disabled true
+   :required false
+   :constant "-XX:NumberOfGCLogFiles"
+   :default_value "0"}
+
+  :gc_log_file_size
+  {:type "string"
+   :label "GC log file size"
+   :disabled true
+   :required false
+   :constant "-XX:GCLogFileSize"
+   :render-without-quotes true
+   :default_value ""}
+
+  ;; JMX
+
+  :jmx-port
+  {:type "int"
+   :exclude-from-template-iterables true
+   :label "JMX Port"
+   :required true
+   :default_value 7199}
+
+  :jmx-connection-type
+  {:type "string"
+   :label "JMX Connection Type"
+   :exclude-from-template-iterables true
+   :required true
+   :options
+   [{:label "Local JMX - No Authentication"
+     :value "local-no-auth"}
+    {:label "Remote JMX - No Authentication"
+     :value "remote-no-auth"}
+    {:label "Remote JMX - DSE Unified Authentication"
+     :value "remote-dse-unified-auth"}]
+   :default_value "local-no-auth"}
+
+  :jmx-remote-ssl
+  {:type "boolean"
+   :required true
+   :exclude-from-template-iterables true
+   :label "Enable SSL?"
+   :default_value false
+   :depends :jmx-connection-type
+   :conditional [{:eq "remote-no-auth"}
+                 {:eq "remote-file-based-auth"}
+                 {:eq "remote-dse-unified-auth"}]}
+
+  :jmx-remote-ssl-opts
+  {:type "list"
+   :value_type "string"
+   :exclude-from-template-iterables true
+   :label "Remote SSL Options"
+   :depends :jmx-remote-ssl
+   :conditional true
+   :default_value ["-Djavax.net.ssl.keyStore=/path/to/keystore"
+                   "-Djavax.net.ssl.keyStorePassword=<keystore-password>"
+                   "-Djavax.net.ssl.trustStore=/path/to/truststore"
+                   "-Djavax.net.ssl.trustStorePassword=<truststore-password>"
+                   "-Dcom.sun.management.jmxremote.ssl.enabled.protocols=<enabled-protocols>"
+                   "-Dcom.sun.management.jmxremote.ssl.enabled.cipher.suites=<enabled-cipher-suites>"]}
+
+  ;; Advanced
+
+  :additional-jvm-opts
+  {:type "list"
+   :exclude-from-template-iterables true
+   :label "Additional JVM_OPTS"
+   :value_type "string"
+   :default_value []
+   :description "Arbitrary JVM options can be passed to DSE on startup. Enter a single option in each box exactly as it would appear as a Java command-line argument. Example: -XX:MaxJavaStackTraceDepth=1000"}}
+
+ :groupings
+ [
+  {:name "General JVM Parameters"
+   :list
+   ["enable_assertions"
+    "use_thread_priorities"
+    "thread_priority_policy_42"
+    "heap_dump_on_out_of_memory_error"
+    "per_thread_stack_size"
+    "string_table_size"
+    "always_pre_touch"
+    "use_biased_locking"
+    "use_tlb"
+    "resize_tlb"
+    "perf_disable_shared_mem"
+    "java_net_prefer_ipv4_stack"]}
+  {:name "Startup Parameters"
+   :list
+   ["cassandra_available_processors"
+    "cassandra_config_directory"
+    "cassandra_initial_token"
+    "cassandra_join_ring"
+    "cassandra_load_ring_state"
+    "cassandra_metrics_reporter_config_file"
+    "cassandra_replace_address"
+    "cassandra_replay_list"
+    "cassandra_ring_delay_ms"
+    "cassandra_triggers_dir"
+    "cassandra_write_survey"
+    "cassandra_disable_auth_caches_remote_configuration"
+    "cassandra_force_default_indexing_page_size"
+    "cassandra_force_3_0_protocol_version"]}
+  {:name "Debug Options"
+   :list
+   ["unlock_commercial_features"
+    "flight_recorder"
+    "agent_lib_jdwp"]}
+  {:name "Heap Settings"
+   :list
+   ["initial_heap_size"
+    "max_heap_size"]}
+  {:name "Garbage Collector Settings"
+   :list
+   ["garbage_collector"
+    "heap_size_young_generation"
+    "survivor_ratio"
+    "max_tenuring_threshold"
+    "cms_initiating_occupancy_fraction"
+    "cms_wait_duration"
+    "g1r_set_updating_pause_time_percent"
+    "max_gc_pause_millis"
+    "initiating_heap_occupancy_percent"
+    "parallel_gc_threads"
+    "conc_gc_threads"]}
+  {:name "Garbage Collector Logging Options"
+   :list
+   ["print_gc_details"
+    "print_gc_date_stamps"
+    "print_heap_at_gc"
+    "print_tenuring_distribution"
+    "print_gc_application_stopped_time"
+    "print_promotion_failure"
+    "use_gc_log_file_rotation"
+    "print_flss_statistics"
+    "log_gc"
+    "number_of_gc_log_files"
+    "gc_log_file_size"]}
+  {:name "JMX"
+   :list ["jmx-port"
+          "jmx-connection-type"
+          "jmx-remote-ssl"
+          "jmx-remote-ssl-opts"]}
+  {:name "Advanced"
+   :list ["additional-jvm-opts"]}]}

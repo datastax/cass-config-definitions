@@ -1,5 +1,5 @@
 (
   ;; Begin Cassandra 4.0.x transforms.
-  "4.0.0" "logback-xml-cassandra-4.0.0.edn"
+  "3.11.6" "logback-xml-cassandra-3.11.6.edn"
   ;; End Cassandra 4.0.x transforms.
   )

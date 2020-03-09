@@ -1,9 +1,0 @@
-{:display-name "cassandra-env.sh",
- :package-path "/etc/cassandra/cassandra-env.sh",
- :workload-file-group "cassandra",
- :ui-visibility :editable,
- :renderer
- {:renderer-type :template,
-  :template "cassandra-env-sh-cassandra-4.0.0.template"},
- :properties {}
- :groupings []}

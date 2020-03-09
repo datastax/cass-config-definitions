@@ -4,7 +4,7 @@
  :ui-visibility :hidden
  :renderer
  {:renderer-type :template
-  :template "cassandra-rackdc-properties-cassandra-4.0.0.template"}
+  :template "cassandra-rackdc-properties-cassandra-3.11.6.template"}
  :properties
  {:dc {:type "string", :required false, :default_value "dc1"},
   :rack {:type "string", :required false, :default_value "rack1"}}
