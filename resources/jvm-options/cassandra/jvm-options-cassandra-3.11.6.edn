@@ -19,7 +19,6 @@
    :exclude-from-template-iterables true,
    :label "Additional JVM_OPTS",
    :value_type "string",
-   :default_value [],
    :description
    "Arbitrary JVM options can be passed to DSE on startup. Enter a single option in each box exactly as it would appear as a Java command-line argument. Example: -XX:MaxJavaStackTraceDepth=1000"},
   :log_gc
@@ -42,7 +41,6 @@
   {:type "int",
    :label "Initiating Heap Occupancy Percentage",
    :disabled true,
-   :default_value "",
    :depends :garbage_collector,
    :conditional "G1GC",
    :constant "-XX:InitiatingHeapOccupancyPercent"},
@@ -74,14 +72,7 @@
    :exclude-from-template-iterables true,
    :label "Remote SSL Options",
    :depends :jmx-remote-ssl,
-   :conditional true,
-   :default_value
-   ["-Djavax.net.ssl.keyStore=/path/to/keystore"
-    "-Djavax.net.ssl.keyStorePassword=<keystore-password>"
-    "-Djavax.net.ssl.trustStore=/path/to/truststore"
-    "-Djavax.net.ssl.trustStorePassword=<truststore-password>"
-    "-Dcom.sun.management.jmxremote.ssl.enabled.protocols=<enabled-protocols>"
-    "-Dcom.sun.management.jmxremote.ssl.enabled.cipher.suites=<enabled-cipher-suites>"]},
+   :conditional true},
   :cassandra_join_ring
   {:type "boolean",
    :constant "-Dcassandra.join_ring",
@@ -161,8 +152,7 @@
    :constant "-Xms",
    :type "string",
    :label "Initial Heap Size",
-   :render-without-quotes true,
-   :default_value "auto"},
+   :render-without-quotes true},
   :g1r_set_updating_pause_time_percent
   {:type "int",
    :label "G1GC Updating Pause Time Percentage",
@@ -233,7 +223,6 @@
   {:type "int",
    :label "Parallel GC Threads",
    :disabled true,
-   :default_value "",
    :depends :garbage_collector,
    :conditional "G1GC",
    :constant "-XX:ParallelGCThreads"},
@@ -252,13 +241,11 @@
    :label "GC log file size",
    :disabled true,
    :constant "-XX:GCLogFileSize",
-   :render-without-quotes true,
-   :default_value ""},
+   :render-without-quotes true},
   :conc_gc_threads
   {:type "int",
    :label "Concurrent GC Threads",
    :disabled true,
-   :default_value "",
    :depends :garbage_collector,
    :conditional "G1GC",
    :constant "-XX:ConcGCThreads"},
@@ -270,8 +257,7 @@
    :constant "-Xmx",
    :type "string",
    :label "Max Heap Size",
-   :render-without-quotes true,
-   :default_value "auto"},
+   :render-without-quotes true},
   :use_thread_priorities
   {:type "boolean",
    :static_constant "-XX:+UseThreadPriorities",
@@ -329,7 +315,6 @@
    :type "string",
    :label "Heap size young generation",
    :render-without-quotes true,
-   :default_value "",
    :depends :garbage_collector,
    :conditional "CMS"},
   :cms_initiating_occupancy_fraction
@@ -361,8 +346,7 @@
   {:type "int",
    :label "Number of GC log files",
    :disabled true,
-   :constant "-XX:NumberOfGCLogFiles",
-   :default_value "0"},
+   :constant "-XX:NumberOfGCLogFiles"},
   :print_gc_details
   {:type "boolean",
    :label "Print GC Details",

@@ -12,7 +12,6 @@
   {:type "int",
    :constant "MALLOC_ARENA_MAX",
    :label "Malloc Arena Max",
-   :default_value 4,
    :disabled true,
    :add-export true},
   :heap-dump-dir

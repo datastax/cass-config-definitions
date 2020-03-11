@@ -21,7 +21,6 @@
   {:type "int", :default_value 20, :unit "MB"},
   :loggers
   {:type "list",
-   :default_value [],
    :value_type "dict",
    :order [:name :level],
    :fields {:name {:type "string"}, :level {:type "string"}}}},

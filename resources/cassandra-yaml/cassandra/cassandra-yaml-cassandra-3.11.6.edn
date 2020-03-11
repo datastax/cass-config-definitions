@@ -27,8 +27,7 @@
   :column_index_cache_size_in_kb
   {:type "int", :default_value 2, :unit "KB"},
   :max_hints_delivery_threads {:type "int", :default_value 2},
-  :gc_warn_threshold_in_ms
-  {:type "int", :default_value 1000, :unit "ms"},
+  :gc_warn_threshold_in_ms {:type "int", :unit "ms", :default_value 1000},
   :commit_failure_policy
   {:type "string",
    :options
@@ -174,49 +173,30 @@
    {:keystore
     {:type "string",
      :is_file true,
-     :default_value "/etc/dse/keystores/client.keystore",
      :depends :enabled,
      :conditional [{:eq true}]},
     :cipher_suites
     {:type "list",
      :value_type "string",
      :depends :enabled,
-     :default_value
-     ["TLS_RSA_WITH_AES_128_CBC_SHA"
-      "TLS_RSA_WITH_AES_256_CBC_SHA"
-      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
-      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
-      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
-      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"],
      :conditional [{:eq true}]},
     :keystore_password
     {:type "string",
      :password true,
      :validators [{:name :length, :params {:min 6}}],
-     :default_value "cassandra",
      :depends :enabled,
      :conditional [{:eq true}]},
     :store_type
-    {:type "string",
-     :default_value "JKS",
-     :depends :enabled,
-     :conditional [{:eq true}]},
+    {:type "string", :depends :enabled, :conditional [{:eq true}]},
     :algorithm
-    {:type "string",
-     :default_value "SunX509",
-     :depends :enabled,
-     :conditional [{:eq true}]},
+    {:type "string", :depends :enabled, :conditional [{:eq true}]},
     :protocol
-    {:type "string",
-     :default_value "TLS",
-     :depends :enabled,
-     :conditional [{:eq true}]},
+    {:type "string", :depends :enabled, :conditional [{:eq true}]},
     :truststore_password
     {:type "string",
      :depends :enabled,
      :password true,
      :validators [{:name :length, :params {:min 6}}],
-     :default_value "cassandra",
      :conditional [{:eq true}]},
     :require_client_auth
     {:type "boolean",
@@ -234,13 +214,12 @@
     {:type "string",
      :is_file true,
      :depends :enabled,
-     :default_value "/etc/dse/keystores/client.truststore",
      :conditional [{:eq true}]},
     :enabled {:type "boolean", :default_value false}}},
   :key_cache_size_in_mb {:type "int", :unit "MB"},
   :commitlog_sync_period_in_ms
   {:type "int",
-   :default_value 10000,
+   :default_value 10000
    :depends :commitlog_sync,
    :conditional [{:eq "periodic"}]},
   :batch_size_warn_threshold_in_kb {:type "int", :default_value 64},
@@ -261,8 +240,7 @@
    :default_value "org.apache.cassandra.dht.Murmur3Partitioner"},
   :column_index_size_in_kb
   {:type "int", :default_value 64, :unit "KB"},
-  :enable_sasi_indexes
-  {:type "boolean", :default_value true},
+  :enable_sasi_indexes {:type "boolean", :default_value true},
   :internode_compression
   {:type "string",
    :options
@@ -288,13 +266,12 @@
   :cdc_enabled {:type "boolean", :default_value false},
   :counter_write_request_timeout_in_ms
   {:type "int", :default_value 5000},
-  :windows_timer_interval {:type "int", :default_value 1, :unit "ms"},
+  :windows_timer_interval {:type "int", :unit "ms", :default_value 1},
   :auto_snapshot {:type "boolean", :default_value true},
   :back_pressure_enabled {:type "boolean", :default_value false},
   :write_request_timeout_in_ms
   {:type "int", :default_value 2000, :unit "ms"},
-  :enable_materialized_views
-  {:type "boolean", :default_value true},
+  :enable_materialized_views {:type "boolean", :default_value true},
   :back_pressure_strategy
   {:type "list",
    :depends :back_pressure_enabled,
@@ -310,9 +287,6 @@
      {:high_ratio {:type "string"},
       :factor {:type "string"},
       :flow {:type "string"}}}},
-   :default_value
-   [{:class_name "org.apache.cassandra.net.RateBasedBackPressure",
-     :parameters [{:high_ratio "0.90", :factor "5", :flow "FAST"}]}],
    :conditional [{:eq true}]},
   :request_scheduler
   {:type "string",
@@ -352,56 +326,43 @@
    {:keystore
     {:type "string",
      :is_file true,
-     :default_value "/etc/dse/keystores/server.keystore",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :cipher_suites
     {:type "list",
      :value_type "string",
-     :default_value
-     ["TLS_RSA_WITH_AES_128_CBC_SHA"
-      "TLS_RSA_WITH_AES_256_CBC_SHA"
-      "TLS_DHE_RSA_WITH_AES_128_CBC_SHA"
-      "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
-      "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
-      "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"],
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :keystore_password
     {:type "string",
      :password true,
      :validators [{:name :length, :params {:min 6}}],
-     :default_value "cassandra",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :store_type
     {:type "string",
-     :default_value "JKS",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :algorithm
     {:type "string",
-     :default_value "SunX509",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :protocol
     {:type "string",
-     :default_value "TLS",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :internode_encryption
     {:type "string",
+     :default_value "none",
      :options
      [{:label "none", :value "none"}
       {:label "all", :value "all"}
       {:label "dc", :value "dc"}
-      {:label "rack", :value "rack"}],
-     :default_value "none"},
+      {:label "rack", :value "rack"}]},
     :truststore_password
     {:type "string",
      :password true,
      :validators [{:name :length, :params {:min 6}}],
-     :default_value "cassandra",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :require_client_auth
@@ -417,7 +378,6 @@
     :truststore
     {:type "string",
      :is_file true,
-     :default_value "/etc/dse/keystores/server.truststore",
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]}}},
   :hints_compression
