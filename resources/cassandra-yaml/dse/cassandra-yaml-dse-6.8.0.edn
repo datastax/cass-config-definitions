@@ -68,6 +68,8 @@
            :items_per_collection_warn_threshold
            :read_before_write_list_operations_enabled
            :secondary_index_per_table_failure_threshold
+           :sai_indexes_per_table_failure_threshold
+           :sai_indexes_total_failure_threshold
            :materialized_view_per_table_failure_threshold
            :tables_warn_threshold
            :tables_failure_threshold
@@ -105,6 +107,10 @@
     :read_before_write_list_operations_enabled
     {:type "boolean", :default_value true},
     :secondary_index_per_table_failure_threshold
+    {:type "int"},
+    :sai_indexes_per_table_failure_threshold
+    {:type "int"},
+    :sai_indexes_total_failure_threshold
     {:type "int"},
     :materialized_view_per_table_failure_threshold
     {:type "int"},
@@ -359,6 +365,8 @@
   :inter_dc_stream_throughput_outbound_megabits_per_sec
   {:type "int", :unit "mbps"},
   :file_cache_size_in_mb
+  {:type "int"},
+  :inflight_data_overhead_in_mb
   {:type "int"},
   :row_cache_keys_to_save {:type "int", :unit "rows"},
   :transparent_data_encryption_options
@@ -796,7 +804,23 @@
            :parameters],
    :fields
    {:class_name {:type "string"},
-    :parameters {:type "user_defined", :value_type "string"}}}},
+    :parameters {:type "user_defined", :value_type "string"}}}
+
+  :backup_service
+  {:type "dict",
+   :order [:enabled
+           :staging_directory
+           :backups_max_retry_attempts],
+   :fields
+   {:enabled {:type "boolean",
+              :default_value false},
+    :staging_directory {:type "string"
+                        :is_directory true
+                        :depends :enabled
+                        :description "Example value: /var/lib/cassandra/backups_staging"},
+    :backups_max_retry_attempts {:type "int"
+                                 :depends :enabled}}}
+  },
  :groupings
  [{:name "Security",
    :list
@@ -853,6 +877,7 @@
     "memtable_cleanup_threshold"
     "memtable_space_in_mb"
     "file_cache_size_in_mb"
+    "inflight_data_overhead_in_mb"
     "memtable_flush_writers"]}
   {:name "RPC", :list ["rpc_keepalive"]}
   {:name "Native Transport",
@@ -883,6 +908,8 @@
     "counter_cache_keys_to_save"]}
   {:name "Guardrails",
    :list ["guardrails"]}
+  {:name "Backups"
+   :list ["backup_service"]}
   {:name "Snapshots",
    :list
    ["incremental_backups"

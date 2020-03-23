@@ -313,6 +313,7 @@
            :truststore_type
            :user_search_base
            :user_search_filter
+           :hostname_verification
            :user_memberof_attribute
            :group_search_type
            :group_search_base
@@ -350,6 +351,9 @@
      :default_value "directory_search"},
     :user_search_filter
     {:type "string", :default_value "(uid={0})" :description "Example value: \"(uid={0})\""},
+    :hostname_verification
+    {:type "boolean"
+     :default_value false}
     :truststore_type
     {:type "string",
      :description "Example value: \"jks\""},
@@ -1258,7 +1262,16 @@
                :is_directory true},
     :log_dir {:type "string",
               :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
-              :is_directory true}}}},
+              :is_directory true}}}
+  :index_options
+  {:type "dict",
+   :order [:segment_write_buffer_space_mb :zerocopy_used_threshold]
+   :fields
+   {:segment_write_buffer_space_mb
+    {:type "int" :description "Example value: 1024"}
+    :zerocopy_used_threshold
+    {:type "float" :description "Example value: 0.3"}}}
+  },
  :groupings
  [{:name "DSE Authenticator Options", :list ["authentication_options"]}
   {:name "DSE Role Management Options",
@@ -1325,6 +1338,7 @@
   {:name "Audit Logging Settings", :list ["audit_logging_options"]}
   {:name "KMIP Encryption Options", :list ["kmip_hosts"]}
   {:name "AlwaysOn SQL Server Options", :list ["alwayson_sql_options"]}
+  {:name "Indexing Configuration", :list ["index_options"]}
   {:name "Miscellaneous",
    :list
    ["spark_shared_secret_bit_length"
