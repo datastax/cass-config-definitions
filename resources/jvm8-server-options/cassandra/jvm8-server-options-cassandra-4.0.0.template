@@ -1,0 +1,38 @@
+# This file is managed by DataStax OpsCenter LifeCycle Manager.
+# Manual edits will be overwritten by the next install or configure
+# job that runs on this system.
+
+###########################################################################
+#                          jvm8-server.options                            #
+#                                                                         #
+# See jvm-server.options. This file is specific for Java 8 and newer.     #
+###########################################################################
+
+{% for template_iterable in template_iterables %}{% if template_iterable %}{{template_iterable}}
+{% endif %}{% endfor %}
+
+#################
+#  GC SETTINGS  #
+#################
+
+{% ifequal garbage_collector "CMS" %}
+-XX:+UseParNewGC
+-XX:+UseConcMarkSweepGC
+-XX:+CMSParallelRemarkEnabled
+-XX:+UseCMSInitiatingOccupancyOnly
+-XX:+CMSParallelInitialMarkEnabled
+-XX:+CMSEdenChunksRecordAlways
+## some JVMs will fill up their heap when accessed via JMX, see CASSANDRA-6541
+#-XX:+CMSClassUnloadingEnabled
+{% endifequal %}
+
+{% ifequal garbage_collector "G1GC" %}
+-XX:+UseG1GC
+-XX:+ParallelRefProcEnabled
+{% endifequal %}
+
+{% comment %} Additional options by Opscenter Provisioning {% endcomment %}
+{% for jvm-opt in additional-jvm-opts %}{{jvm-opt}}
+{% endfor %}
+
+# The newline in the end of file is intentional

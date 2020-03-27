@@ -2,4 +2,7 @@
   ;; Begin Cassandra 3.11.x transforms.
   "3.11.6" "cassandra-yaml-cassandra-3.11.6.edn"
   ;; End Cassandra 3.11.x transforms.
+
+  ;; Begin Cassandra 4.x transforms
+  "4.0.0" "cassandra-yaml-cassandra-4.0.0.edn"
 )
