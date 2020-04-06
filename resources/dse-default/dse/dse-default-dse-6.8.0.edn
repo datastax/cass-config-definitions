@@ -42,7 +42,7 @@
    :description
    "Increase/decrease if you want longer/shorter waits checking if the service stopped"},
   :wait-for-stop-sleep
-  {:type "int",
+  {:type "float",
    :required false,
    :label "Wait for stop sleep",
    :constant "WAIT_FOR_STOP_SLEEP",
