@@ -8,9 +8,9 @@ provide additional information about some of the definitions.
 
 ## File Formats
 
-Definitions make use of both EDN formatted files.
+Definitions make use of both EDN (Extensible Data Notation) formatted files.
 
-See: https://github.com/edn-format/edn
+See: [The Extensible Data Notation Reference](https://github.com/edn-format/edn)
 
 # Config DDL Reference
 
