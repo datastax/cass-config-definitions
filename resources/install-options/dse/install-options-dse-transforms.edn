@@ -1,6 +1,3 @@
 (
- ;; :no-change is now implicit. This file now only needs to change when there
- ;; are material config differences between DSE versions.
- ;; See spock/doc/version_fallback.md
  "6.0.0" "install-options-dse-6.0.0.edn"
  )
