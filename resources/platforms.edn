@@ -38,8 +38,4 @@
           "centos" ["6.7.x" "6.8.x" "6.9.x" "6.10.x" "7.1.x" "7.2.x" "7.3.x"
                     "7.4.x" "7.5.x" "7.6.x" "7.7.x"]
           "amazon" ["2016.09" "2017.03" "2017.09" "2018.09" "2"]}
-
- ;; :no-change is now implicit. This file only needs to change if the platform support
- ;; actually changes with a new release of DSE. See spock/doc/version_fallback.edn
-
  )
