@@ -59,6 +59,7 @@
  "5.1.15" ()
  "5.1.16" ()
  "5.1.17" ()
+ "5.1.18" ()
  ;; End DSE 5.1.x transforms.
 
 
@@ -92,6 +93,7 @@
  "6.0.9" :no-change
  "6.0.10" :no-change
  "6.0.11" :no-change
+ "6.0.12" :no-change
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
@@ -105,6 +107,7 @@
           (update-field :spark_redaction_regex
                         {:default_value "(?i)credentials|secret|password|token"}))
  "6.7.7" :no-change
+ "6.7.8" :no-change
  ;; End DSE 6.7.x transforms.
 
 

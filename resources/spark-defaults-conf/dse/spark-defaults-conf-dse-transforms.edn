@@ -74,7 +74,7 @@
  "5.1.17" (transforms
           (update-field :spark-ui-confidential-keys
                         {:type "string" :required true :default_value "credentials,password,secret,token"}))
-
+ "5.1.18" :no-change
  ;; End DSE 5.1.x transforms.
 
 
@@ -91,6 +91,7 @@
  "6.0.9" :no-change
  "6.0.10" :no-change
  "6.0.11" :no-change
+ "6.0.12" :no-change
  ;; End DSE 6.0.x transforms.
 
 
@@ -105,6 +106,7 @@
           (update-field :spark-redaction-regex
                         {:default_value "(?i)credentials|secret|password|token"}))
  "6.7.7" :no-change
+ "6.7.8" :no-change
  ;; End DSE 6.7.x transforms.
 
 

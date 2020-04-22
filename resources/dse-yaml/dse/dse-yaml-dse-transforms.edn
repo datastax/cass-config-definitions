@@ -499,6 +499,18 @@
  "5.1.15" :no-change
  "5.1.16" :no-change
  "5.1.17" :no-change
+ "5.1.18" (transforms
+            (add-field :role_management_options.stats
+                       {:type "boolean"
+                        :required false})
+            (add-field :ldap_options.ssl_protocol
+                       {:type "string"
+                        :required false
+                        :default_value "TLS"})
+            (add-field :ldap_options.hostname_verification
+                       {:type "boolean"
+                        :required false
+                        :default_value false}))
  ;; End DSE 5.1.x transforms.
 
 
@@ -550,6 +562,18 @@
  "6.0.9" :no-change
  "6.0.10" :no-change
  "6.0.11" :no-change
+ "6.0.12" (transforms
+            (add-field :role_management_options.stats
+                       {:type "boolean"
+                        :required false})
+            (add-field :ldap_options.ssl_protocol
+                       {:type "string"
+                        :required false
+                        :default_value "TLS"})
+            (add-field :ldap_options.hostname_verification
+                       {:type "boolean"
+                        :required false
+                        :default_value false}))
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
@@ -600,6 +624,18 @@
  "6.7.5" :no-change
  "6.7.6" :no-change
  "6.7.7" :no-change
+ "6.7.8" (transforms
+          (add-field :role_management_options.stats
+                     {:type "boolean"
+                      :required false})
+          (add-field :ldap_options.ssl_protocol
+                     {:type "string"
+                      :required false
+                      :default_value "TLS"})
+          (add-field :ldap_options.hostname_verification
+                     {:type "boolean"
+                      :required false
+                      :default_value false}))
  ;; End DSE 6.7.x transforms.
 
 
