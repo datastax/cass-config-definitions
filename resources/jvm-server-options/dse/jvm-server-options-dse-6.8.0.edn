@@ -359,7 +359,7 @@
    :default_value false},
   :max_direct_memory
   {:type "string",
-   :constant "MAX_DIRECT_MEMORY",
+   :constant "-XX:MaxDirectMemorySize",
    :label "Max Direct Memory",
    :render-without-quotes true,
    :add-export false},
