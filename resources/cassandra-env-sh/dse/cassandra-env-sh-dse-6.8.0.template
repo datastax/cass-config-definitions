@@ -125,6 +125,8 @@ echo $JVM_OPTS | egrep -q "(^|\s)-XX:\+UseConcMarkSweepGC"
 USING_CMS=$?
 echo $JVM_OPTS | egrep -q "(^|\s)-XX:\+UseG1GC"
 USING_G1=$?
+echo $JVM_OPTS | egrep -q "(^|\s)-XX:MaxDirectMemorySize="
+DEFINED_MAXDM=$?
 
 # Override these to set the amount of memory to allocate to the JVM at
 # start-up. For production use you may wish to adjust this for your
@@ -168,9 +170,17 @@ fi
 
 memory_remaining_in_mb="$((${system_memory_in_mb} - ${heap_size_in_mb}))"
 
+# Override MAX_DIRECT_MEMORY to set the maximum amount of direct memory (NIO direct buffers)
+# that the JVM can use either by exporting an env variable called MAX_DIRECT_MEMORY or by adding
+# -XX:MaxDirectMemorySize= in jvm.options
+
+if [ $DEFINED_MAXDM -eq 0 ] && [ "x$MAX_DIRECT_MEMORY" = "x" ]; then
+    MAX_DIRECT_MEMORY=`echo $JVM_OPTS | egrep -io "(^|\s)-XX:MaxDirectMemorySize=[[:digit:]]+[G,M,K]?($|\s)" | egrep -io "[[:digit:]]+[G,M,K]?"`
+fi
+
 if [ "x$MAX_DIRECT_MEMORY" = "x" ]; then
 # Calculate direct memory as 1/2 of memory available after heap:
-MAX_DIRECT_MEMORY="$((memory_remaining_in_mb / 2))M"
+    MAX_DIRECT_MEMORY="$((memory_remaining_in_mb / 2))M"
 fi
 JVM_OPTS="$JVM_OPTS -XX:MaxDirectMemorySize=$MAX_DIRECT_MEMORY"
 
