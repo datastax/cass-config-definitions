@@ -178,11 +178,15 @@ if [ $DEFINED_MAXDM -eq 0 ] && [ "x$MAX_DIRECT_MEMORY" = "x" ]; then
     MAX_DIRECT_MEMORY=`echo $JVM_OPTS | egrep -io "(^|\s)-XX:MaxDirectMemorySize=[[:digit:]]+[G,M,K]?($|\s)" | egrep -io "[[:digit:]]+[G,M,K]?"`
 fi
 
-if [ "x$MAX_DIRECT_MEMORY" = "x" ]; then
-# Calculate direct memory as 1/2 of memory available after heap:
+if [ "x$MAX_DIRECT_MEMORY" = "x" ] ; then
+    # Calculate direct memory as 1/2 of memory available after heap:
     MAX_DIRECT_MEMORY="$((memory_remaining_in_mb / 2))M"
 fi
-JVM_OPTS="$JVM_OPTS -XX:MaxDirectMemorySize=$MAX_DIRECT_MEMORY"
+
+# We only set -XX:MaxDirectMemorySize if not already set in jvm.options
+if [ $DEFINED_MAXDM -ne 0 ]; then
+    JVM_OPTS="$JVM_OPTS -XX:MaxDirectMemorySize=$MAX_DIRECT_MEMORY"
+fi
 
 # Set this to control the amount of arenas per-thread in glibc
 {{malloc-arena-max}}
