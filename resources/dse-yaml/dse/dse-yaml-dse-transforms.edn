@@ -33,15 +33,12 @@
                      :group "Insightful Monitoring"))
  "6.0.12" (transforms
            (add-field :role_management_options.stats
-                      {:type "boolean"
-                       :required false})
+                      {:type "boolean"})
            (add-field :ldap_options.ssl_protocol
                       {:type "string"
-                       :required false
                        :default_value "TLS"})
            (add-field :ldap_options.hostname_verification
                       {:type "boolean"
-                       :required false
                        :default_value false}))
  ;; End DSE 6.0.x transforms.
 
@@ -89,15 +86,12 @@
                                  :heartbeat_update_interval_seconds]}))
  "6.7.8" (transforms
            (add-field :role_management_options.stats
-                      {:type "boolean"
-                       :required false})
+                      {:type "boolean" })
            (add-field :ldap_options.ssl_protocol
                       {:type "string"
-                       :required false
                        :default_value "TLS"})
            (add-field :ldap_options.hostname_verification
                       {:type "boolean"
-                       :required false
                        :default_value false}))
  ;; End DSE 6.7.x transforms.
 
