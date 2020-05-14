@@ -230,5 +230,6 @@
  ;; jvm.options is not valid for DSE 6.8.0 and greater
  ;; Begin DSE 6.8.x transforms.
  "6.8.0" ()
+ "6.8.1" :no-change
  ;; End DSE 6.8.x transforms.
 )

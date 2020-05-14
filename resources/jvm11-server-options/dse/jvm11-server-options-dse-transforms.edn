@@ -94,5 +94,6 @@
 
  ;; Begin DSE 6.8.x transforms.
  "6.8.0" "jvm11-server-options-dse-6.8.0.edn"
+ "6.8.1" :no-change
  ;; End DSE 6.8.x transforms.
 )
