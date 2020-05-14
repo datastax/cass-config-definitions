@@ -31,6 +31,15 @@
                                  :description "Directory to store insights logs. Example value: \"/var/log/cassandra/\""}}
                       :order [:data_dir :log_dir]}
                      :group "Insightful Monitoring"))
+ "6.0.12" (transforms
+           (add-field :role_management_options.stats
+                      {:type "boolean"})
+           (add-field :ldap_options.ssl_protocol
+                      {:type "string"
+                       :default_value "TLS"})
+           (add-field :ldap_options.hostname_verification
+                      {:type "boolean"
+                       :default_value false}))
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
@@ -75,6 +84,15 @@
                                  :auth_user
                                  :runner_max_errors
                                  :heartbeat_update_interval_seconds]}))
+ "6.7.8" (transforms
+           (add-field :role_management_options.stats
+                      {:type "boolean" })
+           (add-field :ldap_options.ssl_protocol
+                      {:type "string"
+                       :default_value "TLS"})
+           (add-field :ldap_options.hostname_verification
+                      {:type "boolean"
+                       :default_value false}))
  ;; End DSE 6.7.x transforms.
 
 
