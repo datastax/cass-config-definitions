@@ -98,5 +98,14 @@
 
  ;; Begin DSE 6.8.x transforms.
  "6.8.0" "dse-yaml-dse-6.8.0.edn"
+ "6.8.1" (transforms
+          (add-field :role_management_options.stats
+                     {:type "boolean"
+                      :default_value false})
+          (add-field :ldap_options.ssl_protocol
+                     {:type "string"
+                      :default_value "TLS"})
+          ;; Note, ldap_options.hostname_verification is already in 6.8.0 base file
+          )
  ;; End DSE 6.8.x transforms.
  )
