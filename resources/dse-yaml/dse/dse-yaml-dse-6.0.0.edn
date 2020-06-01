@@ -569,7 +569,7 @@
      :depends :enabled
      :default_value 60000}}},
   :solr_data_dir
-  {:type "string"}
+  {:type "string", :is_directory true},
   :config_encryption_active
   {:type "boolean", :default_value false},
   :kmip_hosts
