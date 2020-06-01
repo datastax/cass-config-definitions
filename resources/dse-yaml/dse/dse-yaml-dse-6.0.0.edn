@@ -569,7 +569,9 @@
      :depends :enabled
      :default_value 60000}}},
   :solr_data_dir
-  {:type "string", :is_directory true},
+  {:type "string",
+   :is_directory true,
+   :description "The location where DSE search indexes are stored."},
   :config_encryption_active
   {:type "boolean", :default_value false},
   :kmip_hosts
