@@ -547,7 +547,10 @@
     :refresh_rate_ms
     {:type "int", :required false, :default_value 60000, :depends :enabled}}},
   :solr_data_dir
-  {:type "string" :required false}
+  {:type "string",
+   :required false,
+   :is_directory true,
+   :description "The location where DSE search indexes are stored."},
   :config_encryption_active
   {:type "boolean", :required true, :default_value false},
   :kmip_hosts
