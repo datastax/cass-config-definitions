@@ -5,7 +5,7 @@
 
 {% comment %} Custom Environment Variables by Opscenter Provisioning {% endcomment %}
 {% for custom-env-var in custom-env-vars %}
-export {{custom-env-var|name}}="{{custom-env-var|val|sanitize-bash-env-var-value}}"
+export {{custom-env-var|key|name}}="{{custom-env-var|val|sanitize-bash-env-var-value}}"
 {% endfor %}
 
 # This is here so the installer can force set DSE_HOME
