@@ -47,6 +47,12 @@
 {%     endif %}
 {% endifequal %}
 
+{% if log_vm_output %}
+-XX:+UnlockDiagnosticVMOptions
+-XX:+LogVMOutput
+-XX:LogFile={{vm_log_file}}
+{% endif %}
+
 {% comment %} Additional options by Opscenter Provisioning {% endcomment %}
 {% for jvm-opt in additional-jvm-opts %}{{jvm-opt}}
 {% endfor %}

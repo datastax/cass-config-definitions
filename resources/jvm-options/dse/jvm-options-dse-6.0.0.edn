@@ -621,6 +621,20 @@
                    "-Dcom.sun.management.jmxremote.ssl.enabled.protocols=<enabled-protocols>"
                    "-Dcom.sun.management.jmxremote.ssl.enabled.cipher.suites=<enabled-cipher-suites>"]}
 
+  ;; VM Output
+  :log_vm_output
+  {:type "boolean"
+   :required true
+   :default_value false
+   :description "Enables JVM output logging with thread dumps."}
+  :vm_log_file
+  {:type "string"
+   :depends :log_vm_output
+   :required false
+   :default_value "/var/log/cassandra/jvm.log"
+   :is_file true
+   :description "Location of the JVM output log file."}
+
   ;; Advanced
 
   :additional-jvm-opts
@@ -710,5 +724,8 @@
           "jmx-connection-type"
           "jmx-remote-ssl"
           "jmx-remote-ssl-opts"]}
+  {:name "VM Output Logging"
+   :list ["log_vm_output"
+          "vm_log_file"]}
   {:name "Advanced"
    :list ["additional-jvm-opts"]}]}
