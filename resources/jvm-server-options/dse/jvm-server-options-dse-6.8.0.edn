@@ -372,7 +372,21 @@
    :static_constant "-XX:+ExitOnOutOfMemoryError",
    :label "Exit on out of memory error",
    :description "Should the JVM exit when it encounters an out of memory error in order to prevent potential data-corruption from executing on a JVM that fails to allocate memory reliably. This setting is mutually exclusive with CrashOnOutOfMemoryError in this file and with CrashOnOutOfMemoryError in cassandra-env.sh."
-   :default_value false}},
+   :default_value false}
+
+  ;; VM Output
+  :log_vm_output
+  {:type "boolean"
+   :default_value false
+   :description "Enables JVM output logging with thread dumps."}
+  :vm_log_file
+  {:type "string"
+   :depends :log_vm_output
+   :default_value "/var/log/cassandra/jvm.log"
+   :tarball_default "var/log/cassandra/jvm.log"
+   :is_file true
+   :description "Location of the JVM output log file."}
+  },
  :groupings
  [{:name "General JVM Parameters",
    :list
@@ -440,5 +454,8 @@
     "jmx-remote-ssl"
     "jmx-remote-ssl-require-client-auth"
     "jmx-remote-ssl-opts"]}
+  {:name "VM Output Logging"
+   :list ["log_vm_output"
+          "vm_log_file"]}
   {:name "Advanced",
    :list ["additional-jvm-opts"]}]}
