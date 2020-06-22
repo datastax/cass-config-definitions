@@ -31,6 +31,10 @@
 -XX:+ParallelRefProcEnabled
 {% endifequal %}
 
+{% ifequal garbage_collector "Serial" %}
+-XX:+UseSerialGC
+{% endifequal %}
+
 {% comment %} Additional options by Opscenter Provisioning {% endcomment %}
 {% for jvm-opt in additional-jvm-opts %}{{jvm-opt}}
 {% endfor %}

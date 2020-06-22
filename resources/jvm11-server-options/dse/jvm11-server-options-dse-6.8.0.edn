@@ -30,7 +30,8 @@
    [{:label "G1GC", :value "G1GC"}
     {:label "ZGC", :value "ZGC"}
     {:label "Shenandoah", :value "Shenandoah"}
-    {:label "Graal", :value "Graal"}],
+    {:label "Graal", :value "Graal"}
+    {:label "Serial", :value "Serial"}],
    :default_value "G1GC"},
 
   ;; JPMS Settings
