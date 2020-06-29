@@ -37,6 +37,10 @@
 -XX:+UseJVMCICompiler
 {% endifequal %}
 
+{% ifequal garbage_collector "Serial" %}
+-XX:+UseSerialGC
+{% endifequal %}
+
 ###################
 #  JPMS SETTINGS  #
 ###################
