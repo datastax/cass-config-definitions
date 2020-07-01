@@ -1,0 +1,26 @@
+{:display-name "logback-sparkR.xml"
+ :package-path "/etc/dse/spark/logback-sparkR.xml"
+ :tarball-path "resources/spark/conf/logback-sparkR.xml"
+ :workload-file-group "spark"
+ :ui-visibility :editable
+ :renderer
+ {:renderer-type :template
+  :template "logback-sparkr-xml-dse-5.1.0.template"}
+
+ :properties
+ {:root-level
+  {:type "string" :default_value "WARN"}
+  :org-apache-hadoop-hive-metastore-objectstore
+  {:type "string" :default_value "ERROR"}
+  :org-eclipse-jetty
+  {:type "string" :default_value "ERROR"}
+  :org-apache-hadoop-util-nativecodeloader
+  {:type "string" :default_value "ERROR"}
+}
+ :groupings
+ [{:name "General"
+   :list
+   ["root-level"
+    "org-apache-hadoop-hive-metastore-objectstore"
+    "org-eclipse-jetty"
+    "org-apache-hadoop-util-nativecodeloader"]}]}

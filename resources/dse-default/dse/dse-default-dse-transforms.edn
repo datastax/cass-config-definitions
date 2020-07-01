@@ -1,4 +1,24 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "dse-default-dse-5.1.0.edn"
+ "5.1.12" (transforms
+            (update-template "dse-default-dse-5.1.12.template")
+            (add-field :wait-for-stop
+                       {:type "int"
+                        :label "Wait for stop"
+                        :constant "WAIT_FOR_STOP"
+                        :default_value 60
+                        :unit "seconds"}
+                       :group "General")
+            (add-field :wait-for-stop-sleep
+                       {:type "float"
+                        :label "Wait for stop sleep"
+                        :constant "WAIT_FOR_STOP_SLEEP"
+                        :default_value 0.5
+                        :unit "seconds"}
+                       :group "General"))
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "dse-default-dse-6.0.0.edn"
  "6.0.5" (transforms

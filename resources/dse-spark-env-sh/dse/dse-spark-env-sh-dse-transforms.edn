@@ -1,4 +1,10 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "dse-spark-env-sh-dse-5.1.0.edn"
+ "5.1.2" (transforms
+          (update-template "dse-spark-env-sh-dse-5.1.2.template"))
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.0 transforms.
  "6.0.0" "dse-spark-env-sh-dse-6.0.0.edn"
  "6.0.3" (transforms

@@ -1,4 +1,15 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "spark-defaults-conf-dse-5.1.0.edn"
+ "5.1.4" (transforms
+          (update-field :spark-dse-configuration-fetch-retries
+                        {:default_value 2}))
+ "5.1.17" (transforms
+           (update-field :spark-ui-confidential-keys
+                         {:type "string" :default_value "credentials,password,secret,token"}))
+ "5.1.18" :no-change
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "spark-defaults-conf-dse-6.0.0.edn"
  ;; End DSE 6.0.x transforms.

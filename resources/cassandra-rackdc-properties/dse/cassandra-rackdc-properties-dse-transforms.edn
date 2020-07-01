@@ -1,6 +1,6 @@
 (
  ;; Begin DSE 6.0.x transforms.
- "6.0.0"  "cassandra-rackdc-properties-dse-6.0.0.edn"
+ "5.1.0"  "cassandra-rackdc-properties-dse-5.1.0.edn"
  ;; End DSE 6.0.x transforms.
 
 

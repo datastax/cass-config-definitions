@@ -4,7 +4,7 @@
  :workload-file-group "lifecycle manager"
  :ui-visibility :editable
  :renderer {:renderer-type :template
-            :template "package-proxy-dse-6.0.0.template"}
+            :template "package-proxy-dse-5.1.0.template"}
  :properties {:enabled {:type "boolean"
                         :default_value false}
               :protocol {:type "string"

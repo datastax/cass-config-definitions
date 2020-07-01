@@ -1,4 +1,122 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "dse-yaml-dse-5.1.0.edn"
+ "5.1.1" (transforms
+          (update-field :back_pressure_threshold_per_core
+                        {:default_value "2000"})
+          (add-field :dsefs_options.block_allocator_options
+                     {:type "dict"
+                      :order [:overflow_margin_mb
+                              :overflow_factor]
+                      :fields {:overflow_margin_mb {:type "int"
+                                                    :default_value 1024
+                                                    :unit "MB"}
+                               :overflow_factor {:type "float"
+                                                 :default_value 1.05}}
+                      :depends :enabled})
+          (update-field :dsefs_options {:order [:enabled
+                                                :keyspace_name
+                                                :work_dir
+                                                :public_port
+                                                :private_port
+                                                :data_directories
+                                                :service_startup_timeout_ms
+                                                :service_close_timeout_ms
+                                                :gossip_options
+                                                :rest_options
+                                                :transaction_options
+                                                :block_allocator_options]}))
+ "5.1.2" (transforms
+          (add-field :dsefs_options.query_cache_size
+                     {:type "int"
+                      :default_value 2048
+                      :unit "cached elements"})
+          (add-field :dsefs_options.query_cache_expire_after_ms
+                     {:type "int"
+                      :default_value 2000
+                      :unit "milliseconds"})
+          (add-field :graph.max_query_params
+                     {:type "int"
+                      :default_value 256
+                      :unit "parameters per graph query"})
+          ;; These auth-changes occurred in DSE 5.1.0, but they're being
+          ;; updated in 5.1.2 because we missed the changes in 5.1.0 and
+          ;; they're backwards incompatible so we can't retroactively change
+          ;; defaults on existing deploys. See OPSC-12443 for details.
+          (update-field :authentication_options
+                        {:order [:enabled
+                                 :default_scheme
+                                 :other_schemes
+                                 :scheme_permissions
+                                 :allow_digest_with_kerberos
+                                 :plain_text_without_ssl
+                                 :transitional_mode]})
+          (update-field :authentication_options.enabled
+                        {:type "boolean"
+                         :default_value true})
+          (update-field :authentication_options.scheme_permissions
+                        {:default_value false}))
+ "5.1.3" (transforms
+          (add-field :dsefs_options.rest_options.idle_connection_timeout_ms
+                     {:type "int"
+                      :unit "ms"}))
+ "5.1.4" (transforms
+          (update-field :dsefs_options.gossip_options.round_delay_ms
+                        {:default_value 2000})
+          (update-field :dsefs_options.gossip_options.shutdown_delay_ms
+                        {:default_value 10000})
+          (update-field :graph.gremlin_server.scriptEngines
+                        {:default_value {:gremlin-groovy
+                                         {:config
+                                          {:sandbox_enabled false
+                                           :sandbox_rules
+                                           {:whitelist_packages []
+                                            :whitelist_types []
+                                            :whitelist_supers []}}}}}))
+ "5.1.7" (transforms
+           (add-field :performance_core_threads
+                      {:type "int"
+                       :unit "threads"
+                       :description "The number of background threads used by the performance service under normal conditions."}
+                      :group "CQL Performance Service Options"))
+ "5.1.11" (transforms
+           (update-field :node_health_options.uptime_ramp_up_period_seconds
+                         {:default_value 10800})
+           (update-field :dsefs_options.service_startup_timeout_ms
+                         {:default_value 600000})
+           (update-field :dsefs_options.rest_options.connection_open_timeout_ms
+                         {:default_value 10000})
+           (add-field :dsefs_options.rest_options.internode_idle_connection_timeout_ms
+                      {:type "int"
+                       :unit "ms"})
+           (add-field :dsefs_options.rest_options.core_max_concurrent_connections_per_host
+                      {:type "int"}))
+ "5.1.14" (transforms
+           (add-group "Insightful Monitoring"
+                      :after "DSE Authorizer Options")
+           (add-field :insights_options
+                      {:type "dict"
+                       :fields
+                       {:data_dir {:type "string"
+                                   :is_directory true
+                                   :description "Directory to store insights data. Example value: \"/var/lib/cassandra/insights_data\""}
+                        :log_dir {:type "string"
+                                  :is_directory true
+                                  :description "Directory to store insights logs. Example value: \"/var/log/cassandra/\""}}
+                       :order [:data_dir :log_dir]}
+                      :group "Insightful Monitoring"))
+ "5.1.18" (transforms
+            (add-field :role_management_options.stats
+                       {:type "boolean"
+                        :default_value false})
+            (add-field :ldap_options.ssl_protocol
+                       {:type "string"
+                        :default_value "TLS"})
+            (add-field :ldap_options.hostname_verification
+                       {:type "boolean"
+                        :default_value false}))
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "dse-yaml-dse-6.0.0.edn"
  "6.0.1" (transforms
@@ -26,8 +144,10 @@
                      {:type "dict"
                       :fields
                       {:data_dir {:type "string"
+                                  :is_directory true
                                   :description "Directory to store insights data. Example value: \"/var/lib/cassandra/insights_data\""}
                        :log_dir {:type "string"
+                                 :is_directory true
                                  :description "Directory to store insights logs. Example value: \"/var/log/cassandra/\""}}
                       :order [:data_dir :log_dir]}
                      :group "Insightful Monitoring"))

@@ -4,7 +4,7 @@
  :workload-file-group "lifecycle manager"
  :ui-visibility :editable
  :renderer {:renderer-type :template
-            :template "java-setup-dse-6.0.0.template"}
+            :template "java-setup-dse-5.1.0.template"}
  :properties {:manage-java {:type "boolean"
                             :default_value true
                             :description "Uncheck if a Java Virtual Machine is pre-installed on your targets and you do not want LCM to install or upgrade Java."}
