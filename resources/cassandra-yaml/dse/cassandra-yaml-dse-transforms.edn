@@ -1,4 +1,30 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "cassandra-yaml-dse-5.1.0.edn"
+ "5.1.1" (transforms
+          (add-field :otc_backlog_expiration_interval_ms
+                     {:type "int"
+                      :unit "ms"}
+                     :group "Outbound TCP Connections"))
+ "5.1.6" (transforms
+          (add-field :aggregated_request_timeout_in_ms
+                     {:type "int"
+                      :default_value 120000
+                      :unit "ms"}
+                     :group "Timeouts")
+          (add-field :cross_dc_rtt_in_ms
+                     {:type "int"
+                      :unit "ms"}
+                     :group "Timeouts")
+          (add-field :seed_gossip_probability
+                     {:type "float"}
+                     :group "Miscellaneous"))
+ "5.1.14" (tranforms
+           (add-field :echo_attempts_before_reset
+                      {:type "int"}
+                      :group  "Cluster Communication"))
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "cassandra-yaml-dse-6.0.0.edn"
  "6.0.1" (transforms
