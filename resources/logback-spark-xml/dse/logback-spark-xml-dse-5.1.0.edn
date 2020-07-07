@@ -1,0 +1,29 @@
+{:display-name "logback-spark.xml"
+ :package-path "/etc/dse/spark/logback-spark.xml"
+ :tarball-path "resources/spark/conf/logback-spark.xml"
+ :workload-file-group "spark"
+ :ui-visibility :editable
+ :renderer
+ {:renderer-type :template
+  :template "logback-spark-xml-dse-5.1.0.template"}
+ :workload :spark
+ :properties
+ {:root-level
+  {:type "string" :default_value "WARN"}
+  :logger-jetty-level
+  {:type "string" :default_value "ERROR"}
+  :object-store-level
+  {:type "string" :default_value "ERROR"}
+  :retrying-hms-handler-level
+  {:type "string" :default_value "OFF"}
+  :native-code-loader-level
+  {:type "string" :default_value "ERROR"}
+}
+ :groupings
+ [{:name "General",
+   :list
+   ["root-level"
+    "logger-jetty-level"
+	"object-store-level"
+	"retrying-hms-handler-level"
+	"native-code-loader-level"]}]}

@@ -5,7 +5,7 @@
  :ui-visibility :hidden
  :renderer
  {:renderer-type :template
-  :template "cassandra-rackdc-properties-dse-6.0.0.template"}
+  :template "cassandra-rackdc-properties-dse-5.1.0.template"}
  :properties
  {:dc {:type "string"},
   :rack {:type "string"}}

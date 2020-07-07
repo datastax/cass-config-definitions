@@ -1,4 +1,8 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" ()
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "spark-alwayson-sql-conf-dse-6.0.0.edn"
  ;; just removes a defunct comment

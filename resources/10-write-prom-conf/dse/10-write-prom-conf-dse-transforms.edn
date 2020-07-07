@@ -1,4 +1,9 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" ()
+ "5.1.14"  "10-write-prom-conf-dse-5.1.14.edn"
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" ()
  "6.0.5" "10-write-prom-conf-dse-6.0.5.edn"

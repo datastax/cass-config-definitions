@@ -1,4 +1,8 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0"   "logback-spark-server-xml-dse-6.0.0.edn"
+ ;; End DSE 5.1.x transforms.
+ 
  ;; Begin DSE 6.0.x transforms.
  "6.0.0"  "logback-spark-server-xml-dse-6.0.0.edn"
  ;; End DSE 6.0.x transforms.

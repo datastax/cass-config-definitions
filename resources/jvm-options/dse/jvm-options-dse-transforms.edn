@@ -1,4 +1,71 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "jvm-options-dse-5.1.0.edn"
+ "5.1.6" (transforms
+          (add-field :print_heap_histogram_on_out_of_memory_error
+                     {:type "boolean"
+                      :constant "-Dcassandra.printHeapHistogramOnOutOfMemoryError"
+                      :default_value false}
+                     :group "General JVM Parameters")
+          (add-field :exit_on_out_of_memory_error
+                     {:type "boolean"
+                      :static_constant "-XX:+ExitOnOutOfMemoryError"
+                      :label "Exit on out of memory error"
+                      :default_value false}
+                     :group "General JVM Parameters")
+          (add-field :crash_on_out_of_memory_error
+                     {:type "boolean"
+                      :static_constant "-XX:+CrashOnOutOfMemoryError"
+                      :depends :exit_on_out_of_memory_error
+                      :conditional [{:eq false}]
+                      :label "Crash on out of memory error"
+                      :default_value false}
+                     :group "General JVM Parameters"))
+ "5.1.7" (transforms
+          (add-field :expiration_date_overflow_policy
+                     {:type "string"
+                      :description "Defines how to handle INSERT requests with a TTL that exceeds the maximum supported expiration date and time, which is 2038-01-19T03:14:06+00:00. REJECT is the default policy and will reject any requests with an expiration timestamp that exceeds the maximum. CAP will adjust the TTL to expire as far in the future as is possible, and will warn the client that it has submitted an invalid TTL. CAP_NOWARN behaves the same as CAP but issues no warning to the client."
+                      :constant "-Dcassandra.expiration_date_overflow_policy"
+                      :options [{:label "Reject"
+                                 :value "REJECT"}
+                                {:label "Cap and warn"
+                                 :value "CAP"}
+                                {:label "Cap and do not warn"
+                                 :value "CAP_NOWARN"}]}
+                     :group "Startup Parameters"))
+ "5.1.12" (transforms
+           (add-field :dse_consistent_replace
+                      {:type "string"
+                       :description "Use this option to perform a consistent replace. Value corresponds to which consistency level to use. Only valid when cassandra_replace_address is specified."
+                       :constant "-Ddse.consistent_replace"
+                       :options
+                       [{:label "Disabled" :value nil}
+                        {:label "ONE" :value "ONE"}
+                        {:label "LOCAL_QUORUM" :value "LOCAL_QUORUM"}
+                        {:label "QUORUM" :value "QUORUM"}]
+                       :default_value nil
+                       :render-without-quotes true}
+                      :group "Startup Parameters")
+           (add-field :dse_consistent_replace_parallelism
+                      {:type "int"
+                       :description "Specifies how many ranges will be repaired simultaneously during consistent replace. The higher the parallelism, the more resources will be consumed cluster-wide, what may affect cluster performance."
+                       :constant "-Ddse.consistent_replace.parallelism"
+                       :render-without-quotes true}
+                      :group "Startup Parameters")
+           (add-field :dse_consistent_replace_retries
+                      {:type "int"
+                       :description "Specifies how many times a failed repair will be retried during consistent replace. If all retries fail, consistent replace will fail, but can be resumed with nodetool bootstrap resume."
+                       :constant "-Ddse.consistent_replace.retries"
+                       :render-without-quotes true}
+                      :group "Startup Parameters")
+           (add-field :dse_consitent_replace_whitelist
+                      {:type "string"
+                       :description "Targeted keyspaces or tables for consistent replace can be specified as: \"ks1,ks2.cf1\". By default it's empty, all tables and keyspaces will be consistent replaced."
+                       :constant "-Ddse.consistent_replace.whitelist"
+                       :render-without-quotes true}
+                      :group "Startup Parameters"))
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "jvm-options-dse-6.0.0.edn"
  "6.0.1" (transforms

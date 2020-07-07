@@ -1,4 +1,27 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "cassandra-env-sh-dse-5.1.0.edn"
+ "5.1.3" (transforms
+          (update-template "cassandra-env-sh-dse-5.1.3.template"))
+ "5.1.6" (transforms
+          (add-field :on_out_of_memory_error
+                     {:type "string"
+                      :default_value "kill -9 %p"}
+                     :group "General")
+          (update-template "cassandra-env-sh-dse-5.1.6.template"))
+ "5.1.8" (transforms
+           (update-template "cassandra-env-sh-dse-5.1.8.template"))
+ ;; Minor text change with respect to an error message when patch version is
+ ;; less than what is required.
+ "5.1.10" (transforms
+            (update-template "cassandra-env-sh-dse-5.1.10.template"))
+ ;; Adds support for MX4J_ADDRESS and MX4J_PORT being specified as just an
+ ;; address/port as opposed to a full JVM option. It is backwards compatible
+ ;; with the old way of doing it.
+ "5.1.11" (transforms
+            (update-template "cassandra-env-sh-dse-5.1.11.template"))
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "cassandra-env-sh-dse-6.0.0.edn"
  "6.0.1" (transforms

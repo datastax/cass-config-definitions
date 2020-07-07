@@ -1,0 +1,35 @@
+{:display-name "10-write-prom.conf",
+ :package-path "/usr/share/dse/collectd/etc/collectd/10-write-prom.conf",
+ :tarball-path ""
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :renderer
+ {:renderer-type :template,
+  :template "10-write-prom-conf-dse-5.1.14.template"},
+ :properties
+ {
+  ;; General Options
+
+  :enabled
+  {:type "boolean",
+   :label
+   "Enable Prometheus",
+   :default_value false},
+
+  :port
+  {:type "int",
+   :label "Port",
+   :default_value "9103",
+   :depends :enabled,
+   :conditional [{:eq true}]}
+
+  :staleness-delta
+  {:type "int",
+   :depends :enabled,
+   :conditional [{:eq true}]}},
+ :groupings
+ [{:name "General Parameters",
+   :list
+   ["enabled",
+    "port"
+    "staleness-delta"]}]}

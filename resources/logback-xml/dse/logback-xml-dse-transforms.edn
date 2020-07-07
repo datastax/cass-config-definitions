@@ -1,4 +1,14 @@
 (
+ ;; Begin DSE 5.1.x transforms.
+ "5.1.0" "logback-xml-dse-5.1.0.edn"
+ "5.1.3" (transforms
+          (update-template "logback-xml-dse-5.1.3.template"))
+ "5.1.4" (transforms
+          (update-template "logback-xml-dse-5.1.4.template"))
+ "5.1.10" (transforms
+           (update-template "logback-xml-dse-5.1.10.template"))
+ ;; End DSE 5.1.x transforms.
+
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "logback-xml-dse-6.0.0.edn"
  "6.0.1" (transforms
