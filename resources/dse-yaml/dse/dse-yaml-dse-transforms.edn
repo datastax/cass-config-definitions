@@ -213,6 +213,11 @@
            (add-field :ldap_options.hostname_verification
                       {:type "boolean"
                        :default_value false}))
+ "6.7.9" (transforms
+          (add-field :ldap_options.extra_user_search_bases
+                     {:type "list"
+                      :value_type "string"
+                      :default_value []}))
  ;; End DSE 6.7.x transforms.
 
 
