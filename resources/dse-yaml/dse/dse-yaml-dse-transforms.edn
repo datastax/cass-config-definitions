@@ -247,5 +247,26 @@
                       :default_value "TLS"})
           ;; Note, ldap_options.hostname_verification is already in 6.8.0 base file
           )
+ "6.8.2" (transforms
+          (add-field :ldap_options.extra_user_search_bases
+                     {:type "list"
+                      :value_type "string"})
+          (add-field :ldap_options.extra_group_search_bases
+                     {:type "list"
+                      :value_type "string"})
+          (add-field :ldap_options.all_parent_groups_search_type
+                     {:type "string"
+                      :options
+                      [{:label "directory_search", :value "directory_search"}
+                       {:label "memberof_search", :value "memberof_search"}]})
+          (add-field :ldap_options.all_parent_groups_memberof_attribute
+                     {:type "string"})
+          (add-field :ldap_options.all_parent_groups_search_filter
+                     {:type "string"})
+          (add-field :audit_logging_options.render_cql_literals
+                     {:type "boolean"
+                      :depends :enabled
+                      :description "Whether to render bound variables as CQL literals"})
+          (delete-field :index_options))
  ;; End DSE 6.8.x transforms.
  )

@@ -124,7 +124,19 @@
                      :group "Snapshots"))
  ;; End DSE 6.7.x transforms.
 
+ ;; Begin DSE 6.8.x transforms.
  "6.8.0" "cassandra-yaml-dse-6.8.0.edn"
+
+ "6.8.2" (transforms
+          (add-field :snapshot_before_dropping_column
+                     {:type "boolean"
+                      :default_value false
+                      :description "Whether or not to automatically take a snapshot before dropping columns."}
+                     :group "Snapshots")
+          (add-field :guardrails.disk_usage_max_disk_size_in_gb
+                     {:type "int"
+                      :description "Allows configuring max disk size of data directories when calculating thresholds for disk_usage_percentage_warn_threshold and disk_usage_percentage_failure_threshold."}))
+ ;; End DSE 6.8.x transforms.
  )
 
 
