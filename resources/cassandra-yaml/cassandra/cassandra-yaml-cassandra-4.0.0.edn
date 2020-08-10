@@ -15,7 +15,7 @@
   :unlogged_batch_across_partitions_warn_threshold
   {:type "int", :default_value 10},
   :compaction_throughput_mb_per_sec
-  {:type "int", :default_value 16, :unit "MB/sec"},
+  {:type "int", :default_value 64, :unit "MB/sec"},
   :storage_port {:type "int", :default_value 7000, :format false},
   :start_native_transport
   {:type "boolean", :readonly true, :default_value true},
@@ -157,56 +157,44 @@
     :truststore
     :truststore_password
     :protocol
-    :algorithm
     :store_type
     :cipher_suites],
    :fields
-   {:keystore
+   {:enabled
+    {:type "boolean"
+     :default_value false}
+    :keystore
     {:type "string",
      :is_file true,
-     :depends :enabled,
-     :conditional [{:eq true}]},
+     :default_value "conf/.keystore"},
     :cipher_suites
     {:type "list",
-     :value_type "string",
-     :depends :enabled,
-     :conditional [{:eq true}]},
+     :value_type "string"},
     :keystore_password
     {:type "string",
      :password true,
-     :validators [{:name :length, :params {:min 6}}],
-     :depends :enabled,
-     :conditional [{:eq true}]},
+     :default_value "cassandra"
+     :validators [{:name :length, :params {:min 6}}]},
     :store_type
-    {:type "string", :depends :enabled, :conditional [{:eq true}]},
-    :algorithm
-    {:type "string", :depends :enabled, :conditional [{:eq true}]},
+    {:type "string"},
     :protocol
-    {:type "string", :depends :enabled, :conditional [{:eq true}]},
+    {:type "string"},
     :truststore_password
     {:type "string",
-     :depends :enabled,
      :password true,
-     :validators [{:name :length, :params {:min 6}}],
-     :conditional [{:eq true}]},
+     :default_value "password"
+     :validators [{:name :length, :params {:min 6}}]},
     :require_client_auth
     {:type "boolean",
-     :default_value false,
-     :depends :enabled,
-     :conditional [{:eq true}]},
+     :default_value false},
     :optional
     {:type "boolean",
-     :default_value false,
-     :depends :enabled,
      :description
-     "When 'optional' is selected, both encrypted and unencrypted connections over native transport are allowed. That is a necessary transition state to facilitate enabling client to node encryption on live clusters without inducing an outage for existing unencrypted clients. Typically, once existing clients are migrated to encrypted connections, 'optional' is unselected in order to enforce native transport encryption.",
-     :conditional [{:eq true}]},
+     "When 'optional' is selected, both encrypted and unencrypted connections over native transport are allowed. That is a necessary transition state to facilitate enabling client to node encryption on live clusters without inducing an outage for existing unencrypted clients. Typically, once existing clients are migrated to encrypted connections, 'optional' is unselected in order to enforce native transport encryption."},
     :truststore
     {:type "string",
      :is_file true,
-     :depends :enabled,
-     :conditional [{:eq true}]},
-    :enabled {:type "boolean", :default_value false}}},
+     :default_value "conf/.truststore"}}},
   :key_cache_size_in_mb {:type "int", :unit "MB"},
   :commitlog_sync_period_in_ms
   {:type "int",
@@ -256,26 +244,9 @@
   {:type "int", :default_value 5000},
   :windows_timer_interval {:type "int", :unit "ms", :default_value 1},
   :auto_snapshot {:type "boolean", :default_value true},
-  :back_pressure_enabled {:type "boolean", :default_value false},
   :write_request_timeout_in_ms
   {:type "int", :default_value 2000, :unit "ms"},
   :enable_materialized_views {:type "boolean", :default_value true},
-  :back_pressure_strategy
-  {:type "list",
-   :depends :back_pressure_enabled,
-   :value_type "dict",
-   :order [:class_name :parameters],
-   :fields
-   {:class_name {:type "string"},
-    :parameters
-    {:type "list",
-     :value_type "dict",
-     :order [:high_ratio :factor :flow],
-     :fields
-     {:high_ratio {:type "string"},
-      :factor {:type "string"},
-      :flow {:type "string"}}}},
-   :conditional [{:eq true}]},
   :concurrent_reads {:type "int", :default_value 32},
   :authenticator
   {:type "string",
@@ -292,6 +263,8 @@
   {:type "dict",
    :order
    [:internode_encryption
+    :optional
+    :enable_legacy_ssl_storage_port
     :keystore
     :keystore_password
     :truststore
@@ -307,6 +280,7 @@
     {:type "string",
      :is_file true,
      :depends :internode_encryption,
+     :default_value "conf/.keystore"
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :cipher_suites
     {:type "list",
@@ -317,6 +291,7 @@
     {:type "string",
      :password true,
      :validators [{:name :length, :params {:min 6}}],
+     :default_value "cassandra"
      :depends :internode_encryption,
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :store_type
@@ -339,11 +314,16 @@
       {:label "all", :value "all"}
       {:label "dc", :value "dc"}
       {:label "rack", :value "rack"}]},
+    :optional
+    {:type "boolean"}
+    :enable_legacy_ssl_storage_port
+    {:type "boolean", :default_value false}
     :truststore_password
     {:type "string",
      :password true,
      :validators [{:name :length, :params {:min 6}}],
      :depends :internode_encryption,
+     :default_value "cassandra"
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]},
     :require_client_auth
     {:type "boolean",
@@ -359,6 +339,7 @@
     {:type "string",
      :is_file true,
      :depends :internode_encryption,
+     :default_value "conf/.truststore"
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]}}},
   :hints_compression
   {:type "list",
@@ -366,7 +347,18 @@
    :order [:class_name :parameters],
    :fields
    {:class_name {:type "string"},
-    :parameters {:type "user_defined", :value_type "string"}}}},
+    :parameters {:type "user_defined", :value_type "string"}}}
+  :replica_filtering_protection
+  {:type "dict"
+   :order [:cached_rows_warn_threshold
+           :cached_rows_fail_threshold]
+   :fields
+   {:cached_rows_warn_threshold 
+    {:type "int"
+     :default_value 2000}
+    :cached_rows_fail_threshold
+    {:type "int"
+     :default_value 32000}}}},
  :groupings
  [{:name "Security",
    :list
@@ -460,11 +452,10 @@
    ["enable_user_defined_functions"
     "enable_scripted_user_defined_functions"]}
   {:name "Change Data Capture", :list ["cdc_enabled"]}
-  {:name "Back Pressure",
-   :list ["back_pressure_enabled" "back_pressure_strategy"]}
   {:name "Miscellaneous",
    :list
-   ["disk_failure_policy"
+   ["replica_filtering_protection"
+    "disk_failure_policy"
     "commit_failure_policy"
     "trickle_fsync"
     "trickle_fsync_interval_in_kb"
