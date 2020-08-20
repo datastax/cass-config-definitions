@@ -115,6 +115,28 @@
             (add-field :ldap_options.hostname_verification
                        {:type "boolean"
                         :default_value false}))
+ "5.1.19" (transforms
+           (update-field :ldap_options.group_search_filter
+                         {:default_value "(|(uniquemember={0})|(cn={0}))"})
+           (add-field :ldap_options.extra_user_search_bases
+                      {:type "list"
+                       :value_type "string"})
+           (add-field :ldap_options.extra_group_search_bases
+                      {:type "list"
+                       :value_type "string"})
+           (add-field :ldap_options.all_parent_groups_search_type
+                      {:type "string"
+                       :options
+                       [{:label "directory_search", :value "directory_search"}
+                        {:label "memberof_search", :value "memberof_search"}]})
+           (add-field :ldap_options.all_parent_groups_memberof_attribute
+                      {:type "string"})
+           (add-field :ldap_options.all_parent_groups_search_filter
+                      {:type "string"})
+           (add-field :audit_logging_options.render_cql_literals
+                      {:type "boolean"
+                       :depends :enabled
+                       :description "Whether to render bound variables as CQL literals"}))
  ;; End DSE 5.1.x transforms.
 
  ;; Begin DSE 6.0.x transforms.

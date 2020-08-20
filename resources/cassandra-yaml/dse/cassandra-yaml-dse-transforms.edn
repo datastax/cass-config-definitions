@@ -23,6 +23,12 @@
            (add-field :echo_attempts_before_reset
                       {:type "int"}
                       :group  "Cluster Communication"))
+ "5.1.19" (transforms
+           (add-field :snapshot_before_dropping_column
+                      {:type "boolean"
+                       :default_value false
+                       :description "Whether or not to automatically take a snapshot before dropping columns."}
+                      :group "Snapshots"))
  ;; End DSE 5.1.x transforms.
 
  ;; Begin DSE 6.0.x transforms.
