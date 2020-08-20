@@ -10,6 +10,8 @@
   :hinted_handoff_enabled {:type "boolean", :default_value true},
   :dynamic_snitch_update_interval_in_ms
   {:type "int", :default_value 100, :unit "ms"},
+  :inter_dc_stream_throughput_outbound_megabits_per_sec
+  {:type "int", :unit "mbps"},
   :max_hint_window_in_ms
   {:type "int", :default_value 10800000, :unit "ms"},
   :cross_node_timeout {:type "boolean", :default_value false},
@@ -64,6 +66,12 @@
    :default_value "org.apache.cassandra.auth.CassandraRoleManager"},
   :ssl_storage_port {:type "int", :default_value 7001, :format false},
   :tracetype_repair_ttl {:type "int", :default_value 604800},
+  :disk_optimization_strategy
+  {:type "string",
+   :options
+   [{:label "ssd", :value "ssd"}
+    {:label "spinning", :value "spinning"}],
+   :default_value "ssd"},
   :hints_flush_period_in_ms {:type "int", :default_value 10000},
   :counter_cache_save_period {:type "int", :default_value 7200},
   :batch_size_fail_threshold_in_kb {:type "int", :default_value 640},
@@ -138,6 +146,9 @@
     {:label "offheap_buffers", :value "offheap_buffers"}
     {:label "offheap_objects", :value "offheap_objects"}],
    :default_value "heap_buffers"},
+  :stream_throughput_outbound_megabits_per_sec
+  {:type "int",
+   :unit "mbps" :description "Example value: 200"},
   :tombstone_failure_threshold {:type "int", :default_value 100000},
   :native_transport_port
   {:type "int", :default_value 9042, :format false},
@@ -268,6 +279,7 @@
   {:type "int", :default_value 5000},
   :windows_timer_interval {:type "int", :unit "ms", :default_value 1},
   :auto_snapshot {:type "boolean", :default_value true},
+  :memtable_cleanup_threshold {:type "float"},
   :back_pressure_enabled {:type "boolean", :default_value false},
   :write_request_timeout_in_ms
   {:type "int", :default_value 2000, :unit "ms"},
@@ -425,7 +437,7 @@
     "concurrent_counter_writes"
     "concurrent_materialized_view_writes"]}
   {:name "Memtable Settings",
-   :list ["memtable_allocation_type" "memtable_flush_writers"]}
+   :list ["memtable_allocation_type" "memtable_flush_writers" "memtable_cleanup_threshold"]}
   {:name "RPC",
    :list
    ["start_rpc"
@@ -464,6 +476,8 @@
   {:name "Cluster Communication",
    :list
    ["endpoint_snitch"
+    "stream_throughput_outbound_megabits_per_sec"
+    "inter_dc_stream_throughput_outbound_megabits_per_sec"
     "dynamic_snitch_update_interval_in_ms"
     "dynamic_snitch_reset_interval_in_ms"
     "dynamic_snitch_badness_threshold"
@@ -504,4 +518,5 @@
     "windows_timer_interval"
     "tracetype_query_ttl"
     "tracetype_repair_ttl"
+    "disk_optimization_strategy"
     "prepared_statements_cache_size_mb"]}]}
