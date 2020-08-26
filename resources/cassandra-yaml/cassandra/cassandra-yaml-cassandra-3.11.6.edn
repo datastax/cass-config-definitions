@@ -70,8 +70,8 @@
   {:type "string",
    :options
    [{:label "ssd", :value "ssd"}
-    {:label "spinning", :value "spinning"}],
-   :default_value "ssd"},
+    {:label "spinning", :value "spinning"}]
+  },
   :hints_flush_period_in_ms {:type "int", :default_value 10000},
   :counter_cache_save_period {:type "int", :default_value 7200},
   :batch_size_fail_threshold_in_kb {:type "int", :default_value 640},
