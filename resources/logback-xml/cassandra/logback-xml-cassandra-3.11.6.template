@@ -89,7 +89,9 @@ appender reference in the root level section below.
   <root level="{{root-log-level}}">
     <appender-ref ref="SYSTEMLOG" />
     <appender-ref ref="STDOUT" />
-    <appender-ref ref="ASYNCDEBUGLOG" /> <!-- Comment this line to disable debug.log -->
+    {% if debuglog-enabled %}
+    <appender-ref ref="ASYNCDEBUGLOG" /> <!-- Comment out this line to disable debug.log -->
+    {% endif %}
     <!--
     <appender-ref ref="LogbackMetrics" />
     -->
