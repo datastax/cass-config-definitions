@@ -21,6 +21,13 @@
                      {:type "string"
                       :default_value "DEBUG"}
                      :group "General"))
+ "6.0.13" (transforms
+           (update-template "logback-xml-dse-6.0.13.template")
+           (add-field :scan-period
+                      {:type "int"
+                       :default_value 60
+                       :unit "seconds"}
+                      :group "General"))
  ;; End DSE 6.0.x transforms.
 
 

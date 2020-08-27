@@ -77,6 +77,12 @@
                        {:type "int"
                         :description "This parameter should not be used unless directed by a support engineer or consultant. See \"nodetool help leaksdetection\" for the documentation."}}}
                      :group "Miscellaneous"))
+ "6.0.13" (transforms
+           (add-field :snapshot_before_dropping_column
+                      {:type "boolean"
+                       :default_value false
+                       :description "Whether or not to automatically take a snapshot before dropping columns."}
+                      :group "Snapshots"))
  ;; End DSE 6.0.x transforms.
 
 

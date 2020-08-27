@@ -182,6 +182,53 @@
            (add-field :ldap_options.hostname_verification
                       {:type "boolean"
                        :default_value false}))
+ "6.0.13" (transforms
+           (update-field :ldap_options.group_search_filter
+                         {:default_value "(|(uniquemember={0})|(cn={0}))"})
+           (add-field :ldap_options.extra_user_search_bases
+                      {:type "list"
+                       :value_type "string"
+                       :default_value []})
+           (add-field :ldap_options.extra_group_search_bases
+                      {:type "list"
+                       :value_type "string"
+                       :default_value []})
+           (add-field :ldap_options.all_parent_groups_search_type
+                      {:type "string"
+                       :options
+                       [{:label "directory_search", :value "directory_search"}
+                        {:label "memberof_search", :value "memberof_search"}]})
+           (add-field :ldap_options.all_parent_groups_memberof_attribute
+                      {:type "string"
+                       :default_value "isMemberOf"})
+           (add-field :ldap_options.all_parent_groups_search_filter
+                      {:type "string"})
+           (add-field :dns_service_discovery
+                      {:type "dict"
+                       :fields
+                       {:fqdn
+                        {:type "string"
+                         :description "fully qualified domain name to get the SRV records from"}
+                        :lookup_timeout_ms
+                        {:type "int"
+                         :default_value 5000
+                         :unit "ms"
+                         :description "timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent"}
+                        :retention_duration_ms
+                        {:type "int"
+                         :default_value 600000
+                         :unit "ms"
+                         :description "for how long the old results should be retained/cached (value between 0 and 10 days equivalent);"}
+                        :polling_interval_ms
+                        {:type "int"
+                         :default_value 0
+                         :unit "ms"}}
+                       :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}
+                      :group "LDAP Options")
+           (add-field :audit_logging_options.render_cql_literals
+                      {:type "boolean"
+                       :default_value false
+                       :description "Whether to render bound variables as CQL literals"}))
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
