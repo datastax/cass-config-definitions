@@ -33,6 +33,13 @@
 
  ;; Begin DSE 6.7.x transforms.
  "6.7.0" "logback-xml-dse-6.7.0.edn"
+ "6.7.10" (transforms
+           (update-template "logback-xml-dse-6.7.10.template")
+           (add-field :scan-period
+                      {:type "int"
+                       :default_value 60
+                       :unit "seconds"}
+                      :group "General"))
  ;; End DSE 6.7.x transforms.
 
 
