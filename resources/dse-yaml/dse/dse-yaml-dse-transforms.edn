@@ -208,21 +208,22 @@
                        :fields
                        {:fqdn
                         {:type "string"
-                         :description "fully qualified domain name to get the SRV records from"}
+                         :description "Fully qualified domain name to get the SRV records from."}
                         :lookup_timeout_ms
                         {:type "int"
                          :default_value 5000
                          :unit "ms"
-                         :description "timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent"}
+                         :description "Timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent."}
                         :retention_duration_ms
                         {:type "int"
                          :default_value 600000
                          :unit "ms"
-                         :description "for how long the old results should be retained/cached (value between 0 and 10 days equivalent);"}
+                         :description "For how long the old results should be retained/cached (value between 0 and 10 days equivalent)."}
                         :polling_interval_ms
                         {:type "int"
                          :default_value 0
-                         :unit "ms"}}
+                         :unit "ms"
+                         :description "How often DSE should try to refresh the list of obtained servers."}}
                        :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}
                       :group "LDAP Options")
            (add-field :audit_logging_options.render_cql_literals
@@ -308,22 +309,22 @@
                        :fields
                        {:fqdn
                         {:type "string"
-                         :description "fully qualified domain name to get the SRV records from"}
+                         :description "Fully qualified domain name to get the SRV records from."}
                         :lookup_timeout_ms
                         {:type "int"
                          :default_value 5000
                          :unit "ms"
-                         :description "timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent"}
+                         :description "Timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent."}
                         :retention_duration_ms
                         {:type "int"
                          :default_value 600000
                          :unit "ms"
-                         :description "for how long the old results should be retained/cached (value between 0 and 10 days equivalent);"}
+                         :description "For how long the old results should be retained/cached (value between 0 and 10 days equivalent)."}
                         :polling_interval_ms
                         {:type "int"
                          :default_value 0
                          :unit "ms"
-                         :description "how often DSE should try to refresh the list of obtained servers"}}
+                         :description "How often DSE should try to refresh the list of obtained servers."}}
                        :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}
                       :group "LDAP Options"))
  ;; End DSE 6.7.x transforms.
