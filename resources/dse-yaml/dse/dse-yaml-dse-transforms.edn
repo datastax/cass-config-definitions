@@ -362,5 +362,29 @@
                       :depends :enabled
                       :description "Whether to render bound variables as CQL literals"})
           (delete-field :index_options))
+ "6.8.4" (transforms
+          (add-field :dns_service_discovery
+                     {:type "dict"
+                      :fields
+                      {:fqdn
+                       {:type "string"
+                        :description "Fully qualified domain name to get the SRV records from."}
+                       :lookup_timeout_ms
+                       {:type "int"
+                        :default_value 5000
+                        :unit "ms"
+                        :description "Timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent."}
+                       :retention_duration_ms
+                       {:type "int"
+                        :default_value 600000
+                        :unit "ms"
+                        :description "For how long the old results should be retained/cached (value between 0 and 10 days equivalent)."}
+                       :polling_interval_ms
+                       {:type "int"
+                        :default_value 0
+                        :unit "ms"
+                        :description "How often DSE should try to refresh the list of obtained servers."}}
+                      :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}
+                     :group "LDAP Options"))
  ;; End DSE 6.8.x transforms.
  )

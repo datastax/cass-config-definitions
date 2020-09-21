@@ -48,5 +48,12 @@
  "6.8.2" (transforms
           ;; indexing logger removed
           (update-template "logback-xml-dse-6.8.2.template"))
+ "6.8.4" (transforms
+          (update-template "logback-xml-dse-6.8.4.template")
+          (add-field :scan-period
+                     {:type "int"
+                      :default_value 60
+                      :unit "seconds"}
+                     :group "General"))
  ;; End DSE 6.8.x transforms.
  )
