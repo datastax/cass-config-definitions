@@ -203,7 +203,7 @@
                        :default_value "isMemberOf"})
            (add-field :ldap_options.all_parent_groups_search_filter
                       {:type "string"})
-           (add-field :dns_service_discovery
+           (add-field :ldap_options.dns_service_discovery
                       {:type "dict"
                        :fields
                        {:fqdn
@@ -224,8 +224,7 @@
                          :default_value 0
                          :unit "ms"
                          :description "How often DSE should try to refresh the list of obtained servers."}}
-                       :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}
-                      :group "LDAP Options")
+                       :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]})
            (add-field :audit_logging_options.render_cql_literals
                       {:type "boolean"
                        :default_value false
@@ -304,7 +303,7 @@
                       :depends :enabled
                       :description "Whether to render bound variables as CQL literals"}))
  "6.7.10" (transforms
-           (add-field :dns_service_discovery
+           (add-field :ldap_options.dns_service_discovery
                       {:type "dict"
                        :fields
                        {:fqdn
@@ -325,8 +324,7 @@
                          :default_value 0
                          :unit "ms"
                          :description "How often DSE should try to refresh the list of obtained servers."}}
-                       :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}
-                      :group "LDAP Options"))
+                       :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}))
  ;; End DSE 6.7.x transforms.
 
 
@@ -363,7 +361,7 @@
                       :description "Whether to render bound variables as CQL literals"})
           (delete-field :index_options))
  "6.8.4" (transforms
-          (add-field :dns_service_discovery
+          (add-field :ldap_options.dns_service_discovery
                      {:type "dict"
                       :fields
                       {:fqdn
@@ -384,7 +382,6 @@
                         :default_value 0
                         :unit "ms"
                         :description "How often DSE should try to refresh the list of obtained servers."}}
-                      :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}
-                     :group "LDAP Options"))
+                      :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}))
  ;; End DSE 6.8.x transforms.
  )
