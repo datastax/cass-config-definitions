@@ -325,6 +325,17 @@
                          :unit "ms"
                          :description "How often DSE should try to refresh the list of obtained servers."}}
                        :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}))
+ "6.7.11" (transforms
+           (add-field :ldap_options.groups_validity_in_ms
+                      {:type "int"
+                       :default_value 0
+                       :unit "ms"
+                       :description "Validity period for the groups cache in milliseconds."})
+           (add-field :ldap_options.groups_update_interval_in_ms
+                      {:type "int"
+                       :default_value 0
+                       :unit "ms"
+                       :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."}))
  ;; End DSE 6.7.x transforms.
 
 
