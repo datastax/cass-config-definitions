@@ -7,6 +7,13 @@
           (update-template "logback-xml-dse-5.1.4.template"))
  "5.1.10" (transforms
            (update-template "logback-xml-dse-5.1.10.template"))
+ "5.1.20" (transforms
+           (update-template "logback-xml-dse-5.1.20.template")
+           (add-field :scan-period
+                      {:type "int"
+                       :default_value 60
+                       :unit "seconds"}
+                      :group "General"))
  ;; End DSE 5.1.x transforms.
 
  ;; Begin DSE 6.0.x transforms.
