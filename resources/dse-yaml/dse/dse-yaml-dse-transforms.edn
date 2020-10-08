@@ -137,6 +137,40 @@
                       {:type "boolean"
                        :depends :enabled
                        :description "Whether to render bound variables as CQL literals"}))
+
+ "5.1.20" (transforms
+           (add-field :ldap_options.groups_validity_in_ms
+                      {:type "int"
+                       :default_value 0
+                       :unit "ms"
+                       :description "Validity period for the groups cache in milliseconds."})
+           (add-field :ldap_options.groups_update_interval_in_ms
+                      {:type "int"
+                       :default_value 0
+                       :unit "ms"
+                       :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."})
+           (add-field :ldap_options.dns_service_discovery
+                     {:type "dict"
+                      :fields
+                      {:fqdn
+                       {:type "string"
+                        :description "Fully qualified domain name to get the SRV records from."}
+                       :lookup_timeout_ms
+                       {:type "int"
+                        :default_value 5000
+                        :unit "ms"
+                        :description "Timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent."}
+                       :retention_duration_ms
+                       {:type "int"
+                        :default_value 600000
+                        :unit "ms"
+                        :description "For how long the old results should be retained/cached (value between 0 and 10 days equivalent)."}
+                       :polling_interval_ms
+                       {:type "int"
+                        :default_value 0
+                        :unit "ms"
+                        :description "How often DSE should try to refresh the list of obtained servers."}}
+                      :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}))
  ;; End DSE 5.1.x transforms.
 
  ;; Begin DSE 6.0.x transforms.
