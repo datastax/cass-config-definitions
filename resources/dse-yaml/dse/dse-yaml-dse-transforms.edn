@@ -263,6 +263,17 @@
                       {:type "boolean"
                        :default_value false
                        :description "Whether to render bound variables as CQL literals"}))
+ "6.0.14" (transforms
+           (add-field :ldap_options.groups_validity_in_ms
+                      {:type "int"
+                       :default_value 0
+                       :unit "ms"
+                       :description "Validity period for the groups cache in milliseconds."})
+           (add-field :ldap_options.groups_update_interval_in_ms
+                      {:type "int"
+                       :default_value 0
+                       :unit "ms"
+                       :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."}))
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
