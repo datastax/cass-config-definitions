@@ -381,12 +381,6 @@
                        :default_value 0
                        :unit "ms"
                        :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."}))
- "6.7.12" (transforms
-           (add-field :kmip_hosts.key_cache_update_millis
-                      {:type "int"
-                       :default_value 300000
-                       :unit "ms"
-                       :description "Refresh interval for the KMIP host key cache. After this interval, cache entries become eligible for refresh."}))
  ;; End DSE 6.7.x transforms.
 
 
