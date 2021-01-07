@@ -450,5 +450,19 @@
                       :default_value 0
                       :unit "ms"
                       :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."}))
+ "6.8.9" (transforms
+          (add-field :role_management_options.mode_by_authentication
+                     {:type "dict"
+                      :fields
+                      {:internal
+                       {:type "string"
+                        :description "Mode for internal authentication scheme. Allowed values are 'internal' or 'ldap'."}
+                       :ldap
+                       {:type "string"
+                        :description "Mode for ldap authentication scheme. Allowed values are 'internal' or 'ldap'."}
+                       :kerberos
+                       {:type "string"
+                        :description "Mode for kerberos authentication scheme.  Allowed values are 'internal' or 'ldap'."}}
+                      :description "Optionally set mode on a per-authentication-scheme basis, allowing different role management modes for different authentication schemes. Overrides the top-level 'mode' option. Allowed values are 'internal' or 'ldap'."}))
  ;; End DSE 6.8.x transforms.
  )
