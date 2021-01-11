@@ -127,7 +127,8 @@
            (add-field :ldap_options.all_parent_groups_search_type
                       {:type "string"
                        :options
-                       [{:label "directory_search", :value "directory_search"}
+                       [{:label "default", :value ""}
+                        {:label "directory_search", :value "directory_search"}
                         {:label "memberof_search", :value "memberof_search"}]})
            (add-field :ldap_options.all_parent_groups_memberof_attribute
                       {:type "string"})
@@ -230,7 +231,8 @@
            (add-field :ldap_options.all_parent_groups_search_type
                       {:type "string"
                        :options
-                       [{:label "directory_search", :value "directory_search"}
+                       [{:label "default", :value ""}
+                        {:label "directory_search", :value "directory_search"}
                         {:label "memberof_search", :value "memberof_search"}]})
            (add-field :ldap_options.all_parent_groups_memberof_attribute
                       {:type "string"
@@ -337,7 +339,8 @@
           (add-field :ldap_options.all_parent_groups_search_type
                      {:type "string"
                       :options
-                      [{:label "directory_search", :value "directory_search"}
+                      [{:label "default", :value ""}
+                       {:label "directory_search", :value "directory_search"}
                        {:label "memberof_search", :value "memberof_search"}]})
           (add-field :ldap_options.all_parent_groups_memberof_attribute
                      {:type "string"})
@@ -405,7 +408,8 @@
           (add-field :ldap_options.all_parent_groups_search_type
                      {:type "string"
                       :options
-                      [{:label "directory_search", :value "directory_search"}
+                      [{:label "default", :value ""}
+                       {:label "directory_search", :value "directory_search"}
                        {:label "memberof_search", :value "memberof_search"}]})
           (add-field :ldap_options.all_parent_groups_memberof_attribute
                      {:type "string"})
