@@ -47,6 +47,7 @@
         "mbean": "org.apache.cassandra.metrics:type=Storage,name=HintsOnDisk",
         "metric_type": "gauge",
         "path": ["Count"],
+        "precision": 0,
         "priority": 40,
         "scope": "general",
         "type": "jmx"
