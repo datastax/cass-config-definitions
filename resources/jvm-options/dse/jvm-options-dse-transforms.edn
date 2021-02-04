@@ -64,6 +64,13 @@
                        :constant "-Ddse.consistent_replace.whitelist"
                        :render-without-quotes true}
                       :group "Startup Parameters"))
+ "5.1.21" (transforms
+           (add-field :jdk_nio_maxcachedbuffersize
+                      {:type "int"
+                       :description "Limit maximum cached thread local direct buffer to 1MB to avoid native OOM. See https://bugs.openjdk.java.net/browse/JDK-8147468"
+                       :constant "-Djdk.nio.maxCachedBufferSize"
+                       :default_value 1048576}
+                      :group "General JVM Parameters"))
  ;; End DSE 5.1.x transforms.
 
  ;; Begin DSE 6.0.x transforms.
