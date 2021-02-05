@@ -172,6 +172,21 @@
                         :unit "ms"
                         :description "How often DSE should try to refresh the list of obtained servers."}}
                       :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]}))
+ "5.1.21" (transforms
+           (add-field :role_management_options.mode_by_authentication
+                      {:type "dict"
+                       :fields
+                       {:internal
+                        {:type "string"
+                         :description "Mode for internal authentication scheme. Allowed values are 'internal' or 'ldap'."}
+                        :ldap
+                        {:type "string"
+                         :description "Mode for ldap authentication scheme. Allowed values are 'internal' or 'ldap'."}
+                        :kerberos
+                        {:type "string"
+                         :description "Mode for kerberos authentication scheme.  Allowed values are 'internal' or 'ldap'."}}
+                       :order [:internal :ldap :kerberos]
+                       :description "Optionally set mode on a per-authentication-scheme basis, allowing different role management modes for different authentication schemes. Overrides the top-level 'mode' option. Allowed values are 'internal' or 'ldap'."}))
  ;; End DSE 5.1.x transforms.
 
  ;; Begin DSE 6.0.x transforms.
