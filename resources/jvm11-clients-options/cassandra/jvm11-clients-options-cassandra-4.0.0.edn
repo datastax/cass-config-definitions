@@ -28,7 +28,7 @@
    :exclude-from-template-iterables true,
    :static_constant "-Djdk.attach.allowAttachSelf=true"
    :render-without-quotes true,
-   :default_value true}
+   :default_value true}},
 
   ;;
   ;; Variables that are rendered by template iterables
@@ -36,7 +36,7 @@
 
   ;; General Options
 
-  :groupings
+ :groupings
  [{:name "JPMS Settings",
    :list
    ["jdk_attach_allow_attach_self"
