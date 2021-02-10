@@ -1,0 +1,24 @@
+{:display-name "jvm8-clients.options",
+ :package-path "/etc/cassandra/jvm8-clients.options",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :renderer
+ {:renderer-type :template,
+  :template "jvm8-clients-options-cassandra-4.0.0.template"},
+ :properties
+ {;;
+  ;; Variables that are not rendered by template_iterables
+  ;;
+
+  ;; Additional Options
+
+  :additional-jvm-opts
+  {:type "list",
+   :exclude-from-template-iterables true,
+   :label "Additional JVM_OPTS",
+   :value_type "string",
+   :default_value []},
+
+ :groupings
+ [{:name "Advanced",
+   :list ["additional-jvm-opts"]}]}
