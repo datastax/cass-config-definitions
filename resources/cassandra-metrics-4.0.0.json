@@ -30,7 +30,25 @@
                     "pending-view-mutation-stage",
                     "active-graph-query-threads",
                     "completed-graph-query-threads",
-                    "pending-graph-query-threads"]
+                    "pending-graph-query-threads",
+                    "solr-stall-metrics-flush",
+                    "solr-stall-metrics-merge",
+                    "solr-index-pool-queue-size1",
+                    "solr-update-metrics-write"]
+    },
+    "solr-index-pool-queue-size2": {
+        "aggregation_type": "counter",
+        "api_key": "solr-index-pool-queue-size2",
+        "is_table_metric": true,
+        "description": "Get the current size of each processing queues.",
+        "group": "solr",
+        "label": "Search: IndexPool - Queue Size",
+        "mbean": "com.datastax.bdp:type=metrics,scope=search,index={keyspace}.{table},metricType=IndexPool,name=Queue Size,subname=Total",
+		"metric_type": "gauge",
+        "path": ["Value"],
+        "scope": "solr",
+        "type": "jmx",
+        "unit": "tasks"
     },
     "nodesync-data-repaired": {
         "aggregation_type": "counter",
