@@ -518,9 +518,10 @@
                         :description "Mode for kerberos authentication scheme.  Allowed values are 'internal' or 'ldap'."}}
                       :order [:internal :ldap :kerberos]
                       :description "Optionally set mode on a per-authentication-scheme basis, allowing different role management modes for different authentication schemes. Overrides the top-level 'mode' option. Allowed values are 'internal' or 'ldap'."}))
- "6.8.11" (add-field :kmip_hosts.key_cache_update_millis
+ "6.8.11" (transforms
+           (add-field :kmip_hosts.key_cache_update_millis
                       {:type "int"
                        :default_value 300000
-                       :description "Refresh interval for the KMIP host key cache. After this interval, cache entries become eligible for refresh. Upon next access, an async reload is scheduled and the old value returned until it completes. If key_cache_millis is non-zero, then this must be also. Defaults to the same value as key_cache_millis."})
+                       :description "Refresh interval for the KMIP host key cache. After this interval, cache entries become eligible for refresh. Upon next access, an async reload is scheduled and the old value returned until it completes. If key_cache_millis is non-zero, then this must be also. Defaults to the same value as key_cache_millis."}))
  ;; End DSE 6.8.x transforms.
  )
