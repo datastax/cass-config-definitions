@@ -1,0 +1,59 @@
+# This file is managed by DataStax OpsCenter LifeCycle Manager.
+# Manual edits will be overwritten by the next install or configure
+# job that runs on this system.
+
+# AlwaysOn SQL spark configuration property file
+# DSE related Settings
+spark.cassandra.connection.factory          {{spark_cassandra_connection_factory}}
+spark.cassandra.auth.conf.factory           {{spark_cassandra_auth_conf_factory}}
+spark.extraListeners                        {{spark_extraListeners}}
+spark.SparkHadoopUtil                       {{spark_SparkHadoopUtil}}
+spark.hadoop.com.datastax.bdp.fs.client.authentication.factory     {{spark_hadoop_com_datastax_bdp_fs_client_authentication_factory}}
+
+spark.sql.catalogImplementation             {{spark_sql_catalogImplementation}}
+spark.sql.extensions                        {{spark_sql_extensions}}
+spark.sql.hive.metastore.barrierPrefixes    {{spark_sql_hive_metastore_barrierPrefixes}}
+spark.sql.thriftServer.incrementalCollect   {{spark_sql_thriftServer_incrementalCollect}}
+spark.hive.alwaysOnSql                      {{spark_hive_alwaysOnSql}}
+
+
+# Mutual authentication and encryption for Spark application. Unlike in standalone mode, those
+# settings are per application. Authentication key is generated automatically using secure random
+# number generator whenever spark.authenticate is set to true. The secret key is different for each
+# single application. It is allowed to have applications running with authentication enabled and
+# disabled at the same time.
+spark.authenticate                          {{spark_authenticate}}
+spark.network.crypto.enabled                {{spark_network_crypto_enabled}}
+spark.network.crypto.saslFallback           {{spark_network_crypto_saslFallback}}
+spark.authenticate.secretBitLength          {{spark_authenticate_secretBitLength}}
+spark.authenticate.enableSaslEncryption     {{spark_authenticate_enableSaslEncryption}}
+spark.network.sasl.serverAlwaysEncrypt      {{spark_network_sasl_serverAlwaysEncrypt}}
+
+# Regex to decide which Spark configuration properties and environment variables contain sensitive
+# information and therefore should be redacted when they are listed in any way.
+spark.redaction.regex                       {{spark_redaction_regex}}
+
+# When DSE Spark is started, it fetches some configuration settings from DSE node
+# This operation can be retried a couple of times, as defined by this property
+# The delay between subsequent retries starts from 1 second and is doubled with each trial (limited at 10 seconds)
+spark.dse.configuration.fetch.retries   {{spark_dse_configuration_fetch_retries}}
+
+# Increase retry threshold for greater stability
+spark.task.maxFailures	{{spark_task_maxFailures}}
+
+spark.executor.memory {{spark_executor_memory}}
+
+# AlwaysOnSql performs DNS reverse lookup for connection_address served via status endpoint
+spark.alwaysOnSql.resolveAddress.enabled    {{spark_alwaysOnSql_resolveAddress_enabled}}
+
+{% for item in spark_additional_configs %}{{item|key}} {{item|val}}
+{% endfor %}
+
+# Hive configuration settings in key-value pairs. It starts with spark.hive.
+# spark.hive.
+
+{% for item in hive_additional_configs %}{{item|key}} {{item|val}}
+{% endfor %}
+
+{% for item in resource_manager_additional_configs %}{{item|key}} {{item|val}}
+{% endfor %}
