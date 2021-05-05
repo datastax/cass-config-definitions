@@ -187,7 +187,7 @@
                          :description "Mode for kerberos authentication scheme.  Allowed values are 'internal' or 'ldap'."}}
                        :order [:internal :ldap :kerberos]
                        :description "Optionally set mode on a per-authentication-scheme basis, allowing different role management modes for different authentication schemes. Overrides the top-level 'mode' option. Allowed values are 'internal' or 'ldap'."}))
- "5.1.23" (transforms
+ "5.1.24" (transforms
            (add-field :kmip_hosts.key_cache_update_millis
                       {:type "int"
                        :default_value 300000
