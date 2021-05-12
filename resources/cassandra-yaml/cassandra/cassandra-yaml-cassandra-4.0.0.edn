@@ -206,6 +206,7 @@
   {:type "int", :default_value 0, :unit "seconds"},
   :inter_dc_tcp_nodelay {:type "boolean", :default_value false},
   :num_tokens {:type "int"},
+  :allocate_tokens_for_local_replication_factor {:type "int", :default_value 3},
   :partitioner
   {:type "string",
    :options
