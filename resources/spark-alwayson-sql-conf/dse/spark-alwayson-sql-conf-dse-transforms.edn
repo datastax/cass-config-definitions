@@ -43,5 +43,12 @@
 
  ;; Begin DSE 6.8.x transforms.
  "6.8.0" "spark-alwayson-sql-conf-dse-6.8.0.edn"
+ "6.8.13" (transforms
+           (update-template "spark-alwayson-sql-conf-dse-6.8.13.template")
+           (add-field :spark_alwaysOnSql_resolveAddress_enabled
+                      {:type "boolean"
+                       :default_value true}
+                      :group "Spark Config Settings"
+                      :after :spark_executor_memory))
  ;; End DSE 6.8.x transforms.
 )
