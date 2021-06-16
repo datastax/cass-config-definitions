@@ -45,8 +45,6 @@
  "6.7.0" "cassandra-env-sh-dse-6.7.0.edn"
  "6.7.3" (transforms
            (update-template "cassandra-env-sh-dse-6.7.3.template"))
- "6.7.15" (transforms
-           (update-template "cassandra-env-sh-dse-6.7.15.template"))
  ;; End DSE 6.7.x transforms.
 
 
