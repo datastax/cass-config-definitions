@@ -148,6 +148,12 @@
           (add-field :guardrails.disk_usage_max_disk_size_in_gb
                      {:type "int"
                       :description "Allows configuring max disk size of data directories when calculating thresholds for disk_usage_percentage_warn_threshold and disk_usage_percentage_failure_threshold."}))
+ "6.8.15" (transforms
+           (add-field :pick_level_on_streaming_min_sstable_size_bytes
+                      {:type "int"
+                       :required true
+                       :default_value 0}
+                       :group "Compactions"))
  ;; End DSE 6.8.x transforms.
  )
 
