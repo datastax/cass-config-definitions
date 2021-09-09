@@ -342,6 +342,8 @@
      :depends :internode_encryption,
      :default_value "conf/.truststore"
      :conditional [{:eq "all"} {:eq "dc"} {:eq "rack"}]}}},
+  :native_transport_max_concurrent_requests_in_bytes_per_ip {:type "int"},
+  :native_transport_max_concurrent_requests_in_bytes {:type "int"},
   :hints_compression
   {:type "list",
    :value_type "dict",
@@ -454,6 +456,10 @@
    ["enable_user_defined_functions"
     "enable_scripted_user_defined_functions"]}
   {:name "Change Data Capture", :list ["cdc_enabled"]}
+  {:name "Client Backpressure",
+   :list
+   ["native_transport_max_concurrent_requests_in_bytes_per_ip"
+    "native_transport_max_concurrent_requests_in_bytes"]}
   {:name "Miscellaneous",
    :list
    [
