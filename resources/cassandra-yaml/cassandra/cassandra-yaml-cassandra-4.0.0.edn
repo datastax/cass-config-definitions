@@ -260,6 +260,42 @@
   {:type "int", :default_value 50, :unit "MB"},
   :index_summary_resize_interval_in_minutes
   {:type "int", :default_value 60},
+  :audit_logging_options
+  {:type "dict",
+   :order
+   [:enabled
+    :logger
+    :audit_logs_dir
+    :included_keyspaces
+    :excluded_keyspaces
+    :included_categories
+    :excluded_categories
+    :included_users
+    :excluded_users
+    :roll_cycle
+    :block
+    :max_queue_weight
+    :max_log_size
+    :archive_command
+    :max_archive_retries
+    ],
+   :fields
+   {:enabled {:type “boolean”, :default_value false},
+    :logger {:type "list", :value_type "dict" :default_value [{:class_name "BinAuditLogger"}]},
+    :audit_logs_dir {:type "string", :is_file true, :depends :enabled, :conditional [{:eq true}]},
+    :included_keyspaces {:type "string", :depends :enabled, :conditional [{:eq true}]},
+    :excluded_keyspaces {:type "string", :depends :enabled, :default_value "system, system_schema, system_virtual_schema", :conditional [{:eq true}]},
+    :included_categories {:type "string", :depends :enabled, :conditional [{:eq true}]},
+    :excluded_categories {:type "string", :depends :enabled, :conditional [{:eq true}]},
+    :included_users {:type "string", :depends :enabled, :conditional [{:eq true}]},
+    :excluded_users {:type "string", :depends :enabled, :conditional [{:eq true}]},
+    :roll_cycle {:type "string", :depends :enabled, :default_value "HOURLY", :conditional [{:eq true}]},
+    :block {:type "boolean", :depends :enabled, :default_value true, :conditional [{:eq true}]},
+    :max_queue_weight {:type "int", :depends :enabled, :default_value 268435456, :conditional [{:eq true}]},
+    :max_log_size {:type "int", :depends :enabled, :default_value 17179869184, :conditional [{:eq true}]},
+    :archive_command {:type "string", :depends :enabled, :conditional [{:eq true}]},
+    :max_archive_retries{:type "int", :depends :enabled, :default_value 10, :conditional [{:eq true}]}
+    }},
   :server_encryption_options
   {:type "dict",
    :order
@@ -436,6 +472,12 @@
     "dynamic_snitch_badness_threshold"
     "internode_compression"
     "inter_dc_tcp_nodelay"]}
+  {:name "Audit and Query Logging",
+   :list
+   ["audit_logging_options", "full_query_logging_options"]}
+  {:name "Audit and Query Logging",
+   :list
+   ["audit_logging_options", "full_query_logging_options"]}
   {:name "Hinted Handoff",
    :list
    ["hinted_handoff_enabled"
