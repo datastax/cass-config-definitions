@@ -296,6 +296,26 @@
     :archive_command {:type "string", :depends :enabled, :conditional [{:eq true}]},
     :max_archive_retries{:type "int", :depends :enabled, :default_value 10, :conditional [{:eq true}]}
     }},
+  :full_query_logging_options
+  {:type "dict",
+   :order
+   [:log_dir
+    :roll_cycle
+    :block
+    :max_queue_weight
+    :max_log_size
+    :archive_command
+    :max_archive_retries
+    ],
+   :fields
+   {:log_dir {:type "string", :is_directory true},
+    :roll_cycle {:type "string"},
+    :block {:type “boolean”},
+    :max_queue_weight {:type "int"}, 
+    :max_log_size {:type "int"},
+    :archive_command {:type "string"},
+    :max_archive_retries{:type "int"}
+   }},
   :server_encryption_options
   {:type "dict",
    :order
