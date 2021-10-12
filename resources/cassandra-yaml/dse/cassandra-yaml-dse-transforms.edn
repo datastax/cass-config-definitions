@@ -151,7 +151,6 @@
  "6.8.15" (transforms
            (add-field :pick_level_on_streaming_min_sstable_size_bytes
                       {:type "int"
-                       :required true
                        :default_value 0}
                        :group "Compactions"))
  ;; End DSE 6.8.x transforms.

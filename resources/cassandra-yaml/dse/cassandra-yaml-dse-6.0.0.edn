@@ -436,6 +436,12 @@
   {:type "int"},
   :tpc_cores
   {:type "int"},
+  :tpc_concurrent_requests_limit
+  {:type "int",
+   :description "The number of concurrently executed read/write requests per core, to be increased only if the CPU is under utilized, or decreased only in case of excessive memory pressure (i.e. long GCs/OOM)."},
+  :tpc_pending_requests_limit
+  {:type "int",
+   :description "The number of pending read/write requests per core, to be increased only if getting too many timeouts."},
   :partitioner
   {:type "string",
    :options
@@ -675,6 +681,8 @@
     "num_tokens"
     "allocate_tokens_for_local_replication_factor"
     "tpc_cores"
+    "tpc_concurrent_requests_limit"
+    "tpc_pending_requests_limit"
     "listen_on_broadcast_address"]}
   {:name "Directories",
    :list
