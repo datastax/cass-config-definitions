@@ -132,6 +132,16 @@
                        :constant "-Dio.netty.maxDirectMemory"
                        :label "io.netty.maxDirectMemory"}
                       :group "General JVM Parameters"))
+ "6.0.17" (transforms
+           (add-field :cassandra_non_periodic_tasks_shutdown_timeout_in_minutes
+                      {:type "int"
+                       :description "Specifies the wait timeout in minutes for shutting down non-periodic tasks."
+                       :constant "-Dcassandra.non_periodic_tasks_shutdown_timeout_in_minutes"
+                       :default_value 1
+                       :disabled true
+                       :render-without-quotes true
+                       :required false}
+                      :group "Startup Parameters"))
  ;; End DSE 6.7.x transforms.
 
 
