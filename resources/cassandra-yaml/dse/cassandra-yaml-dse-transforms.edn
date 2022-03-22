@@ -153,6 +153,13 @@
                       {:type "int"
                        :default_value 0}
                        :group "Compactions"))
+ "6.8.21" (transforms
+           (add-field :snapshot_size_cache_validity_in_secs
+                      {:type "int"
+                       :required false
+                       :default_value 0
+                       :description "Enables snapshot size caching speeding up calls to nodetool tablestats and nodetool listsnapshots and reducing IO usage when these calls are done repeatedly."}
+                       :group "Snapshots"))
  ;; End DSE 6.8.x transforms.
  )
 
