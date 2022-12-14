@@ -126,9 +126,7 @@
                        :description "Specifies the wait timeout in minutes for shutting down non-periodic tasks."
                        :constant "-Dcassandra.non_periodic_tasks_shutdown_timeout_in_minutes"
                        :default_value 1
-                       :disabled true
-                       :render-without-quotes true
-                       :required false}
+                       :render-without-quotes true}
                       :group "Startup Parameters"))
  ;; End DSE 6.0.x transforms.
 
@@ -148,9 +146,7 @@
                        :description "Specifies the wait timeout in minutes for shutting down non-periodic tasks."
                        :constant "-Dcassandra.non_periodic_tasks_shutdown_timeout_in_minutes"
                        :default_value 1
-                       :disabled true
-                       :render-without-quotes true
-                       :required false}
+                       :render-without-quotes true}
                       :group "Startup Parameters"))
  ;; End DSE 6.7.x transforms.
 
