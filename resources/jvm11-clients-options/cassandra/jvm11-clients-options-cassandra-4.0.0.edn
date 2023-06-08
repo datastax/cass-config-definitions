@@ -1,0 +1,46 @@
+{:display-name "jvm11-clients.options",
+ :package-path "/etc/cassandra/jvm11-clients.options",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :renderer
+ {:renderer-type :template,
+  :template "jvm11-clients-options-cassandra-4.0.0.template"},
+ :properties
+ {;;
+  ;; Variables that are not rendered by template_iterables
+  ;;
+
+  ;; Additional Options
+  ;; -Xlog settings should be done in additional options
+
+  :additional-jvm-opts
+  {:type "list",
+   :exclude-from-template-iterables true,
+   :label "Additional JVM_OPTS",
+   :value_type "string",
+   :default_value []},
+
+  ;; JPMS Settings
+
+  :jdk_attach_allow_attach_self
+  {:type "boolean",
+   :label "jdk.attach.allowAttachSelf",
+   :exclude-from-template-iterables true,
+   :static_constant "-Djdk.attach.allowAttachSelf=true"
+   :render-without-quotes true,
+   :default_value true}},
+
+  ;;
+  ;; Variables that are rendered by template iterables
+  ;;
+
+  ;; General Options
+
+ :groupings
+ [{:name "JPMS Settings",
+   :list
+   ["jdk_attach_allow_attach_self"
+    "io_netty_try_reflection_set_accessible"]}
+  {:name "Advanced",
+   :list
+   ["additional-jvm-opts"]}]}

@@ -1,0 +1,19 @@
+# This file is managed by DataStax OpsCenter LifeCycle Manager.
+# Manual edits will be overwritten by the next install or configure
+# job that runs on this system.
+
+###########################################################################
+#                         jvm-clients.options                             #
+#                                                                         #
+# See jvm8-clients.options and jvm11-clients.options for Java version     #
+# specific options.                                                       #
+###########################################################################
+
+{% for template_iterable in template_iterables %}{% if template_iterable %}{{template_iterable}}
+{% endif %}{% endfor %}
+
+{% comment %} Additional options by Opscenter Provisioning {% endcomment %}
+{% for jvm-opt in additional-jvm-opts %}{{jvm-opt}}
+{% endfor %}
+
+# The newline in the end of file is intentional

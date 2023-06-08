@@ -1,0 +1,19 @@
+{:display-name "jvm-clients.options",
+ :package-path "/etc/cassandra/jvm-clients.options",
+ :workload-file-group "cassandra",
+ :ui-visibility :editable,
+ :renderer
+ {:renderer-type :template,
+  :template "jvm-clients-options-cassandra-4.0.0.template"},
+ :properties
+ {
+  :additional-jvm-opts
+  {:type "list",
+   :exclude-from-template-iterables true,
+   :label "Additional JVM_OPTS",
+   :value_type "string",
+   :default_value []}},
+
+  :groupings
+ [{:name "Advanced",
+   :list ["additional-jvm-opts"]}]}
