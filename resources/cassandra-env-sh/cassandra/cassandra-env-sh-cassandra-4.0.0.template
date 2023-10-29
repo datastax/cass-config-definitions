@@ -310,3 +310,7 @@ JVM_OPTS="$JVM_OPTS $JVM_EXTRA_OPTS"
 {%for jvm-opt in additional-jvm-opts %}
 JVM_OPTS="$JVM_OPTS {{jvm-opt}}"
 {% endfor %}
+
+{%for env-opt in additional-env-opts %}
+{{env-opt}}
+{% endfor %}
