@@ -270,13 +270,13 @@
     :client_request_timeout_seconds],
    :fields
    {:port {:type "int", :default_value 8609},
-    :frame_length_in_mb {:type "int", :default_value 256},
-    :server_acceptor_threads {:type "int", :default_value 8},
-    :server_worker_threads {:type "int", :default_value 16},
-    :client_max_connections {:type "int", :default_value 100},
-    :client_worker_threads {:type "int", :default_value 16},
-    :handshake_timeout_seconds {:type "int", :default_value 10},
-    :client_request_timeout_seconds {:type "int", :default_value 60}}},
+    :frame_length_in_mb {:type "int"},
+    :server_acceptor_threads {:type "int"},
+    :server_worker_threads {:type "int"},
+    :client_max_connections {:type "int"},
+    :client_worker_threads {:type "int"},
+    :handshake_timeout_seconds {:type "int"},
+    :client_request_timeout_seconds {:type "int"}}},
   :user_level_latency_tracking_options
   {:type "dict",
    :order [:enabled
