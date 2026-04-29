@@ -43,8 +43,9 @@ spark.task.maxFailures	{{spark_task_maxFailures}}
 
 spark.executor.memory {{spark_executor_memory}}
 
-# AlwaysOnSql performs DNS reverse lookup for connection_address served via status endpoint
-spark.alwaysOnSql.resolveAddress.enabled    {{spark_alwaysOnSql_resolveAddress_enabled}}
+# AlwaysOnSql performs DNS reverse lookup for connection_address served via status endpoint.
+# Set to false to disable the lookup.
+spark.alwaysOnSql.resolveAddress.enabled {{spark_alwaysOnSql_resolveAddress_enabled}}
 
 {% for item in spark_additional_configs %}{{item|key}} {{item|val}}
 {% endfor %}

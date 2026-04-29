@@ -1,43 +1,50 @@
 {:properties
  {:spark-cassandra-auth-conf-factory
   {:type "string",
+   :required true,
    :default_value "com.datastax.bdp.spark.DseAuthConfFactory"},
   :spark-network-crypto-saslfallback
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark-sql-hive-metastore-barrier-prefixes
   {:type "string",
+   :required true,
    :default_value "org.apache.spark.sql.cassandra"},
   :spark-dse-configuration-fetch-retries
-  {:type "int", :default_value "2"},
+  {:type "int", :required true, :default_value "2"},
   :spark-authenticate
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark-authenticate-secretbitlength
-  {:type "int", :default_value 256},
+  {:type "int", :required true, :default_value 256},
   :spark-sql-catalog-implementation
-  {:type "string", :default_value "hive"},
+  {:type "string", :required true, :default_value "hive"},
   :spark-hadoop-util
   {:type "string",
+   :required true,
    :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"},
   :spark-hadoop-com-datastax-bdp-fs-client-authentication-factory
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"},
   :spark-authenticate-enable-sasl-encryption
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark-redaction-regex
   {:type "string",
+   :required true,
    :default_value "(?i)secret|password|token"},
   :spark-task-maxfailures
-  {:type "int", :default_value 10},
+  {:type "int", :required true, :default_value 10},
   :spark-extra-listeners
   {:type "string",
+   :required true,
    :default_value "com.datastax.bdp.spark.reporting.DseSparkListener"},
   :spark-network-sasl-serveralwaysencrypt
-  {:type "boolean", :default_value true},
+  {:type "boolean", :required true, :default_value true},
   :spark-network-crypto-enabled
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark-cassandra-connection-factory
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.spark.DseCassandraConnectionFactory"}},
  :groupings
@@ -63,7 +70,6 @@
    :list ["spark-redaction-regex" "spark-task-maxfailures"]}],
  :ui-visibility :editable,
  :package-path "/etc/dse/spark/spark-defaults.conf",
- :tarball-path "resources/spark/conf/spark-defaults.conf"
  :renderer
  {:renderer-type :template,
   :template "spark-defaults-conf-dse-6.7.0.template"},

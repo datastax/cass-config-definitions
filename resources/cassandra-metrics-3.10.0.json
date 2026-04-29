@@ -588,5 +588,47 @@
         "scope": "solr",
         "type": "jmx",
         "unit": "evictions"
+    },
+    "solr-searcher-numdoc": {
+        "aggregation_type": "counter",
+        "api_key": "solr-searcher-numdoc",
+        "description": "Number of searchable documents in the index.",
+        "group": "solr",
+        "label": "Search: Index Searcher - Docs Count",
+        "mbean": "solr/{keyspace}.{table}:type=searcher,id=org.apache.solr.search.SolrIndexSearcher",
+        "path": ["numDocs"],
+        "metric_type": "gauge",
+        "is_table_metric": true,
+        "scope": "solr",
+        "type": "jmx",
+        "unit": "docs"
+    },
+    "solr-searcher-maxdoc": {
+        "aggregation_type": "counter",
+        "api_key": "solr-searcher-maxdoc",
+        "description": "Total number of searchable and deleted documents in the index.",
+        "group": "solr",
+        "label": "Search: Index Searcher - Max Docs",
+        "mbean": "solr/{keyspace}.{table}:type=searcher,id=org.apache.solr.search.SolrIndexSearcher",
+        "path": ["maxDoc"],
+        "metric_type": "gauge",
+        "is_table_metric": true,
+        "scope": "solr",
+        "type": "jmx",
+        "unit": "docs"
+    },
+    "solr-searcher-deleteddoc": {
+        "aggregation_type": "counter",
+        "api_key": "solr-searcher-deleteddoc",
+        "description": "Number of deleted documents not yet removed from the index.",
+        "group": "solr",
+        "label": "Search: Index Searcher - Deleted Docs",
+        "mbean": "solr/{keyspace}.{table}:type=searcher,id=org.apache.solr.search.SolrIndexSearcher",
+        "path": ["deletedDocs"],
+        "metric_type": "gauge",
+        "is_table_metric": true,
+        "scope": "solr",
+        "type": "jmx",
+        "unit": "docs"
     }
 }

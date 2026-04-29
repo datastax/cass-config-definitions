@@ -1,9 +1,7 @@
 {:display-name "jvm11-server.options",
  :package-path "/etc/dse/cassandra/jvm11-server.options",
- :tarball-path "resources/cassandra/conf/jvm11-server.options"
  :workload-file-group "cassandra",
  :ui-visibility :editable,
- ;; jvm.options is only valid for DSE 6.8.0 and greater
  :renderer
  {:renderer-type :template,
   :template "jvm11-server-options-dse-6.8.0.template"},
@@ -26,12 +24,12 @@
   {:type "string",
    :label "Garbage Collector",
    :exclude-from-template-iterables true,
+   :required true,
    :options
    [{:label "G1GC", :value "G1GC"}
     {:label "ZGC", :value "ZGC"}
     {:label "Shenandoah", :value "Shenandoah"}
-    {:label "Graal", :value "Graal"}
-    {:label "Serial", :value "Serial"}],
+    {:label "Graal", :value "Graal"}],
    :default_value "G1GC"},
 
   ;; JPMS Settings
@@ -39,6 +37,8 @@
   :jdk_attach_allow_attach_self
   {:type "boolean",
    :label "jdk.attach.allowAttachSelf",
+   :disabled false,
+   :required true,
    :exclude-from-template-iterables true,
    :static_constant "-Djdk.attach.allowAttachSelf=true"
    :render-without-quotes true,
@@ -46,6 +46,8 @@
   :io_netty_try_reflection_set_accessible
   {:type "boolean",
    :label "io.netty.tryReflectionSetAccessible",
+   :disabled false,
+   :required true,
    :exclude-from-template-iterables true,
    :static_constant "-Dio.netty.tryReflectionSetAccessible=true"
    :render-without-quotes true,
@@ -62,6 +64,7 @@
   :g1r_set_updating_pause_time_percent
   {:type "int",
    :label "G1GC Updating Pause Time Percentage",
+   :required true,
    :default_value "5",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
@@ -69,6 +72,7 @@
   :max_gc_pause_millis
   {:type "int",
    :label "G1GC Max GC Pause Milliseconds",
+   :required true,
    :default_value "500",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
@@ -76,18 +80,27 @@
   :initiating_heap_occupancy_percent
   {:type "int",
    :label "Initiating Heap Occupancy Percentage",
+   :required false,
+   :disabled true,
+   :default_value "",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:InitiatingHeapOccupancyPercent"},
   :parallel_gc_threads
   {:type "int",
    :label "Parallel GC Threads",
+   :required false,
+   :disabled true,
+   :default_value "",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:ParallelGCThreads"},
   :conc_gc_threads
   {:type "int",
    :label "Concurrent GC Threads",
+   :required false,
+   :disabled true,
+   :default_value "",
    :depends :garbage_collector,
    :conditional [{:eq "G1GC"}],
    :constant "-XX:ConcGCThreads"}},

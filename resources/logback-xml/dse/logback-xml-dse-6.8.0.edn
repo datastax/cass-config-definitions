@@ -1,56 +1,58 @@
 {:display-name "logback.xml",
  :package-path "/etc/dse/cassandra/logback.xml",
- :tarball-path "resources/cassandra/logback.xml",
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  :renderer
  {:renderer-type :template,
   :template "logback-xml-dse-6.8.0.template"},
  :properties
- {:lcm-manage--logback-xml
+ {
+  :lcm-manage--logback-xml
   {:type "boolean",
    :label "Manage logback.xml?"
+   :required true,
    :default_value true},
   :systemlog-appender-level
-  {:type "string", :default_value "INFO"
+  {:type "string", :required true, :default_value "INFO"
    :depends :lcm-manage--logback-xml},
   :debuglog-appender-min-index
-  {:type "int", :default_value 1
+  {:type "int", :required true, :default_value 1
    :depends :lcm-manage--logback-xml},
   :debuglog-appender-max-file-size
-  {:type "int", :default_value 20, :unit "MB"
+  {:type "int", :required true, :default_value 20, :unit "MB"
    :depends :lcm-manage--logback-xml},
   :systemlog-appender-max-index
-  {:type "int", :default_value 20
+  {:type "int", :required true, :default_value 20
    :depends :lcm-manage--logback-xml},
   :bdp-util-process-internalservicerunner
-  {:type "string", :default_value "DEBUG"
+  {:type "string", :required false, :default_value "DEBUG"
    :depends :lcm-manage--logback-xml},
   :debuglog-appender-max-index
-  {:type "int", :default_value 20
+  {:type "int", :required true, :default_value 20
    :depends :lcm-manage--logback-xml},
   :root-log-level
-  {:type "string", :default_value "INFO"
+  {:type "string", :required true, :default_value "INFO"
    :depends :lcm-manage--logback-xml},
   :systemlog-appender-min-index
-  {:type "int", :default_value 1
+  {:type "int", :required true, :default_value 1
    :depends :lcm-manage--logback-xml},
   :bdp-util-process-servicerunner
-  {:type "string", :default_value "DEBUG"
+  {:type "string", :required false, :default_value "DEBUG"
    :depends :lcm-manage--logback-xml},
   :systemlog-appender-max-file-size
-  {:type "int", :default_value 20, :unit "MB"
+  {:type "int", :required true, :default_value 20, :unit "MB"
    :depends :lcm-manage--logback-xml},
   :loggers
   {:type "list",
    :depends :lcm-manage--logback-xml
+   :required false,
+   :default_value [],
    :value_type "dict",
    :order [:name
            :level]
    :fields
-   {:name {:type "string"},
-    :level {:type "string"}}
-   :description "Set logging levels for specific logger names."}},
+   {:name {:type "string", :required false},
+    :level {:type "string", :required false}}}},
  :groupings
  [{:name "General",
    :list

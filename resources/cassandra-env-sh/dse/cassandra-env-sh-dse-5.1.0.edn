@@ -1,6 +1,5 @@
 {:display-name "cassandra-env.sh"
  :package-path "/etc/dse/cassandra/cassandra-env.sh"
- :tarball-path "resources/cassandra/conf/cassandra-env.sh"
  :workload-file-group "cassandra"
  :ui-visibility :editable
  :renderer
@@ -12,13 +11,16 @@
   {:type "int"
    :constant "MALLOC_ARENA_MAX"
    :label "Malloc Arena Max"
+   :required false
    :default_value 4
+   :disabled true
    :add-export true}
 
   :heap-dump-dir
   {:type "string"
    :constant "CASSANDRA_HEAPDUMP_DIR"
    :label "Cassandra Heapdump Directory"
+   :required false
    :description "If this value is changed to a non-default directory, that directory must exist and be writeable by the cassandra user. LCM will not create it."
    :is_directory true
    :add-export true}

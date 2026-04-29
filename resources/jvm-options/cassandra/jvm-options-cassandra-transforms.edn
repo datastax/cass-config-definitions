@@ -1,5 +1,0 @@
-(
-  ;; Begin Cassandra 3.11.x transforms.
-  "3.11.6" "jvm-options-cassandra-3.11.6.edn"
-  ;; End Cassandra 3.11.x transforms.
-  )

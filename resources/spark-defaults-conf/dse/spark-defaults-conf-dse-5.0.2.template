@@ -1,0 +1,44 @@
+# This file is managed by DataStax OpsCenter LifeCycle Manager.
+# Manual edits will be overwritten by the next install or configure
+# job that runs on this system.
+
+# Default system properties included when running spark-submit.
+# This is useful for setting default environmental settings.
+
+# DSE related Settings
+spark.cassandra.connection.factory  {{spark-cassandra-connection-factory}}
+spark.cassandra.auth.conf.factory   {{spark-cassandra-auth-conf-factory}}
+spark.extraListeners                {{spark-extraListeners}}
+spark.SparkHadoopUtil               org.apache.hadoop.security.DseSparkHadoopUtil
+
+# SSL settings for client connections
+# true or false, to enable or disable SSL respectively
+spark.ssl.enabled                   {{spark-ssl-enabled}}
+# a path to the key-store file; can be relative to the current directory
+spark.ssl.keyStore                  {{spark-ssl-keyStore}}
+# a password to the key-store file
+spark.ssl.keyStorePassword          {{spark-ssl-keyStorePassword}}
+# a password to the private key
+spark.ssl.keyPassword               {{spark-ssl-keyPassword}}
+# a path to the trust-store file; can be relative to the current directory
+spark.ssl.trustStore                {{spark-ssl-trustStore}}
+# a password to the trust-store file
+spark.ssl.trustStorePassword        {{spark-ssl-trustStorePassword}}
+# a protocol name supported by a particular Java version
+spark.ssl.protocol                  {{spark-ssl-protocol}}
+# a comma separated list of ciphers
+spark.ssl.enabledAlgorithms         {{spark-ssl-enabledAlgorithms}}
+# inherit SSL configuration for executors from the workers
+spark.ssl.useNodeLocalConf          {{spark-ssl-useNodeLocalConf}}
+# a comma separated list of class prefixes to be loaded by the shared classloader
+spark.sql.hive.metastore.sharedPrefixes  {{spark-sql-hive-metastore-sharedPrefixes}}
+
+# Port on which the external shuffle service will run
+spark.shuffle.service.port {{spark-shuffle-service-port}}
+
+{if spark-dse-configuration-fetch-retries}
+# When DSE Spark is started, it fetches some configuration settings from DSE node
+# This operation can be retried a couple of times, as defined by this property
+# The delay between subsequent retries starts from 1 second and is doubled with each trial
+spark.dse.configuration.fetch.retries  {{spark-dse-configuration-fetch-retries}}
+{fi}

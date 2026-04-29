@@ -39,7 +39,7 @@
     </root>
 
     <logger name="org.eclipse.jetty" level="{{logger-jetty-level}}"/>
-    <logger name="com.datastax.driver.core.CodecRegistry" level="ERROR"/>
+    <logger name="com.datastax.oss.driver.internal.core.type.codec.registry.DefaultCodecRegistry" level="ERROR"/>
     <logger name="org.apache.hadoop.hive.metastore.ObjectStore" level="{{object-store-level}}"/>
     <logger name="org.apache.hadoop.util.NativeCodeLoader" level="{{native-code-loader-level}}"/>
 
