@@ -205,8 +205,9 @@
  "6.8.63" :no-change
  ;; End DSE 6.8.x transforms.
 
- ;; Begin DSE 6.9.x transforms. 
- "6.9.0" :no-change
+ ;; jvm8-server-options is not valid for DSE 6.9.0 and greater
+ ;; Begin DSE 6.9.x transforms.
+ "6.9.0" ()
  "6.9.1" :no-change
  "6.9.2" :no-change
  "6.9.3" :no-change
