@@ -1,6 +1,5 @@
 {:display-name "spark-alwayson-sql.conf",
  :package-path "/etc/dse/spark/spark-alwayson-sql.conf",
- :tarball-path "resources/spark/conf/spark-alwayson-sql.conf"
  :workload-file-group "spark",
  :ui-visibility :editable,
  :renderer
@@ -9,71 +8,84 @@
  :properties
  {:spark_SparkHadoopUtil
   {:type "string",
+   :required true,
    :default_value "org.apache.hadoop.security.DseSparkHadoopUtil"},
   :spark_network_crypto_enabled
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark_sql_thriftServer_incrementalCollect
   {:type "boolean"
+   :required true
    :default_value true}
   :spark_cassandra_connection_factory
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.spark.DseCassandraConnectionFactory"},
   :spark_extraListeners
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.spark.reporting.DseSparkListener,org.apache.spark.sql.hive.thriftserver.AlwaysOnSqlSparkListener"},
   :spark_sql_hive_metastore_barrierPrefixes
   {:type "string",
+   :required true,
    :default_value "org.apache.spark.sql.cassandra"},
   :spark_redaction_regex
   {:type "string",
+   :required true,
    :default_value "(?i)secret|password|token"},
   :resource_manager_additional_configs
   {:type "user_defined",
    :key_name "key",
-   :value_type "string"},
+   :value_type "string",
+   :required true},
   :spark_authenticate
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark_task_maxFailures
-  {:type "int", :default_value "10"},
+  {:type "int", :required true, :default_value "10"},
   :spark_executor_memory
   {:type "string"
+   :required true
    :default_value "1G"},
   :spark_sql_catalogImplementation
-  {:type "string", :default_value "hive"},
+  {:type "string", :required true, :default_value "hive"},
   :spark_network_sasl_serverAlwaysEncrypt
-  {:type "boolean", :default_value true},
+  {:type "boolean", :required true, :default_value true},
   :spark_network_crypto_saslFallback
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark_hadoop_com_datastax_bdp_fs_client_authentication_factory
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.spark.ha.alwaysonsql.auth.DseFsRestClientAuthProviderFactory"},
   :spark_cassandra_auth_conf_factory
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.spark.ha.alwaysonsql.auth.AlwaysOnSqlInClusterAuthConfFactory"},
   :hive_additional_configs
   {:type "user_defined",
    :key_name "key",
-   :value_type "string"},
+   :value_type "string",
+   :required true},
   :spark_authenticate_secretBitLength
-  {:type "int", :default_value 256},
+  {:type "int", :required true, :default_value 256},
   :spark_hive_alwaysOnSql
-  {:type "boolean", :default_value true},
+  {:type "boolean", :required true, :default_value true},
   :spark_sql_extensions
   {:type "string",
+   :required true,
    :default_value
    "org.apache.spark.sql.hive.thriftserver.AlwaysOnSqlExtensions"},
   :spark_authenticate_enableSaslEncryption
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark_additional_configs
   {:type "user_defined",
    :key_name "key",
-   :value_type "string"},
+   :value_type "string",
+   :required true},
   :spark_dse_configuration_fetch_retries
-  {:type "int", :default_value "2"}},
+  {:type "int", :required true, :default_value "2"}},
  :groupings
  [{:name "Spark Config Settings",
    :list

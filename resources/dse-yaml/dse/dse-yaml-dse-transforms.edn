@@ -1,4 +1,369 @@
 (
+ ;; Begin DSE 4.8.x transforms.
+ "4.8.0" "dse-yaml-dse-4.8.0.edn"
+ "4.8.1" :no-change
+ "4.8.2" :no-change
+ "4.8.3" (transforms
+          (update-field
+           :ttl_index_rebuild_options
+           {:type "dict",
+            :fields
+            {:fixed_rate_period
+             {:type "int", :required false, :default_value 300},
+             :initial_delay {:type "int", :required false, :default_value 20},
+             :max_docs_per_batch
+             {:type "int", :required false, :default_value 200}
+             :thread_pool_size
+             {:type "int", :required true, :default_value 1}}}))
+
+ "4.8.4" :no-change
+ "4.8.5" (transforms
+          (update-field
+           :node_health_options
+           {:type "dict",
+            :fields
+            {:refresh_rate_ms
+             {:type "int", :required true, :default_value 60000}
+             :uptime_ramp_up_period_seconds
+             {:type "int", :required true, :default_value 86400}}}))
+
+ "4.8.6" :no-change
+ "4.8.7" :no-change
+ "4.8.8" :no-change
+ "4.8.9" (transforms
+          (add-field :async_bootstrap_reindex {:type "boolean"
+                                               :required true
+                                               :default_value false}
+                     :group "Solr Indexing"))
+ "4.8.10" (transforms
+           (add-field :solr_resource_upload_limit_mb {:type "int"
+                                                      :required true
+                                                      :default_value 10}
+                      :group "Miscellaneous"))
+ "4.8.11" :no-change
+ "4.8.12" :no-change
+ "4.8.13" (transforms
+           (update-field :ttl_index_rebuild_options.max_docs_per_batch
+                         {:default_value 4096})
+           (update-field :back_pressure_threshold_per_core
+                         {:default_value 2000}))
+ "4.8.14" :no-change
+ "4.8.15" :no-change
+ "4.8.16" :no-change
+ ;; End DSE 4.8.x transforms.
+
+
+ ;; Begin DSE 5.0.x transforms.
+ "5.0.1" "dse-yaml-dse-5.0.1.edn"
+ "5.0.2" (transforms
+          (add-field :async_bootstrap_reindex
+                     {:type "boolean"
+                      :required true
+                      :default_value false}
+                     :group "Miscellaneous")
+          (add-field :spark_security_encryption_enabled
+                     {:type "boolean"
+                      :required true
+                      :default_value false}
+                     :group "Miscellaneous")
+          (update-field :graph
+                        {:type "dict",
+                         :order [:analytic_evaluation_timeout_in_minutes
+                                 :max_query_threads
+                                 :max_query_queue
+                                 :realtime_evaluation_timeout_in_seconds
+                                 :schema_agreement_timeout_in_ms
+                                 :system_evaluation_timeout_in_seconds
+                                 :window_size
+                                 :ids
+                                 :listener
+                                 :msg
+                                 :observer
+                                 :shared_data
+                                 :gremlin_server
+                                 :schema_mode],
+                         :fields
+                         {:adjacency_cache_clean_rate {:type "int"
+                                                       :required true
+                                                       :default_value 1024
+                                                       :unit "rows per second"}
+                          :adjacency_cache_max_entry_size_in_mb {:type "int"
+                                                                 :required true
+                                                                 :default_value 0
+                                                                 :unit "mb"}
+                          :adjacency_cache_size_in_mb {:type "int"
+                                                       :required true
+                                                       :default_value 128
+                                                       :unit "mb"}
+                          :analytic_evaluation_timeout_in_minutes {:type "int"
+                                                                   :required true
+                                                                   :default_value 10080
+                                                                   :unit "minutes"}
+                          :gremlin_server_enabled {:type "boolean"
+                                                   :required true
+                                                   :default_value true}
+                          :index_cache_clean_rate {:type "int"
+                                                   :required true
+                                                   :default_value 1024
+                                                   :unit "rows per second"}
+                          :index_cache_max_entry_size_in_mb {:type "int"
+                                                             :required true
+                                                             :default_value 0
+                                                             :unit "mb"}
+                          :index_cache_size_in_mb {:type "int"
+                                                   :required true
+                                                   :default_value 128
+                                                   :unit "mb"}
+                          :max_query_threads {:type "int",
+                                              :required false},
+                          :max_query_queue {:type "int",
+                                            :required true,
+                                            :default_value 10000},
+                          :realtime_evaluation_timeout_in_seconds {:type "int",
+                                                                   :required true,
+                                                                   :default_value 30
+                                                                   :unit "seconds"},
+                          :schema_agreement_timeout_in_ms {:type "int",
+                                                           :required true,
+                                                           :default_value "10000"
+                                                           :unit "milliseconds"},
+                          :system_evaluation_timeout_in_seconds {:type "int",
+                                                                 :required true,
+                                                                 :default_value 180},
+                          :window_size {:type "int", :required true, :default_value 100000},
+                          :ids {:type "dict",
+                                :order [:block_renew :community_reuse, :id_hash_modulus, :member_block_size],
+                                :fields
+                                {:block_renew {:type "float", :required true, :default_value 0.8},
+                                 :community_reuse {:type "int", :required true, :default_value 28},
+                                 :id_hash_modulus {:type "int", :required true, :default_value 20},
+                                 :member_block_size {:type "int", :required true, :default_value 512}}}
+                          :listener {:type "user_defined",
+                                     :value_type "dict",
+                                     :order [:black_types
+                                             :interval_in_seconds
+                                             :type
+                                             :white_types],
+                                     :fields,
+                                     {:black_types {:type "list", :value_type "string"},
+                                      :interval_in_seconds {:type "int",
+                                                            :default_value 3600
+                                                            :required true
+                                                            :unit "seconds"},
+                                      ;; only "slf4j" is valid here right now. this should
+                                      ;; probably be made into an options.
+                                      :type {:type "string", :default_value "slf4j"},
+                                      :white_types {:type "list", :value_type "string"}}},
+                          :msg {:type "dict"
+                                :order [:graph_msg_timeout_in_ms],
+                                :fields
+                                {:graph_msg_timeout_in_ms {:type "int",
+                                                           :required true,
+                                                           :default_value 5000}}},
+                          :observer {:type "user_defined",
+                                     :value_type "dict",
+                                     :order [:black_types
+                                             :observed_graphs
+                                             :slow_threshold_in_ms
+                                             :type
+                                             :white_types]
+                                     :fields
+                                     {:black_types {:type "list",
+                                                    :value_type "string"},
+                                      :observed_graphs {:type "list",
+                                                        :value_type "string"},
+                                      :slow_threshold_in_ms {:type "int",
+                                                             :default_value 300000
+                                                             :required true
+                                                             :unit "milliseconds"},
+                                      ;; according to dse.yaml comments, the only valid options here are "slf4j" and "slow_request".
+                                      ;; we may want to turn this into an options at some point.
+                                      :type {:type "string", :default_value "slf4j"},
+                                      :white_types {:type "list", :value_type "string"}}},
+                          :shared_data {:type "dict",
+                                        :order [:refresh_interval_in_ms],
+                                        :fields
+                                        {:refresh_interval_in_ms {:type "int"
+                                                                  :required true
+                                                                  :default_value 60000
+                                                                  :unit "milliseconds"}}}
+                          :gremlin_server {:type "dict",
+                                           :order [:port
+                                                   :maxContentLength
+                                                   :maxChunkSize]
+                                           :fields
+                                           {:port {:type "int"
+                                                   :default_value 8182}
+                                            :threadPoolWorker {:type "int"
+                                                               :required true
+                                                               :default_value 2
+                                                               :unit "workers"}
+                                            :gremlinPool {:type "int"
+                                                          :required true
+                                                          :default_value 8
+                                                          :unit "threads"}
+                                            :maxContentLength {:type "int"
+                                                               :required true
+                                                               :default_value 65536000
+                                                               :unit "bytes"}
+                                            :maxChunkSize {:type "int"
+                                                           :required true
+                                                           :default_value 4096000
+                                                           :unit "bytes"}
+                                            :maxHeaderSize {:type "int"
+                                                            :required true
+                                                            :default_value 8192}
+                                            :maxAccumulationBufferComponents {:type "int"
+                                                                              :required true
+                                                                              :default_value 1024
+                                                                              :unit "request components"}
+                                            :resultIterationBatchSize {:type "int"
+                                                                       :required true
+                                                                       :default_value 64
+                                                                       :unit "results per response batch"}
+                                            :useEpollEventLoop {:type "boolean"
+                                                                :required true
+                                                                :default_value false}
+                                            ;; Backported removal of metrics from 5.0.4 to 5.0.2
+                                            ;; where they were introduced.
+
+                                            ;; serializers and scriptEngines aren't configurable
+                                            ;; via LCM, DSE will use their default values
+                                            }}
+                          :schema_mode {:type "string"
+                                        :options [{:label "Production", :value "Production"},
+                                                  {:label "Development", :value "Development"}],
+                                        :required true,
+                                        :default_value "Production"}}}))
+
+ "5.0.3" (transforms
+          (update-field :dsefs_options
+                        {:order [:enabled
+                                 :keyspace_name
+                                 :work_dir
+                                 :public_port
+                                 :private_port
+                                 :data_directories
+                                 :service_startup_timeout_ms
+                                 :service_close_timeout_ms
+                                 :gossip_options
+                                 :rest_options
+                                 :transaction_options
+                                 :data_directories]})
+          (add-field :advanced_replication_options.security_base_path
+                     {:type "string", :required false, :depends :enabled})
+          (update-field :tiered_storage_options.tiers
+                        {:type "list",
+                         :value_type "dict",
+                         :fields {:paths {:type "list", :value_type "string"},
+                                  :compaction_strategy {:type "string", :default_value "bla"},
+                                  :compaction_options {:type "user_defined",
+                                                       :key_name "option_name"
+                                                       :value_type "string"}}})
+          (add-field :tiered_storage_options.local_options
+                     {:type "user_defined",
+                      :key_name "key_name",
+                      :value_type "string"})
+          (update-field :tiered_storage_options
+                        {:order [:tiers, :local_options]}))
+
+ "5.0.4" (transforms
+          (update-field :performance_max_threads
+                        {:type "int"
+                         :required false
+                         :default_value nil
+                         :description "The default is to match the 'concurrent_writes' value in cassandra.yaml."})
+          (add-field :performance_queue_capacity
+                     {:type "int"
+                      :required false
+                      :default_value 32000}
+                     :group "CQL Performance Service Options")
+          (update-field :graph.gremlin_server.gremlinPool
+                        {:type "int"
+                         :required true
+                         :default_value 0
+                         :unit "threads"
+                         :description "When set to zero, this value will default to the number of CPU's in the system according to Runtime.availableProcessors()"}))
+ "5.0.5" :no-change
+ "5.0.6" (transforms
+          (update-field :graph.schema_agreement_timeout_in_ms
+                        {:type "int",
+                         :required true,
+                         :default_value "60000"
+                         :unit "milliseconds"})
+          (add-field :graph.ids.consistency_mode
+                     {:type "string",
+                      :options [{:label "DC_GLOBAL", :value "DC_GLOBAL"},
+                                {:label "GLOBAL", :value "GLOBAL"}],
+                      :required true,
+                      :default_value "GLOBAL"})
+          (add-field :graph.ids.datacenter_id
+                     {:type "int"
+                      :depends :consistency_mode
+                      :conditional [{:eq "DC_GLOBAL"}]}))
+ "5.0.7" :no-change
+ "5.0.8" (transforms
+          (update-field :ttl_index_rebuild_options
+                        {:type "dict"
+                         :fields
+                         {:fixed_rate_period
+                          {:type "int" :required false :default_value 300}
+                          :initial_delay {:type "int" :required false :default_value 20}
+                          :max_docs_per_batch
+                          {:type "int" :required false :default_value 4096}
+                          :thread_pool_size {:type "int" :default_value 1}}})
+          (update-field :back_pressure_threshold_per_core
+                        {:type "int"
+                         :required false
+                         :default_value 2000})
+          (update-field :flush_max_time_per_core
+                        {:type "int"
+                         :required false
+                         :unit "minutes"
+                         :default_value 5})
+          (update-field :graph.schema_agreement_timeout_in_ms
+                        {:type "int",
+                         :required true,
+                         :default_value "1"
+                         :unit "milliseconds"}))
+ "5.0.9" :no-change
+ "5.0.10" (transforms
+           (add-field :dsefs_options.rest_options.idle_connection_timeout_ms
+                      {:type "int"
+                       :required false
+                       :unit "ms"
+                       :default_value 0}))
+ "5.0.11" :no-change
+ "5.0.12" (transforms
+           (add-field :performance_core_threads
+                      {:type "int"
+                       :required false
+                       :unit "threads"
+                       :default_value 4
+                       :description "The number of background threads used by the performance service under normal conditions."}
+                      :group "CQL Performance Service Options")
+           (add-field :graph.gremlin_server.scriptEngines
+                      {:type "dict"
+                       :required false
+                       :default_value {:gremlin-groovy
+                                       {:config
+                                        {:sandbox_enabled false
+                                         :sandbox_rules
+                                         {:whitelist_packages []
+                                          :whitelist_types []
+                                          :whitelist_supers []}}}}}))
+ "5.0.13" :no-change
+ "5.0.14" :no-change
+ "5.0.15" (transforms
+           (update-field :node_health_options.uptime_ramp_up_period_seconds
+                         {:default_value 10800})
+           (update-field :dsefs_options.service_startup_timeout_ms
+                         {:default_value nil})
+           (update-field :dsefs_options.rest_options.connection_open_timeout_ms
+                         {:default_value nil}))
+ ;; End DSE 5.0.x transforms.
+
+
  ;; Begin DSE 5.1.x transforms.
  "5.1.0" "dse-yaml-dse-5.1.0.edn"
  "5.1.1" (transforms
@@ -9,9 +374,11 @@
                       :order [:overflow_margin_mb
                               :overflow_factor]
                       :fields {:overflow_margin_mb {:type "int"
+                                                    :required true
                                                     :default_value 1024
                                                     :unit "MB"}
                                :overflow_factor {:type "float"
+                                                 :required true
                                                  :default_value 1.05}}
                       :depends :enabled})
           (update-field :dsefs_options {:order [:enabled
@@ -29,14 +396,17 @@
  "5.1.2" (transforms
           (add-field :dsefs_options.query_cache_size
                      {:type "int"
+                      :required true
                       :default_value 2048
                       :unit "cached elements"})
           (add-field :dsefs_options.query_cache_expire_after_ms
                      {:type "int"
+                      :required true
                       :default_value 2000
                       :unit "milliseconds"})
           (add-field :graph.max_query_params
                      {:type "int"
+                      :required true
                       :default_value 256
                       :unit "parameters per graph query"})
           ;; These auth-changes occurred in DSE 5.1.0, but they're being
@@ -53,32 +423,45 @@
                                  :transitional_mode]})
           (update-field :authentication_options.enabled
                         {:type "boolean"
+                         :required true
                          :default_value true})
           (update-field :authentication_options.scheme_permissions
                         {:default_value false}))
  "5.1.3" (transforms
           (add-field :dsefs_options.rest_options.idle_connection_timeout_ms
                      {:type "int"
-                      :unit "ms"}))
+                      :required false
+                      :unit "ms"
+                      :default_value 0}))
  "5.1.4" (transforms
           (update-field :dsefs_options.gossip_options.round_delay_ms
                         {:default_value 2000})
           (update-field :dsefs_options.gossip_options.shutdown_delay_ms
                         {:default_value 10000})
           (update-field :graph.gremlin_server.scriptEngines
-                        {:default_value {:gremlin-groovy
+                        {:required false
+                         :default_value {:gremlin-groovy
                                          {:config
                                           {:sandbox_enabled false
                                            :sandbox_rules
                                            {:whitelist_packages []
                                             :whitelist_types []
                                             :whitelist_supers []}}}}}))
+ "5.1.5" :no-change
+ "5.1.6" :no-change
  "5.1.7" (transforms
            (add-field :performance_core_threads
                       {:type "int"
+                       :required false
                        :unit "threads"
+                       :default_value 4
                        :description "The number of background threads used by the performance service under normal conditions."}
                       :group "CQL Performance Service Options"))
+ "5.1.8" (transforms
+          (update-field :solr_encryption_options.decryption_cache_offheap_allocation
+                        {:required false}))
+ "5.1.9" :no-change
+ "5.1.10" :no-change
  "5.1.11" (transforms
            (update-field :node_health_options.uptime_ramp_up_period_seconds
                          {:default_value 10800})
@@ -88,9 +471,15 @@
                          {:default_value 10000})
            (add-field :dsefs_options.rest_options.internode_idle_connection_timeout_ms
                       {:type "int"
+                       :required false
+                       :default_value 120000
                        :unit "ms"})
            (add-field :dsefs_options.rest_options.core_max_concurrent_connections_per_host
-                      {:type "int"}))
+                      {:type "int"
+                       :required false
+                       :default_value 8}))
+ "5.1.12" :no-change
+ "5.1.13" :no-change
  "5.1.14" (transforms
            (add-group "Insightful Monitoring"
                       :after "DSE Authorizer Options")
@@ -98,76 +487,98 @@
                       {:type "dict"
                        :fields
                        {:data_dir {:type "string"
-                                   :is_directory true
-                                   :description "Directory to store insights data. Example value: \"/var/lib/cassandra/insights_data\""}
+                                   :required false
+                                   :default_value "/var/lib/cassandra/insights_data"
+                                   :description "Directory to store insights data"}
                         :log_dir {:type "string"
-                                  :is_directory true
-                                  :description "Directory to store insights logs. Example value: \"/var/log/cassandra/\""}}
+                                  :required false
+                                  :default_value "/var/log/cassandra/"
+                                  :description "Directory to store insights logs"}}
                        :order [:data_dir :log_dir]}
                       :group "Insightful Monitoring"))
+ "5.1.15" :no-change
+ "5.1.16" :no-change
+ "5.1.17" :no-change
  "5.1.18" (transforms
             (add-field :role_management_options.stats
                        {:type "boolean"
-                        :default_value false})
+                        :required false})
             (add-field :ldap_options.ssl_protocol
                        {:type "string"
+                        :required false
                         :default_value "TLS"})
             (add-field :ldap_options.hostname_verification
                        {:type "boolean"
+                        :required false
                         :default_value false}))
  "5.1.19" (transforms
            (update-field :ldap_options.group_search_filter
                          {:default_value "(|(uniquemember={0})|(cn={0}))"})
            (add-field :ldap_options.extra_user_search_bases
                       {:type "list"
-                       :value_type "string"})
+                       :value_type "string"
+                       :required false
+                       :default_value []})
            (add-field :ldap_options.extra_group_search_bases
                       {:type "list"
-                       :value_type "string"})
+                       :value_type "string"
+                       :required false
+                       :default_value []})
            (add-field :ldap_options.all_parent_groups_search_type
                       {:type "string"
+                       :required false
                        :options
                        [{:label "default", :value ""}
                         {:label "directory_search", :value "directory_search"}
                         {:label "memberof_search", :value "memberof_search"}]})
            (add-field :ldap_options.all_parent_groups_memberof_attribute
-                      {:type "string"})
+                      {:type "string"
+                       :required false
+                       :default_value "isMemberOf"})
            (add-field :ldap_options.all_parent_groups_search_filter
-                      {:type "string"})
+                      {:type "string"
+                       :required false})
            (add-field :audit_logging_options.render_cql_literals
                       {:type "boolean"
-                       :depends :enabled
+                       :required false
+                       :default_value false
                        :description "Whether to render bound variables as CQL literals"}))
-
  "5.1.20" (transforms
            (add-field :ldap_options.groups_validity_in_ms
                       {:type "int"
+                       :required false
                        :default_value 0
                        :unit "ms"
                        :description "Validity period for the groups cache in milliseconds."})
            (add-field :ldap_options.groups_update_interval_in_ms
                       {:type "int"
+                       :required false
                        :default_value 0
                        :unit "ms"
                        :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."})
            (add-field :ldap_options.dns_service_discovery
                      {:type "dict"
+                      :required false
                       :fields
                       {:fqdn
                        {:type "string"
+                        :required false
                         :description "Fully qualified domain name to get the SRV records from."}
                        :lookup_timeout_ms
                        {:type "int"
+                        :required false
                         :default_value 5000
                         :unit "ms"
-                        :description "Timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent."}
+                        :description "Timeout in ms for querying DNS; it has to be between 0 and 1 hour equivalent."}
                        :retention_duration_ms
                        {:type "int"
+                        :required false
                         :default_value 600000
                         :unit "ms"
                         :description "For how long the old results should be retained/cached (value between 0 and 10 days equivalent)."}
                        :polling_interval_ms
                        {:type "int"
+                        :required false
                         :default_value 0
                         :unit "ms"
                         :description "How often DSE should try to refresh the list of obtained servers."}}
@@ -175,24 +586,57 @@
  "5.1.22" (transforms
            (add-field :role_management_options.mode_by_authentication
                       {:type "dict"
+                       :required false
                        :fields
                        {:internal
                         {:type "string"
+                         :required false
                          :description "Mode for internal authentication scheme. Allowed values are 'internal' or 'ldap'."}
                         :ldap
                         {:type "string"
+                         :required false
                          :description "Mode for ldap authentication scheme. Allowed values are 'internal' or 'ldap'."}
                         :kerberos
                         {:type "string"
+                         :required false
                          :description "Mode for kerberos authentication scheme.  Allowed values are 'internal' or 'ldap'."}}
                        :order [:internal :ldap :kerberos]
                        :description "Optionally set mode on a per-authentication-scheme basis, allowing different role management modes for different authentication schemes. Overrides the top-level 'mode' option. Allowed values are 'internal' or 'ldap'."}))
  "5.1.23" (transforms
            (add-field :kmip_hosts.key_cache_update_millis
                       {:type "int"
+                       :required false
                        :default_value 300000
                        :description "Refresh interval for the KMIP host key cache. After this interval, cache entries become eligible for refresh. Upon next access, an async reload is scheduled and the old value returned until it completes. If key_cache_millis is non-zero, then this must be also. Defaults to the same value as key_cache_millis."}))
+ "5.1.24" :no-change
+ "5.1.25" :no-change
+ "5.1.26" :no-change
+ "5.1.27" :no-change
+ "5.1.28" :no-change
+ "5.1.29" :no-change
+ "5.1.30" :no-change
+ "5.1.31" :no-change
+ "5.1.32" :no-change
+ "5.1.33" :no-change
+ "5.1.34" :no-change
+ "5.1.35" :no-change
+ "5.1.36" :no-change
+ "5.1.37" :no-change
+ "5.1.38" :no-change
+ "5.1.39" :no-change
+ "5.1.40" :no-change
+ "5.1.41" :no-change
+ "5.1.42" :no-change
+ "5.1.43" :no-change
+ "5.1.44" :no-change
+ "5.1.45" :no-change
+ "5.1.46" :no-change
+ "5.1.47" :no-change
+ "5.1.48" :no-change
+ "5.1.49" :no-change
+ "5.1.50" :no-change
  ;; End DSE 5.1.x transforms.
+
 
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "dse-yaml-dse-6.0.0.edn"
@@ -203,17 +647,23 @@
                         {:default_value 10800})
           (add-field :dsefs_options.rest_options.internode_idle_connection_timeout_ms
                      {:type "int"
+                      :required false
                       :unit "ms"})
           (add-field :dsefs_options.rest_options.core_max_concurrent_connections_per_host
-                     {:type "int"}))
+                     {:type "int"
+                      :required false}))
+ "6.0.3" :no-change
+ "6.0.4" :no-change
  "6.0.5" (transforms
           (add-field :dsefs_options.internode_authentication
                      {:type "dict"
                       :fields
                       {:enabled {:type "boolean"
+                                 :required false
                                  :default_value true}
                        :algorithm {:type "string"
-                                   :description "Example value: \"HmacSHA256\""}}
+                                   :required false
+                                   :default_value "HmacSHA256"}}
                       :order [:enabled :algorithm]})
           (add-group "Insightful Monitoring"
                      :after "DSE Authorizer Options")
@@ -221,101 +671,132 @@
                      {:type "dict"
                       :fields
                       {:data_dir {:type "string"
-                                  :is_directory true
-                                  :description "Directory to store insights data. Example value: \"/var/lib/cassandra/insights_data\""}
+                                  :required false
+                                  :default_value "/var/lib/cassandra/insights_data"
+                                  :description "Directory to store insights data"}
                        :log_dir {:type "string"
-                                 :is_directory true
-                                 :description "Directory to store insights logs. Example value: \"/var/log/cassandra/\""}}
+                                 :required false
+                                 :default_value "/var/log/cassandra/"
+                                 :description "Directory to store insights logs"}}
                       :order [:data_dir :log_dir]}
                      :group "Insightful Monitoring"))
+ "6.0.6" :no-change
+ "6.0.7" :no-change
+ "6.0.8" :no-change
+ "6.0.9" :no-change
+ "6.0.10" :no-change
+ "6.0.11" :no-change
  "6.0.12" (transforms
-           (add-field :role_management_options.stats
-                      {:type "boolean"})
-           (add-field :ldap_options.ssl_protocol
-                      {:type "string"
-                       :default_value "TLS"})
-           (add-field :ldap_options.hostname_verification
-                      {:type "boolean"
-                       :default_value false}))
+            (add-field :role_management_options.stats
+                       {:type "boolean"
+                        :required false})
+            (add-field :ldap_options.ssl_protocol
+                       {:type "string"
+                        :required false
+                        :default_value "TLS"})
+            (add-field :ldap_options.hostname_verification
+                       {:type "boolean"
+                        :required false
+                        :default_value false}))
  "6.0.13" (transforms
            (update-field :ldap_options.group_search_filter
                          {:default_value "(|(uniquemember={0})|(cn={0}))"})
            (add-field :ldap_options.extra_user_search_bases
                       {:type "list"
                        :value_type "string"
+                       :required false
                        :default_value []})
            (add-field :ldap_options.extra_group_search_bases
                       {:type "list"
                        :value_type "string"
+                       :required false
                        :default_value []})
            (add-field :ldap_options.all_parent_groups_search_type
                       {:type "string"
+                       :required false
                        :options
                        [{:label "default", :value ""}
                         {:label "directory_search", :value "directory_search"}
                         {:label "memberof_search", :value "memberof_search"}]})
            (add-field :ldap_options.all_parent_groups_memberof_attribute
                       {:type "string"
+                       :required false
                        :default_value "isMemberOf"})
            (add-field :ldap_options.all_parent_groups_search_filter
-                      {:type "string"})
+                      {:type "string"
+                       :required false})
            (add-field :ldap_options.dns_service_discovery
                       {:type "dict"
+                       :required false
                        :fields
                        {:fqdn
                         {:type "string"
+                         :required false
                          :description "Fully qualified domain name to get the SRV records from."}
                         :lookup_timeout_ms
                         {:type "int"
+                         :required false
                          :default_value 5000
                          :unit "ms"
                          :description "Timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent."}
                         :retention_duration_ms
                         {:type "int"
+                         :required false
                          :default_value 600000
                          :unit "ms"
                          :description "For how long the old results should be retained/cached (value between 0 and 10 days equivalent)."}
                         :polling_interval_ms
                         {:type "int"
+                         :required false
                          :default_value 0
                          :unit "ms"
                          :description "How often DSE should try to refresh the list of obtained servers."}}
                        :order [:fqdn :lookup_timeout_ms :retention_duration_ms :polling_interval_ms]})
            (add-field :audit_logging_options.render_cql_literals
                       {:type "boolean"
+                       :required false
                        :default_value false
                        :description "Whether to render bound variables as CQL literals"}))
  "6.0.14" (transforms
            (add-field :ldap_options.groups_validity_in_ms
                       {:type "int"
+                       :required false
                        :default_value 0
                        :unit "ms"
                        :description "Validity period for the groups cache in milliseconds."})
            (add-field :ldap_options.groups_update_interval_in_ms
                       {:type "int"
+                       :required false
                        :default_value 0
                        :unit "ms"
                        :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."}))
  "6.0.15" (transforms
            (add-field :role_management_options.mode_by_authentication
                       {:type "dict"
+                       :required false
                        :fields
                        {:internal
                         {:type "string"
+                         :required false
                          :description "Mode for internal authentication scheme. Allowed values are 'internal' or 'ldap'."}
                         :ldap
                         {:type "string"
+                         :required false
                          :description "Mode for ldap authentication scheme. Allowed values are 'internal' or 'ldap'."}
                         :kerberos
                         {:type "string"
+                         :required false
                          :description "Mode for kerberos authentication scheme.  Allowed values are 'internal' or 'ldap'."}}
                        :order [:internal :ldap :kerberos]
                        :description "Optionally set mode on a per-authentication-scheme basis, allowing different role management modes for different authentication schemes. Overrides the top-level 'mode' option. Allowed values are 'internal' or 'ldap'."}))
- "6.0.16" (transform
+ "6.0.16" (transforms
            (add-field :kmip_hosts.key_cache_update_millis
                       {:type "int"
+                       :required false
                        :default_value 300000
                        :description "Refresh interval for the KMIP host key cache. After this interval, cache entries become eligible for refresh. Upon next access, an async reload is scheduled and the old value returned until it completes. If key_cache_millis is non-zero, then this must be also. Defaults to the same value as key_cache_millis."}))
+ "6.0.17" :no-change
+ "6.0.18" :no-change
  ;; End DSE 6.0.x transforms.
 
  ;; Begin DSE 6.7.x transforms.
@@ -326,9 +807,10 @@
                       :depends :enabled
                       :order [:enabled :algorithm]
                       :fields {
-                          :enabled {:type "boolean" :default_value true}
+                          :enabled {:type "boolean" :default_value true :required true}
                           :algorithm {:type "string"
                                       :depends :enabled
+                                      :required true
                                       :default_value "HmacSHA256"}}})
           (update-field :dsefs_options
                         {:order [:enabled
@@ -344,6 +826,7 @@
                                  :rest_options
                                  :transaction_options
                                  :block_allocator_options]}))
+ "6.7.2" :no-change
  "6.7.3" (transforms
           (add-field :alwayson_sql_options.heartbeat_update_interval_seconds
                      {:type "int"
@@ -360,55 +843,77 @@
                                  :auth_user
                                  :runner_max_errors
                                  :heartbeat_update_interval_seconds]}))
+ "6.7.4" :no-change
+ "6.7.5" :no-change
+ "6.7.6" :no-change
+ "6.7.7" :no-change
  "6.7.8" (transforms
-           (add-field :role_management_options.stats
-                      {:type "boolean" })
-           (add-field :ldap_options.ssl_protocol
-                      {:type "string"
-                       :default_value "TLS"})
-           (add-field :ldap_options.hostname_verification
-                      {:type "boolean"
-                       :default_value false}))
+          (add-field :role_management_options.stats
+                     {:type "boolean"
+                      :required false})
+          (add-field :ldap_options.ssl_protocol
+                     {:type "string"
+                      :required false
+                      :default_value "TLS"})
+          (add-field :ldap_options.hostname_verification
+                     {:type "boolean"
+                      :required false
+                      :default_value false}))
  "6.7.9" (transforms
           (add-field :ldap_options.extra_user_search_bases
                      {:type "list"
-                      :value_type "string"})
+                      :value_type "string"
+                      :required false
+                      :default_value []})
           (add-field :ldap_options.extra_group_search_bases
                      {:type "list"
-                      :value_type "string"})
+                      :value_type "string"
+                      :required false
+                      :default_value []})
           (add-field :ldap_options.all_parent_groups_search_type
                      {:type "string"
+                      :required false
                       :options
                       [{:label "default", :value ""}
                        {:label "directory_search", :value "directory_search"}
                        {:label "memberof_search", :value "memberof_search"}]})
           (add-field :ldap_options.all_parent_groups_memberof_attribute
-                     {:type "string"})
+                     {:type "string"
+                      :required false
+                      :default_value "isMemberOf"})
           (add-field :ldap_options.all_parent_groups_search_filter
-                     {:type "string"})
+                     {:type "string"
+                      :required false})
           (add-field :audit_logging_options.render_cql_literals
                      {:type "boolean"
                       :depends :enabled
+                      :required false
+                      :default_value false
                       :description "Whether to render bound variables as CQL literals"}))
  "6.7.10" (transforms
            (add-field :ldap_options.dns_service_discovery
                       {:type "dict"
+                       :required false
                        :fields
                        {:fqdn
                         {:type "string"
+                         :required false
                          :description "Fully qualified domain name to get the SRV records from."}
                         :lookup_timeout_ms
                         {:type "int"
+                         :required false
                          :default_value 5000
                          :unit "ms"
-                         :description "Timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent."}
+                         :description "Timeout in ms for querying DNS; it has to be between 0 and 1 hour equivalent."}
                         :retention_duration_ms
                         {:type "int"
+                         :required false
                          :default_value 600000
                          :unit "ms"
                          :description "For how long the old results should be retained/cached (value between 0 and 10 days equivalent)."}
                         :polling_interval_ms
                         {:type "int"
+                         :required false
                          :default_value 0
                          :unit "ms"
                          :description "How often DSE should try to refresh the list of obtained servers."}}
@@ -416,33 +921,45 @@
  "6.7.11" (transforms
            (add-field :ldap_options.groups_validity_in_ms
                       {:type "int"
+                       :required false
                        :default_value 0
                        :unit "ms"
                        :description "Validity period for the groups cache in milliseconds."})
            (add-field :ldap_options.groups_update_interval_in_ms
                       {:type "int"
+                       :required false
                        :default_value 0
                        :unit "ms"
                        :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."}))
+ "6.7.12" :no-change
  "6.7.13" (transforms
            (add-field :role_management_options.mode_by_authentication
                       {:type "dict"
+                       :required false
                        :fields
                        {:internal
                         {:type "string"
+                         :required false
                          :description "Mode for internal authentication scheme. Allowed values are 'internal' or 'ldap'."}
                         :ldap
                         {:type "string"
+                         :required false
                          :description "Mode for ldap authentication scheme. Allowed values are 'internal' or 'ldap'."}
                         :kerberos
                         {:type "string"
+                         :required false
                          :description "Mode for kerberos authentication scheme.  Allowed values are 'internal' or 'ldap'."}}
                        :order [:internal :ldap :kerberos]
                        :description "Optionally set mode on a per-authentication-scheme basis, allowing different role management modes for different authentication schemes. Overrides the top-level 'mode' option. Allowed values are 'internal' or 'ldap'."})
            (add-field :kmip_hosts.key_cache_update_millis
                       {:type "int"
+                       :required false
                        :default_value 300000
                        :description "Refresh interval for the KMIP host key cache. After this interval, cache entries become eligible for refresh. Upon next access, an async reload is scheduled and the old value returned until it completes. If key_cache_millis is non-zero, then this must be also. Defaults to the same value as key_cache_millis."}))
+ "6.7.14" :no-change
+ "6.7.15" :no-change
+ "6.7.16" :no-change
+ "6.7.17" :no-change
  ;; End DSE 6.7.x transforms.
 
 
@@ -451,53 +968,69 @@
  "6.8.1" (transforms
           (add-field :role_management_options.stats
                      {:type "boolean"
-                      :default_value false})
+                      :required false})
           (add-field :ldap_options.ssl_protocol
                      {:type "string"
+                      :required false
                       :default_value "TLS"})
           ;; Note, ldap_options.hostname_verification is already in 6.8.0 base file
           )
  "6.8.2" (transforms
           (add-field :ldap_options.extra_user_search_bases
                      {:type "list"
-                      :value_type "string"})
+                      :value_type "string"
+                      :required false
+                      :default_value []})
           (add-field :ldap_options.extra_group_search_bases
                      {:type "list"
-                      :value_type "string"})
+                      :value_type "string"
+                      :required false
+                      :default_value []})
           (add-field :ldap_options.all_parent_groups_search_type
                      {:type "string"
+                      :required false
                       :options
                       [{:label "default", :value ""}
                        {:label "directory_search", :value "directory_search"}
                        {:label "memberof_search", :value "memberof_search"}]})
           (add-field :ldap_options.all_parent_groups_memberof_attribute
-                     {:type "string"})
+                     {:type "string"
+                      :required false
+                      :default_value "isMemberOf"})
           (add-field :ldap_options.all_parent_groups_search_filter
-                     {:type "string"})
+                     {:type "string"
+                      :required false})
           (add-field :audit_logging_options.render_cql_literals
                      {:type "boolean"
-                      :depends :enabled
+                      :required false
+                      :default_value true
                       :description "Whether to render bound variables as CQL literals"})
           (delete-field :index_options))
+ "6.8.3" :no-change
  "6.8.4" (transforms
           (add-field :ldap_options.dns_service_discovery
                      {:type "dict"
+                      :required false
                       :fields
                       {:fqdn
                        {:type "string"
+                        :required false
                         :description "Fully qualified domain name to get the SRV records from."}
                        :lookup_timeout_ms
                        {:type "int"
+                        :required false
                         :default_value 5000
                         :unit "ms"
-                        :description "Timeout in ms for querying DNS; it has be be between 0 and 1 hour equivalent."}
+                        :description "Timeout in ms for querying DNS; it has to be between 0 and 1 hour equivalent."}
                        :retention_duration_ms
                        {:type "int"
+                        :required false
                         :default_value 600000
                         :unit "ms"
                         :description "For how long the old results should be retained/cached (value between 0 and 10 days equivalent)."}
                        :polling_interval_ms
                        {:type "int"
+                        :required false
                         :default_value 0
                         :unit "ms"
                         :description "How often DSE should try to refresh the list of obtained servers."}}
@@ -505,33 +1038,125 @@
  "6.8.5" (transforms
           (add-field :ldap_options.groups_validity_in_ms
                      {:type "int"
+                      :required false
                       :default_value 0
                       :unit "ms"
                       :description "Validity period for the groups cache in milliseconds."})
           (add-field :ldap_options.groups_update_interval_in_ms
                      {:type "int"
+                      :required false
                       :default_value 0
                       :unit "ms"
                       :description "Refresh interval for groups cache (if enabled). After this interval, cache entries become eligible for refresh."}))
+ "6.8.6" :no-change
+ "6.8.7" :no-change
+ "6.8.8" :no-change
  "6.8.9" (transforms
           (add-field :role_management_options.mode_by_authentication
                      {:type "dict"
+                      :required false
                       :fields
                       {:internal
                        {:type "string"
+                        :required false
                         :description "Mode for internal authentication scheme. Allowed values are 'internal' or 'ldap'."}
                        :ldap
                        {:type "string"
+                        :required false
                         :description "Mode for ldap authentication scheme. Allowed values are 'internal' or 'ldap'."}
                        :kerberos
                        {:type "string"
+                        :required false
                         :description "Mode for kerberos authentication scheme.  Allowed values are 'internal' or 'ldap'."}}
                       :order [:internal :ldap :kerberos]
                       :description "Optionally set mode on a per-authentication-scheme basis, allowing different role management modes for different authentication schemes. Overrides the top-level 'mode' option. Allowed values are 'internal' or 'ldap'."}))
+ "6.8.10" :no-change
  "6.8.11" (transforms
            (add-field :kmip_hosts.key_cache_update_millis
                       {:type "int"
+                       :required false
                        :default_value 300000
                        :description "Refresh interval for the KMIP host key cache. After this interval, cache entries become eligible for refresh. Upon next access, an async reload is scheduled and the old value returned until it completes. If key_cache_millis is non-zero, then this must be also. Defaults to the same value as key_cache_millis."}))
+ "6.8.12" :no-change
+ "6.8.13" :no-change
+ "6.8.14" :no-change
+ "6.8.15" :no-change
+ "6.8.16" :no-change
+ "6.8.17" :no-change
+ "6.8.18" :no-change
+ "6.8.19" :no-change
+ "6.8.20" :no-change
+ "6.8.21" :no-change
+ "6.8.22" :no-change
+ "6.8.23" :no-change
+ "6.8.24" :no-change
+ "6.8.25" :no-change
+ "6.8.26" :no-change
+ "6.8.27" :no-change
+ "6.8.28" :no-change
+ "6.8.29" :no-change
+ "6.8.30" :no-change
+ "6.8.31" :no-change
+ "6.8.32" :no-change
+ "6.8.33" :no-change
+ "6.8.34" :no-change
+ "6.8.35" :no-change
+ "6.8.36" :no-change
+ "6.8.37" :no-change
+ "6.8.38" :no-change
+ "6.8.39" :no-change
+ "6.8.40" :no-change
+ "6.8.41" :no-change
+ "6.8.42" :no-change
+ "6.8.43" :no-change
+ "6.8.44" :no-change
+ "6.8.45" :no-change
+ "6.8.46" :no-change
+ "6.8.47" :no-change
+ "6.8.48" :no-change
+ "6.8.49" :no-change
+ "6.8.50" :no-change
+ "6.8.51" :no-change
+ "6.8.52" :no-change
+ "6.8.53" :no-change
+ "6.8.54" :no-change
+ "6.8.55" :no-change
+ "6.8.56" :no-change
+ "6.8.57" :no-change
+ "6.8.58" :no-change
+ "6.8.59" :no-change
+ "6.8.60" :no-change
+ "6.8.61" :no-change
+ "6.8.62" :no-change
+ "6.8.63" :no-change
  ;; End DSE 6.8.x transforms.
+
+ ;; Begin DSE 6.9.x transforms. 
+ "6.9.0" :no-change
+ "6.9.1" :no-change
+ "6.9.2" :no-change
+ "6.9.3" :no-change
+ "6.9.4" :no-change
+ "6.9.5" :no-change
+ "6.9.6" :no-change
+ "6.9.7" :no-change
+ "6.9.8" :no-change
+ "6.9.9" :no-change
+ "6.9.10" :no-change
+ "6.9.11" :no-change
+ "6.9.12" :no-change
+ "6.9.13" :no-change
+ "6.9.14" :no-change
+ "6.9.15" :no-change
+ "6.9.16" :no-change
+ "6.9.17" :no-change
+ "6.9.18" :no-change
+ "6.9.19" (transforms
+           (add-field :slf4j_logcodes_path
+                      {:type "string"
+                       :required false}
+                       :group "Audit Logging Settings"))
+ "6.9.20" :no-change
+ "6.9.21" :no-change
+ ;; End DSE 6.9.x transforms.
  )

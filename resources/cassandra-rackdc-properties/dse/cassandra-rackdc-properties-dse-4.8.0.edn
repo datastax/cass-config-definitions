@@ -1,0 +1,15 @@
+{:display-name "cassandra-rackdc.properties"
+ :package-path "/etc/dse/cassandra/cassandra-rackdc.properties"
+ :workload-file-group "None"
+ :ui-visibility :hidden
+ :renderer
+ {:renderer-type :template
+  :template "cassandra-rackdc-properties-dse-4.8.0.template"}
+ :properties
+ {:dc {:type "string", :required false, :default_value "DC1"},
+  :rack {:type "string", :required false, :default_value "RAC1"}}
+ :groupings
+ [{:name "General",
+   :list
+   ["dc"
+    "rack"]}]}

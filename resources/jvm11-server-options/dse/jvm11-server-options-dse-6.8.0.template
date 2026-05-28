@@ -43,10 +43,6 @@
 -XX:CICompilerCount=2
 {% endifequal %}
 
-{% ifequal garbage_collector "Serial" %}
--XX:+UseSerialGC
-{% endifequal %}
-
 ###################
 #  JPMS SETTINGS  #
 ###################

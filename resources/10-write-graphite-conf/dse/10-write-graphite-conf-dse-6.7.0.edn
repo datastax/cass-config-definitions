@@ -2,7 +2,6 @@
 ;; https://collectd.org/documentation/manpages/collectd.conf.5.shtml#plugin_write_graphite
 {:display-name "10-write-graphite",
  :package-path "/usr/share/dse/collectd/etc/collectd/10-write-graphite.conf",
- :tarball-path "",
  :workload-file-group "cassandra",
  :ui-visibility :editable,
  ;; jvm.options is only valid for DSE 6.7.0 and greater
@@ -15,6 +14,7 @@
 
   :enabled
   {:type "boolean",
+   :required true,
    :label
    "Enable Graphite",
    :default_value false},
@@ -41,40 +41,54 @@
            :always-append-ds],
    :fields
    {:host
-    {:type "string"},
+    {:type "string",
+     :required true,
+     :default_value false},
     :port
     {:type "int",
+     :required true,
      :default_value 2003},
     :reconnect-interval
-    {:type "int"},
+    {:type "int",
+     :required false},
 
     :prefix
-    {:type "string"},
+    {:type "string",
+     :required false},
     :postfix
-    {:type "string"},
+    {:type "string",
+     :required false},
     :protocol
-    {:type "string"},
+    {:type "string",
+     :required false},
 
     :log-send-errors
     {:type "boolean",
+     :required true,
      :default_value false},
     :escape-character
     {:type "string",
+     :required true,
      :default_value "_"},
     :separate-instances
     {:type "boolean",
+     :required true,
      :default_value true},
     :store-rates
     {:type "boolean",
+     :required true,
      :default_value false},
     :preserve-separator
     {:type "boolean",
+     :required true,
      :default_value false},
     :drop-duplicate-fields
     {:type "boolean",
+     :required true,
      :default_value false},
     :always-append-ds
     {:type "boolean",
+     :required true,
      :default_value false}}}},
  :groupings
  [{:name "General Parameters",

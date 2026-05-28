@@ -1,44 +1,181 @@
+;; Attributes in this file are :disabled-true because it gets special
+;; handling in order to pull workload fields off the data-model. Consequently,
+;; nothing in here is editable from the UI. The wait-for-start setting we want
+;; to make available though, per OPSC-10190.
+
 (
+ ;; Begin DSE 4.8.x transforms.
+ "4.8.0" "dse-default-dse-4.8.0.edn"
+ "4.8.1"  :no-change
+ "4.8.2"  :no-change
+ "4.8.3"  :no-change
+ "4.8.4"  :no-change
+ "4.8.5"  :no-change
+ "4.8.6"  :no-change
+ "4.8.7"  :no-change
+ "4.8.8"  :no-change
+ "4.8.9"  :no-change
+ "4.8.10" :no-change
+ "4.8.11" (transforms
+           (update-template "dse-default-dse-4.8.11.template")
+           (add-field :wait-for-start
+                      {:type "int"
+                       :required false
+                       :label "Wait for start"
+                       :constant "WAIT_FOR_START"
+                       :disabled true
+                       :default_value 14
+                       :unit "seconds"}
+                      :group "General"))
+ "4.8.12" :no-change
+ "4.8.13" :no-change
+ "4.8.14" :no-change
+ "4.8.15" :no-change
+ "4.8.16" :no-change
+ ;; End DSE 4.8.x transforms.
+
+
+ ;; Begin DSE 5.0.x transforms.
+ "5.0.1" "dse-default-dse-5.0.1.edn"
+ "5.0.2" :no-change
+ "5.0.3" (transforms
+          (update-template "dse-default-dse-5.0.3.template")
+          (add-field :wait-for-start
+                     {:type "int"
+                      :required false
+                      :label "Wait for start"
+                      :constant "WAIT_FOR_START"
+                      :disabled true
+                      :default_value 14
+                      :unit "seconds"}
+                     :group "General"))
+ "5.0.4" :no-change
+ "5.0.5" :no-change
+ "5.0.6" :no-change
+ "5.0.7" :no-change
+ "5.0.8" :no-change
+ "5.0.9" :no-change
+ "5.0.10" :no-change
+ "5.0.11" :no-change
+ "5.0.12" :no-change
+ "5.0.13" :no-change
+ "5.0.14" :no-change
+ "5.0.15" :no-change
+ ;; End DSE 5.0.x transforms.
+
+
  ;; Begin DSE 5.1.x transforms.
  "5.1.0" "dse-default-dse-5.1.0.edn"
+ "5.1.1" :no-change
+ "5.1.2" :no-change
+ "5.1.3" :no-change
+ "5.1.4" :no-change
+ "5.1.5" :no-change
+ "5.1.6" :no-change
+ "5.1.7" :no-change
+ "5.1.8" :no-change
+ "5.1.9" :no-change
+ "5.1.10" :no-change
+ "5.1.11" :no-change
  "5.1.12" (transforms
             (update-template "dse-default-dse-5.1.12.template")
             (add-field :wait-for-stop
                        {:type "int"
+                        :required false
                         :label "Wait for stop"
                         :constant "WAIT_FOR_STOP"
+                        :disabled true
                         :default_value 60
                         :unit "seconds"}
                        :group "General")
             (add-field :wait-for-stop-sleep
                        {:type "float"
+                        :required false
                         :label "Wait for stop sleep"
                         :constant "WAIT_FOR_STOP_SLEEP"
+                        :disabled true
                         :default_value 0.5
                         :unit "seconds"}
                        :group "General"))
+ "5.1.13" :no-change
+ "5.1.14" :no-change
+ "5.1.15" :no-change
+ "5.1.16" :no-change
+ "5.1.17" :no-change
+ "5.1.18" :no-change
+ "5.1.19" :no-change
+ "5.1.20" :no-change
+ "5.1.22" :no-change
+ "5.1.23" :no-change
+ "5.1.24" :no-change
+ "5.1.25" :no-change
+ "5.1.26" :no-change
+ "5.1.27" :no-change
+ "5.1.28" :no-change
+ "5.1.29" :no-change
+ "5.1.30" :no-change
+ "5.1.31" :no-change
+ "5.1.32" :no-change
+ "5.1.33" :no-change
+ "5.1.34" :no-change
+ "5.1.35" :no-change
+ "5.1.36" :no-change
+ "5.1.37" :no-change
+ "5.1.38" :no-change
+ "5.1.39" :no-change
+ "5.1.40" :no-change
+ "5.1.41" :no-change
+ "5.1.42" :no-change
+ "5.1.43" :no-change
+ "5.1.44" :no-change
+ "5.1.45" :no-change
+ "5.1.46" :no-change
+ "5.1.47" :no-change
+ "5.1.48" :no-change
+ "5.1.49" :no-change
+ "5.1.50" :no-change
  ;; End DSE 5.1.x transforms.
+
 
  ;; Begin DSE 6.0.x transforms.
  "6.0.0" "dse-default-dse-6.0.0.edn"
+ "6.0.1" :no-change
+ "6.0.2" :no-change
+ "6.0.3" :no-change
+ "6.0.4" :no-change
  "6.0.5" (transforms
           (update-template "dse-default-dse-6.0.5.template")
           (add-field :wait-for-stop
                      {:type "int"
+                      :required false
                       :label "Wait for stop"
                       :constant "WAIT_FOR_STOP"
-                      :description
-                      "Increase/decrease if you want longer/shorter waits checking if the service stopped. Unit is seconds. Example value: 60"
+                      :disabled true
+                      :default_value 60
                       :unit "seconds"}
                      :group "General")
           (add-field :wait-for-stop-sleep
                      {:type "float"
+                      :required false
                       :label "Wait for stop sleep"
                       :constant "WAIT_FOR_STOP_SLEEP"
-                      :description
-                      "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped. Unit is seconds. Example value: 0.5"
+                      :disabled true
+                      :default_value 0.5
                       :unit "seconds"}
                      :group "General"))
+ "6.0.6" :no-change
+ "6.0.7" :no-change
+ "6.0.8" :no-change
+ "6.0.9" :no-change
+ "6.0.10" :no-change
+ "6.0.11" :no-change
+ "6.0.12" :no-change
+ "6.0.13" :no-change
+ "6.0.14" :no-change
+ "6.0.15" :no-change
+ "6.0.16" :no-change
+ "6.0.17" :no-change
+ "6.0.18" :no-change
  ;; End DSE 6.0.x transforms.
 
 
@@ -48,24 +185,134 @@
           (update-template "dse-default-dse-6.7.1.template")
           (add-field :wait-for-stop
                      {:type "int",
+                      :required false,
                       :label "Wait for stop",
                       :constant "WAIT_FOR_STOP",
+                      :disabled true,
+                      :default_value 60,
                       :unit "seconds",
                       :description
-                      "Increase/decrease if you want longer/shorter waits checking if the service stopped. Unit is seconds. Example value: 60"}
+                      "Increase/decrease if you want longer/shorter waits checking if the service stopped"}
                       :group "General")
           (add-field :wait-for-stop-sleep
                      {:type "float",
+                      :required false,
                       :label "Wait for stop sleep",
                       :constant "WAIT_FOR_STOP_SLEEP",
+                      :disabled true,
+                      :default_value 0.5,
                       :unit "seconds",
                       :description
-                      "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped. Unit is seconds. Example value: 0.5"}
+                      "Decrease/increase if you want finer/coarser grained waits while checking if the service stopped"}
                      :group "General"))
+ "6.7.2" :no-change
+ "6.7.3" :no-change
+ "6.7.4" :no-change
+ "6.7.5" :no-change
+ "6.7.6" :no-change
+ "6.7.7" :no-change
+ "6.7.8" :no-change
+ "6.7.9" :no-change
+ "6.7.10" :no-change
+ "6.7.11" :no-change
+ "6.7.12" :no-change
+ "6.7.13" :no-change
+ "6.7.14" :no-change
+ "6.7.15" :no-change
+ "6.7.16" :no-change
+ "6.7.17" :no-change
  ;; End DSE 6.7.x transforms.
 
 
  ;; Begin DSE 6.8.x transforms.
  "6.8.0" "dse-default-dse-6.8.0.edn"
+ "6.8.1" :no-change
+ "6.8.2" :no-change
+ "6.8.3" :no-change
+ "6.8.4" :no-change
+ "6.8.5" :no-change
+ "6.8.6" :no-change
+ "6.8.7" :no-change
+ "6.8.8" :no-change
+ "6.8.9" :no-change
+ "6.8.10" :no-change
+ "6.8.11" :no-change
+ "6.8.12" :no-change
+ "6.8.13" :no-change
+ "6.8.14" :no-change
+ "6.8.15" :no-change
+ "6.8.16" :no-change
+ "6.8.17" :no-change
+ "6.8.18" :no-change
+ "6.8.19" :no-change
+ "6.8.20" :no-change
+ "6.8.21" :no-change
+ "6.8.22" :no-change
+ "6.8.23" :no-change
+ "6.8.24" :no-change
+ "6.8.25" :no-change
+ "6.8.26" :no-change
+ "6.8.27" :no-change
+ "6.8.28" :no-change
+ "6.8.29" :no-change
+ "6.8.30" :no-change
+ "6.8.31" :no-change
+ "6.8.32" :no-change
+ "6.8.33" :no-change
+ "6.8.34" :no-change
+ "6.8.35" :no-change
+ "6.8.36" :no-change
+ "6.8.37" :no-change
+ "6.8.38" :no-change
+ "6.8.39" :no-change
+ "6.8.40" :no-change
+ "6.8.41" :no-change
+ "6.8.42" :no-change
+ "6.8.43" :no-change
+ "6.8.44" :no-change
+ "6.8.45" :no-change
+ "6.8.46" :no-change
+ "6.8.47" :no-change
+ "6.8.48" :no-change
+ "6.8.49" :no-change
+ "6.8.50" :no-change
+ "6.8.51" :no-change
+ "6.8.52" :no-change
+ "6.8.53" :no-change
+ "6.8.54" :no-change
+ "6.8.55" :no-change
+ "6.8.56" :no-change
+ "6.8.57" :no-change
+ "6.8.58" :no-change
+ "6.8.59" :no-change
+ "6.8.60" :no-change
+ "6.8.61" :no-change
+ "6.8.62" :no-change
+ "6.8.63" :no-change
  ;; End DSE 6.8.x transforms.
+
+ ;; Begin DSE 6.9.x transforms. 
+ "6.9.0" :no-change
+ "6.9.1" :no-change
+ "6.9.2" :no-change
+ "6.9.3" :no-change
+ "6.9.4" :no-change
+ "6.9.5" :no-change
+ "6.9.6" :no-change
+ "6.9.7" :no-change
+ "6.9.8" :no-change
+ "6.9.9" :no-change
+ "6.9.10" :no-change
+ "6.9.11" :no-change
+ "6.9.12" :no-change
+ "6.9.13" :no-change
+ "6.9.14" :no-change
+ "6.9.15" :no-change
+ "6.9.16" :no-change
+ "6.9.17" :no-change
+ "6.9.18" :no-change
+ "6.9.19" :no-change
+ "6.9.20" :no-change
+ "6.9.21" :no-change
+ ;; End DSE 6.9.x transforms.
  )

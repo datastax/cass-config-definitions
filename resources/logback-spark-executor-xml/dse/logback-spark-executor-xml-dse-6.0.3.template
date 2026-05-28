@@ -43,7 +43,7 @@
         <appender-ref ref="STDERR" />
     </root>
 
-    <logger name="com.datastax.driver.core.CodecRegistry" level="{{com-datastax-driver-core-CodecRegistry}}"/>
+    <logger name="com.datastax.oss.driver.internal.core.type.codec.registry.DefaultCodecRegistry" level="{{com-datastax-driver-core-CodecRegistry}}"/>
     <logger name="org.eclipse.jetty" level="{{logger-jetty-level}}"/>
 
      <!-- Settings to quiet third party logs that are too verbose -->

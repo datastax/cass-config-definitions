@@ -5,7 +5,9 @@
  */
 
 buildscript {
-    repositories rootProject.ext.repositoryConfig
+    repositories {
+        mavenCentral()
+    }
     dependencies {
         classpath 'commons-codec:commons-codec:1.11'
         classpath 'us.bpsm:edn-java:0.5.0'
@@ -23,9 +25,9 @@ import org.apache.commons.codec.binary.Hex
 description = "OpsCenter definitions"
 
 task tar(type:Tar) {
-    archiveName = "definition_files.tgz"
+    archiveFileName = "definition_files.tgz"
     compression = Compression.GZIP
-    destinationDir buildDir
+    destinationDirectory = buildDir
     into ('/'){
         from 'resources'
         exclude 'build'

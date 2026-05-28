@@ -1,6 +1,5 @@
 {:display-name "hive-site.xml"
  :package-path "/etc/dse/spark/hive-site.xml"
- :tarball-path "resources/spark/conf/hive-site.xml"
  :workload-file-group "spark"
  :ui-visibility :editable
  :renderer
@@ -10,35 +9,36 @@
  :properties
  {
   :hive-exec-mode-local-auto
-  {:type "boolean" :default_value false}
+  {:type "boolean" :required true :default_value false}
   :hive-metastore-rawstore-impl
-  {:type "string" :default_value "com.datastax.bdp.hadoop.hive.metastore.CassandraHiveMetaStore"
+  {:type "string" :required true :default_value "com.datastax.bdp.hadoop.hive.metastore.CassandraHiveMetaStore"
    :render-without-quotes true}
   :com-datastax-bdp-fs-client-authentication-factory
-  {:type "string"
+  {:type "string" :required true
    :default_value "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"
    :render-without-quotes true}
 
   :cassandra-auto-create-hive-schema
-  {:type "boolean" :default_value true}
+  {:type "boolean" :required true :default_value true}
   :hive-metastore-warehouse-dir
-  {:type "string"
+  {:type "string" :required true
    :default_value "dsefs:///user/spark/warehouse"
    :render-without-quotes true}
   :spark-enable
-  {:type "boolean" :default_value true}
+  {:type "boolean" :required true :default_value true}
   :cassandra-connection-meta-store-column-family-name
-  {:type "string"
+  {:type "string" :required true
    :default_value "sparkmetastore"
    :render-without-quotes true}
   :hive-server2-logging-operation-enabled {:type "boolean"
+                                           :required true
                                            :default_value false}
   :hive-server2-transport-mode
-  {:type "string"
+  {:type "string" :required true
    :default_value "binary"
    :render-without-quotes true}
   :spark-hadoop-com-datastax-bdp-fs-client-authentication-factory
-  {:type "string"
+  {:type "string" :required true
    :default_value "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory"
    :render-without-quotes true}
   :jdbc-auth-type
@@ -51,6 +51,7 @@
              ]}
   :use-ssl
   {:type "boolean"
+   :required true
    :description "Specifies whether to use SSL for JDBC connections. If using client-to-node encryption in cassandra.yaml, select use-ssl to enable SSL for JDBC."
    :default_value false}
   :keystore

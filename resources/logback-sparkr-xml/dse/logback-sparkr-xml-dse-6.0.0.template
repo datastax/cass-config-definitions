@@ -50,7 +50,7 @@
         <appender-ref ref="FILE" />
     </root>
 
-    <logger name="com.datastax.driver.core.CodecRegistry" level="{{com-datastax-driver-core-codecregistry}}"/>
+    <logger name="com.datastax.oss.driver.internal.core.type.codec.registry.DefaultCodecRegistry" level="{{com-datastax-driver-core-codecregistry}}"/>
     <logger name="org.apache.hadoop.hive.metastore.ObjectStore" level="{{org-apache-hadoop-hive-metastore-objectstore}}"/>
     <logger name="org.eclipse.jetty" level="{{org-eclipse-jetty}}"/>
     <logger name="org.apache.hadoop.util.NativeCodeLoader" level="{{org-apache-hadoop-util-nativecodeloader}}"/>

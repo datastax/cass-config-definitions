@@ -8,25 +8,29 @@
    :conditional [{:eq true}]},
   :cassandra-connection-meta-store-column-family-name
   {:type "string",
+   :required true,
    :default_value "sparkmetastore",
    :render-without-quotes true},
   :hive-server2-logging-operation-enabled
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :spark-hadoop-com-datastax-bdp-fs-client-authentication-factory
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory",
    :render-without-quotes true},
-  :spark-enable {:type "boolean", :default_value true},
+  :spark-enable {:type "boolean", :required true, :default_value true},
   :hive-metastore-rawstore-impl
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.hadoop.hive.metastore.CassandraHiveMetaStore",
    :render-without-quotes true},
   :cassandra-auto-create-hive-schema
-  {:type "boolean", :default_value true},
+  {:type "boolean", :required true, :default_value true},
   :hive-server2-transport-mode
   {:type "string",
+   :required true,
    :default_value "binary",
    :render-without-quotes true},
   :keystore-password
@@ -39,6 +43,7 @@
    :conditional [{:eq true}]},
   :com-datastax-bdp-fs-client-authentication-factory
   {:type "string",
+   :required true,
    :default_value
    "com.datastax.bdp.fs.hadoop.DseRestClientAuthProviderBuilderFactory",
    :render-without-quotes true},
@@ -52,12 +57,14 @@
     {:label "password", :value "password"}]},
   :hive-metastore-warehouse-dir
   {:type "string",
+   :required true,
    :default_value "dsefs:///user/spark/warehouse",
    :render-without-quotes true},
   :hive-exec-mode-local-auto
-  {:type "boolean", :default_value false},
+  {:type "boolean", :required true, :default_value false},
   :use-ssl
   {:type "boolean",
+   :required true,
    :description
    "Specifies whether to use SSL for JDBC connections. If using client-to-node encryption in cassandra.yaml, select use-ssl to enable SSL for JDBC.",
    :default_value false}},
@@ -78,7 +85,6 @@
     "spark-hadoop-com-datastax-bdp-fs-client-authentication-factory"]}],
  :ui-visibility :editable,
  :package-path "/etc/dse/spark/hive-site.xml",
- :tarball-path "resources/spark/conf/hive-site.xml"
  :renderer
  {:renderer-type :template,
   :template "hive-site-xml-dse-6.7.0.template"},

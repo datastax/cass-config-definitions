@@ -5,42 +5,51 @@
                       {}
 
                       ["6.x"]
-                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
+                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}
+                       "11.0" {:package-name "java-11-openjdk-headless"}}
 
                       ["7.x"]
-                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}}
+                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}
+                       "11.0" {:package-name "java-11-openjdk-headless"}}}
 
 
             "red hat enterprise" {["7.x"]
                                   {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
+                                  {"11" {:package-name "java-11-openjdk-headless"}}
 
                                   ["6.x"]
                                   {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
+                                  {"11.0" {:package-name "java-11-openjdk-headless"}}
 
                                   ["5.x"]
                                   {}}
             "oracle" {["7.x"]
-                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
+                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}
+                       "11.0" {:package-name "java-11-openjdk-headless"}}
 
                       ["6.x"]
-                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}
+                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}
+                       "11.0" {:package-name "java-11-openjdk-headless"}}}
+                      
+
+                      "amazon" {["2018.09" "2017.09" "2017.03" "2016.09" "2"]
+                                {"1.8" {:package-name "java-1.8.0-openjdk-headless"}
+                                 "11.0" {:package-name "java-11-openjdk-headless"}}}
+
+
+                      "debian" {["9.x"]
+                                {"1.8" {:package-name "openjdk-8-jre-headless"}
+                                 "11.0" {:package-name "openjdk-11-jre-headless"}} 
+
+                                ["8.x" "7.1.x" "7.x" "6.x"]
+                                {}}
+
+
+                      "ubuntu" {["16.04" "18.04"]
+                                {"1.8" {:package-name "openjdk-8-jre-headless"}
+                                 "11.0" {:package-name "openjdk-11-jre-headless"}}
+
+                                ["14.04" "13.04" "12.04" "12.x" "11.x"]
+                                {}}
                       }
-
-            "amazon" {["2018.09" "2017.09" "2017.03" "2016.09" "2"]
-                      {"1.8" {:package-name "java-1.8.0-openjdk-headless"}}}
-
-
-            "debian" {["9.x"]
-                      {"1.8" {:package-name "openjdk-8-jre-headless"}}
-
-                      ["8.x" "7.1.x" "7.x" "6.x"]
-                      {}}
-
-
-            "ubuntu" {["16.04" "18.04"]
-                      {"1.8" {:package-name "openjdk-8-jre-headless"}}
-
-                      ["14.04" "13.04" "12.04" "12.x" "11.x"]
-                      {}}
-            }
  }

@@ -1,6 +1,5 @@
 {:display-name "logback-spark-executor.xml"
  :package-path "/etc/dse/spark/logback-spark-executor.xml"
- :tarball-path "resources/spark/conf/logback-spark-executor.xml"
  :workload-file-group "spark"
  :ui-visibility :editable
  :renderer
@@ -9,37 +8,37 @@
  :workload :spark
  :properties
  {:root-level
-  {:type "string" :default_value "INFO"}
+  {:type "string" :required true :default_value "INFO"}
 
   ;; logger-jetty-level should have been called org-eclipse-jetty,
   ;; but we are leaving the old name for backwards compatibility
   :logger-jetty-level
-  {:type "string" :default_value "ERROR"}
+  {:type "string" :required true :default_value "ERROR"}
 
   :com-datastax-driver-core-CodecRegistry
-  {:type "string" :default_value "ERROR"}
+  {:type "string" :required true :default_value "ERROR"}
 
   :org-apache-spark-util-logging-FileAppender
-  {:type "string" :default_value "OFF"}
+  {:type "string" :required true :default_value "OFF"}
   :org-spark_project-jetty
-  {:type "string" :default_value "WARN"}
+  {:type "string" :required true :default_value "WARN"}
 
   :org-spark_project-jetty-util-component-AbstractLifeCycle
-  {:type "string" :default_value "ERROR"}
+  {:type "string" :required true :default_value "ERROR"}
   :org-apache-spark-repl-SparkIMain-exprTyper
-  {:type "string" :default_value "INFO"}
+  {:type "string" :required true :default_value "INFO"}
   :org-apache-spark-repl-SparkILoop-SparkILoopInterpreter
-  {:type "string" :default_value "INFO"}
+  {:type "string" :required true :default_value "INFO"}
 
   :org-apache-parquet
-  {:type "string" :default_value "ERROR"}
+  {:type "string" :required true :default_value "ERROR"}
   :parquet
-  {:type "string" :default_value "ERROR"}
+  {:type "string" :required true :default_value "ERROR"}
   :org-apache-hadoop-hive-metastore-RetryingHMSHandler
-  {:type "string" :default_value "FATAL"}
+  {:type "string" :required true :default_value "FATAL"}
 
   :org-apache-hadoop-hive-ql-exec-FunctionRegistry
-  {:type "string" :default_value "ERROR"}}
+  {:type "string" :required true :default_value "ERROR"}}
  :groupings
  [{:name "General",
    :list

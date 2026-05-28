@@ -1,6 +1,5 @@
 {:display-name "spark-daemon-defaults.conf"
  :package-path "/etc/dse/spark/spark-daemon-defaults.conf"
- :tarball-path "resources/spark/conf/spark-daemon-defaults.conf"
  :workload-file-group "spark"
  :ui-visibility :editable
  :renderer
@@ -12,17 +11,20 @@
   :spark_dse_shuffle_sasl_port
   {:type "int"
    :label "DSE Shuffle SASL Port"
-   :default_value 7447}
+   :default_value 7447
+   :required true}
 
   :spark_dse_shuffle_no_sasl_port
   {:type "int"
    :label "DSE Shuffle No-SASL Port"
-   :default_value 7437}
+   :default_value 7437
+   :required true}
 
   :spark_ui_filters
   {:type "string"
    :label "Spark UI Filters"
-   :default_value "com.datastax.bdp.auth.SparkUIAuthFilter"}}
+   :default_value "com.datastax.bdp.auth.SparkUIAuthFilter"
+   :required false}}
  :groupings
  [{:name "Shuffle Service Ports"
    :list
